@@ -1,0 +1,28 @@
+# Dr. Adriano — Cirurgia Buco-Maxilo-Facial
+
+> Site profissional do Dr. Adriano em João Pessoa. Informações sobre avaliação, planejamento e tratamentos em cirurgia buco-maxilo-facial.
+
+Este arquivo é um modelo. Publicar somente depois de confirmar domínio, nome profissional, CRO, endereço, telefone, URLs finais e conteúdo revisado.
+
+## Páginas principais
+
+- [Início](https://DOMINIO/): apresentação do profissional, especialidade, abordagem e formas de contato.
+- [Apneia do sono](https://DOMINIO/apneia-do-sono): relação entre anatomia facial, avaliação e possibilidades de tratamento.
+- [Implantes dentários](https://DOMINIO/implantes-dentarios): avaliação, planejamento e relação com a reconstrução óssea.
+- [Reconstrução óssea](https://DOMINIO/reconstrucao-ossea): indicações, planejamento e etapas.
+- [DTM e ATM](https://DOMINIO/dtm-atm): sintomas, diagnóstico e possibilidades de tratamento conservador e cirúrgico.
+- [Cirurgia ortognática](https://DOMINIO/cirurgia-ortognatica): indicações, planejamento, cirurgia e recuperação.
+- [Para dentistas](https://DOMINIO/para-dentistas): encaminhamentos e comunicação profissional.
+
+## Informações oficiais
+
+- Profissional: NOME COMPLETO
+- Registro profissional: CRO A CONFIRMAR
+- Especialidade: A CONFIRMAR
+- Localização: João Pessoa, Paraíba
+- Site oficial: https://DOMINIO/
+- Contato: URL OU TELEFONE A CONFIRMAR
+
+## Observação
+
+O conteúdo tem caráter informativo e não substitui avaliação individual. Indicações, riscos, etapas e recuperação variam conforme o caso.
