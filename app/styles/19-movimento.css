@@ -1,0 +1,373 @@
+/* Revelação ao rolar.
+   Fatia de globals.css — a ordem dos @import lá é significativa. */
+
+/*
+ * Por que isto existe: a entrada escalonada já estava escrita (`fadeUp` com
+ * atrasos por `nth-child`), mas disparava no carregamento. Para qualquer bloco
+ * abaixo da primeira dobra a animação terminava antes de a pessoa chegar lá —
+ * ninguém via nada. Foi por isso que alguém a desligou com `animation: none`.
+ *
+ * A correção não é reativar do jeito antigo: é amarrar o movimento à posição
+ * do elemento na tela. `animation-timeline: view()` faz isso sem uma linha de
+ * JavaScript.
+ *
+ * Onde o navegador não suporta (hoje Safari e Firefox), nada roda e o
+ * conteúdo aparece pronto — que é o estado correto, não um degradado.
+ */
+
+@keyframes revealUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/*
+ * Duas guardas antes de qualquer movimento: o pedido explícito de menos
+ * animação, e o suporte do navegador. Sem as duas, `.reveal` não faz nada e
+ * o elemento fica visível — nunca escondido à espera de um script.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .reveal {
+      animation: revealUp linear both;
+      animation-timeline: view();
+      animation-range: entry 5% entry 42%;
+    }
+
+    /*
+     * A cascata não vem de atraso no tempo — não existe tempo aqui, existe
+     * rolagem. Cada item entra num ponto um pouco mais adiante do percurso,
+     * e é isso que produz o efeito de um depois do outro.
+     */
+    .reveal:nth-child(2) { animation-range: entry 9% entry 46%; }
+    .reveal:nth-child(3) { animation-range: entry 13% entry 50%; }
+    .reveal:nth-child(4) { animation-range: entry 17% entry 54%; }
+    .reveal:nth-child(5) { animation-range: entry 21% entry 58%; }
+    .reveal:nth-child(6) { animation-range: entry 25% entry 62%; }
+  }
+}
+
+/* ── Trilho das etapas ───────────────────────────────────────────────────
+   Três caixas lado a lado não comunicam sequência: comunicam três opções. O
+   traço que as liga é o que transforma a grade numa linha do tempo.
+
+   A grade deixa de ser 1fr 1fr 1fr. O peso vai para a PRIMEIRA etapa, não
+   para a do meio: a do meio é a cirurgia, e destacá-la numa página que passa
+   o tempo todo dizendo "você não precisa chegar decidido a operar" empurraria
+   justamente o que o texto procura não empurrar. A primeira é a avaliação —
+   a única coisa que estamos de fato pedindo. */
+.journey-track {
+  position: relative;
+  grid-template-columns: 1.22fr 1fr 1fr;
+  gap: 34px;
+  align-items: start;
+}
+
+/* O trilho corre atrás dos marcos, na altura do centro deles. */
+.journey-track::before {
+  position: absolute;
+  z-index: 0;
+  top: 21px;
+  right: 6%;
+  left: 6%;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--sand-400);
+  content: "";
+}
+
+.journey-track li {
+  position: relative;
+  z-index: 1;
+  border-top: 0;
+  padding-top: 0;
+}
+
+.journey-track li:first-child h3 {
+  font-size: var(--fs-h3);
+}
+
+.journey-marker {
+  display: inline-flex;
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--sand-400);
+  border-radius: 50%;
+  margin-bottom: 18px;
+  background: var(--sand-100);
+  color: var(--navy-800);
+}
+
+.journey-track li:first-child .journey-marker {
+  border-color: var(--navy-800);
+  background: var(--navy-800);
+  color: var(--white);
+}
+
+/* O número deixa de ser o marco e vira etiqueta: quem carrega o marco agora
+   é o ícone. */
+.journey-number {
+  display: block;
+  width: auto;
+  height: auto;
+  margin-bottom: 8px;
+  background: transparent;
+  color: var(--sand-800);
+  font-size: var(--fs-label);
+  letter-spacing: 0.12em;
+}
+
+@media (max-width: 800px) {
+  .journey-track {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  /* Na coluna única a linha passa a ser vertical, atrás dos marcos. A versão
+     antiga desenhava esse fio com `border-left` em cada item; com o trilho
+     próprio ali, os dois apareciam ao mesmo tempo. */
+  .journey-track::before {
+    top: 22px;
+    right: auto;
+    bottom: 22px;
+    left: 21px;
+    width: 2px;
+    height: auto;
+  }
+
+  .journey-track li {
+    border-left: 0;
+    margin-left: 0;
+    padding: 0 0 32px 62px;
+  }
+
+  .journey-track li:last-child {
+    padding-bottom: 0;
+  }
+
+  /* O marco volta a ser o elemento posicionado; o número é só a etiqueta ao
+     lado do título, e não um segundo círculo solto na margem. */
+  .journey-marker {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-bottom: 0;
+  }
+
+  .journey-number {
+    position: static;
+    width: auto;
+    height: auto;
+    margin-bottom: 4px;
+  }
+
+  .journey-track h3 {
+    padding-top: 0;
+  }
+
+  .journey-track li:first-child h3 {
+    font-size: var(--fs-lead);
+  }
+}
+
+/* ── Crença e resposta, lado a lado ──────────────────────────────────────
+   O título sai da lateral e vai para cima: a seção precisa da largura inteira
+   para caber duas colunas de leitura sem espremer nenhuma das duas. */
+.objections-section .container {
+  display: block;
+}
+
+.objections-section .section-heading {
+  max-width: 760px;
+  margin-bottom: 40px;
+}
+
+.objection-list {
+  display: grid;
+  gap: 0;
+}
+
+.objection-list li {
+  display: grid;
+  grid-template-columns: 0.82fr 1.18fr;
+  align-items: start;
+  padding: 26px 0;
+  border-top: 1px solid var(--border);
+  gap: 34px;
+}
+
+/* A metade de cima da dobra: o que a pessoa traz. Tipografia maior e cor
+   fechada, para ela reconhecer a própria frase de relance. */
+.objection-belief {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: start;
+  column-gap: 11px;
+}
+
+.objection-belief .objection-index {
+  grid-column: 1 / -1;
+  margin-bottom: 8px;
+  color: var(--page-accent, var(--blue-600));
+  font-size: var(--fs-label);
+  letter-spacing: 0.12em;
+}
+
+.objection-belief strong {
+  color: var(--navy-950);
+  font-size: var(--fs-lead);
+  line-height: 1.35;
+}
+
+/* A resposta recua e ganha um fio na cor da página: é a segunda voz da
+   conversa, não a continuação da primeira. */
+.objection-reality {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: start;
+  padding-left: 22px;
+  border-left: 2px solid color-mix(in srgb, var(--page-accent, var(--blue-600)) 45%, transparent);
+  column-gap: 11px;
+}
+
+.objection-reality p {
+  margin-bottom: 0;
+  color: var(--muted);
+}
+
+.objection-glyph {
+  margin-top: 3px;
+  color: var(--page-accent, var(--blue-600));
+}
+
+.objection-reality .objection-glyph {
+  opacity: 0.75;
+}
+
+@media (max-width: 900px) {
+  /* Espremer duas colunas de texto abaixo disto deixa as duas ruins: a
+     resposta passa a vir embaixo, e o fio lateral continua distinguindo-a. */
+  .objection-list li {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .objection-reality {
+    margin-left: 29px;
+  }
+}
+
+/* ── Dois públicos, pesos diferentes ─────────────────────────────────────
+   Duas colunas idênticas diziam que os dois caminhos valem o mesmo. Não
+   valem: a página é escrita para o paciente, e o encaminhamento de colega é o
+   caminho secundário. A diferença de largura é pequena de propósito — o
+   suficiente para a hierarquia aparecer, sem espremer o segundo card. */
+.audience-grid {
+  grid-template-columns: 1.12fr 0.88fr;
+}
+
+@media (max-width: 900px) {
+  .audience-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Ênfase dos botões de ação ───────────────────────────────────────────
+   O verde chapado tinha o mesmo peso visual de uma tarja: nada dizia que
+   aquilo era o passo seguinte. Três camadas resolvem, na ordem do mais
+   discreto para o mais visível.
+
+   1. Volume — o fundo deixa de ser uma cor só e ganha um degradê curto, mais
+      claro em cima. É o que faz a peça parecer um objeto com luz, não um
+      retângulo preenchido. O clareamento para em 6%: o rótulo tem 15px, e
+      acima disso o branco sobre o topo do degradê cai abaixo de 4,5:1.
+   2. Brilho — sombra na própria cor do botão, não em preto. Cinza embaixo do
+      verde suja; verde embaixo do verde acende.
+   3. Pulso — um halo que se abre UMA vez, quando o botão entra na tela, e
+      para. Pulsar sem fim é criar urgência que o texto desta página passa o
+      tempo inteiro recusando. */
+.button-whatsapp,
+.header-cta,
+.button-whatsapp.button-whatsapp-solid {
+  background-image: linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--whatsapp) 94%, white),
+    var(--whatsapp) 58%,
+    var(--whatsapp-deep)
+  );
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.22) inset,
+    0 8px 20px -6px color-mix(in srgb, var(--whatsapp) 58%, transparent);
+}
+
+.button-whatsapp:hover,
+.header-cta:hover,
+.button-whatsapp.button-whatsapp-solid:hover {
+  background-image: linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--whatsapp) 94%, white),
+    var(--whatsapp-deep) 62%,
+    var(--whatsapp-deep)
+  );
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.26) inset,
+    0 12px 26px -6px color-mix(in srgb, var(--whatsapp) 72%, transparent);
+}
+
+/* O botão do formulário não é do WhatsApp, mas é o mesmo passo seguinte por
+   outro caminho: recebe o mesmo volume, na cor dele. */
+.form-submit:not(:disabled) {
+  background-image: linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--navy-700) 92%, white),
+    var(--navy-800) 60%,
+    var(--navy-950)
+  );
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.16) inset,
+    0 8px 20px -6px color-mix(in srgb, var(--navy-800) 52%, transparent);
+}
+
+/*
+ * O anel do pulso.
+ *
+ * Tentei primeiro amarrá-lo à rolagem, como o resto do movimento desta folha.
+ * Não vale a pena: num pseudo-elemento a `view()` nasce presa em 100%, e no
+ * elemento a animação precisa de `fill`, que por sua vez congela o
+ * `:hover`. Animação temporal aqui é previsível e funciona em qualquer
+ * navegador.
+ *
+ * Duas voltas e para. Pulsar sem fim é fabricar urgência — exatamente o que o
+ * texto desta página recusa quando diz que ninguém precisa chegar decidido.
+ */
+@keyframes ctaPulse {
+  0% {
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.22) inset,
+      0 8px 20px -6px color-mix(in srgb, var(--whatsapp) 58%, transparent),
+      0 0 0 0 color-mix(in srgb, var(--whatsapp) 40%, transparent);
+  }
+  70%, 100% {
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.22) inset,
+      0 8px 20px -6px color-mix(in srgb, var(--whatsapp) 58%, transparent),
+      0 0 0 14px transparent;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Só o botão do topo e o flutuante: são os dois que a pessoa vê sem rolar.
+     Repetir o anel em cada botão da página seria pisca-pisca. */
+  .hero-actions .button-whatsapp.button-whatsapp-solid,
+  .floating-whatsapp {
+    animation: ctaPulse 2.8s ease-out 1.1s 2;
+  }
+}

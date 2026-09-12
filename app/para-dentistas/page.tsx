@@ -16,6 +16,8 @@ import { DoctorPortrait } from "@/components/doctor-portrait";
 import { FaqSection } from "@/components/faq-section";
 import { FloatingWhatsApp } from "@/components/floating-whatsapp";
 import { JsonLd } from "@/components/json-ld";
+import { ObjectionList } from "@/components/objection-list";
+import { PainList } from "@/components/pain-list";
 import { SectionWave } from "@/components/section-wave";
 import { TrustMarquee } from "@/components/trust-marquee";
 import { WhatsAppButton } from "@/components/whatsapp-button";
@@ -212,14 +214,7 @@ export default function ParaDentistasPage() {
               <h2>O tratamento chegou a uma etapa que precisa de outra especialidade.</h2>
             </div>
 
-            <ul className="pain-list">
-              {painItems.map((item) => (
-                <li className="pain-item stagger-card" key={item}>
-                  <span className="pain-mark" aria-hidden="true" />
-                  {item}
-                </li>
-              ))}
-            </ul>
+            <PainList items={painItems} />
 
             <aside className="consequence-panel">
               <span className="consequence-icon" aria-hidden="true">
@@ -245,19 +240,7 @@ export default function ParaDentistasPage() {
               <h2>O que precisa ficar claro entre os profissionais.</h2>
             </div>
 
-            <ol className="objection-list">
-              {objections.map((item, index) => (
-                <li key={item.belief}>
-                  <span className="objection-index" aria-hidden="true">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <div>
-                    <strong>{item.belief}</strong>
-                    <p>{item.reality}</p>
-                  </div>
-                </li>
-              ))}
-            </ol>
+            <ObjectionList items={objections} />
           </div>
         </section>
 

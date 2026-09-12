@@ -130,7 +130,9 @@
 .button-whatsapp-solid,
 .button-whatsapp.button-whatsapp-solid {
   border-color: var(--whatsapp);
-  background: var(--whatsapp);
+  /* `background-color`, e não `background`: a forma curta zera a imagem, e o
+     degradê do botão é aplicado em 19-movimento.css. */
+  background-color: var(--whatsapp);
   color: var(--white);
 }
 

@@ -27,8 +27,16 @@ export function TreatmentMethod({ content }: { content: TreatmentContent }) {
               phrase={content.methodTitleHighlight}
             />
           </h2>
+          {/*
+            O marca-texto cai no parágrafo que contém a frase de
+            `methodHighlight` — nos outros, `Highlight` devolve o texto
+            intacto. Era o único bloco longo do site sem nenhum ponto de
+            parada visual.
+          */}
           {content.methodBody.map((paragraph) => (
-            <p key={paragraph}>{paragraph}</p>
+            <p key={paragraph}>
+              <Highlight text={paragraph} phrase={content.methodHighlight} />
+            </p>
           ))}
 
           <ul className="method-points">

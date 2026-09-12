@@ -73,7 +73,7 @@ export function AudienceCards() {
   return (
     <div className="audience-grid">
       {audiences.map((audience) => (
-        <article className={"audience-card audience-" + audience.key} key={audience.key}>
+        <article className={"audience-card reveal audience-" + audience.key} key={audience.key}>
           <div className="audience-visual" aria-hidden="true">
             <MotifThumb type={audience.key === "paciente" ? "planning" : "joint"} />
             <span className="audience-badge">{audience.badge}</span>

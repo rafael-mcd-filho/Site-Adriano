@@ -1,4 +1,4 @@
-import { Check, Clock3, ClipboardList, MessageSquareText, ChevronDown } from "lucide-react";
+import { Clock3, ClipboardList, MessageSquareText } from "lucide-react";
 import { WhatsAppButton } from "@/components/whatsapp-button";
 import type { TreatmentContent } from "@/lib/content";
 
@@ -42,18 +42,21 @@ export function TreatmentConsultation({ content }: { content: TreatmentContent }
           </article>
         </div>
 
-        <details className="consultation-preparation">
-          <summary>
-            <ClipboardList size={20} aria-hidden="true" />
-            O que levar à primeira consulta
-            <ChevronDown size={18} aria-hidden="true" />
-          </summary>
-          <ul>
-            {content.whatToBring.map((item) => (
-              <li key={item}><Check size={15} aria-hidden="true" />{item}</li>
-            ))}
-          </ul>
-        </details>
+        {/*
+          Este bloco já foi uma lista do que levar, escondida num acordeão
+          logo acima do botão. Quem não tinha os exames em mãos lia uma lista
+          de pendências no momento de decidir. Agora ele desobriga, e está
+          aberto: a mensagem só serve se for lida.
+        */}
+        <div className="consultation-preparation">
+          <span className="consultation-icon" aria-hidden="true">
+            <ClipboardList size={22} />
+          </span>
+          <div>
+            <h3>{content.preparation.title}</h3>
+            <p>{content.preparation.text}</p>
+          </div>
+        </div>
 
         <div className="consultation-note">
           <p>{content.consultationNote}</p>

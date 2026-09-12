@@ -1,3 +1,5 @@
+import type { PainIcon } from "@/components/pain-list";
+
 /**
  * Data da última revisão editorial do conteúdo clínico. Conteúdo de saúde é
  * YMYL: o Google pondera recência explícita. Quando uma página for revisada
@@ -16,7 +18,7 @@ export const contentLastReviewed = "2026-09-11";
  */
 export const neutralFormOptions = [
   "Quero entender como funciona a avaliação.",
-  "Quero saber o que levar na primeira consulta.",
+  "Quero saber o que acontece na primeira consulta.",
   "Prefiro explicar meu caso pelo WhatsApp.",
   "Outro assunto.",
 ];
@@ -48,6 +50,12 @@ export type TreatmentContent = {
   /** Em linguagem de vida real, não de prontuário. */
   painItems: string[];
   /**
+   * Um ícone por item de `painItems`, na mesma ordem. Nomes válidos em
+   * `components/pain-list.tsx`. Serve para a pessoa achar o sintoma dela de
+   * relance, em vez de ler quatro parágrafos iguais.
+   */
+  painIcons?: readonly PainIcon[];
+  /**
    * Foto do bloco editorial. Decidido aqui, e não por `motif` dentro do
    * componente: motivo visual é linguagem gráfica, foto é escolha editorial —
    * amarrar uma na outra obriga a inventar um motivo para trocar de imagem.
@@ -72,6 +80,15 @@ export type TreatmentContent = {
   methodTitle: string;
   methodTitleHighlight?: string;
   methodBody: string[];
+  /**
+   * Trecho de `methodBody` que recebe o marca-texto.
+   *
+   * Um por página, e sempre na frase que desarma — "em casos selecionados",
+   * "nem toda alteração precisa de cirurgia". São as frases que fazem a pessoa
+   * continuar lendo, e passavam despercebidas no meio do parágrafo. Grifar
+   * mais de uma anula as duas; grifar promessa, em saúde, é outro problema.
+   */
+  methodHighlight?: string;
   methodPoints: string[];
   crossLink?: { label: string; href: string };
   journey?: {
@@ -91,7 +108,16 @@ export type TreatmentContent = {
 
   /* ── Bloco 6 — primeira consulta ────────────────────────────────────── */
   consultationKicker?: string;
-  whatToBring: string[];
+  /**
+   * O bloco que antecede o botão final.
+   *
+   * Era uma lista do que levar — tomografia, relatórios, medicamentos —, e
+   * ficava exatamente entre o texto e o CTA. A última coisa que a pessoa lia
+   * antes de decidir era uma lista de tarefas, e quem não tem os exames em
+   * mãos adia. Agora o bloco desobriga: o exame que existir adianta a
+   * conversa, e o que não existir não impede a avaliação.
+   */
+  preparation: { title: string; text: string };
   consultationTitle: string;
   consultationIntro: string;
   consultationOutcome: string;
@@ -159,7 +185,7 @@ const faqValores = {
 const faqSegundaOpiniao = {
   question: "E se eu só quiser uma segunda opinião sobre o que já me disseram?",
   answer:
-    "Você pode buscar uma avaliação para esclarecer uma indicação anterior. Traga os exames e relatórios que já tem, além das dúvidas que ficaram. A análise pode confirmar a orientação recebida ou apontar outras possibilidades.",
+    "Você pode buscar uma avaliação para esclarecer uma indicação anterior. Os exames e relatórios que você já tem ajudam, junto com as dúvidas que ficaram. A análise pode confirmar a orientação recebida ou apontar outras possibilidades.",
 };
 
 const faqDentista = {
@@ -196,6 +222,7 @@ export const treatments: Record<string, TreatmentContent> = {
       "Quem dorme ao seu lado relata ronco alto, pausas na respiração ou despertares com engasgo.",
       "Já trata apneia, mas as dificuldades com o tratamento ainda atrapalham suas noites.",
     ],
+    painIcons: ["bateria", "cafe", "som", "cama"],
     painImage: "sleep",
     storyEyebrow: "O que você quer recuperar",
     consequenceTitle: "O que você quer recuperar é a disposição para viver o dia",
@@ -218,6 +245,7 @@ export const treatments: Record<string, TreatmentContent> = {
       "O tratamento precisa considerar o que dificulta sua respiração durante o sono. O Dr. Adriano avalia a posição dos maxilares e a via aérea, o caminho por onde o ar passa, junto com seu histórico e os estudos do sono. Isso ajuda a esclarecer se a estrutura da face tem um papel no seu caso.",
       "Essa análise se soma ao acompanhamento com o médico do sono e os demais profissionais. CPAP, medidas clínicas e aparelhos intraorais estão entre as opções, conforme a indicação. A cirurgia dos maxilares é discutida em casos selecionados, quando os benefícios esperados justificam os riscos e as alternativas foram consideradas.",
     ],
+    methodHighlight: "A cirurgia dos maxilares é discutida em casos selecionados",
     methodPoints: [
       "Sintomas, rotina do sono e condições de saúde.",
       "Polissonografia ou outros estudos do sono já realizados.",
@@ -226,13 +254,11 @@ export const treatments: Record<string, TreatmentContent> = {
     ],
     authorityBody:
       "O Dr. Adriano atua na avaliação e no tratamento de alterações dos maxilares e da face. Na investigação da apneia obstrutiva, sua participação é analisar se a posição dos maxilares influencia a passagem de ar, sempre em conjunto com o médico e os demais profissionais que acompanham o seu sono.",
-    whatToBring: [
-      "Estudos do sono, como a polissonografia, se já tiver.",
-      "Relatórios dos profissionais que acompanham seu sono.",
-      "Informações sobre CPAP ou aparelho intraoral, se utiliza.",
-      "Lista de medicamentos em uso.",
-    ],
-    consultationTitle: "Traga suas noites difíceis e as dúvidas sobre o tratamento.",
+    preparation: {
+      title: "Para marcar, basta querer entender suas noites.",
+      text: "Se você já tem polissonografia ou relatórios de quem acompanha seu sono, eles adiantam a conversa. Se não tem, a avaliação começa pelo exame da face e pelo que você contar.",
+    },
+    consultationTitle: "Suas noites difíceis e suas dúvidas sobre o tratamento cabem na conversa.",
     consultationIntro: "Como você acorda, o que já tentou e o que dificulta o tratamento fazem parte da conversa. O exame da face e os estudos do sono ajudam a investigar a participação dos maxilares.",
     consultationOutcome: "Se a estrutura dos maxilares pode contribuir para a apneia, quais exames ainda são necessários e o que discutir com sua equipe para orientar os próximos passos.",
     consultationNote: "Se você já faz tratamento para apneia, mantenha o acompanhamento enquanto esclarece suas dúvidas com a equipe responsável.",
@@ -241,7 +267,7 @@ export const treatments: Record<string, TreatmentContent> = {
       { question: "Quem faz o diagnóstico de apneia do sono?", answer: "A investigação é conduzida por um médico, que avalia sintomas e histórico e indica o estudo do sono apropriado, como a polissonografia. A avaliação buco-maxilo-facial complementa esse cuidado quando há suspeita de participação da anatomia dos maxilares." },
       { question: "Toda apneia precisa de cirurgia?", answer: "Não. Existem diferentes tipos e causas de apneia. A cirurgia dos maxilares pode ser considerada em casos selecionados de apneia obstrutiva, após análise da anatomia, da gravidade, dos tratamentos e da saúde geral." },
       { question: "Qual é o papel do cirurgião buco-maxilo-facial?", answer: "Avaliar se a posição e a estrutura dos maxilares contribuem para a obstrução da passagem de ar. Essa análise é discutida com os demais profissionais para definir se há alguma indicação de cuidado nessa área." },
-      { question: "Preciso repetir a polissonografia antes da consulta?", answer: "Traga os exames que já possui. A necessidade de atualizar ou complementar o estudo do sono depende da história clínica e da orientação dos profissionais envolvidos; não é preciso repetir exames por conta própria." },
+      { question: "Preciso repetir a polissonografia antes da consulta?", answer: "Os exames que você já tem bastam para começar. A necessidade de atualizar ou complementar o estudo do sono depende da história clínica e da orientação dos profissionais envolvidos; não é preciso repetir exames por conta própria." },
       faqValores,
       faqSegundaOpiniao,
     ],
@@ -285,6 +311,7 @@ export const treatments: Record<string, TreatmentContent> = {
       "Recebeu indicação de enxerto sem entender o que muda nas etapas e na recuperação.",
       "Tem receio de começar um tratamento sem saber o que será possível ao final.",
     ],
+    painIcons: ["refeicao", "tempo", "camadas", "duvida"],
     storyEyebrow: "O que uma avaliação deve responder",
     consequenceTitle: "Uma resposta útil precisa explicar o que é possível e por quê",
     consequenceText: "A falta de osso pode interromper o plano que você imaginava para os dentes. A avaliação especializada reúne a região da perda, os tecidos, sua saúde e a futura prótese para discutir caminhos concretos. Ela pode identificar possibilidades ou confirmar limites, com os motivos e as alternativas explicados.",
@@ -305,6 +332,7 @@ export const treatments: Record<string, TreatmentContent> = {
       "O ponto de partida é a prótese de que você precisa para reabilitar os dentes. A partir da posição planejada para ela, o Dr. Adriano e seu dentista avaliam onde há suporte ósseo e o que precisaria ser reconstruído. Assim, cada etapa tem uma finalidade no tratamento.",
       "O exame da boca e a tomografia, quando indicada, mostram o volume e a forma do osso disponível. Se houver indicação de enxerto ou outra técnica reconstrutiva, a conversa inclui os materiais, a cicatrização, os riscos e o que precisa ser reavaliado antes dos implantes. Quando reconstruir não for adequado, outras formas de reabilitação entram no plano.",
     ],
+    methodHighlight: "Quando reconstruir não for adequado, outras formas de reabilitação entram no plano",
     methodPoints: [
       "Volume ósseo disponível e região da perda.",
       "Posição e função da futura prótese.",
@@ -314,7 +342,10 @@ export const treatments: Record<string, TreatmentContent> = {
     crossLink: { label: "Entenda como a reconstrução se relaciona aos implantes", href: "/implantes-dentarios" },
     authorityBody:
       "O Dr. Adriano atua na avaliação e no tratamento de alterações dos maxilares e da face. Quando a falta de osso interrompe um plano de reabilitação, sua participação é analisar as condições da região e discutir, junto com o dentista que acompanha você, o que pode ser reconstruído e com qual finalidade.",
-    whatToBring: ["Tomografia ou radiografias, se já tiver.", "Pareceres e planos de tratamento anteriores.", "Informações sobre a prótese que usa e o acompanhamento atual.", "Lista de medicamentos e exames recentes disponíveis."],
+    preparation: {
+      title: "Para marcar, não precisa ter nada em mãos.",
+      text: "Se você já tem tomografia ou um plano de tratamento anterior, eles adiantam a conversa. Se não tem, a avaliação começa pelo exame da região e pelo que você quer reabilitar.",
+    },
     consultationTitle: "Uma avaliação para retomar a conversa sobre suas possibilidades.",
     consultationIntro: "Você conta o que deseja reabilitar e o que já ouviu sobre a falta de osso. O exame da região e as imagens disponíveis ajudam a esclarecer essa informação e a necessidade de novos exames.",
     consultationOutcome: "Se há uma possibilidade de reconstrução a considerar, quais condições precisam ser atendidas e como seriam as etapas até reavaliar os implantes. Os limites e as alternativas fazem parte da orientação.",
@@ -329,7 +360,7 @@ export const treatments: Record<string, TreatmentContent> = {
       faqValores,
     ],
     closingTitle: "A dúvida sobre a falta de osso pode dar lugar a uma decisão mais clara.",
-    closingText: "Agende uma avaliação e traga o plano e os exames que já recebeu. Vamos discutir o que a perda óssea significa para você e quais caminhos de reabilitação merecem ser considerados.",
+    closingText: "Agende uma avaliação para entender o que a perda óssea significa no seu caso. Vamos conversar sobre os caminhos de reabilitação que merecem ser considerados — e sobre os que não valem para você.",
     testimonials: [],
     visualSummary: { kicker: "Osso e reabilitação", title: "Reconstruir com um objetivo para os seus dentes.", cues: ["Perda óssea", "Enxerto ósseo", "Futura prótese"] },
     formQuestion: "Como podemos ajudar?",
@@ -368,6 +399,7 @@ export const treatments: Record<string, TreatmentContent> = {
       "Percebe estalos com dor ou teme que a mandíbula trave durante uma refeição.",
       "Já usou placa ou tentou outros cuidados, mas o incômodo continua voltando.",
     ],
+    painIcons: ["refeicao", "ouvido", "atividade", "tempo"],
     storyEyebrow: "O que você quer voltar a fazer",
     consequenceTitle: "Você quer voltar a fazer coisas simples sem pensar tanto na dor",
     consequenceText: "Uma refeição, uma conversa longa, um bocejo. Quando a mandíbula passa a exigir atenção o tempo todo, investigar a causa ajuda a escolher o cuidado, em vez de repetir tentativas sem orientação. Dor persistente, por si só, não significa dano progressivo nem necessidade de cirurgia.",
@@ -389,14 +421,18 @@ export const treatments: Record<string, TreatmentContent> = {
       "Muitos quadros começam com cuidados conservadores, como orientação de hábitos, fisioterapia e outros recursos conforme o diagnóstico. O objetivo é reduzir os sintomas e melhorar os movimentos da mandíbula, acompanhando o que funciona para você e o que precisa ser ajustado.",
       "Procedimentos na ATM são considerados em situações selecionadas. Podem envolver técnicas minimamente invasivas e, em casos específicos, cirurgia aberta ou prótese articular. A indicação exige discutir os benefícios possíveis, os riscos e as alternativas.",
     ],
+    methodHighlight: "Muitos quadros começam com cuidados conservadores",
     methodPoints: ["Histórico da dor e impacto na mastigação.", "Exame dos movimentos, músculos e articulações.", "Exames de imagem apenas quando necessários.", "Tratamentos anteriores e integração com outros profissionais."],
     authorityBody:
       "O Dr. Adriano atua na avaliação e no tratamento de alterações dos maxilares, da face e da articulação da mandíbula. Nos quadros de dor e limitação de movimento, sua participação começa pela investigação da origem dos sintomas, considerando os cuidados conservadores antes de discutir qualquer indicação cirúrgica.",
-    whatToBring: ["Ressonância, tomografia ou outros exames, se já tiver.", "A placa que utiliza, se for o caso.", "Informações sobre tratamentos já realizados e sua resposta.", "Lista de medicamentos, inclusive os usados para dor."],
+    preparation: {
+      title: "Para marcar, basta a dor que você sente.",
+      text: "Se você já tem imagens da articulação ou usa uma placa, elas adiantam a conversa. Se não tem, a avaliação começa pelo exame dos movimentos e pelo que você já tentou.",
+    },
     consultationTitle: "O que piora sua dor? O que você já deixou de fazer por causa dela?",
     consultationIntro: "A consulta começa por essas respostas e pelo que já foi tentado. O exame avalia os músculos, a articulação e os movimentos da boca; imagens são solicitadas quando acrescentam informação à investigação.",
     consultationOutcome: "As possíveis origens da dor, os próximos passos para esclarecê-las e os cuidados a considerar. Quando outro profissional puder contribuir, essa participação é discutida com você.",
-    consultationNote: "Leve a placa e os exames que já possui. Contar o que ajudou ou não ajudou faz diferença na avaliação.",
+    consultationNote: "Contar o que já tentou, o que ajudou e o que não ajudou faz diferença na avaliação.",
     faqTitle: "Dúvidas sobre dor, estalos, placas e cirurgia de ATM.",
     faqs: [
       { question: "Qual é a diferença entre DTM e ATM?", answer: "ATM é a articulação temporomandibular, que participa dos movimentos de abrir e fechar a boca. DTM reúne alterações da articulação e dos músculos da mastigação que podem provocar dor ou dificuldade de movimento." },
@@ -414,7 +450,7 @@ export const treatments: Record<string, TreatmentContent> = {
     formOptions: neutralFormOptions,
     contactForm: {
       title: "Converse sobre a dor na mandíbula.",
-      description: "Deixe seu nome e WhatsApp. A equipe explica como funciona a consulta e o que levar sobre os tratamentos que você já fez.",
+      description: "Deixe seu nome e WhatsApp. A equipe explica como funciona a consulta e responde o que você precisar antes de marcar.",
     },
     whatsappMessage: "Olá, vi a página sobre DTM e ATM e gostaria de saber como funciona a avaliação da mandíbula.",
     metadata: { title: "DTM e ATM em João Pessoa | Dor na Mandíbula e Tratamento", description: "Dor na mandíbula, estalos ou travamento? Conheça a avaliação de DTM e ATM em João Pessoa, os cuidados conservadores e quando a cirurgia é considerada." },
@@ -446,6 +482,7 @@ export const treatments: Record<string, TreatmentContent> = {
       "A posição do queixo ou a diferença entre os lados da face incomoda você.",
       "Seu ortodontista falou em cirurgia e surgiram dúvidas sobre a mudança no rosto e a recuperação.",
     ],
+    painIcons: ["refeicao", "fala", "rosto", "calendario"],
     storyEyebrow: "O que entra na conversa",
     consequenceTitle: "Mastigar melhor e se sentir bem com a própria face merecem uma conversa",
     consequenceText: "O que dificulta sua mastigação e o que incomoda na aparência devem ser ouvidos juntos. A avaliação relaciona essas expectativas à estrutura dos maxilares e explica quais mudanças são possíveis. Tempo de aparelho, recuperação e rotina de trabalho também entram na decisão desde o começo.",
@@ -466,6 +503,7 @@ export const treatments: Record<string, TreatmentContent> = {
       "A cirurgia ortognática reposiciona os maxilares quando a alteração óssea justifica esse tratamento. O planejamento considera a relação da mordida, as dificuldades para mastigar e as repercussões na face. Suas expectativas ajudam a definir os objetivos da conversa, junto com o que é viável no seu caso.",
       "O Dr. Adriano e o ortodontista diferenciam a posição dos dentes da posição dos maxilares para discutir o papel de cada etapa. Nem toda alteração precisa de cirurgia. Se houver indicação, você recebe explicações sobre os benefícios funcionais esperados, os riscos e as alternativas. Queixas de respiração ou fala podem exigir outros profissionais.",
     ],
+    methodHighlight: "Nem toda alteração precisa de cirurgia.",
     methodPoints: ["Relação entre os dentes e os maxilares.", "Mastigação, fechamento dos lábios e queixas funcionais.", "Análise facial, exames e documentação ortodôntica.", "Objetivos e sequência definidos com o ortodontista."],
     journey: {
       kicker: "A jornada completa",
@@ -479,11 +517,14 @@ export const treatments: Record<string, TreatmentContent> = {
     },
     authorityBody:
       "O Dr. Adriano atua na avaliação e no tratamento de alterações dos maxilares e da face. Nos casos de alteração da mordida, sua participação é diferenciar a posição dos dentes da posição dos maxilares e planejar as etapas em conjunto com o ortodontista que acompanha você.",
-    whatToBring: ["Documentação ortodôntica e exames disponíveis.", "Contato do ortodontista, se já estiver em acompanhamento.", "Informações sobre tratamentos anteriores e medicamentos.", "Dúvidas sobre função, mudanças faciais e recuperação."],
-    consultationTitle: "Traga o que incomoda na mordida e o que você espera do tratamento.",
+    preparation: {
+      title: "Para marcar, basta a dúvida.",
+      text: "Se você já está em tratamento ortodôntico, o contato do seu ortodontista adianta a conversa. Se ainda não está, a avaliação começa pelo exame da mordida e pelo que incomoda você.",
+    },
+    consultationTitle: "O que incomoda na mordida e o que você espera do tratamento.",
     consultationIntro: "Você conta suas dificuldades para comer, suas expectativas sobre a face e os receios sobre a cirurgia. O exame e a documentação ortodôntica ajudam a relacionar essas questões à posição dos dentes e dos maxilares.",
     consultationOutcome: "O que falta para definir a indicação e como o ortodontista participa. Se a cirurgia for uma opção, a conversa aborda mudanças esperadas, riscos, etapas e recuperação para você planejar a decisão.",
-    consultationNote: "Se o ortodontista já sugeriu cirurgia, traga a documentação. A avaliação também serve para esclarecer essa orientação.",
+    consultationNote: "Se o ortodontista já sugeriu cirurgia, a avaliação também serve para esclarecer essa orientação.",
     faqTitle: "Aparelho, mudanças faciais e recuperação: suas principais dúvidas.",
     faqs: [
       { question: "Como saber se tenho indicação de cirurgia ortognática?", answer: "É preciso avaliar a relação entre dentes e maxilares, as queixas funcionais e suas condições de saúde. O cirurgião e o ortodontista analisam se o benefício de uma abordagem conjunta justifica a cirurgia e quais alternativas existem." },
@@ -533,6 +574,7 @@ export const treatments: Record<string, TreatmentContent> = {
       "Conversar e sorrir sem concentrar a atenção no espaço deixado por um dente.",
       "Encontrar uma opção para os dentes que você perdeu há anos.",
     ],
+    painIcons: ["refeicao", "sopa", "sorriso", "tempo"],
     storyEyebrow: "Por onde o plano começa",
     consequenceTitle: "O plano começa pelo que faz falta no seu dia a dia",
     consequenceText: "A reabilitação deve considerar os alimentos que você evita, o conforto para falar e o que incomoda na prótese atual. Os implantes dão suporte aos dentes da prótese e podem contribuir para essas funções quando indicados. A avaliação relaciona seus objetivos às condições da boca e aos cuidados de manutenção.",
@@ -553,6 +595,7 @@ export const treatments: Record<string, TreatmentContent> = {
       "O implante é o suporte; a prótese é a parte que substitui o dente e participa da mastigação. Planejá-los juntos permite considerar onde o dente precisa ficar, como ele encontrará os demais e quais condições de osso e gengiva serão necessárias.",
       "O Dr. Adriano integra a etapa cirúrgica ao planejamento do seu dentista. O exame da boca, as imagens quando indicadas e seu histórico de saúde orientam a proposta. Você conhece as possibilidades de reabilitação, as etapas e os cuidados antes de escolher como seguir.",
     ],
+    methodHighlight: "antes de escolher como seguir",
     methodPoints: ["Quantidade de osso e saúde da gengiva.", "Posição do implante em relação à futura prótese.", "Mordida, saúde geral e fatores de cicatrização.", "Higiene, manutenção e acompanhamento após a reabilitação."],
     crossLink: { label: "Pouco osso? Entenda quando considerar reconstrução óssea", href: "/reconstrucao-ossea" },
     journey: {
@@ -567,7 +610,10 @@ export const treatments: Record<string, TreatmentContent> = {
     },
     authorityBody:
       "O Dr. Adriano atua na avaliação e no tratamento de alterações dos maxilares e da face. Na reabilitação com implantes, sua participação é a etapa cirúrgica, planejada junto com o dentista responsável pela prótese para que o implante atenda ao que a sua mastigação precisa.",
-    whatToBring: ["Radiografia ou tomografia, se já tiver.", "Informações sobre próteses e tratamentos anteriores.", "Lista de medicamentos e condições de saúde.", "Exames recentes e contato do dentista que acompanha você, se houver."],
+    preparation: {
+      title: "Para marcar, não precisa juntar nada.",
+      text: "Se você já tem radiografia ou tomografia, elas adiantam a conversa. Se não tem, a avaliação começa pelo exame da boca e pelo que você quer voltar a comer.",
+    },
     consultationTitle: "Vamos conversar sobre o que falta para você mastigar com mais conforto.",
     consultationIntro: "Você conta quais dentes perdeu, o que evita comer e como se sente com a prótese atual, se usa uma. O exame da boca e as imagens disponíveis ajudam a entender o suporte para uma reabilitação.",
     consultationOutcome: "Se os implantes são uma opção a considerar, quais exames faltam e se a boca precisa de algum preparo. A proposta deve explicar a prótese, as etapas, os cuidados e as alternativas para o seu caso.",

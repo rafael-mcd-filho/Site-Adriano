@@ -1,3 +1,4 @@
+import { ObjectionList } from "@/components/objection-list";
 import type { TreatmentContent } from "@/lib/content";
 
 /**
@@ -23,19 +24,7 @@ export function TreatmentObjections({ content }: { content: TreatmentContent }) 
           <h2>{content.objectionsTitle}</h2>
         </div>
 
-        <ol className="objection-list">
-          {content.objections.map((item, index) => (
-            <li key={item.belief}>
-              <span className="objection-index" aria-hidden="true">
-                {String(index + 1).padStart(2, "0")}
-              </span>
-              <div>
-                <strong>{item.belief}</strong>
-                <p>{item.reality}</p>
-              </div>
-            </li>
-          ))}
-        </ol>
+        <ObjectionList items={content.objections} />
       </div>
     </section>
   );

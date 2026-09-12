@@ -34,6 +34,11 @@
 @import "./styles/17-divida-revisao-leitura.css";
 @import "./styles/18-divida-revisao-visual.css";
 
+/* ── Movimento ──────────────────────────────────────────────────────────
+   Revelação ao rolar. Vem depois da camada final porque é ela que continha o
+   desligamento da animação antiga; não é dívida. */
+@import "./styles/19-movimento.css";
+
 /* ── Por rota ───────────────────────────────────────────────────────────
    Cada arquivo alcança só a sua rota, via [data-rota="…"]. Carregados por
    último de propósito: vencem sem precisar de !important. */

@@ -85,25 +85,29 @@
 .consultation-card { border: 0; border-radius: 0; padding: 0; background: transparent; }
 .consultation-icon { width: 38px; height: 38px; border-radius: var(--radius-sm); margin-bottom: 14px; }
 .consultation-card p { font-size: var(--fs-body); }
-.consultation-preparation { margin-top: 32px; border-block: 1px solid var(--border); }
-.consultation-preparation summary { display: flex; align-items: center; gap: 12px; min-height: 64px; padding-block: 16px; cursor: pointer; color: var(--navy-800); font-weight: 700; list-style: none; }
-.consultation-preparation summary::-webkit-details-marker { display: none; }
-.consultation-preparation summary > svg { flex: 0 0 auto; }
-.consultation-preparation summary > svg:last-child { margin-left: auto; transition: transform 180ms ease; }
-.consultation-preparation[open] summary > svg:last-child { transform: rotate(180deg); }
-.consultation-preparation ul { display: grid; gap: 10px; margin: 0; padding: 0 0 22px; list-style: none; }
-.consultation-preparation li { display: flex; align-items: baseline; gap: 10px; }
-.consultation-preparation li svg { flex: 0 0 auto; color: var(--blue-600); }
 .consultation-note { border: 0; border-radius: var(--radius-md); background: var(--blue-50); }
 .contact-fields { display: grid; min-width: 0; padding: 0; margin: 0; border: 0; gap: 20px; }
 .contact-fields:disabled input, .contact-fields:disabled button { cursor: not-allowed; }
 .contact-fields:disabled .form-submit { background: var(--surface); border-color: var(--border); color: var(--muted); }
 .contact-fields:disabled .button-circle { display: none; }
 .contact-fields:disabled .button-motion { padding-inline: 21px; }
+/* Deixou de ser um acordeão com a lista do que levar: agora é um painel
+   aberto que desobriga. Ver o comentário em treatment-consultation.tsx. */
+.consultation-preparation {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-top: 32px;
+  padding: 22px 24px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface-soft);
+}
+.consultation-preparation h3 { margin-bottom: 6px; font-size: var(--fs-lead); }
+.consultation-preparation p { margin-bottom: 0; color: var(--muted); }
 .reason-option { min-height: 48px; }
 .field input { font-size: max(16px, 1em); }
 .page-enter > :nth-child(n) { animation-duration: 350ms; animation-delay: 0ms; }
-.stagger-card { animation: none; }
 .areas-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
 .area-card { box-shadow: none; border-radius: var(--radius-md); }
 .area-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-sm); }

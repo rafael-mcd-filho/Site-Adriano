@@ -1,4 +1,5 @@
 import { EditorialStory } from "@/components/editorial-story";
+import { PainList } from "@/components/pain-list";
 import type { TreatmentContent } from "@/lib/content";
 
 /**
@@ -28,14 +29,7 @@ export function TreatmentPain({
             <h2>{content.painTitle}</h2>
           </div>
 
-          <ul className="pain-list">
-            {content.painItems.map((item) => (
-              <li className="pain-item stagger-card" key={item}>
-                <span className="pain-mark" aria-hidden="true" />
-                {item}
-              </li>
-            ))}
-          </ul>
+          <PainList items={content.painItems} icons={content.painIcons} />
         </div>
       </section>
       <EditorialStory

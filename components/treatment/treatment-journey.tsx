@@ -1,4 +1,12 @@
+import { HeartPulse, Search, Waypoints } from "lucide-react";
 import type { TreatmentContent } from "@/lib/content";
+
+/**
+ * As três etapas seguem sempre a mesma lógica — entender, executar,
+ * acompanhar —, então o ícone vem da posição e não do conteúdo: não há o que
+ * decidir por página, e um campo a mais em `content` só daria margem a erro.
+ */
+const stepIcons = [Search, Waypoints, HeartPulse];
 
 /** Uma trilha mantém a sequência de cuidado visível no desktop e no celular. */
 export function TreatmentJourney({ content }: { content: TreatmentContent }) {
@@ -14,14 +22,29 @@ export function TreatmentJourney({ content }: { content: TreatmentContent }) {
           <h2>{content.journey.title}</h2>
           <p>{content.journey.intro}</p>
         </div>
+
+        {/*
+          A linha que liga as etapas é desenhada pelo CSS, atrás dos marcos.
+          Ela é decoração: quem usa leitor de tela recebe uma lista ordenada,
+          que já carrega a ideia de sequência sem precisar enxergar o traço.
+        */}
         <ol className="journey-track">
-          {content.journey.steps.map((step, index) => (
-            <li key={step.title}>
-              <span className="journey-number" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
-              <h3>{step.title.replace(/^\d+\.\s*/, "")}</h3>
-              <p>{step.text}</p>
-            </li>
-          ))}
+          {content.journey.steps.map((step, index) => {
+            const Icon = stepIcons[index] ?? Search;
+
+            return (
+              <li className="reveal" key={step.title}>
+                <span className="journey-marker" aria-hidden="true">
+                  <Icon size={17} />
+                </span>
+                <span className="journey-number" aria-hidden="true">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <h3>{step.title.replace(/^\d+\.\s*/, "")}</h3>
+                <p>{step.text}</p>
+              </li>
+            );
+          })}
         </ol>
       </div>
     </section>

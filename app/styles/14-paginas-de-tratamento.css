@@ -410,3 +410,17 @@
   color: rgba(255, 255, 255, 0.75);
   font-size: var(--fs-lead);
 }
+
+/* O ícone substitui o traço de cor igual em todos os itens: é o que permite
+   varrer a lista e parar no sintoma que é o seu. */
+.pain-icon {
+  display: inline-flex;
+  width: 38px;
+  height: 38px;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--page-accent, var(--blue-600)) 12%, var(--white));
+  color: var(--page-accent, var(--blue-600));
+}
