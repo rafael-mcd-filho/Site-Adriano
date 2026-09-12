@@ -1,5 +1,10 @@
 import { ButtonContent } from "@/components/button-content";
-import { getWhatsAppHref, siteConfig } from "@/lib/site";
+import {
+  getWhatsAppHref,
+  originFromCtaId,
+  siteConfig,
+  whatsappMessageWithSource,
+} from "@/lib/site";
 
 export function WhatsAppIcon({ size = 16 }: { size?: number }) {
   return (
@@ -17,7 +22,6 @@ export function WhatsAppIcon({ size = 16 }: { size?: number }) {
 }
 
 const isConfigured = Boolean(siteConfig.whatsappNumber);
-const unconfiguredTitle = "Número de demonstração ainda não configurado";
 
 type WhatsAppButtonProps = {
   message: string;
@@ -26,6 +30,9 @@ type WhatsAppButtonProps = {
   label?: string;
   compact?: boolean;
   className?: string;
+  /** Origem legível na mensagem. Sem isso, é derivada do `ctaId`. */
+  source?: string;
+  fallbackHref?: string;
 };
 
 export function WhatsAppButton({
@@ -34,43 +41,33 @@ export function WhatsAppButton({
   label = "Falar pelo WhatsApp",
   compact = false,
   className = "",
+  source,
+  fallbackHref = "#contato",
 }: WhatsAppButtonProps) {
+  const displayLabel = isConfigured ? label : label
+    .replace("Perguntar pelo WhatsApp", "Tirar uma dúvida")
+    .replace("Complementar pelo WhatsApp", "Voltar ao contato")
+    .replace(/(?:pelo|no) WhatsApp/g, "com a equipe");
   return (
     <a
       id={ctaId}
       data-cta={ctaId}
-      data-cta-channel="whatsapp"
+      data-cta-channel={isConfigured ? "whatsapp" : "form"}
       className={
         (compact
           ? "button button-whatsapp button-motion button-small "
           : "button button-whatsapp button-motion ") + className
       }
-      href={getWhatsAppHref(message)}
+      href={isConfigured ? getWhatsAppHref(
+        whatsappMessageWithSource(message, source ?? originFromCtaId(ctaId)),
+      ) : fallbackHref}
       target={isConfigured ? "_blank" : undefined}
       rel={isConfigured ? "noopener noreferrer" : undefined}
-      aria-label="Falar com a equipe pelo WhatsApp"
-      title={isConfigured ? undefined : unconfiguredTitle}
+      aria-label={displayLabel + (isConfigured ? " — falar com a equipe pelo WhatsApp" : " — ir para o formulário de contato")}
     >
-      <ButtonContent icon={WhatsAppIcon}>{label}</ButtonContent>
-    </a>
-  );
-}
-
-export function FloatingWhatsApp({ message }: { message: string }) {
-  return (
-    <a
-      id="cta-flutuante-whatsapp"
-      data-cta="cta-flutuante-whatsapp"
-      data-cta-channel="whatsapp"
-      className="floating-whatsapp"
-      href={getWhatsAppHref(message)}
-      target={isConfigured ? "_blank" : undefined}
-      rel={isConfigured ? "noopener noreferrer" : undefined}
-      aria-label="Falar com a equipe pelo WhatsApp"
-      title={isConfigured ? "Falar pelo WhatsApp" : unconfiguredTitle}
-    >
-      <WhatsAppIcon size={22} />
-      <span>WhatsApp</span>
+      <ButtonContent icon={WhatsAppIcon} seal="whatsapp">
+        {displayLabel}
+      </ButtonContent>
     </a>
   );
 }

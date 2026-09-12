@@ -4,15 +4,22 @@ import type { ReactNode } from "react";
  * Destaca um trecho dentro de um texto que vem do conteúdo estruturado.
  *
  * O conteúdo permanece string em `lib/content.ts` — quem decide o que merece
- * destaque é o dado (`introHighlight`), não a marcação. Se a frase não existir
- * no texto, devolve o texto intacto: nunca falha, no máximo não destaca.
+ * destaque é o dado (`titleHighlight`, `educationTitleHighlight`), não a
+ * marcação. Se a frase não existir no texto, devolve o texto intacto: nunca
+ * falha, no máximo não destaca.
+ *
+ * `accent` é o traço que varre da esquerda para a direita e serve ao H1;
+ * `soft` é o marca-texto estático dos H2 e dos parágrafos. Um por seção — dois
+ * destaques na mesma tela anulam um ao outro.
  */
 export function Highlight({
   text,
   phrase,
+  variant = "soft",
 }: {
   text: string;
   phrase?: string;
+  variant?: "soft" | "accent";
 }): ReactNode {
   if (!phrase) return text;
 
@@ -22,7 +29,9 @@ export function Highlight({
   return (
     <>
       {text.slice(0, at)}
-      <span className="mark-soft">{phrase}</span>
+      <span className={variant === "accent" ? "mark-accent" : "mark-soft"}>
+        {phrase}
+      </span>
       {text.slice(at + phrase.length)}
     </>
   );

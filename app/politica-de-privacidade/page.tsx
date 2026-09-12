@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Cookie, Database, LockKeyhole, MessageCircle, ShieldCheck } from "lucide-react";
-import Link from "next/link";
 import { schemaName } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -18,11 +17,6 @@ export default function PrivacyPage() {
   return (
     <main>
       <section className="legal-hero section-soft-edge">
-        <div className="container breadcrumb" aria-label="Breadcrumb">
-          <Link href="/">Início</Link>
-          <span aria-hidden="true">/</span>
-          <span>Política de privacidade</span>
-        </div>
         <div className="container legal-heading">
           <span className="eyebrow">Privacidade e transparência</span>
           <h1>Seus dados devem ser tratados com a mesma clareza que o seu cuidado.</h1>
@@ -49,17 +43,17 @@ export default function PrivacyPage() {
               <Database aria-hidden="true" />
               <h2>Dados coletados pelo formulário</h2>
               <p>
-                O formulário solicita nome, WhatsApp e uma opção de contato em
-                lista fechada — na página inicial, a área sobre a qual você quer
-                conversar; nas demais, o tipo de ajuda que procura. São
-                registrados também a página de origem e a data do envio.
+                O formulário solicita nome, WhatsApp e uma mensagem opcional
+                sobre o atendimento. O envio inclui a página de origem, um
+                identificador da solicitação, a data e o registro da autorização
+                de contato. Quando disponíveis, são incluídos o domínio de
+                referência e os identificadores de campanha presentes no link.
               </p>
               <p>
-                O formulário não coleta sintomas, diagnósticos, exames,
-                documentos ou qualquer descrição do seu quadro clínico. Nenhuma
-                das opções disponíveis descreve estado de saúde. Se precisar
-                falar sobre o caso, isso acontece na conversa com a equipe, não
-                aqui.
+                Use a mensagem para dúvidas sobre horários, agendamento ou
+                funcionamento da consulta. Não envie sintomas, diagnósticos,
+                exames, documentos ou dados de outros pacientes. A conversa
+                clínica acontece com orientação da equipe.
               </p>
             </section>
 
@@ -68,8 +62,10 @@ export default function PrivacyPage() {
               <h2>Como as informações são utilizadas</h2>
               <p>
                 Os dados são usados para responder à solicitação, orientar o fluxo
-                de atendimento e manter a segurança do formulário. Eles não devem
-                ser utilizados para definir diagnóstico ou tratamento sem consulta.
+                de atendimento e manter a segurança do formulário. A origem
+                ajuda a equipe a identificar a página e a campanha que geraram
+                o contato. Os dados não devem ser utilizados para definir
+                diagnóstico ou tratamento sem consulta.
               </p>
               <p>
                 O envio é encaminhado a um serviço externo contratado apenas para
@@ -94,8 +90,10 @@ export default function PrivacyPage() {
               <h2>Cookies, métricas e publicidade</h2>
               <p>
                 Tecnologias não essenciais somente serão ativadas depois da
-                definição da ferramenta de consentimento. Eventos de conversão não
-                devem receber sintomas, opções clínicas ou conteúdo do formulário.
+                definição da ferramenta de consentimento. A identificação de
+                origem do formulário não usa cookies nem guarda histórico de
+                navegação. Eventos de conversão não devem receber nome, telefone
+                ou conteúdo da mensagem.
               </p>
             </section>
 
@@ -118,4 +116,3 @@ export default function PrivacyPage() {
     </main>
   );
 }
-

@@ -3,7 +3,11 @@
 import { X } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { WhatsAppIcon } from "@/components/whatsapp-button";
-import { getWhatsAppHref, siteConfig } from "@/lib/site";
+import {
+  getWhatsAppHref,
+  siteConfig,
+  whatsappMessageWithSource,
+} from "@/lib/site";
 
 const STORAGE_KEY = "adriano-exit-intent-visto";
 
@@ -122,7 +126,9 @@ export function ExitIntent({ message }: { message: string }) {
             data-cta="cta-saida-whatsapp"
             data-cta-channel="whatsapp"
             className="button button-motion"
-            href={getWhatsAppHref(message)}
+            href={getWhatsAppHref(
+              whatsappMessageWithSource(message, "aviso de saída da página"),
+            )}
             target={siteConfig.whatsappNumber ? "_blank" : undefined}
             rel={siteConfig.whatsappNumber ? "noopener noreferrer" : undefined}
             onClick={dismiss}

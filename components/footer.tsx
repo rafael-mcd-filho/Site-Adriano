@@ -2,9 +2,33 @@ import Link from "next/link";
 import { ArrowUpRight, Clock3, MapPin, ShieldCheck } from "lucide-react";
 import { areaNavigation, schemaName, siteConfig } from "@/lib/site";
 
+/**
+ * A onda é o recorte da cor da última seção invadindo o rodapé, não um enfeite
+ * solto: o `fill` acompanha `--footer-wave-fill`, que a página define conforme
+ * a seção que fica logo acima.
+ *
+ * O `line-height: 0` no invólucro não é decorativo — sem ele o SVG herda a
+ * linha de texto do bloco e sobra uma fresta de alguns pixels entre a onda e o
+ * rodapé.
+ */
+function FooterWave() {
+  return (
+    <div className="footer-wave" aria-hidden="true">
+      <svg viewBox="0 0 1440 56" preserveAspectRatio="none" focusable="false">
+        <path
+          d="M0 56L60 46.7C120 37 240 19 360 14C480 9 600 18 720 23.3C840 28 960 28 1080 25.7C1200 23 1320 19 1380 16.7L1440 14V0H1380C1320 0 1200 0 1080 0C960 0 840 0 720 0C600 0 480 0 360 0C240 0 120 0 60 0H0V56Z"
+          style={{ fill: "var(--footer-wave-fill, var(--ivory))" }}
+        />
+      </svg>
+    </div>
+  );
+}
+
 export function Footer() {
   return (
     <footer className="site-footer">
+      <FooterWave />
+
       <div className="container footer-grid">
         <div className="footer-brand">
           <Link className="brand brand-light" href="/">
@@ -17,8 +41,8 @@ export function Footer() {
             </span>
           </Link>
           <p>
-            Informação clara, diagnóstico cuidadoso e planejamento para decisões
-            construídas com segurança.
+            Antes de falar em cirurgia, precisamos entender o seu caso.
+            Atendimento em cirurgia buco-maxilo-facial em João Pessoa.
           </p>
           {siteConfig.isDemo && (
             <span className="demo-badge">
@@ -43,6 +67,11 @@ export function Footer() {
           <h2 className="footer-title">Informações</h2>
           <ul className="footer-links">
             <li>
+              <a href={siteConfig.instagram} target="_blank" rel="noopener noreferrer">
+                Instagram do Dr. Adriano
+              </a>
+            </li>
+            <li>
               <Link href="/para-dentistas">Para dentistas</Link>
             </li>
             <li>
@@ -50,6 +79,9 @@ export function Footer() {
             </li>
             <li>
               <Link href="/#duvidas">Dúvidas frequentes</Link>
+            </li>
+            <li>
+              <Link href="/#local">Como chegar</Link>
             </li>
           </ul>
         </div>
@@ -67,7 +99,7 @@ export function Footer() {
             </li>
           </ul>
           <Link className="footer-action" href="/#contato">
-            Solicitar contato <ArrowUpRight size={16} aria-hidden="true" />
+            Quero entender meu caso <ArrowUpRight size={16} aria-hidden="true" />
           </Link>
         </div>
       </div>
@@ -84,4 +116,3 @@ export function Footer() {
     </footer>
   );
 }
-

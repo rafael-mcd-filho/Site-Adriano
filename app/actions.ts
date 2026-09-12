@@ -1,12 +1,16 @@
 "use server";
 
+import { redirect } from "next/navigation";
+import { getContactPage, parseContactAttribution } from "@/lib/contact-attribution";
+import { siteConfig } from "@/lib/site";
+
 export type ContactFormState = {
-  status: "idle" | "success" | "error";
+  status: "idle" | "success" | "error" | "configuration";
   message: string;
   errors?: {
     name?: string;
     whatsapp?: string;
-    reason?: string;
+    message?: string;
     consent?: string;
   };
 };
@@ -26,33 +30,38 @@ export async function submitContact(
 ): Promise<ContactFormState> {
   const name = clean(formData.get("name"));
   const whatsapp = clean(formData.get("whatsapp"));
-  const reason = clean(formData.get("reason"));
+  const message = clean(formData.get("message")).replace(/\r\n?/g, "\n");
   const consent = clean(formData.get("consent"));
   const company = clean(formData.get("company"));
   const page = clean(formData.get("page"));
-  const source = clean(formData.get("source"));
+  const originPage = getContactPage(page);
 
   if (company) {
     return {
-      status: "success",
-      message:
-        "Recebemos sua solicitação. A equipe entrará em contato pelo WhatsApp em horário comercial.",
+      status: "error",
+      message: "Não foi possível enviar esta solicitação. Atualize a página e tente novamente.",
     };
   }
 
   const errors: ContactFormState["errors"] = {};
-  const phoneDigits = whatsapp.replace(/\D/g, "");
+  const digits = whatsapp.replace(/\D/g, "");
+  const phoneDigits = digits.length > 11 && digits.startsWith("55") ? digits.slice(2) : digits;
 
-  if (name.length < 2) {
-    errors.name = "Informe seu nome.";
+  if (name.length < 2 || name.length > 100 || /[\u0000-\u001f\u007f]/.test(name)) {
+    errors.name = "Informe seu nome, com 2 a 100 caracteres.";
   }
 
-  if (phoneDigits.length < 10 || phoneDigits.length > 13) {
+  if (
+    whatsapp.length > 25 ||
+    !/^[\d\s()+.-]+$/.test(whatsapp) ||
+    !/^[1-9]{2}(?:[2-9]\d{7}|9\d{8})$/.test(phoneDigits) ||
+    /^(\d)\1+$/.test(phoneDigits)
+  ) {
     errors.whatsapp = "Informe um WhatsApp com DDD.";
   }
 
-  if (!reason) {
-    errors.reason = "Escolha uma opção.";
+  if (message.length > 1000 || /[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/.test(message)) {
+    errors.message = "Escreva uma mensagem com até 1.000 caracteres.";
   }
 
   if (consent !== "yes") {
@@ -67,42 +76,75 @@ export async function submitContact(
     };
   }
 
-  const payload = {
-    name,
-    whatsapp: phoneDigits,
-    reason,
-    page,
-    source,
-    submittedAt: new Date().toISOString(),
-  };
+  if (!originPage) {
+    return {
+      status: "error",
+      message: "Não foi possível identificar este formulário. Atualize a página e tente novamente.",
+    };
+  }
 
   const webhook = process.env.FORM_WEBHOOK_URL;
 
-  if (webhook) {
-    try {
-      const response = await fetch(webhook, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-        cache: "no-store",
-      });
-
-      if (!response.ok) {
-        throw new Error("Webhook rejected the submission.");
-      }
-    } catch {
-      return {
-        status: "error",
-        message:
-          "Não foi possível enviar agora. Tente novamente ou fale com a equipe pelo WhatsApp.",
-      };
-    }
+  /**
+   * Sem destino configurado, o envio não pode terminar em "recebemos sua
+   * solicitação": ninguém receberia. Não há conversão sem entrega confirmada.
+   */
+  if (!webhook) {
+    return {
+      status: "configuration",
+      message:
+        "O formulário está temporariamente indisponível. Tente novamente mais tarde.",
+    };
   }
 
-  return {
-    status: "success",
-    message:
-      "Recebemos sua solicitação. A equipe entrará em contato pelo WhatsApp em horário comercial.",
+  const attribution = parseContactAttribution(clean(formData.get("attribution")));
+  const payload = {
+    schemaVersion: 2,
+    submissionId: crypto.randomUUID(),
+    name,
+    whatsapp: phoneDigits,
+    message,
+    // Compatibilidade com automações anteriores; migrar para `message`.
+    reason: message,
+    page,
+    source: "site",
+    formId: "contato-" + page,
+    pageTitle: originPage.label,
+    pagePath: originPage.path,
+    pageUrl: new URL(originPage.path, siteConfig.url).href,
+    attribution,
+    consent: { granted: true, purpose: "responder-solicitacao-pelo-whatsapp", policyPath: "/politica-de-privacidade" },
+    submittedAt: new Date().toISOString(),
   };
-}
 
+  try {
+    const response = await fetch(webhook, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+      cache: "no-store",
+      redirect: "error",
+      signal: AbortSignal.timeout(8000),
+    });
+
+    if (!response.ok) {
+      throw new Error("Webhook rejected the submission.");
+    }
+  } catch {
+    // Não registrar conteúdo do lead nem URL privada do webhook nos logs.
+    console.error("Contact form delivery failed");
+    return {
+      status: "error",
+      message:
+        "Não foi possível enviar agora. Tente novamente ou fale com a equipe pelo WhatsApp.",
+    };
+  }
+
+  /**
+   * Fora do try: `redirect` sinaliza por exceção e seria engolido pelo catch.
+   * A URL própria é o que permite marcar a conversão no GTM e no Google Ads —
+   * um estado de sucesso desenhado na mesma página não gera evento de rota e
+   * não pode virar conversão.
+   */
+  redirect("/obrigado?origem=" + encodeURIComponent(page || "site"));
+}

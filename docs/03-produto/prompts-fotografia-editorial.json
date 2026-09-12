@@ -1,0 +1,18 @@
+{
+  "mode": "Built-in image_gen",
+  "assets": [
+    {
+      "key": "background_consulta",
+      "prompt": "Use case: photorealistic-natural. Create one original wide panoramic background photograph for a sophisticated Brazilian oral and maxillofacial surgeon's website. Editorial conceptual still life, not a real clinic claim. A close view of a clean warm ivory desk in the lower right third with a small accurate white dental teaching model of upper and lower jaws, a closed navy notebook and a pen. Softly out-of-focus architectural glazing and linen curtains in the distant background, natural daylight, realistic materials, subtle warm stone and navy palette (#223853, #dacfc0, ivory). The left 60% must remain very calm and softly blurred with no objects and enough negative space for website text added later. The jaw model is peripheral and not a large dramatic dental close-up; no teeth implants, clinical procedures, people, real scans, signage or logos. Premium restrained architectural/editorial photography, not a 3D render or abstract vector. Wide 16:9 composition, high resolution. NO text, no lettering, no watermark, no graphic overlays. This image will sit beneath a dark navy overlay in a patient consultation section."
+    },
+    {
+      "key": "background_sono",
+      "prompt": "Use case: photorealistic-natural. Create one original wide panoramic editorial lifestyle photograph for the sleep-related section of a Brazilian oral and maxillofacial surgeon's website. A peaceful real-looking bedroom in early morning, a slightly unmade ivory linen bed and soft natural sunlight through curtains, a middle-aged man about 45 to 55, medium skin tone, seen from behind and in a distant side profile only, sitting naturally on the far right edge of the bed and looking toward the window, wearing a simple light cotton T-shirt. Reflective everyday moment, neither distressed nor presenting a success story, no smile to camera. The left 60% is a softly blurred dark navy wall and warm shadow with clean negative space for white website text to be added later. Natural muted warm highlights, deep navy and warm ivory, credible skin and fabric textures, premium cinematic editorial photograph, authentic and understated. NO doctors, clinic branding, medical devices, before/after, icons, text, watermark or logos. Wide 16:9 high-resolution composition. A conceptual illustration of how sleep fits into everyday life, not a photo of an actual patient."
+    }
+  ],
+  "consultationCorrection": "Edit this conceptual consultation-desk photograph only in the outdoor view through the large window: remove the mountain, city, coastline and any recognizable location. Replace that view with very soft, luminous, completely out-of-focus garden greenery and neutral architectural light, with no identifiable buildings or geography. Preserve the dental model, desk, navy notebook, pen, interior curtain, chair, vase, composition, lighting and all other details exactly. No text or logos.",
+  "outputs": [
+    "public/images/editorial/consulta-contexto.webp",
+    "public/images/editorial/sono-rotina.webp"
+  ]
+}

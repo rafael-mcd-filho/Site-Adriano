@@ -2,7 +2,7 @@ import { TreatmentPage } from "@/components/treatment-page";
 import { treatments } from "@/lib/content";
 import { treatmentMetadata } from "@/lib/metadata";
 
-const content = treatments["dtm-atm"];
+const content = treatments["cirurgia-atm"];
 
 export const metadata = treatmentMetadata(content);
 

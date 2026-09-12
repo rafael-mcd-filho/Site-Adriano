@@ -8,11 +8,11 @@ export default function NotFound() {
         <Compass />
         <span>404</span>
       </div>
-      <span className="eyebrow">Caminho não encontrado</span>
-      <h1>Esta página não faz parte do nosso planejamento.</h1>
+      <span className="eyebrow">Página não encontrada</span>
+      <h1>Não encontramos a página que você procurou.</h1>
       <p>
-        O endereço pode ter mudado. Volte ao início ou escolha uma área de
-        atuação pelo menu.
+        O endereço pode ter mudado ou estar incompleto. Você pode voltar ao
+        início ou encontrar abaixo as áreas de atendimento.
       </p>
       <div className="hero-actions">
         <Link className="button" href="/">
@@ -27,4 +27,3 @@ export default function NotFound() {
     </main>
   );
 }
-
