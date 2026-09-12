@@ -133,32 +133,97 @@
   color: var(--blue-600);
 }
 
+/* O card inteiro já era clicável, mas nada nele dizia isso: o link era uma
+   linha de texto azul no pé do card, com o mesmo peso de um link de rodapé.
+   Quem clicava no título ou na descrição acertava por sorte.
+
+   Agora o link é uma faixa de ação: separada do texto por um fio, ocupando a
+   largura toda, com a seta num círculo que se preenche no hover. Continua não
+   sendo um botão cheio — seis botões sólidos na mesma grade disputariam com o
+   CTA de WhatsApp e dariam à home cara de vitrine. */
 .area-link {
-  display: inline-flex;
+  display: flex;
   align-items: center;
+  justify-content: space-between;
   margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid rgba(var(--navy-800-rgb), 0.08);
   color: var(--blue-600);
   font-size: var(--fs-fine);
   font-weight: 700;
-  gap: 4px;
+  gap: 12px;
   transition: color 180ms ease;
 }
 
+.area-link-arrow {
+  display: grid;
+  width: 32px;
+  height: 32px;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid rgba(var(--blue-600-rgb), 0.35);
+  border-radius: 50%;
+  color: var(--blue-600);
+  transition:
+    background 220ms ease,
+    border-color 220ms ease,
+    color 220ms ease,
+    transform 220ms ease;
+}
+
 /* Estica a área clicável para o card inteiro sem transformar o card num link
-   gigante: o nome acessível continua sendo "Saiba mais sobre X". */
+   gigante: o nome acessível continua sendo o rótulo da ação. */
 .area-link::after {
   position: absolute;
   content: "";
   inset: 0;
 }
 
+.area-card:hover {
+  border-color: rgba(var(--blue-600-rgb), 0.45);
+}
+
+.area-card:hover h3,
 .area-card:hover .area-link {
   color: var(--navy-800);
+}
+
+.area-card:hover .area-link-arrow,
+.area-link:focus-visible .area-link-arrow {
+  border-color: var(--navy-800);
+  background: var(--navy-800);
+  color: var(--white);
+  transform: translateX(3px);
 }
 
 .area-link:focus-visible {
   outline: 2px solid var(--blue-600);
   outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .area-link-arrow {
+    transition: none;
+  }
+
+  .area-card:hover .area-link-arrow {
+    transform: none;
+  }
+}
+
+/* No celular os cards viram linhas separadas por fio (ver 17-): um segundo
+   fio dentro da linha seria ruído, então a faixa perde o traço e fica só com
+   a seta — que ali é o único sinal de que a linha leva a algum lugar. */
+@media (max-width: 600px) {
+  .area-link {
+    padding-top: 4px;
+    border-top: 0;
+  }
+
+  .area-link-arrow {
+    width: 28px;
+    height: 28px;
+  }
 }
 
 /* Dois públicos */

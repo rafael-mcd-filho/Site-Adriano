@@ -2,7 +2,6 @@ import {
   ArrowRight,
   BadgeCheck,
   Check,
-  ChevronRight,
   MapPin,
   ShieldCheck,
 } from "lucide-react";
@@ -15,7 +14,7 @@ import { FloatingWhatsApp } from "@/components/floating-whatsapp";
 import { HeroBackdrop } from "@/components/hero-backdrop";
 import { JsonLd } from "@/components/json-ld";
 import { LocationSection } from "@/components/location-section";
-import { MotifThumb } from "@/components/motif-thumb";
+import { MotifThumb, type MotifType } from "@/components/motif-thumb";
 import { Reviews } from "@/components/reviews";
 import { TrustMarquee } from "@/components/trust-marquee";
 import { SectionWave } from "@/components/section-wave";
@@ -44,6 +43,8 @@ const areaCards: Array<{
   tone: "teal" | "navy";
   description: string;
   action: string;
+  /** Desenho do card quando o motivo da rota não serve à grade da home. */
+  thumb?: MotifType;
 }> = [
   {
     slug: "apneia-do-sono",
@@ -92,6 +93,7 @@ const areaCards: Array<{
     description:
       "Inflamou de novo, entala comida ou apareceu no raio-X? Nem todo siso precisa sair — entenda o que decide a indicação no seu caso.",
     action: "Saber se preciso tirar",
+    thumb: "wisdom",
   },
 ];
 
@@ -284,7 +286,7 @@ export default function Home() {
                 return (
                   <article className="area-card" key={card.slug}>
                     <div className="area-visual" aria-hidden="true">
-                      <MotifThumb type={treatment.motif} />
+                      <MotifThumb type={card.thumb ?? treatment.motif} />
                       <span
                         className={
                           card.tone === "teal"
@@ -308,9 +310,13 @@ export default function Home() {
                         ))}
                       </ul>
                       <Link className="area-link" href={"/" + treatment.slug}>
-                        {card.action}
-                        <span className="sr-only"> — {treatment.navLabel}</span>
-                        <ChevronRight size={15} aria-hidden="true" />
+                        <span>
+                          {card.action}
+                          <span className="sr-only"> — {treatment.navLabel}</span>
+                        </span>
+                        <span className="area-link-arrow" aria-hidden="true">
+                          <ArrowRight size={15} />
+                        </span>
                       </Link>
                     </div>
                   </article>

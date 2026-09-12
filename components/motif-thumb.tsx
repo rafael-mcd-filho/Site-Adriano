@@ -2,13 +2,14 @@
  * Mesmo conjunto do `VisualMotif` — inclui `planning`, que não pertence a
  * nenhum tratamento e só existe nas composições de página.
  */
-type MotifType =
+export type MotifType =
   | "air"
   | "implant"
   | "layers"
   | "joint"
   | "alignment"
-  | "planning";
+  | "planning"
+  | "wisdom";
 
 /**
  * Marca compacta para o topo dos cards de área.
@@ -87,6 +88,26 @@ export function MotifThumb({ type }: { type: MotifType }) {
           <rect x="42" y="54" width="10" height="12" rx="3" opacity="0.75" />
           <rect x="56" y="54" width="10" height="12" rx="3" opacity="0.75" />
           <path d="M18 50h60" strokeDasharray="4 5" opacity="0.55" />
+        </>
+      )}
+
+      {/* Siso usa o motivo de camadas na própria página (o mapa de volume
+          ósseo serve à imagem de um dente incluso), mas na grade da home ele
+          ficava idêntico ao card de reconstrução, lado a lado. Aqui ganha
+          desenho próprio: o molar inclinado abaixo da linha do osso e o canal
+          da mandíbula embaixo — as duas coisas que decidem a indicação. */}
+      {type === "wisdom" && (
+        <>
+          <path d="M12 36h72" strokeDasharray="4 5" opacity="0.5" />
+          <g transform="rotate(-26 48 52)">
+            <path
+              d="M34 44c0-9 6-10 7-10 5 0 7 4 7 5 0-1 2-5 7-5 1 0 7 1 7 10v6c0 4-3 5-5 5H39c-2 0-5-1-5-5z"
+              strokeWidth="2.4"
+            />
+            <path d="M39 55c0 7-1 12-3 16M57 55c0 7 1 12 3 16" />
+          </g>
+          <path d="M10 80c22-7 54-7 76 0" opacity="0.45" />
+          <circle cx="70" cy="76.6" r="2.6" fill="currentColor" stroke="none" opacity="0.6" />
         </>
       )}
 
