@@ -15,3 +15,7 @@
  * Se a regra passar a valer para mais de uma rota, ela não pertence mais
  * aqui: mova para o arquivo dono em app/styles/.
  */
+/* O modelo anatômico está no terço inferior da fotografia. */
+[data-rota="implantes-dentarios"] .photo-hero .doctor-portrait-hero {
+  align-self: start;
+}

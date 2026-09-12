@@ -15,3 +15,7 @@
  * Se a regra passar a valer para mais de uma rota, ela não pertence mais
  * aqui: mova para o arquivo dono em app/styles/.
  */
+/* Mantém o modelo ósseo visível abaixo da identificação profissional. */
+[data-rota="reconstrucao-ossea"] .photo-hero .doctor-portrait-hero {
+  align-self: start;
+}
