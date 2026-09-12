@@ -1,5 +1,11 @@
 import { contentLastReviewed, treatments } from "@/lib/content";
-import { areaNavigation, schemaName, siteConfig } from "@/lib/site";
+import {
+  areaNavigation,
+  locationAddress,
+  practiceLocations,
+  schemaName,
+  siteConfig,
+} from "@/lib/site";
 
 export const dynamic = "force-static";
 
@@ -48,7 +54,18 @@ export function GET() {
     ...siteConfig.credentials.map((credential) => "- Credencial: " + credential),
     "- Certificado fornecido pelo profissional: " + siteConfig.url + siteConfig.boardCertificate,
     "- Instagram: " + siteConfig.instagram,
-    "- Localização: " + siteConfig.city,
+    ...practiceLocations.map(
+      (location) =>
+        "- Consultório em " +
+        location.city +
+        ": " +
+        location.building +
+        ", " +
+        locationAddress(location) +
+        ". WhatsApp " +
+        location.whatsappDisplay +
+        ".",
+    ),
     "- Atendimento: " + siteConfig.hours,
     "- Modalidade: atendimento particular; valores informados individualmente no contato.",
     "- Site oficial: " + siteConfig.url + "/",
@@ -61,7 +78,7 @@ export function GET() {
     // `null` some da lista; string vazia é linha em branco de verdade, que o
     // Markdown precisa para separar os blocos.
     siteConfig.isDemo
-      ? "- ATENÇÃO: este site está em modo de demonstração. Endereço, telefone e horários são dados de exemplo. Identidade e registros foram fornecidos pelo cliente; a certificação possui documento de suporte."
+      ? "- ATENÇÃO: este ambiente é de teste e está fora do índice de busca."
       : null,
   ];
 

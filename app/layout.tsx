@@ -11,10 +11,12 @@ import { siteName } from "@/lib/metadata";
 import { ogImageFor } from "@/lib/og";
 import {
   areaNavigation,
-  schemaGeo,
+  locationMapsLink,
+  practiceLocations,
   schemaName,
-  schemaTelephones,
+  schemaTelephone,
   siteConfig,
+  type PracticeLocation,
 } from "@/lib/site";
 import "./globals.css";
 
@@ -84,14 +86,61 @@ export const viewport: Viewport = {
   colorScheme: "light",
 };
 
-const telephones = schemaTelephones();
-const geo = schemaGeo();
+/**
+ * Um consultório como nó próprio do grafo.
+ *
+ * São dois `Dentist`, um por cidade, cada um com endereço completo e o
+ * telefone do WhatsApp daquela equipe. Um nó único com duas cidades em
+ * `areaServed` diria ao Google que existe um lugar atendendo duas regiões —
+ * quando existem dois lugares, cada um na sua.
+ *
+ * `openingHoursSpecification` saiu: o "08:00 às 18:00" era dado de
+ * demonstração. O material confirma horário comercial, não o horário exato, e
+ * schema com hora inventada é pior do que schema sem hora.
+ */
+function practiceNode(location: PracticeLocation) {
+  return {
+    "@type": "Dentist",
+    "@id": siteConfig.url + "/#practice-" + location.id,
+    name: schemaName + " — " + location.city,
+    description: siteConfig.description,
+    url: siteConfig.url,
+    image: siteConfig.url + homeOgImage.url,
+    inLanguage: "pt-BR",
+    medicalSpecialty: "OralAndMaxillofacialSurgery",
+    telephone: schemaTelephone(location),
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: [location.street, location.complement, location.building]
+        .filter(Boolean)
+        .join(", "),
+      ...(location.neighborhood ? { addressNeighborhood: location.neighborhood } : {}),
+      addressLocality: location.city,
+      addressRegion: location.state,
+      postalCode: location.postalCode,
+      addressCountry: "BR",
+    },
+    hasMap: locationMapsLink(location),
+    employee: { "@id": siteConfig.url + "/#person" },
+    ...(siteConfig.instagram ? { sameAs: [siteConfig.instagram] } : {}),
+    availableService: areaNavigation.map((area) => ({
+      "@type": "MedicalProcedure",
+      name: area.label,
+      url: siteConfig.url + area.href,
+      ...(treatments[area.href.replace("/", "")]
+        ? {
+            description:
+              treatments[area.href.replace("/", "")].metadata.description,
+          }
+        : {}),
+    })),
+  };
+}
 
 /**
- * Um `@graph` só: WebSite, a pessoa que assina a avaliação e o consultório.
- * Campos que dependem de dado ainda não confirmado (telefone, coordenadas,
- * perfil social) entram apenas quando existem — schema com placeholder é pior
- * do que schema incompleto.
+ * Um `@graph` só: o site, a pessoa que assina a avaliação e os dois
+ * consultórios. A pessoa carrega a formação e as filiações — é ela, e não o
+ * consultório, que tem mestrado, cátedra e presidência de entidade.
  */
 const structuredData = {
   "@context": "https://schema.org",
@@ -102,7 +151,7 @@ const structuredData = {
       url: siteConfig.url,
       name: siteName,
       inLanguage: "pt-BR",
-      publisher: { "@id": siteConfig.url + "/#practice" },
+      publisher: { "@id": siteConfig.url + "/#person" },
     },
     {
       "@type": "Person",
@@ -110,79 +159,40 @@ const structuredData = {
       name: schemaName,
       jobTitle: siteConfig.specialty,
       knowsAbout: areaNavigation.map((area) => area.label),
-      address: {
-        "@type": "PostalAddress",
-        addressLocality: "João Pessoa",
-        addressRegion: "PB",
-        addressCountry: "BR",
-      },
-      worksFor: { "@id": siteConfig.url + "/#practice" },
-      ...(siteConfig.instagram ? { sameAs: [siteConfig.instagram] } : {}),
-    },
-    {
-      "@type": "Dentist",
-      "@id": siteConfig.url + "/#practice",
-      name: schemaName,
-      description: siteConfig.description,
-      url: siteConfig.url,
-      image: siteConfig.url + homeOgImage.url,
-      inLanguage: "pt-BR",
-      /*
-       * `priceRange: "$$"` saiu. Era um dado que ninguém verificou, num site
-       * cuja regra é não publicar o que não dá para comprovar — e faixa de
-       * preço é justamente o tipo de informação que a publicidade odontológica
-       * não comporta. O campo é opcional para o Google.
-       *
-       * `address` entrou: o nó do consultório declarava `areaServed` mas
-       * nenhum endereço, e endereço é o que o Google usa para entender um
-       * negócio local. Fica no nível de cidade enquanto o endereço definitivo
-       * não existir — verdadeiro e incompleto, em vez de inventado.
-       */
-      medicalSpecialty: "OralAndMaxillofacialSurgery",
-      address: {
-        "@type": "PostalAddress",
-        addressLocality: "João Pessoa",
-        addressRegion: "PB",
-        addressCountry: "BR",
-        ...(siteConfig.address ? { streetAddress: siteConfig.address } : {}),
-      },
-      areaServed: {
-        "@type": "City",
-        name: "João Pessoa",
-        addressRegion: "PB",
-        addressCountry: "BR",
-      },
-      employee: { "@id": siteConfig.url + "/#person" },
-      openingHoursSpecification: [
+      alumniOf: [
         {
-          "@type": "OpeningHoursSpecification",
-          dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-          opens: "08:00",
-          closes: "18:00",
+          "@type": "CollegeOrUniversity",
+          name: "Universidade Federal do Rio Grande do Norte",
+        },
+        {
+          "@type": "CollegeOrUniversity",
+          name: "Universidade Estadual de Campinas",
         },
       ],
-      contactPoint: {
-        "@type": "ContactPoint",
-        contactType: "agendamento",
-        availableLanguage: "Portuguese",
-        areaServed: "BR",
-        ...(telephones.length ? { telephone: telephones[0] } : {}),
+      affiliation: [
+        {
+          "@type": "CollegeOrUniversity",
+          name: "Universidade Federal do Rio Grande do Norte",
+        },
+        {
+          "@type": "Hospital",
+          name: "Hospital Universitário Onofre Lopes",
+        },
+      ],
+      memberOf: {
+        "@type": "Organization",
+        name: "Colégio Brasileiro de Cirurgia e Traumatologia Buco-Maxilo-Facial",
       },
-      ...(telephones.length ? { telephone: telephones } : {}),
-      ...(geo ? { geo } : {}),
-      ...(siteConfig.instagram ? { sameAs: [siteConfig.instagram] } : {}),
-      availableService: areaNavigation.map((area) => ({
-        "@type": "MedicalProcedure",
-        name: area.label,
-        url: siteConfig.url + area.href,
-        ...(treatments[area.href.replace("/", "")]
-          ? {
-              description:
-                treatments[area.href.replace("/", "")].metadata.description,
-            }
-          : {}),
+      hasCredential: siteConfig.credentials.map((credential) => ({
+        "@type": "EducationalOccupationalCredential",
+        name: credential,
       })),
+      worksFor: practiceLocations.map((location) => ({
+        "@id": siteConfig.url + "/#practice-" + location.id,
+      })),
+      ...(siteConfig.instagram ? { sameAs: [siteConfig.instagram] } : {}),
     },
+    ...practiceLocations.map(practiceNode),
   ],
 };
 

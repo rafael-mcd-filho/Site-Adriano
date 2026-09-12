@@ -62,8 +62,8 @@ export const ogCards = {
   },
   sobre: {
     eyebrow: "DR. ADRIANO ROCHA GERMANO",
-    title: "Cirurgião bucomaxilofacial em João Pessoa.",
-    footer: "Certificação Board FBCOMS · Banca de examinadores · CRO-PB 12753",
+    title: "Cirurgião bucomaxilofacial em João Pessoa e Natal.",
+    footer: "Mestre e doutor pela UNICAMP · Professor titular da UFRN",
     alt: "Formação e credenciais do Dr. Adriano Rocha Germano",
   },
   "para-dentistas": {

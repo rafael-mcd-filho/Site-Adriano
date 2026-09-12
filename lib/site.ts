@@ -1,30 +1,21 @@
 /**
  * Identidade, registros, Instagram e domínio fornecidos pelo cliente em
  * 10/09/2026. Certificação e banca constam no certificado de 2026 enviado.
- * Endereço, telefone e mapa continuam sem dado definitivo — e, como o site
- * está indexável, eles não renderizam em vez de renderizar demonstração.
+ * Currículo, consultórios e WhatsApp de atendimento fornecidos em 12/09/2026.
  */
 
 /**
- * Indexação e dados de demonstração eram a MESMA chave, e isso tornava o site
- * impossível de publicar: `NEXT_PUBLIC_SITE_IS_DEMO=false` era a única forma
- * de sair do `noindex`, e ela também apagava endereço, telefone e mapa. Quem
- * quisesse aparecer na busca tinha de escolher entre publicar dado falso e
- * publicar sem dado nenhum.
+ * Indexação é uma decisão; dado de demonstração era outra, e as duas já foram
+ * a mesma chave — o que tornava o site impossível de publicar sem escolher
+ * entre dado falso e dado nenhum.
  *
- * Agora são duas decisões separadas:
+ * O site é rastreável por padrão; `NEXT_PUBLIC_SITE_NOINDEX=true` fecha de
+ * volta, e deploys de preview da Vercel saem do índice sozinhos. Abrir o
+ * índice desliga o modo demo: nada de demonstração chega ao Google.
  *
- * - `isIndexable` diz se o site pode ser rastreado. Passou a ser o padrão:
- *   um site que existe para ser encontrado não deveria depender de alguém
- *   lembrar de destravá-lo. `NEXT_PUBLIC_SITE_NOINDEX=true` fecha de volta.
- * - `NEXT_PUBLIC_SITE_IS_DEMO` continua dizendo se os dados de atendimento
- *   ainda são provisórios.
- *
- * O acoplamento que sobrou é de propósito e vai no sentido seguro: **abrir o
- * índice desliga o modo demo**. Nada de demonstração chega ao Google, porque
- * endereço inventado indexado manda paciente para a porta de um estranho.
- * O resultado é um site incompleto e honesto — a seção de localização pede
- * para confirmar com a equipe — em vez de um site completo e mentiroso.
+ * Desde 12/09/2026 o atendimento tem dado real, então o modo demo não carrega
+ * mais nenhum valor — a chave continua existindo só para os avisos de
+ * ambiente de teste.
  */
 const isPreviewDeploy = process.env.NEXT_PUBLIC_VERCEL_ENV === "preview";
 export const isIndexable =
@@ -34,94 +25,206 @@ const wantsDemoData = process.env.NEXT_PUBLIC_SITE_IS_DEMO !== "false";
 const isDemo = wantsDemoData && !isIndexable;
 
 /**
- * Valor de demonstração: vira string vazia assim que o site pode ser indexado
- * ou quando o modo demo é desligado explicitamente.
+ * Um consultório. São dois, e nenhum é "o principal" para quem está na outra
+ * cidade: cada um tem endereço e WhatsApp próprios.
  *
- * A trava é deliberada. Endereço, telefone e mapa inventados que vazassem para
- * produção mandariam paciente para a porta errada e fariam alguém ligar para o
- * número de um estranho. Assim, faltar a variável de ambiente quebra a seção
- * de forma visível — em vez de publicar mentira com aparência de verdade.
+ * O bairro de Natal não veio no material e não foi deduzido pelo CEP —
+ * endereço é o dado que manda gente para uma porta, e ele fica como veio.
  */
-const demo = (value: string) => (isDemo ? value : "");
+export type PracticeLocation = {
+  id: "joao-pessoa" | "natal";
+  city: string;
+  state: "PB" | "RN";
+  building: string;
+  street: string;
+  complement: string;
+  neighborhood?: string;
+  postalCode: string;
+  /** Somente dígitos, com DDI. */
+  whatsapp: string;
+  whatsappDisplay: string;
+};
+
+export const practiceLocations: PracticeLocation[] = [
+  {
+    id: "joao-pessoa",
+    city: "João Pessoa",
+    state: "PB",
+    building: "Edifício Eco Medical Center",
+    street: "Rua Antônio Rabelo Júnior, 170",
+    complement: "Sala 1405",
+    neighborhood: "Miramar",
+    postalCode: "58032-090",
+    whatsapp: "5583986070067",
+    whatsappDisplay: "(83) 98607-0067",
+  },
+  {
+    id: "natal",
+    city: "Natal",
+    state: "RN",
+    building: "Edifício CTC — Corporate Tower Center",
+    street: "Av. Amintas Barros, 3700",
+    complement: "Torre Trade, sala 511",
+    postalCode: "59075-250",
+    whatsapp: "5584994177276",
+    whatsappDisplay: "(84) 99417-7276",
+  },
+];
+
+/** Endereço em uma linha, na ordem que o Google Maps entende. */
+export function locationAddress(location: PracticeLocation) {
+  return [
+    location.street,
+    location.complement,
+    location.neighborhood,
+    location.city + " - " + location.state,
+    location.postalCode,
+  ]
+    .filter(Boolean)
+    .join(", ");
+}
+
+/**
+ * Mapa incorporado apontando para o endereço real. Busca por texto, sem chave
+ * de API: o alfinete cai no endereço publicado, que agora é verdadeiro.
+ */
+export function locationMapEmbed(location: PracticeLocation) {
+  return (
+    "https://maps.google.com/maps?q=" +
+    encodeURIComponent(location.building + ", " + locationAddress(location)) +
+    "&z=16&output=embed"
+  );
+}
+
+/** Link para abrir a rota no aplicativo de mapas do celular. */
+export function locationMapsLink(location: PracticeLocation) {
+  return (
+    "https://www.google.com/maps/search/?api=1&query=" +
+    encodeURIComponent(location.building + ", " + locationAddress(location))
+  );
+}
+
+/**
+ * Trajetória em ordem cronológica, conforme informado pelo cliente.
+ *
+ * A ordem é informação — por isso o ano vem na frente quando existe. Onde o
+ * material não trouxe ano (especialidade, mestrado e doutorado), o item fica
+ * sem ano em vez de ganhar um estimado.
+ *
+ * Dois itens vieram descritos como relato do próprio profissional ("segundo a
+ * conversa"): a fundação do serviço e da residência no HUOL e a fundação do
+ * serviço pediátrico no Varela Santiago. Estão publicados como os demais, com
+ * esta ressalva registrada aqui.
+ */
+export const professionalTimeline: Array<{
+  year?: string;
+  title: string;
+  detail: string;
+}> = [
+  {
+    year: "1997",
+    title: "Graduação em Odontologia",
+    detail: "Universidade Federal do Rio Grande do Norte (UFRN), com láurea de melhor concluinte.",
+  },
+  {
+    title: "Especialista em Cirurgia e Traumatologia Buco-Maxilo-Facial",
+    detail: "Especialidade reconhecida pelo Conselho Federal de Odontologia.",
+  },
+  {
+    title: "Mestrado e doutorado",
+    detail: "Em Cirurgia e Traumatologia Buco-Maxilo-Facial, pela Universidade Estadual de Campinas (UNICAMP).",
+  },
+  {
+    year: "2004",
+    title: "Professor da UFRN, por concurso",
+    detail: "Hoje professor titular e chefe do Serviço de Cirurgia e Traumatologia Buco-Maxilo-Facial do Hospital Universitário Onofre Lopes (HUOL/UFRN), onde fundou o serviço e o programa de residência.",
+  },
+  {
+    title: "Hospital Infantil Varela Santiago",
+    detail: "Fundador e coordenador do serviço voltado a crianças com anomalias bucomaxilofaciais, incluindo pacientes fissurados e sindrômicos.",
+  },
+  {
+    year: "2015",
+    title: "Pós-doutorado",
+    detail: "Hospital Universitario 12 de Octubre, em Madri, Espanha.",
+  },
+  {
+    year: "2023–2024",
+    title: "Presidente do Colégio Brasileiro de Cirurgia e Traumatologia Buco-Maxilo-Facial",
+    detail: "A entidade nacional da especialidade, responsável também pela certificação Board.",
+  },
+  {
+    year: "2026",
+    title: "Certificação Board e banca de examinadores",
+    detail: "Certificado pelo Board do Colégio Brasileiro (FBCOMS) e membro ativo da banca que avalia outros cirurgiões.",
+  },
+];
 
 export const siteConfig = {
   name: "Dr. Adriano",
   fullName: "Dr. Adriano Rocha Germano",
   specialty: "Cirurgião Bucomaxilofacial",
   registry: "CRO-PB 12753 · CRO-RN 1980",
+  /**
+   * As quatro credenciais que entram nos blocos de autoridade de todas as
+   * páginas. A trajetória completa fica em `professionalTimeline`, na /sobre.
+   *
+   * A ordem vai do que o paciente reconhece para o que o colega reconhece:
+   * universidade e hospital antes de entidade de classe e certificação.
+   */
   credentials: [
-    "Certificado pelo Board do Colégio Brasileiro de Cirurgia e Traumatologia Buco-Maxilo-Facial (FBCOMS), em 2026.",
-    "Membro ativo da banca de examinadores do Board, conforme certificado de 2026.",
+    "Mestre e doutor em Cirurgia e Traumatologia Buco-Maxilo-Facial pela UNICAMP, com pós-doutorado no Hospital 12 de Octubre, em Madri.",
+    "Professor titular da UFRN e chefe do Serviço de Cirurgia e Traumatologia Buco-Maxilo-Facial do Hospital Universitário Onofre Lopes.",
+    "Presidente do Colégio Brasileiro de Cirurgia e Traumatologia Buco-Maxilo-Facial em 2023 e 2024.",
+    "Certificado pelo Board do Colégio Brasileiro (FBCOMS) e membro da banca de examinadores, em 2026.",
   ],
   // O total de 29 foi informado pelo cliente; não consta na imagem do certificado.
   boardContext:
     "Em 2026, integra o grupo de 29 profissionais no Brasil habilitados a atuar como avaliadores desse Board.",
   boardCertificate: "/credenciais/certificado-board-adriano-rocha-germano-2026.png",
-  city: "João Pessoa, PB",
-  address: demo("Av. Epitácio Pessoa, 2450 · Sala 908 — Bairro dos Estados, João Pessoa/PB"),
-  /** Linhas do endereço para o bloco de localização. */
-  addressLines: [
-    demo("Av. Epitácio Pessoa, 2450 · Sala 908"),
-    demo("Bairro dos Estados · João Pessoa/PB · CEP 58030-001"),
-    demo("Referência: próximo ao Parque Solon de Lucena"),
-  ].filter(Boolean),
-  phone: process.env.NEXT_PUBLIC_PHONE || demo("8330000000"),
-  phoneDisplay:
-    process.env.NEXT_PUBLIC_PHONE_DISPLAY ||
-    demo("(83) 3000-0000") ||
-    "Telefone a confirmar",
+  /** Onde ele atende. Usado nas frases de identidade, não nas rotas de SEO. */
+  serviceArea: "João Pessoa e Natal",
   /** Perfis oficiais. Entram em `sameAs` só quando preenchidos. */
   instagram: process.env.NEXT_PUBLIC_INSTAGRAM_URL || "https://www.instagram.com/dr.adrianorgermano/",
-  /**
-   * Coordenadas do consultório, no formato "-7.112324,-34.856268". Ficam fora
-   * do schema enquanto vazias: um `geo` apontando para o lugar errado é pior
-   * do que nenhum — o Google usa isso para o mapa local.
-   */
-  geo: process.env.NEXT_PUBLIC_GEO || demo("-7.117,-34.863"),
-  hours: "Atendimento em horário comercial",
+  hours: "Atendimento com agendamento, em horário comercial",
   hoursLines: [
-    "Segunda a sexta · 08h às 18h",
-    "Sábados e domingos · fechado",
+    "Segunda a sexta, em horário comercial",
+    "Agendamento pelo WhatsApp de cada consultório",
   ],
   description:
-    "Dor na mandíbula, perda de dentes ou alterações na mordida? Avaliação em cirurgia buco-maxilo-facial em João Pessoa para entender seu caso antes de decidir.",
+    "Dor na mandíbula, perda de dentes ou alterações na mordida? Avaliação em cirurgia buco-maxilo-facial em João Pessoa e Natal para entender seu caso antes de decidir.",
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://dradrianorgermano.com.br",
-  whatsappNumber: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "",
   /**
-   * URL de incorporação do Google Maps. Enquanto vazia, a seção de localização
-   * mostra um painel de espera no lugar do mapa — publicar um mapa apontando
-   * para o endereço errado é pior do que não publicar mapa nenhum.
+   * Número dos botões de WhatsApp do site. É o de João Pessoa, onde está a
+   * captação ativa; o de Natal aparece no bloco do próprio consultório.
+   *
+   * Enquanto este campo estava vazio, TODOS os botões do site eram âncoras
+   * para um formulário desabilitado — o site não tinha nenhum canal de
+   * contato funcionando. A variável de ambiente continua podendo sobrescrever.
    */
-  /*
-   * O mapa de demonstração aponta para a REGIÃO, não para um ponto exato: um
-   * alfinete cravado num endereço inventado marca o prédio de outra pessoa.
-   */
-  mapEmbedUrl:
-    process.env.NEXT_PUBLIC_MAP_EMBED_URL ||
-    demo(
-      "https://maps.google.com/maps?q=Bairro%20dos%20Estados%2C%20Jo%C3%A3o%20Pessoa%2C%20PB&z=14&output=embed",
-    ),
+  whatsappNumber:
+    process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || practiceLocations[0].whatsapp,
   isDemo,
   isIndexable,
 };
 
-/** O modo demo diz respeito ao atendimento, não à identidade já confirmada. */
+/** O modo demo diz respeito ao ambiente, não à identidade já confirmada. */
 export const schemaName = siteConfig.fullName;
 
 /**
  * Faixa logo abaixo do hero.
  *
- * Eram quatro atributos por página — "avaliação antes da indicação", "opções
- * explicadas com clareza". Boas mensagens, mas afirmadas pelo próprio
- * anunciante: no lugar onde o visitante ainda decide se fica, o que reduz
- * incerteza é fato verificável, não adjetivo. Os atributos continuam ditos nas
- * seções, onde há espaço para sustentá-los.
+ * Fato verificável, não adjetivo: é o lugar onde o visitante ainda decide se
+ * fica. Com o currículo em mãos, a faixa troca o registro e a certificação —
+ * que já aparecem no hero e no bloco de autoridade — pelo que só este
+ * profissional tem: universidade, cátedra e a presidência da entidade da
+ * especialidade.
  */
 export const credentialFacts: [string, string, string, string] = [
-  siteConfig.registry,
-  "Certificação Board · FBCOMS 2026",
-  "Banca de examinadores do Board",
-  "Atendimento particular · " + siteConfig.city,
+  "Mestre e doutor · UNICAMP",
+  "Professor titular · UFRN",
+  "Presidente do Colégio Brasileiro de Cirurgia Bucomaxilofacial · 2023–2024",
+  "Consultórios em " + siteConfig.serviceArea,
 ];
 
 /**
@@ -169,33 +272,26 @@ export const areaNavigation = [
   },
 ];
 
-/** Telefones em formato E.164, sem duplicar quando WhatsApp e fixo coincidem. */
-export function schemaTelephones() {
-  const numbers = [siteConfig.whatsappNumber, siteConfig.phone]
-    .map((value) => value.replace(/\D/g, ""))
-    .filter(Boolean)
-    .map((digits) => "+" + (digits.startsWith("55") ? digits : "55" + digits));
-
-  return Array.from(new Set(numbers));
+/** Telefone de um consultório em formato E.164, para o schema. */
+export function schemaTelephone(location: PracticeLocation) {
+  return "+" + location.whatsapp;
 }
 
-/** `geo` do schema, apenas quando as coordenadas foram configuradas. */
-export function schemaGeo() {
-  const [latitude, longitude] = siteConfig.geo.split(",").map(Number);
-
-  if (!Number.isFinite(latitude) || !Number.isFinite(longitude)) return null;
-
-  return { "@type": "GeoCoordinates", latitude, longitude };
-}
-
-export function getWhatsAppHref(message: string) {
-  if (!siteConfig.whatsappNumber) {
+/**
+ * Link de conversa no WhatsApp. `number` existe para o bloco de cada
+ * consultório: quem mora em Natal fala com a equipe de Natal.
+ */
+export function getWhatsAppHref(
+  message: string,
+  number: string = siteConfig.whatsappNumber,
+) {
+  if (!number) {
     return "#contato";
   }
 
   return (
     "https://wa.me/" +
-    siteConfig.whatsappNumber.replace(/\D/g, "") +
+    number.replace(/\D/g, "") +
     "?text=" +
     encodeURIComponent(message)
   );

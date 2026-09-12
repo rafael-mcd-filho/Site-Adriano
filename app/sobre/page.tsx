@@ -23,7 +23,7 @@ import { breadcrumbSchema } from "@/lib/schema";
 import {
   areaNavigation,
   credentialFacts,
-  schemaName,
+  professionalTimeline,
   siteConfig,
 } from "@/lib/site";
 
@@ -31,7 +31,7 @@ export const metadata: Metadata = pageMetadata({
   title: "Dr. Adriano Rocha Germano | Cirurgião Bucomaxilofacial",
   socialTitle: "Dr. Adriano Rocha Germano",
   description:
-    "Formação, certificação Board do Colégio Brasileiro de CTBMF e critérios de indicação do Dr. Adriano Rocha Germano, cirurgião bucomaxilofacial em João Pessoa.",
+    "Mestre e doutor pela UNICAMP, professor titular da UFRN e presidente do Colégio Brasileiro de CTBMF em 2023–2024. Consultórios em João Pessoa e Natal.",
   path: "/sobre",
   ogSlug: "sobre",
   absoluteTitle: true,
@@ -40,33 +40,6 @@ export const metadata: Metadata = pageMetadata({
 const whatsappMessage =
   "Olá, vi a página do Dr. Adriano e gostaria de entender como funciona a avaliação.";
 
-/**
- * Somente o que está documentado.
- *
- * Graduação, residência, títulos, docência e publicações entram aqui quando o
- * currículo verificável for fornecido — cada item com instituição e ano. Até
- * lá a lista fica curta e verdadeira, que é o único jeito de ela servir de
- * prova. Inventar formação, além de infração, é o tipo de coisa que um colega
- * encaminhador confere.
- */
-const credentials = [
-  {
-    title: "Cirurgia e Traumatologia Buco-Maxilo-Facial",
-    text: "Atuação em cirurgia dos maxilares, da face e da articulação da mandíbula, em João Pessoa.",
-  },
-  {
-    title: siteConfig.registry,
-    text: "Registros ativos nos Conselhos Regionais de Odontologia da Paraíba e do Rio Grande do Norte.",
-  },
-  {
-    title: "Certificação Board · FBCOMS, 2026",
-    text: "Certificado pelo Board do Colégio Brasileiro de Cirurgia e Traumatologia Buco-Maxilo-Facial.",
-  },
-  {
-    title: "Banca de examinadores do Board",
-    text: "Membro ativo da banca de examinadores, conforme o certificado de 2026.",
-  },
-];
 
 /**
  * O eixo da indicação, em quatro afirmações. É o conteúdo humano que estava na
@@ -103,16 +76,10 @@ export default function SobrePage() {
           url: siteConfig.url + "/sobre",
           inLanguage: "pt-BR",
           isPartOf: { "@id": siteConfig.url + "/#website" },
-          mainEntity: {
-            "@id": siteConfig.url + "/#person",
-            "@type": "Person",
-            name: schemaName,
-            jobTitle: siteConfig.specialty,
-            hasCredential: siteConfig.credentials.map((credential) => ({
-              "@type": "EducationalOccupationalCredential",
-              name: credential,
-            })),
-          },
+          // A pessoa inteira — formação, filiações, credenciais — mora no
+          // grafo do layout. Aqui só a referência, para não haver dois nós
+          // descrevendo a mesma pessoa com dados diferentes.
+          mainEntity: { "@id": siteConfig.url + "/#person" },
         }}
       />
 
@@ -130,10 +97,11 @@ export default function SobrePage() {
                 <span className="mark-accent">falar em cirurgia</span>.
               </h1>
               <p>
-                Cirurgião bucomaxilofacial em João Pessoa, com atuação em
-                alterações dos maxilares, da face e da articulação da
-                mandíbula. A consulta começa pela sua história, e a conduta vem
-                do que o exame mostrar — não de um protocolo pronto.
+                Cirurgião bucomaxilofacial, professor titular da UFRN e chefe do
+                serviço da especialidade no Hospital Universitário Onofre Lopes,
+                com consultórios em João Pessoa e Natal. A consulta começa pela
+                sua história, e a conduta vem do que o exame mostrar — não de
+                um protocolo pronto.
               </p>
 
               <ul className="hero-badges">
@@ -143,11 +111,11 @@ export default function SobrePage() {
                 </li>
                 <li>
                   <Check size={13} aria-hidden="true" />
-                  Certificação Board (FBCOMS)
+                  Mestre e doutor · UNICAMP
                 </li>
                 <li>
                   <Check size={13} aria-hidden="true" />
-                  {siteConfig.city}
+                  {siteConfig.serviceArea}
                 </li>
               </ul>
 
@@ -175,27 +143,32 @@ export default function SobrePage() {
 
         <TrustMarquee items={credentialFacts} />
 
-        {/* 2 — formação e credenciais, em uma seção só. */}
+        {/* 2 — formação e credenciais, em uma seção só. A ordem é
+            cronológica porque a trajetória é a informação: graduação, pós,
+            cátedra, entidade. O registro profissional fecha o bloco. */}
         <section className="section section-white credentials-section" id="formacao">
           <div className="container">
             <div className="section-heading">
-              <span className="section-kicker">Formação e credenciais</span>
-              <h2>O que sustenta a conduta, com registro e ano.</h2>
+              <span className="section-kicker">Formação e trajetória</span>
+              <h2>Quase três décadas entre a universidade, o hospital e o consultório.</h2>
             </div>
 
-            <ul className="credentials-list">
-              {credentials.map((item) => (
+            <ol className="career-timeline">
+              {professionalTimeline.map((item) => (
                 <li key={item.title}>
-                  <span className="consultation-icon" aria-hidden="true">
-                    <BadgeCheck size={20} />
-                  </span>
+                  <span className="career-year">{item.year ?? ""}</span>
                   <div>
                     <strong>{item.title}</strong>
-                    <p>{item.text}</p>
+                    <p>{item.detail}</p>
                   </div>
                 </li>
               ))}
-            </ul>
+            </ol>
+
+            <p className="career-registry">
+              <BadgeCheck size={17} aria-hidden="true" />
+              {siteConfig.registry} · especialista registrado nos dois estados
+            </p>
           </div>
         </section>
 
@@ -222,7 +195,11 @@ export default function SobrePage() {
                 o Dr. Adriano recebeu essa certificação e passou a integrar a
                 banca que avalia outros cirurgiões.
               </p>
-              <p>{siteConfig.boardContext}</p>
+              <p>
+                Antes disso, em 2023 e 2024, presidiu o próprio Colégio
+                Brasileiro — a entidade nacional da especialidade, que mantém
+                essa certificação. {siteConfig.boardContext}
+              </p>
 
               <a
                 className="text-link"
@@ -301,9 +278,9 @@ export default function SobrePage() {
                 </span>
                 <h3>Onde é o atendimento</h3>
                 <p>
-                  Em {siteConfig.city}. O local exato, os horários disponíveis e
-                  as orientações de chegada são confirmados com a equipe no
-                  agendamento.
+                  Dois consultórios, em {siteConfig.serviceArea}, cada um com
+                  WhatsApp próprio. Endereços, mapas e rotas estão na página
+                  inicial.
                 </p>
               </article>
             </div>

@@ -34,13 +34,13 @@ export const metadata: Metadata = pageMetadata({
   title: "Encaminhamento Buco-Maxilo-Facial",
   socialTitle: "Para dentistas | Dr. Adriano",
   description:
-    "Discuta indicação, etapa cirúrgica e continuidade do cuidado com o Dr. Adriano Rocha Germano. Encaminhamento buco-maxilo-facial em João Pessoa.",
+    "Discuta indicação, etapa cirúrgica e continuidade do cuidado com o Dr. Adriano Rocha Germano, professor titular da UFRN. Encaminhamento em João Pessoa e Natal.",
   path: "/para-dentistas",
   ogSlug: "para-dentistas",
 });
 
 const whatsappMessage =
-  "Olá, sou dentista em João Pessoa e gostaria de conversar sobre um caso para encaminhamento.";
+  "Olá, sou profissional de saúde e gostaria de conversar sobre um caso para encaminhamento.";
 
 /**
  * Dúvidas do profissional que precisa integrar a etapa especializada.
@@ -221,8 +221,8 @@ export default function ParaDentistasPage() {
                 Seu paciente tem um plano em andamento e uma questão que pede
                 avaliação especializada. Dentistas, ortodontistas e médicos
                 discutem indicação, escopo e continuidade do cuidado com o
-                Dr. Adriano Rocha Germano, cirurgião bucomaxilofacial em
-                João Pessoa.
+                Dr. Adriano Rocha Germano, cirurgião bucomaxilofacial com
+                consultórios em João Pessoa e Natal.
               </p>
 
               <ul className="hero-badges">
@@ -332,6 +332,16 @@ export default function ParaDentistasPage() {
                 ))}
               </ul>
               <p>{siteConfig.boardContext}</p>
+              {/* Para o colega, a prova mais forte não é o título — é ter
+                  formado outros cirurgiões e montado os serviços onde os
+                  casos complexos da região são tratados. */}
+              <p>
+                Fundou o Serviço de Cirurgia e Traumatologia Buco-Maxilo-Facial
+                e o programa de residência do Hospital Universitário Onofre
+                Lopes, onde é chefe do serviço, e coordena o atendimento de
+                crianças com anomalias bucomaxilofaciais — incluindo pacientes
+                fissurados e sindrômicos — no Hospital Infantil Varela Santiago.
+              </p>
               <p>
                 O histórico, os exames e o objetivo do encaminhamento dão
                 contexto à avaliação. Esse diálogo aproxima a etapa

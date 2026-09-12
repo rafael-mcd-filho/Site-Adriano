@@ -33,6 +33,8 @@ type WhatsAppButtonProps = {
   /** Origem legível na mensagem. Sem isso, é derivada do `ctaId`. */
   source?: string;
   fallbackHref?: string;
+  /** Número de outro consultório. Sem ele, usa o número principal do site. */
+  number?: string;
 };
 
 export function WhatsAppButton({
@@ -43,6 +45,7 @@ export function WhatsAppButton({
   className = "",
   source,
   fallbackHref = "#contato",
+  number,
 }: WhatsAppButtonProps) {
   const displayLabel = isConfigured ? label : label
     .replace("Perguntar pelo WhatsApp", "Tirar uma dúvida")
@@ -60,6 +63,7 @@ export function WhatsAppButton({
       }
       href={isConfigured ? getWhatsAppHref(
         whatsappMessageWithSource(message, source ?? originFromCtaId(ctaId)),
+        number,
       ) : fallbackHref}
       target={isConfigured ? "_blank" : undefined}
       rel={isConfigured ? "noopener noreferrer" : undefined}

@@ -161,7 +161,7 @@ const homeFaqs = [
   {
     question: "Onde e em que horários acontece o atendimento?",
     answer:
-      "Em João Pessoa, PB, em horário comercial. Confirme o endereço, os dias disponíveis e as orientações de chegada com a equipe no agendamento.",
+      "Em dois consultórios: João Pessoa, no bairro de Miramar, e Natal, no Corporate Tower Center. O atendimento é de segunda a sexta, em horário comercial, com agendamento pelo WhatsApp de cada consultório — os endereços completos estão no fim desta página.",
   },
   {
     question: "Existe avaliação online?",
@@ -198,7 +198,7 @@ export default function Home() {
           <div className="container home-hero-grid">
             <div className="home-hero-copy hero-photo-copy page-enter">
               <span className="eyebrow">
-                {siteConfig.specialty} · {siteConfig.city}
+                {siteConfig.specialty} · {siteConfig.serviceArea}
               </span>
               <h1>
                 <span className="hero-name">{siteConfig.fullName}</span>
@@ -219,7 +219,7 @@ export default function Home() {
                 </li>
                 <li>
                   <Check size={13} aria-hidden="true" />
-                  Certificação Board (FBCOMS)
+                  Mestre e doutor · UNICAMP
                 </li>
                 <li>
                   <Check size={13} aria-hidden="true" />
@@ -251,7 +251,7 @@ export default function Home() {
                 </span>
                 <span>
                   <MapPin size={17} aria-hidden="true" />
-                  {siteConfig.city}
+                  Consultórios em {siteConfig.serviceArea}
                 </span>
               </div>
             </div>

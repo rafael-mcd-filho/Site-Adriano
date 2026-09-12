@@ -41,7 +41,7 @@ export function DoctorPortrait({
             <span className="portrait-registry">
               {siteConfig.registry}
             </span>
-            <span className="identity-board"><BadgeCheck size={16} aria-hidden="true" /> Certificação Board · FBCOMS</span>
+            <span className="identity-board"><BadgeCheck size={16} aria-hidden="true" /> Professor titular · UFRN</span>
             <Link className="identity-link" href="/sobre">
               Conhecer a formação <ArrowRight size={14} aria-hidden="true" />
             </Link>

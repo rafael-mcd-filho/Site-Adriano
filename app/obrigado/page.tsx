@@ -10,7 +10,7 @@ import { ConversionTracker } from "@/app/obrigado/conversion-tracker";
 import { ButtonContent } from "@/components/button-content";
 import { WhatsAppButton } from "@/components/whatsapp-button";
 import { pageMetadata } from "@/lib/metadata";
-import { siteConfig } from "@/lib/site";
+import { practiceLocations, siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = pageMetadata({
   title: "Solicitação recebida",
@@ -107,6 +107,13 @@ export default async function ObrigadoPage({
               WhatsApp, em horário comercial. Com o número salvo, a mensagem não
               chega de um desconhecido.
             </p>
+            <ul className="thanks-numbers">
+              {practiceLocations.map((location) => (
+                <li key={location.id}>
+                  {location.city}: <strong>{location.whatsappDisplay}</strong>
+                </li>
+              ))}
+            </ul>
             <ul>
               <li>
                 <Link href="/#processo">Como funciona a primeira consulta</Link>

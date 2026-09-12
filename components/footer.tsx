@@ -1,6 +1,11 @@
 import Link from "next/link";
 import { ArrowRight, Clock3, MapPin, ShieldCheck } from "lucide-react";
-import { areaNavigation, schemaName, siteConfig } from "@/lib/site";
+import {
+  areaNavigation,
+  practiceLocations,
+  schemaName,
+  siteConfig,
+} from "@/lib/site";
 
 /**
  * A onda é o recorte da cor da última seção invadindo o rodapé, não um enfeite
@@ -92,10 +97,18 @@ export function Footer() {
         <div>
           <h2 className="footer-title">Atendimento</h2>
           <ul className="footer-contact">
-            <li>
-              <MapPin size={18} aria-hidden="true" />
-              <span>{siteConfig.city}</span>
-            </li>
+            {practiceLocations.map((location) => (
+              <li key={location.id}>
+                <MapPin size={18} aria-hidden="true" />
+                <span>
+                  <strong>{location.city}</strong>
+                  <br />
+                  <a href={"https://wa.me/" + location.whatsapp}>
+                    WhatsApp {location.whatsappDisplay}
+                  </a>
+                </span>
+              </li>
+            ))}
             <li>
               <Clock3 size={18} aria-hidden="true" />
               <span>{siteConfig.hours}</span>

@@ -651,3 +651,185 @@
     grid-template-columns: minmax(0, 1fr) auto;
   }
 }
+
+/* ── Consultórios ──────────────────────────────────────────────────────── */
+/* Um cartão por cidade, cada um com mapa e WhatsApp próprios. A seção deixou
+   de ser "o endereço" e passou a responder "qual fica mais perto de mim?". */
+.location-section .split-heading p {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.location-section .split-heading p svg {
+  flex: 0 0 auto;
+  margin-top: 4px;
+  color: var(--blue-600);
+}
+
+.locations-grid {
+  display: grid;
+  margin-top: clamp(28px, 4vw, 42px);
+  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+
+.location-card {
+  display: grid;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  background: var(--white);
+  grid-template-rows: auto 1fr;
+}
+
+.location-card-map {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: var(--surface);
+}
+
+.location-card-map iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.location-card-body {
+  display: grid;
+  align-content: start;
+  padding: clamp(22px, 3vw, 30px);
+  gap: 12px;
+}
+
+.location-card-body h3 {
+  margin: 0;
+  font-size: var(--fs-h3);
+  letter-spacing: -0.025em;
+}
+
+.location-card-address {
+  display: flex;
+  align-items: flex-start;
+  color: var(--ink);
+  font-size: var(--fs-sm);
+  font-style: normal;
+  gap: 10px;
+  line-height: 1.6;
+}
+
+.location-card-address svg {
+  flex: 0 0 auto;
+  margin-top: 4px;
+  color: var(--blue-600);
+}
+
+.location-card-route {
+  display: inline-flex;
+  align-items: center;
+  justify-self: start;
+  gap: 6px;
+}
+
+.location-card-body .location-cta {
+  margin-top: 6px;
+}
+
+/* Rodapé: cidade em cima, WhatsApp embaixo. */
+.footer-contact strong {
+  color: rgba(255, 255, 255, 0.86);
+  font-weight: 650;
+}
+
+.footer-contact a {
+  color: rgba(255, 255, 255, 0.62);
+  transition: color 180ms ease;
+}
+
+.footer-contact a:hover {
+  color: var(--white);
+}
+
+/* ── Trajetória na /sobre ──────────────────────────────────────────────── */
+/* O ano vem numa coluna própria porque a ordem é a informação. Itens sem ano
+   no material ficam com a coluna vazia, em vez de ganhar um ano estimado. */
+.career-timeline {
+  display: grid;
+  max-width: 900px;
+  margin: clamp(30px, 4vw, 44px) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.career-timeline li {
+  display: grid;
+  padding: 20px 0;
+  border-top: 1px solid var(--border);
+  gap: 6px 28px;
+  grid-template-columns: 112px 1fr;
+}
+
+.career-year {
+  color: var(--blue-600);
+  font-family: var(--font-manrope), sans-serif;
+  font-size: var(--fs-sm);
+  font-variant-numeric: tabular-nums;
+  font-weight: 750;
+  letter-spacing: -0.01em;
+  padding-top: 2px;
+}
+
+.career-timeline strong {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--navy-950);
+  font-family: var(--font-manrope), sans-serif;
+  font-size: var(--fs-lead);
+  font-weight: 650;
+  letter-spacing: -0.02em;
+}
+
+.career-timeline p {
+  max-width: 66ch;
+  margin: 0;
+  font-size: var(--fs-sm);
+}
+
+.career-registry {
+  display: flex;
+  align-items: center;
+  margin: 8px 0 0;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: var(--fs-sm);
+  gap: 8px;
+}
+
+.career-registry svg {
+  color: var(--blue-600);
+}
+
+/* ── Confirmação: números para salvar ──────────────────────────────────── */
+.thanks-extra .thanks-numbers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 24px;
+  font-size: var(--fs-sm);
+}
+
+@media (max-width: 600px) {
+  .locations-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .career-timeline li {
+    grid-template-columns: 1fr;
+  }
+
+  .career-year:empty {
+    display: none;
+  }
+}

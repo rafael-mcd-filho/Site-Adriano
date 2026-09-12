@@ -64,7 +64,7 @@ export function TreatmentTrust({
             </span>
             <span>
               <MapPin size={16} aria-hidden="true" />
-              {siteConfig.city}
+              Consultórios em {siteConfig.serviceArea}
             </span>
           </div>
 

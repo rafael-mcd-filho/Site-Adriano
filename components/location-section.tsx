@@ -1,113 +1,100 @@
-import { Clock3, MapPin, Phone } from "lucide-react";
-import type { ReactNode } from "react";
+import { Clock3, MapPin, Navigation } from "lucide-react";
 import { WhatsAppButton } from "@/components/whatsapp-button";
-import { siteConfig } from "@/lib/site";
+import {
+  locationMapEmbed,
+  locationMapsLink,
+  practiceLocations,
+  siteConfig,
+  type PracticeLocation,
+} from "@/lib/site";
 
-function InfoBlock({
-  icon,
-  label,
-  lines,
-}: {
-  icon: ReactNode;
-  label: string;
-  lines: string[];
-}) {
+/**
+ * Um consultório por cartão, cada um com o próprio mapa e o próprio WhatsApp.
+ *
+ * Eram um endereço e um telefone de demonstração. Com os dois consultórios
+ * reais, a seção passou a responder a pergunta que a pessoa de fato traz —
+ * "qual fica mais perto de mim?" — e o botão de cada cartão fala com a equipe
+ * daquela cidade, em vez de mandar quem mora em Natal para o número de João
+ * Pessoa.
+ */
+function LocationCard({ location }: { location: PracticeLocation }) {
   return (
-    <div className="info-block">
-      <span className="info-icon" aria-hidden="true">
-        {icon}
-      </span>
-      <div>
-        <span className="info-label">{label}</span>
-        {lines.map((line) => (
-          <span className="info-line" key={line}>
-            {line}
-          </span>
-        ))}
+    <article className="location-card">
+      <div className="location-card-map">
+        <iframe
+          src={locationMapEmbed(location)}
+          title={"Mapa do consultório em " + location.city}
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+          allowFullScreen
+        />
       </div>
-    </div>
+
+      <div className="location-card-body">
+        <span className="section-kicker">
+          {location.city} · {location.state}
+        </span>
+        <h3>{location.building}</h3>
+
+        <address className="location-card-address">
+          <MapPin size={17} aria-hidden="true" />
+          <span>
+            {location.street} · {location.complement}
+            <br />
+            {location.neighborhood ? location.neighborhood + " · " : ""}
+            {location.city}/{location.state} · CEP {location.postalCode}
+          </span>
+        </address>
+
+        <a
+          className="text-link location-card-route"
+          href={locationMapsLink(location)}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Navigation size={15} aria-hidden="true" />
+          Abrir rota no mapa
+        </a>
+
+        <WhatsAppButton
+          ctaId={"cta-local-" + location.id + "-whatsapp"}
+          className="location-cta"
+          message={
+            "Olá, gostaria de agendar uma avaliação no consultório de " +
+            location.city +
+            "."
+          }
+          label={"WhatsApp " + location.whatsappDisplay}
+          number={location.whatsapp}
+        />
+      </div>
+    </article>
   );
 }
 
 export function LocationSection() {
-  const hasMap = Boolean(siteConfig.mapEmbedUrl);
-
   return (
     <section className="section location-section" id="local">
-      <div className="container location-grid">
-        {hasMap ? (
-          <div className="location-map">
-            <iframe
-              src={siteConfig.mapEmbedUrl}
-              title={(siteConfig.isDemo ? "Mapa da região em " : "Localização do consultório em ") + siteConfig.city}
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              allowFullScreen
-            />
-          </div>
-        ) : (
-          /* O mapa só entra quando o endereço definitivo for confirmado.
-             Apontar para o lugar errado é pior do que não ter mapa. */
-          <div className="location-map location-map-pending" aria-hidden="true">
-            <MapPin size={30} />
-            <strong>Orientações para chegar</strong>
-            <span>
-              Confirme o local da consulta com a equipe ao agendar.
+      <div className="container">
+        <div className="section-heading split-heading">
+          <div>
+            <span className="pill-badge">
+              <MapPin size={13} aria-hidden="true" />
+              Onde você será atendido
             </span>
+            <h2>Dois consultórios: João Pessoa e Natal.</h2>
           </div>
-        )}
-
-        <div className="location-copy">
-          <span className="pill-badge">
-            <MapPin size={13} aria-hidden="true" />
-            Sua consulta
-          </span>
-          <h2>Atendimento em João Pessoa.</h2>
           <p>
-            Antes de sair de casa, confirme com a equipe o local, o horário
-            e os documentos ou exames que deve levar.
+            <Clock3 size={16} aria-hidden="true" /> {siteConfig.hoursLines[0]}.
+            Fale com o consultório da sua cidade para combinar o horário e
+            saber o que levar.
           </p>
+        </div>
 
-          <div className="info-blocks">
-            {/*
-              Sem endereço definitivo, `addressLines` é uma lista vazia e o
-              bloco aparecia com o rótulo e nada embaixo. A linha de espera diz
-              a verdade — o local existe, é confirmado no agendamento — em vez
-              de deixar um campo órfão parecendo erro de carregamento.
-            */}
-            <InfoBlock
-              icon={<MapPin size={18} />}
-              label="Endereço"
-              lines={
-                siteConfig.addressLines.length
-                  ? siteConfig.addressLines
-                  : ["Confirmado com a equipe no agendamento"]
-              }
-            />
-            <InfoBlock
-              icon={<Phone size={18} />}
-              label="Contato"
-              lines={[siteConfig.phoneDisplay]}
-            />
-            <InfoBlock
-              icon={<Clock3 size={18} />}
-              label="Horário de atendimento"
-              lines={siteConfig.hoursLines}
-            />
-          </div>
-
-          <WhatsAppButton
-            ctaId="cta-local-whatsapp"
-            className="location-cta"
-            message="Olá, gostaria de saber como chegar e como funciona o agendamento."
-            label="Consultar local e horários"
-          />
-
-          {siteConfig.isDemo && (
-            <small className="demo-note">
-              Endereço, telefone e horários são dados de demonstração.
-            </small>
-          )}
+        <div className="locations-grid">
+          {practiceLocations.map((location) => (
+            <LocationCard key={location.id} location={location} />
+          ))}
         </div>
       </div>
     </section>
