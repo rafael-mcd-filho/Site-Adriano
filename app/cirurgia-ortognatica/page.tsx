@@ -33,7 +33,7 @@ export default function OrtognaticaPage() {
       <TrustMarquee items={content.highlights} />
       <TreatmentPain content={content} waveTo="var(--navy-800)" />
       <TreatmentMethod content={content} />
-      <SectionWave from="var(--navy-800)" to="var(--white)" flip />
+      <SectionWave from="var(--navy-800)" to="var(--sand-100)" flip />
       <TreatmentJourney content={content} />
       <TreatmentObjections content={content} />
       <TreatmentAuthority content={content} />

@@ -34,7 +34,7 @@ export default function ApneiaPage() {
       <TreatmentObjections content={content} />
       <SectionWave />
       <TreatmentMethod content={content} />
-      <SectionWave from="var(--navy-800)" to="var(--white)" flip />
+      <SectionWave from="var(--navy-800)" to="var(--surface)" flip />
       <TreatmentAuthority content={content} />
       <TreatmentProof content={content} />
       <TreatmentConsultation content={content} />

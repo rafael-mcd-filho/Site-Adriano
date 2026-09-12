@@ -98,7 +98,22 @@ export type TreatmentContent = {
   consultationNote: string;
 
   /* ── Bloco 7 e 8 ────────────────────────────────────────────────────── */
-  faqs: Array<{ question: string; answer: string }>;
+  /**
+   * Exatamente seis. A lista longa fazia o leitor rolar por respostas que não
+   * eram a dele e desistir antes do contato, que vem logo abaixo.
+   *
+   * Critério para escolher: não repita o que o bloco de objeções já responde
+   * nesta mesma página. Com seis lugares, uma pergunta repetida custa uma
+   * dúvida sem resposta.
+   */
+  faqs: [
+    { question: string; answer: string },
+    { question: string; answer: string },
+    { question: string; answer: string },
+    { question: string; answer: string },
+    { question: string; answer: string },
+    { question: string; answer: string },
+  ];
   faqTitle: string;
   closingTitle: string;
   closingText: string;
@@ -131,24 +146,27 @@ export type TreatmentContent = {
   };
 };
 
-/** Respostas iguais nas cinco páginas: valores, segunda opinião e vínculo. */
-const sharedFaqs = [
-  {
-    question: "Como saber o valor da consulta e do tratamento?",
-    answer:
-      "O atendimento é particular. A equipe informa o valor da consulta antes do agendamento. Se houver proposta de tratamento, os custos são apresentados conforme as etapas do seu caso, antes de você decidir começar.",
-  },
-  {
-    question: "E se eu só quiser uma segunda opinião sobre o que já me disseram?",
-    answer:
-      "Você pode buscar uma avaliação para esclarecer uma indicação anterior. Traga os exames e relatórios que já tem, além das dúvidas que ficaram. A análise pode confirmar a orientação recebida ou apontar outras possibilidades.",
-  },
-  {
-    question: "Meu dentista continua acompanhando o meu caso?",
-    answer:
-      "Sim. Quando já existe acompanhamento, a proposta é integrar a etapa especializada ao cuidado do seu dentista, com comunicação sobre a conduta e a continuidade do tratamento.",
-  },
-];
+/**
+ * Respostas que servem a mais de uma página. Ficam nomeadas, e não num bloco
+ * que entra inteiro, porque cada página escolhe quais cabem nas suas seis.
+ */
+const faqValores = {
+  question: "Como saber o valor da consulta e do tratamento?",
+  answer:
+    "O atendimento é particular. A equipe informa o valor da consulta antes do agendamento. Se houver proposta de tratamento, os custos são apresentados conforme as etapas do seu caso, antes de você decidir começar.",
+};
+
+const faqSegundaOpiniao = {
+  question: "E se eu só quiser uma segunda opinião sobre o que já me disseram?",
+  answer:
+    "Você pode buscar uma avaliação para esclarecer uma indicação anterior. Traga os exames e relatórios que já tem, além das dúvidas que ficaram. A análise pode confirmar a orientação recebida ou apontar outras possibilidades.",
+};
+
+const faqDentista = {
+  question: "Meu dentista continua acompanhando o meu caso?",
+  answer:
+    "Sim. Quando já existe acompanhamento, a proposta é integrar a etapa especializada ao cuidado do seu dentista, com comunicação sobre a conduta e a continuidade do tratamento.",
+};
 
 export const treatments: Record<string, TreatmentContent> = {
   "apneia-do-sono": {
@@ -221,12 +239,11 @@ export const treatments: Record<string, TreatmentContent> = {
     faqTitle: "Dúvidas sobre apneia, exames e possibilidades de tratamento.",
     faqs: [
       { question: "Quem faz o diagnóstico de apneia do sono?", answer: "A investigação é conduzida por um médico, que avalia sintomas e histórico e indica o estudo do sono apropriado, como a polissonografia. A avaliação buco-maxilo-facial complementa esse cuidado quando há suspeita de participação da anatomia dos maxilares." },
-      { question: "Todo ronco significa apneia?", answer: "Não. Ronco pode ocorrer sem apneia. Pausas respiratórias percebidas por outra pessoa, despertares com engasgo e sonolência durante o dia são informações relevantes para levar à avaliação médica." },
       { question: "Toda apneia precisa de cirurgia?", answer: "Não. Existem diferentes tipos e causas de apneia. A cirurgia dos maxilares pode ser considerada em casos selecionados de apneia obstrutiva, após análise da anatomia, da gravidade, dos tratamentos e da saúde geral." },
       { question: "Qual é o papel do cirurgião buco-maxilo-facial?", answer: "Avaliar se a posição e a estrutura dos maxilares contribuem para a obstrução da passagem de ar. Essa análise é discutida com os demais profissionais para definir se há alguma indicação de cuidado nessa área." },
-      { question: "A avaliação substitui o CPAP ou meu médico do sono?", answer: "Não. O CPAP é uma opção de tratamento importante, e a dificuldade de adaptação merece acompanhamento. Qualquer mudança de conduta precisa ser discutida com a equipe que trata sua apneia." },
       { question: "Preciso repetir a polissonografia antes da consulta?", answer: "Traga os exames que já possui. A necessidade de atualizar ou complementar o estudo do sono depende da história clínica e da orientação dos profissionais envolvidos; não é preciso repetir exames por conta própria." },
-      ...sharedFaqs,
+      faqValores,
+      faqSegundaOpiniao,
     ],
     closingTitle: "Entenda o que pode estar por trás de noites sem descanso.",
     closingText: "Se você investiga ou já trata apneia, converse com a equipe sobre a avaliação dos maxilares. Entender essa parte do quadro pode ajudar a definir um cuidado mais adequado ao seu sono.",
@@ -305,15 +322,11 @@ export const treatments: Record<string, TreatmentContent> = {
     faqTitle: "Dúvidas sobre enxerto, cicatrização e futuros implantes.",
     faqs: [
       { question: "O que é reconstrução óssea?", answer: "É um conjunto de procedimentos usados, quando indicados, para recuperar volume ou forma do osso. Na reabilitação com implantes, pode envolver enxertos para buscar o suporte necessário ao plano protético." },
-      { question: "Tenho pouco osso. Posso fazer enxerto?", answer: "A falta de osso, isoladamente, não define a indicação. A região, o volume necessário, os tecidos e suas condições de saúde precisam ser analisados. Algumas pessoas não são candidatas ao procedimento." },
-      { question: "A reconstrução garante que vou receber implantes?", answer: "Não. O enxerto precisa cicatrizar e a resposta varia entre pacientes. A condição obtida é reavaliada antes de definir a possibilidade e o momento de colocar implantes." },
       { question: "De onde vem o osso ou o material do enxerto?", answer: "O planejamento pode considerar osso do próprio paciente e materiais de enxerto de outras origens. A escolha, a procedência e os cuidados envolvidos devem ser explicados conforme a técnica indicada." },
-      { question: "O tratamento é feito de uma vez? Quanto tempo leva?", answer: "Pode envolver etapas separadas por períodos de cicatrização. Em situações selecionadas, procedimentos podem ser combinados. A estimativa depende da técnica, da região e da evolução do seu caso." },
-      { question: "Como é o desconforto e a recuperação?", answer: "Anestesia e cuidados após o procedimento fazem parte do plano. Pode haver dor, inchaço e restrições temporárias. A intensidade e o tempo de recuperação variam conforme a cirurgia e são discutidos antes da decisão." },
-      { question: "E se o enxerto não cicatrizar como esperado?", answer: "Essa possibilidade deve ser considerada antes de começar. O acompanhamento permite avaliar a cicatrização, identificar problemas e discutir se é necessário intervir, rever o plano ou considerar outras formas de reabilitação." },
       { question: "Vou ficar sem dentes durante as etapas?", answer: "As opções provisórias são analisadas conforme a área tratada e a necessidade de proteger a cicatrização. O que pode ser utilizado no seu caso deve ser discutido no planejamento." },
+      { question: "Como é o desconforto e a recuperação?", answer: "Anestesia e cuidados após o procedimento fazem parte do plano. Pode haver dor, inchaço e restrições temporárias. A intensidade e o tempo de recuperação variam conforme a cirurgia e são discutidos antes da decisão." },
       { question: "Diabetes, pressão alta ou medicamentos interferem?", answer: "Podem influenciar os cuidados e a indicação. Informe seu histórico e todos os medicamentos em uso. Quando necessário, a avaliação é integrada ao médico que acompanha você." },
-      ...sharedFaqs,
+      faqValores,
     ],
     closingTitle: "A dúvida sobre a falta de osso pode dar lugar a uma decisão mais clara.",
     closingText: "Agende uma avaliação e traga o plano e os exames que já recebeu. Vamos discutir o que a perda óssea significa para você e quais caminhos de reabilitação merecem ser considerados.",
@@ -389,11 +402,9 @@ export const treatments: Record<string, TreatmentContent> = {
       { question: "Qual é a diferença entre DTM e ATM?", answer: "ATM é a articulação temporomandibular, que participa dos movimentos de abrir e fechar a boca. DTM reúne alterações da articulação e dos músculos da mastigação que podem provocar dor ou dificuldade de movimento." },
       { question: "Vou precisar operar?", answer: "Não é possível definir pela presença de dor ou estalos. O cuidado costuma começar com opções conservadoras. Procedimentos cirúrgicos são reservados a situações selecionadas, considerando diagnóstico, alterações encontradas e resposta ao tratamento." },
       { question: "Estalo sem dor precisa de tratamento?", answer: "Estalos isolados, sem dor e sem limitação dos movimentos, são comuns e geralmente não exigem tratamento. Se houver dor, travamento ou mudança na abertura da boca, esses sinais devem ser avaliados." },
-      { question: "Já usei placa e continuo com sintomas. O que fazer?", answer: "Leve a placa e conte como foi o uso e a resposta ao tratamento. A reavaliação considera o diagnóstico, possíveis fatores associados e se o plano precisa de ajustes. Isso não significa que você precise operar." },
-      { question: "Dor de cabeça ou perto do ouvido pode ter relação?", answer: "Pode, mas esses sintomas também ocorrem por outras causas. A investigação precisa considerar essas possibilidades, sem atribuir toda dor à ATM. Outros profissionais podem participar quando necessário." },
-      { question: "Por que minha mandíbula trava?", answer: "Existem diferentes alterações que podem limitar o movimento da mandíbula. O histórico dos episódios e o exame clínico ajudam a orientar a investigação; em alguns casos, exames de imagem são necessários." },
       { question: "Quanto tempo leva para melhorar? A dor pode voltar?", answer: "A resposta varia com a causa, a conduta e os fatores envolvidos. Os sintomas podem oscilar ou reaparecer, por isso o acompanhamento permite ajustar o cuidado. Não há um prazo ou resultado igual para todos." },
-      ...sharedFaqs,
+      faqValores,
+      faqSegundaOpiniao,
     ],
     closingTitle: "A dor está escolhendo o que você come? Vamos investigar.",
     closingText: "Agende uma avaliação para conversar sobre como a mandíbula interfere no seu dia. O próximo passo é entender a causa e discutir um cuidado orientado ao que você precisa recuperar na rotina.",
@@ -476,15 +487,11 @@ export const treatments: Record<string, TreatmentContent> = {
     faqTitle: "Aparelho, mudanças faciais e recuperação: suas principais dúvidas.",
     faqs: [
       { question: "Como saber se tenho indicação de cirurgia ortognática?", answer: "É preciso avaliar a relação entre dentes e maxilares, as queixas funcionais e suas condições de saúde. O cirurgião e o ortodontista analisam se o benefício de uma abordagem conjunta justifica a cirurgia e quais alternativas existem." },
-      { question: "Toda mordida errada precisa de cirurgia?", answer: "Não. Muitas alterações são tratadas com ortodontia. A presença de uma diferença óssea também não define, sozinha, a necessidade de operar: função, extensão da alteração e objetivos precisam ser considerados." },
-      { question: "Vou precisar usar aparelho? Qual é o papel do ortodontista?", answer: "O aparelho costuma participar do preparo e dos ajustes da mordida depois da cirurgia. O ortodontista planeja essas etapas junto com o cirurgião. A sequência e a duração dependem do seu caso." },
       { question: "Quanto tempo dura todo o tratamento?", answer: "O tempo inclui preparação, eventual cirurgia, recuperação e finalização ortodôntica. As estimativas são feitas após a análise conjunta e podem mudar conforme a resposta ao tratamento; não existe um prazo único." },
       { question: "Como é a recuperação e o afastamento do trabalho?", answer: "Pode haver inchaço, desconforto, alterações de sensibilidade e restrições temporárias de alimentação e atividade. O retorno ao trabalho depende do procedimento, do tipo de atividade e da evolução. Esses cuidados são discutidos antes da cirurgia e acompanhados depois." },
       { question: "Vou ficar com a boca imobilizada?", answer: "Os recursos de fixação e a necessidade de elásticos ou limitações de movimento dependem da técnica e do caso. A equipe explica as orientações previstas para alimentação, higiene e movimentação antes do procedimento." },
-      { question: "Meu rosto vai mudar?", answer: "A mudança de posição dos maxilares pode alterar o perfil e outras relações faciais. O planejamento permite conversar sobre as repercussões esperadas e seus limites. A cicatrização e o resultado variam de pessoa para pessoa." },
       { question: "Minha mastigação ou respiração pode melhorar?", answer: "A melhora da função pode ser um objetivo quando a alteração dos maxilares participa da dificuldade. Benefícios para mastigação ou respiração dependem da causa e da indicação. Queixas respiratórias exigem investigação específica e, quando necessário, avaliação multidisciplinar." },
-      { question: "O atendimento é por convênio?", answer: "O atendimento do consultório é particular, sem convênios. A equipe informa os valores da consulta e esclarece os custos de uma eventual proposta de tratamento individualmente." },
-      ...sharedFaqs,
+      faqValores,
     ],
     closingTitle: "Antes de decidir sobre a cirurgia, entenda o que pode mudar para você.",
     closingText: "Agende uma avaliação para conversar sobre mastigação, face e expectativas. Com a participação do ortodontista, você pode discutir a indicação e conhecer as etapas antes de escolher como seguir.",
@@ -569,12 +576,10 @@ export const treatments: Record<string, TreatmentContent> = {
     faqs: [
       { question: "Como saber se posso fazer implante?", answer: "A avaliação considera osso, gengiva, mordida, saúde geral, medicamentos e a prótese planejada. O exame clínico e os exames de imagem necessários ajudam a definir a indicação e as alternativas." },
       { question: "Uso prótese removível. Posso trocar por implantes?", answer: "Em alguns casos, implantes podem dar suporte a outro tipo de prótese. A possibilidade depende das condições da boca e do plano protético. A avaliação também discute o que pode ser usado durante as etapas." },
-      { question: "Perdi o dente há muitos anos. Ainda posso avaliar?", answer: "Sim. O tempo de perda não determina sozinho a indicação. Pode haver mudanças no osso ou nos dentes vizinhos, e a avaliação ajuda a entender se elas exigem cuidados ou etapas adicionais." },
-      { question: "Tenho pouco osso. Todo implante precisa de enxerto?", answer: "Não. A necessidade de enxerto depende da quantidade e da posição do osso em relação ao implante planejado. Quando falta suporte, reconstrução pode ser discutida, desde que haja indicação e condições para realizá-la." },
       { question: "Vou ficar sem dente durante o processo?", answer: "As possibilidades de prótese provisória são analisadas no planejamento. Elas dependem da região, da estabilidade obtida e da necessidade de proteger a cicatrização; não são iguais em todos os casos." },
-      { question: "A idade ou os medicamentos impedem o tratamento?", answer: "A idade isolada não responde essa pergunta. Saúde geral, desenvolvimento ósseo, condições da boca e medicamentos precisam ser considerados. Em alguns casos é necessário conversar com o médico responsável pelo seu acompanhamento." },
       { question: "Quais são os riscos e os cuidados depois?", answer: "Podem ocorrer infecção, dificuldades de cicatrização ou falha na integração do implante, entre outros riscos. Saúde geral, tabagismo, higiene e condições locais influenciam o cuidado. Consultas de acompanhamento e manutenção da prótese continuam necessárias após o tratamento." },
-      ...sharedFaqs,
+      faqDentista,
+      faqValores,
     ],
     closingTitle: "O que você gostaria de mudar na próxima vez que se sentar à mesa?",
     closingText: "Se a falta de dentes ou a prótese limita suas refeições, agende uma avaliação. Vamos entender o que incomoda e discutir se os implantes podem fazer parte de um plano para reabilitar sua mastigação.",

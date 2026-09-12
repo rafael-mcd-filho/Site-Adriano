@@ -261,7 +261,8 @@ export default function ParaDentistasPage() {
           </div>
         </section>
 
-        <SectionWave />
+        {/* Sai da areia das objeções desta rota, não do branco. */}
+        <SectionWave from="var(--sand-100)" />
         <section className="section section-mist method-section">
           <div className="container professional-grid">
             <div>
@@ -285,7 +286,7 @@ export default function ParaDentistasPage() {
           </div>
         </section>
 
-        <SectionWave from="var(--navy-800)" to="var(--white)" flip />
+        <SectionWave from="var(--navy-800)" to="var(--surface)" flip />
         <section className="section authority-section">
           <div className="container authority-grid">
             <DoctorPortrait variant="authority" />

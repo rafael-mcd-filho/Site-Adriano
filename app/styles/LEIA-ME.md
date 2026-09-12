@@ -32,6 +32,30 @@ nome global, sem entrar nesta pasta. É o caminho preferido para coisa nova.
 > coisinha". Duas cópias da mesma regra divergem na primeira manutenção.
 > Sobrescreva só a propriedade que muda.
 
+## Ritmo de superfícies
+
+**Nunca duas superfícies claras iguais em sequência.** Três seções claras
+seguidas fazem a página parecer uma coisa só, e quem rola deixa de perceber que
+mudou de assunto — era o caso de implantes e ortognática, com jornada, objeções,
+quem conduz e primeira consulta todas brancas.
+
+A escala, da paleta de `01-tokens-e-base.css`:
+
+| Papel | Token | Onde |
+|---|---|---|
+| claro | `--white` | objeções, primeira consulta, dor |
+| quente | `--sand-100` | jornada, dois públicos |
+| frio | `--surface` | quem conduz, dúvidas |
+| escuro | `--navy-800` | método |
+| mais escuro | `--navy-950` | faixa de destaques, contato |
+
+`--ivory` (#f8f6f4) não serve como quebra: ao lado de branco, ninguém enxerga a
+diferença.
+
+Ao criar uma seção, olhe a que vem antes e a que vem depois. E **se houver uma
+onda (`SectionWave`) na transição, o `to` dela precisa ser a cor da seção
+seguinte** — senão a curva pinta uma faixa da cor errada.
+
 ## Os arquivos
 
 A ordem importa: cada um pode sobrescrever os anteriores. Não reordene os
