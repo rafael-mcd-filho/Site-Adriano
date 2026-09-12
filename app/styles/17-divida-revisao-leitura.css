@@ -1,5 +1,9 @@
-/* DÍVIDA. Ajustes de contraste e leitura aplicados por cima dos arquivos acima. Ver LEIA-ME.md.
-   Fatia de globals.css — a ordem dos @import lá é significativa. */
+/* CAMADA FINAL — ajustes de contraste e leitura, aplicados por cima de todos
+   os arquivos acima.
+
+   Estas regras vencem porque vêm por último. Não as mova para o arquivo dono
+   sem medir: a maioria perde a disputa se for para trás na cascata. Edite-as
+   aqui mesmo. Ver "A camada final" em LEIA-ME.md. */
 
 /* Revisão de leitura: contraste estável, conteúdo aberto e poucos contornos. */
 .header-cta .button-circle { background: rgba(255, 255, 255, .14); }
@@ -28,7 +32,6 @@
   background: var(--white);
 }
 .home-hero-copy > p, .inner-hero-copy > p { line-height: 1.6; }
-.mark-accent { --mark-color: rgba(218,207,192,.8); }
 .doctor-portrait-hero {
   overflow: hidden;
   gap: 0;
@@ -142,7 +145,6 @@
   .audience-badge { left: 24px; bottom: 30px; }
 }
 @media (max-width: 600px) {
-  :root { --fs-h1: clamp(2.15rem, 9.4vw, 3rem); --fs-h2: clamp(1.75rem, 7.4vw, 2.35rem); }
   .container { width: calc(100% - 36px); }
   .section { padding-block: 56px; }
   .section-heading { margin-bottom: 28px; }
@@ -152,10 +154,8 @@
   .hero-badges { gap: 12px 18px; margin-bottom: 28px; }
   .hero-badges li { border: 0; border-radius: 0; background: transparent; padding: 0; }
   .hero-actions { gap: 16px; }
-  .hero-actions .button { min-height: 54px; }
   .hero-secondary-link { justify-content: center; }
   .hero-proof { margin-top: 18px; }
-  .clinical-note { font-size: var(--fs-fine); }
   .pain-item { padding-block: 17px; }
   .consequence-panel { padding: 20px; margin-top: 18px; }
   .objection-list li { flex-direction: row; gap: 14px; padding-block: 22px; }

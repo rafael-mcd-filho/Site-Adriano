@@ -1,5 +1,9 @@
-/* DÍVIDA. Ajustes de superfície, ondas e fotografia aplicados por cima dos arquivos acima. Ver LEIA-ME.md.
-   Fatia de globals.css — a ordem dos @import lá é significativa. */
+/* CAMADA FINAL — ajustes de superfície, ondas e fotografia, aplicados por cima
+   de todos os arquivos acima.
+
+   Estas regras vencem porque vêm por último. Não as mova para o arquivo dono
+   sem medir: a maioria perde a disputa se for para trás na cascata. Edite-as
+   aqui mesmo. Ver "A camada final" em LEIA-ME.md. */
 
 /* Superfícies sólidas e transições da revisão visual. */
 .brand-mark { border-radius: 50%; }
@@ -42,12 +46,10 @@
 }
 .button .button-circle-whatsapp svg { width: 22px; height: 22px; }
 .button-small .button-circle-whatsapp { right: 12px; }
-.mark-accent { --mark-color: #dacfc0; }
 .home-hero-copy .mark-accent, .inner-hero-copy .mark-accent {
   color: var(--blue-600);
   background: none;
 }
-:root { --section-wave-height: clamp(30px, 4vw, 64px); }
 .section-wave { position: relative; z-index: 1; overflow: hidden; margin-bottom: -1px; line-height: 0; pointer-events: none; }
 /* O SVG ultrapassa o recorte em 2px para a foto não vazar pela borda rasterizada. */
 .section-wave svg { display: block; width: 100%; height: calc(var(--section-wave-height) + 2px); margin-bottom: -2px; }
@@ -113,7 +115,6 @@
   .hero-actions { gap: 16px; }
   .hero-secondary-link { min-height: 44px; }
   .clinical-note { margin-top: 24px; }
-  :root { --section-wave-height: 32px; }
   .section-with-wave > .section-wave { margin-top: 56px; }
   .section-wave + .section, .section-with-wave + .section { padding-top: 40px; }
   .about-section, .contact-section { background-image: none; }

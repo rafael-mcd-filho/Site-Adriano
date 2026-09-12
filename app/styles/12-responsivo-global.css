@@ -288,7 +288,10 @@
     --fs-h3: 21px;
     --fs-h2: clamp(1.9rem, 8.7vw, 2.9rem);
     --fs-h1: clamp(2.4rem, 11.5vw, 3.6rem);
-  }
+    --fs-h1: clamp(2.15rem, 9.4vw, 3rem);
+  --fs-h2: clamp(1.75rem, 7.4vw, 2.35rem);
+  --section-wave-height: 32px;
+}
 
   .container {
     width: min(calc(100% - 28px), var(--container));
@@ -336,6 +339,7 @@
 
   .hero-actions .button {
     width: 100%;
+      min-height: 54px;
   }
   .hero-proof {
     display: grid;
@@ -442,6 +446,7 @@
 
   .clinical-note {
     font-size: var(--fs-label);
+      font-size: var(--fs-fine);
   }
   .professional-grid {
     gap: 38px;

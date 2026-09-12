@@ -55,40 +55,54 @@ A ordem importa: cada um pode sobrescrever os anteriores. Não reordene os
 | `14-paginas-de-tratamento.css` | Blocos 2 a 8 das rotas de tratamento |
 | `15-tratamento-responsivo.css` | Cortes de largura dos blocos de tratamento |
 | `16-rodape-e-obrigado.css` | Onda do rodapé e página de confirmação |
-| `17-divida-…` / `18-divida-…` | **Dívida.** Ver abaixo |
+| `17-divida-…` / `18-divida-…` | Camada final. Ver abaixo |
 | `rotas/*.css` | Uma rota cada, via `[data-rota="…"]` |
 
-## A dívida
+## A camada final (`17-` e `18-`)
 
-Os arquivos `17-` e `18-` são duas rodadas de revisão que foram aplicadas por
-cima do que já existia, em vez de corrigir o arquivo dono. Hoje eles
-sobrescrevem **81 seletores** definidos antes — entre eles `.authority-section`,
-que deixa de ser navy e vira branco lá no fim.
+Duas rodadas de revisão que foram aplicadas por cima do que já existia, em vez
+de corrigir o arquivo dono. São **251 regras** que vencem as anteriores — entre
+elas `.authority-section`, que deixa de ser navy e vira branco lá no fim.
 
 Consequência prática: mudar `.authority-section` em
 `09-credenciais-e-localizacao.css` pode não ter efeito nenhum, porque o `17-`
 sobrescreve depois. **Se uma alteração sua não aparecer, procure o seletor nos
-arquivos de dívida antes de recorrer a `!important`.**
+dois arquivos antes de recorrer a `!important`.**
 
 ```bash
 grep -rn "authority-section" app/styles/
 ```
 
-Onde a dívida mais pesa, por arquivo dono:
+### Por que quase nada dali volta para o arquivo dono
 
-| Arquivo dono | Seletores sobrescritos pela dívida |
-|---|---|
-| `08-home-areas-e-publicos.css` | 15 |
-| `14-paginas-de-tratamento.css` | 14 (+4 junto com `15-`) |
-| `12-responsivo-global.css` | 8 |
-| `07-faixa-de-confianca.css` | 5 |
-| `10-duvidas.css` | 5 |
-| demais | 1 a 3 cada |
+A tentativa foi feita e medida. Das 258 regras originais, **7 foram
+dissolvidas** — os tokens de `.mark-accent` e de `:root` voltaram para
+`01-tokens-e-base.css` e `12-responsivo-global.css`, onde alguém de fato
+procuraria. As outras 251 **não são dívida no sentido de sujeira**: elas ganham
+suas disputas justamente por vir por último. Puxá-las para o arquivo dono muda
+quem vence.
 
-Não faça `17-` e `18-` crescerem. Ao mexer num seletor que aparece neles, o
-certo é levar a regra de volta ao arquivo dono e apagar a linha da dívida —
-conferindo com a sonda logo abaixo. Dissolver os dois arquivos aos poucos, um
-assunto por vez, é a forma segura de zerar isso.
+O caso que ensina isso: `.visual-motif { border-radius }` estava na camada
+final e vencia `.motif-implant { border-radius }`, que vem depois dela em
+`06-motivos-visuais.css`. Mesclada no dono, passou a perder — e o quadro do
+implante mudou de canto. Os dois seletores não compartilham uma classe sequer,
+mas casam no mesmo elemento. Especificidade igual: decide a ordem.
+
+**Então a regra de trabalho é: edite a regra onde ela está.** Se o seletor
+aparece na camada final, é ali que ele se resolve. Mover é operação separada,
+que precisa de análise e da sonda — não faça de passagem.
+
+Para saber se alguma virou dissolvível depois de você mexer no CSS:
+
+```bash
+node scripts/analisa-cascata-css.mjs
+```
+
+Ele erra para o lado seguro: "presa" quer dizer "precisa de olho humano", não
+"impossível". Hoje responde zero dissolvíveis.
+
+Não faça esses dois arquivos crescerem. Regra nova de uma rota vai para
+`rotas/`; regra nova compartilhada vai para o arquivo do assunto.
 
 ## Conferir antes de commitar
 

@@ -96,6 +96,7 @@
   --fs-h3: 24px;
   --fs-h2: clamp(2rem, 3.4vw, 3.55rem);
   --fs-h1: clamp(2.55rem, 4.9vw, 5rem);
+  --section-wave-height: clamp(30px, 4vw, 64px);
 }
 
 * {
@@ -206,6 +207,8 @@ p {
   animation: markSweep 760ms cubic-bezier(0.22, 0.68, 0.24, 1) 420ms both;
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
+  --mark-color: rgba(218,207,192,.8);
+  --mark-color: #dacfc0;
 }
 
 @keyframes markSweep {

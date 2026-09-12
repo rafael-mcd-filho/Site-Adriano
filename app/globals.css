@@ -27,9 +27,10 @@
 @import "./styles/15-tratamento-responsivo.css";
 @import "./styles/16-rodape-e-obrigado.css";
 
-/* ── Dívida ─────────────────────────────────────────────────────────────
-   Correções acumuladas que sobrescrevem os arquivos acima em vez de corrigi-
-   los no lugar. Não faça esta seção crescer: ajuste o arquivo dono. */
+/* ── Camada final ───────────────────────────────────────────────────────
+   Duas rodadas de revisão aplicadas por cima de tudo acima. Vencem porque vêm
+   por último, e a maioria perde a disputa se voltar para o arquivo dono — foi
+   medido. Edite essas regras onde elas estão; não faça a seção crescer. */
 @import "./styles/17-divida-revisao-leitura.css";
 @import "./styles/18-divida-revisao-visual.css";
 
