@@ -85,6 +85,14 @@ const areaCards: Array<{
       "A falta de dentes ou a insegurança com a prótese interfere nas refeições e no sorriso? Veja o que avaliar para planejar sua reabilitação.",
     action: "Saber se posso fazer implante",
   },
+  {
+    slug: "cirurgia-de-siso",
+    badge: "Indicação",
+    tone: "navy",
+    description:
+      "Inflamou de novo, entala comida ou apareceu no raio-X? Nem todo siso precisa sair — entenda o que decide a indicação no seu caso.",
+    action: "Saber se preciso tirar",
+  },
 ];
 
 /**

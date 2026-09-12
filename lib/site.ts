@@ -1,9 +1,10 @@
 /**
  * Identidade, registros, Instagram e domínio fornecidos pelo cliente em
  * 10/09/2026. Certificação e banca constam no certificado de 2026 enviado.
- * Endereço, telefone e horários ainda usam dados de demonstração; o modo demo
- * permanece ativo até a configuração dessas informações de atendimento.
+ * Endereço, telefone e mapa continuam sem dado definitivo — e, como o site
+ * está indexável, eles não renderizam em vez de renderizar demonstração.
  */
+
 /**
  * Indexação e dados de demonstração eram a MESMA chave, e isso tornava o site
  * impossível de publicar: `NEXT_PUBLIC_SITE_IS_DEMO=false` era a única forma
@@ -160,6 +161,11 @@ export const areaNavigation = [
     label: "Cirurgia ortognática",
     href: "/cirurgia-ortognatica",
     hint: "Mordida que não encaixa · esforço para mastigar",
+  },
+  {
+    label: "Cirurgia de siso",
+    href: "/cirurgia-de-siso",
+    hint: "Inflamação que volta · dente incluso · dúvida no raio-X",
   },
 ];
 

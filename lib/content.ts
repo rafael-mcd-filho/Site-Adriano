@@ -447,10 +447,12 @@ export const treatments: Record<string, TreatmentContent> = {
     methodBody: [
       "O ponto de partida é a prótese de que você precisa para reabilitar os dentes. A partir da posição planejada para ela, o Dr. Adriano e seu dentista avaliam onde há suporte ósseo e o que precisaria ser reconstruído. Assim, cada etapa tem uma finalidade no tratamento.",
       "O exame da boca e a tomografia, quando indicada, mostram o volume e a forma do osso disponível. Se houver indicação de enxerto ou outra técnica reconstrutiva, a conversa inclui os materiais, a cicatrização, os riscos e o que precisa ser reavaliado antes dos implantes. Quando reconstruir não for adequado, outras formas de reabilitação entram no plano.",
+      "As técnicas variam com o tamanho do que falta. Perdas localizadas costumam ser tratadas com enxertos; perdas extensas — depois da remoção de uma lesão, de um trauma ou de reabsorções severas — podem exigir reconstrução avançada, inclusive técnicas microcirúrgicas, em que o tecido é transferido junto com o próprio suprimento de sangue. A mesma análise orienta a reabilitação de áreas da face com implantes, quando é disso que o caso precisa.",
     ],
     methodHighlight: "Quando reconstruir não for adequado, outras formas de reabilitação entram no plano",
     methodPoints: [
       "Volume ósseo disponível e região da perda.",
+      "Origem da perda: extração antiga, doença, trauma ou remoção de lesão.",
       "Posição e função da futura prótese.",
       "Condições dos tecidos, saúde geral e medicamentos.",
       "Etapas de reconstrução, cicatrização e reavaliação.",
@@ -507,6 +509,7 @@ export const treatments: Record<string, TreatmentContent> = {
       { question: "Vou ficar sem dentes durante as etapas?", answer: "As opções provisórias são analisadas conforme a área tratada e a necessidade de proteger a cicatrização. O que pode ser utilizado no seu caso deve ser discutido no planejamento." },
       { question: "Como é o desconforto e a recuperação?", answer: "Anestesia e cuidados após o procedimento fazem parte do plano. Pode haver dor, inchaço e restrições temporárias. A intensidade e o tempo de recuperação variam conforme a cirurgia e são discutidos antes da decisão." },
       { question: "Diabetes, pressão alta ou medicamentos interferem?", answer: "Podem influenciar os cuidados e a indicação. Informe seu histórico e todos os medicamentos em uso. Quando necessário, a avaliação é integrada ao médico que acompanha você." },
+      { question: "A perda veio de um trauma ou da remoção de uma lesão. Muda alguma coisa?", answer: "Muda a extensão do que precisa ser reconstruído e, com ela, as técnicas consideradas. Perdas amplas podem exigir reconstrução avançada, inclusive microcirúrgica, e a análise inclui os tecidos ao redor, a saúde geral e o que se pretende reabilitar." },
     ],
     closingTitle: "A dúvida sobre a falta de osso pode dar lugar a uma decisão mais clara.",
     closingText: "Agende uma avaliação para entender o que a perda óssea significa no seu caso. Vamos conversar sobre os caminhos de reabilitação que merecem ser considerados — e sobre os que não valem para você.",
@@ -838,6 +841,143 @@ export const treatments: Record<string, TreatmentContent> = {
   },
 
 
+  "cirurgia-de-siso": {
+    slug: "cirurgia-de-siso",
+    navLabel: "Cirurgia de siso",
+    eyebrow: "Cirurgia de siso em João Pessoa",
+    motif: "layers",
+    title: "Precisa mesmo tirar o siso?",
+    titleHighlight: "Precisa mesmo tirar",
+    intro:
+      "Nem todo siso precisa sair, e nem todo siso que sai é um caso simples. Um dente incluso perto do nervo, uma inflamação que volta ou uma raiz que encosta no canal da mandíbula mudam o preparo e os cuidados. A avaliação esclarece em qual dos dois grupos está o seu caso.",
+    heroBadges: ["Indicação avaliada caso a caso", "Casos de maior complexidade", "João Pessoa"],
+    primaryCta: "Quero saber se preciso tirar",
+    note: "Siso sem sintoma nem sempre precisa de cirurgia. A avaliação começa por essa pergunta.",
+
+    painKicker: "O que está acontecendo com o seu?",
+    painTitle: "Dor que volta, comida que entala, ou só a dúvida do raio-X.",
+    painItems: [
+      "A gengiva atrás do último dente incha e dói de tempos em tempos.",
+      "Comida entala sempre no mesmo lugar e a escova não alcança.",
+      "Você abre menos a boca ou sente a mandíbula travada quando inflama.",
+      "Não dói nada, mas apareceu no raio-X e disseram para tirar.",
+    ],
+    painIcons: ["duvida", "refeicao", "atividade", "camadas"],
+    storyEyebrow: "A pergunta que vem antes",
+    consequenceTitle: "A pergunta não é como tirar. É se precisa tirar",
+    consequenceText:
+      "Sisos sem sintoma, bem posicionados e possíveis de higienizar podem apenas ser acompanhados. Quando há infecção que repete, cárie que não dá para restaurar, dano ao dente vizinho ou uma lesão associada, a remoção passa a ser considerada. A diferença entre um caso e outro não está no incômodo de hoje: está no exame e na imagem.",
+
+    objectionsKicker: "O que costuma ser dito sobre siso",
+    objectionsTitle: "Quatro coisas que você provavelmente já ouviu.",
+    objections: [
+      { belief: "Todo mundo tem que tirar os quatro.", reality: "Não. A indicação é por dente, não por conjunto. Um siso pode precisar sair e o do outro lado não. Remover os quatro de uma vez é uma decisão de logística cirúrgica, tomada quando há indicação para todos eles." },
+      { belief: "Se não dói, posso deixar para sempre?", reality: "Pode acompanhar, que é diferente de esquecer. Sisos assintomáticos são reavaliados periodicamente com exame e imagem, porque a situação pode mudar. O que não se justifica é operar só porque o dente existe." },
+      { belief: "O siso empurra os dentes da frente e entorta tudo.", reality: "Essa relação é discutida há décadas e a evidência não sustenta o siso como causa principal do apinhamento. O motivo para remover precisa ser outro, e o seu ortodontista participa dessa conversa quando há tratamento em andamento." },
+      { belief: "Ouvi falar que pode dar dormência no lábio.", reality: "É um risco real e por isso ele é avaliado antes, não depois. Quando a raiz aparece próxima ao canal da mandíbula, a tomografia mostra a relação exata e o plano muda — inclusive para técnicas que deixam parte da raiz no lugar, quando essa for a conduta mais segura." },
+    ],
+
+    midCtaQuestion:
+      "O seu é um caso de acompanhar ou de remover? É essa a pergunta que a avaliação responde.",
+
+    methodEyebrow: "O que decide a conduta",
+    methodTitle: "A imagem decide mais do que o incômodo.",
+    methodTitleHighlight: "mais do que o incômodo",
+    methodBody: [
+      "A avaliação começa pelo que você sente e pelo que já aconteceu: quantas vezes inflamou, se há dor ao morder, se a região sangra ou se a comida se acumula ali. Isso situa o problema, mas não define a conduta sozinho.",
+      "A imagem é o que mostra a posição do dente, quanto osso o cobre, como as raízes se formaram e qual a relação com o canal onde passa o nervo da mandíbula ou com o seio maxilar, nos de cima. A radiografia panorâmica costuma bastar; a tomografia entra quando a raiz aparece próxima ao canal e essa distância precisa ser medida, não estimada.",
+      "Com isso na mesa, a conversa é sobre o que se ganha e o que se arrisca em cada caminho. Nem todo siso precisa sair, e quando precisa, o preparo muda conforme a dificuldade prevista: um dente irrompido e acessível não é o mesmo problema que um incluso profundo encostado no nervo.",
+    ],
+    methodHighlight: "Nem todo siso precisa sair",
+    methodPoints: [
+      "Histórico de inflamação, dor e dificuldade de higiene.",
+      "Posição do dente, formação das raízes e osso que o recobre.",
+      "Relação com o canal da mandíbula e com o seio maxilar.",
+      "Condição do dente vizinho e presença de lesão associada.",
+      "Saúde geral, medicamentos e tratamento ortodôntico em curso.",
+    ],
+    crossLink: { label: "Dor na mandíbula que não é do siso? Entenda DTM e ATM", href: "/cirurgia-atm" },
+
+    journey: {
+      kicker: "Como funciona",
+      title: "Do exame à volta à rotina.",
+      intro:
+        "A remoção de um siso costuma ser resolvida em uma sessão, com anestesia local. O que varia é o preparo antes e o cuidado depois, conforme a dificuldade do caso.",
+      steps: [
+        {
+          title: "1. Avaliação e imagem",
+          text: "Exame da região e radiografia. Se a raiz aparecer próxima ao canal da mandíbula, a tomografia mede essa relação antes de qualquer decisão.",
+        },
+        {
+          title: "2. O procedimento",
+          text: "Anestesia local, na maioria dos casos, em consultório. Você recebe antes as orientações sobre alimentação, medicação e o que esperar das primeiras horas.",
+        },
+        {
+          title: "3. Recuperação e retorno",
+          text: "Inchaço e desconforto costumam ser maiores nos dois ou três primeiros dias e diminuem na sequência. O retorno confere a cicatrização e libera a volta aos hábitos normais.",
+        },
+      ],
+    },
+
+    authorityBody:
+      "O Dr. Adriano atua na avaliação e no tratamento de alterações dos maxilares e da face. Nos sisos, sua participação costuma ser nos casos que o clínico prefere encaminhar: dentes inclusos profundos, raízes próximas ao canal da mandíbula, lesões associadas e situações em que o risco precisa ser medido antes de operar.",
+
+    consultationQuestions: [
+      consultaEncaminhamento,
+      {
+        question: "Preciso levar radiografia?",
+        answer:
+          "Se você já tem panorâmica ou tomografia, leve: elas adiantam a conversa. Se não tem, o exame começa pela região e a imagem necessária é solicitada na própria avaliação.",
+      },
+      {
+        question: "A consulta já marca a cirurgia?",
+        answer:
+          "Não. A avaliação define se há indicação de remover, e em muitos casos a conduta é acompanhar. Havendo indicação, as etapas, os riscos e os cuidados são explicados antes de você decidir.",
+      },
+      consultaParticular,
+    ],
+
+    preparation: {
+      title: "Para marcar, basta a dúvida.",
+      text: "Se você já tem uma radiografia, ela adianta a conversa. Se não tem, a avaliação começa pelo exame da região e pelo que você já sentiu ali.",
+    },
+    consultationTitle: "O que você sente, o que já inflamou e o que a imagem mostra.",
+    consultationIntro:
+      "A consulta reúne seu histórico com a região, o exame da boca e as imagens disponíveis. Quando a relação com o nervo precisa ser medida, a tomografia é solicitada antes de qualquer conduta.",
+    consultationOutcome:
+      "Se há indicação de remover ou de acompanhar, qual a dificuldade prevista, quais riscos existem no seu caso e como seria a recuperação. Quando a conduta for acompanhar, você sai sabendo o que observar.",
+    consultationNote: "Se está em tratamento ortodôntico, avise: o seu ortodontista participa dessa decisão.",
+
+    faqTitle: "Dor, inchaço, tempo de recuperação e riscos.",
+    faqs: [
+      { question: "Dói para tirar?", answer: "O procedimento é feito sob anestesia local e a região fica dormente. O desconforto aparece depois, quando a anestesia passa, e é controlado com a medicação orientada. A intensidade varia com a dificuldade do caso." },
+      { question: "Quantos dias de recuperação?", answer: "Inchaço e desconforto costumam ser maiores nos dois ou três primeiros dias e melhoram na sequência. O retorno às atividades depende do seu trabalho e da evolução; casos mais complexos pedem mais cuidado. Não existe prazo igual para todos." },
+      { question: "Dá para tirar os dois lados no mesmo dia?", answer: "Em alguns casos sim, quando há indicação para ambos e as condições permitem. A decisão pesa a dificuldade prevista, o tempo de procedimento e como você vai se alimentar nos primeiros dias." },
+      { question: "Quais são os riscos?", answer: "Podem ocorrer infecção, sangramento, alveolite, limitação temporária de abertura da boca e alteração de sensibilidade no lábio, na língua ou no queixo — geralmente temporária e, raramente, persistente. Nos sisos superiores, há ainda a relação com o seio maxilar. Os riscos do seu caso são discutidos antes da decisão." },
+      { question: "Posso tirar grávida ou tomando anticoagulante?", answer: "São situações que mudam o planejamento e às vezes o momento do procedimento. Informe a gestação, as condições de saúde e todos os medicamentos em uso; quando necessário, a conduta é alinhada com o médico que acompanha você." },
+    ],
+
+    closingTitle: "Antes de marcar a extração, vale saber se ela é necessária.",
+    closingText:
+      "Se o siso incomoda, se já inflamou mais de uma vez ou se apareceu numa radiografia e ficou a dúvida, a avaliação esclarece a indicação — inclusive quando ela for acompanhar em vez de operar.",
+
+    visualSummary: {
+      kicker: "Posição e risco",
+      title: "Medir a relação com o nervo antes de decidir.",
+      cues: ["Dente incluso", "Canal da mandíbula", "Osso que recobre"],
+    },
+    formQuestion: "Como podemos ajudar?",
+    formOptions: neutralFormOptions,
+    contactForm: {
+      title: "Converse sobre o seu siso.",
+      description: "Deixe seu nome e WhatsApp. A equipe explica como funciona a avaliação e qual imagem ajuda a analisar o seu caso.",
+    },
+    whatsappMessage: "Olá, vi a página sobre cirurgia de siso e gostaria de saber se preciso remover o meu.",
+    metadata: {
+      title: "Cirurgia de Siso em João Pessoa",
+      description: "Precisa mesmo tirar o siso? Entenda quando a remoção é indicada, quando acompanhar basta e como os casos próximos ao nervo são avaliados em João Pessoa.",
+    },
+  },
 };
 
 export const homeFormOptions = [

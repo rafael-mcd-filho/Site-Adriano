@@ -54,6 +54,12 @@ export const ogCards = {
     footer: "Entenda a indicação e a jornada com seu ortodontista",
     alt: "Cirurgia ortognática planejada em conjunto com a ortodontia",
   },
+  "cirurgia-de-siso": {
+    eyebrow: "CIRURGIA DE SISO",
+    title: "Precisa mesmo tirar o siso?",
+    footer: "Indicação avaliada caso a caso · João Pessoa",
+    alt: "Avaliação de cirurgia de siso em João Pessoa",
+  },
   sobre: {
     eyebrow: "DR. ADRIANO ROCHA GERMANO",
     title: "Cirurgião bucomaxilofacial em João Pessoa.",

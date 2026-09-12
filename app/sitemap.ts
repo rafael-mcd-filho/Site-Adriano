@@ -18,6 +18,7 @@ const routes: Array<{
   { path: "/reconstrucao-ossea", priority: 0.8, changeFrequency: "yearly" },
   { path: "/cirurgia-atm", priority: 0.8, changeFrequency: "yearly" },
   { path: "/cirurgia-ortognatica", priority: 0.8, changeFrequency: "yearly" },
+  { path: "/cirurgia-de-siso", priority: 0.8, changeFrequency: "yearly" },
   { path: "/para-dentistas", priority: 0.6, changeFrequency: "yearly" },
   /**
    * Página de confiança: indexável de propósito, para quem procura a política
