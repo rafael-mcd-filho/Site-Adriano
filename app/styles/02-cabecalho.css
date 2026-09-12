@@ -222,10 +222,79 @@
   color: var(--navy-900);
   font-size: var(--fs-sm);
   font-weight: 600;
+  gap: 14px;
 }
 
 .areas-popover a:hover,
 .areas-popover a.active {
   background: var(--surface);
   color: var(--blue-600);
+}
+
+/* O menu listava nomes de procedimento, e quem chega não sabe o nome do
+   procedimento. A segunda linha é o sintoma que fez a pessoa procurar: é ela
+   que faz o item ser reconhecido, não o rótulo clínico acima. */
+.popover-item {
+  display: grid;
+  min-width: 0;
+  gap: 2px;
+}
+
+.popover-item strong {
+  font-weight: 650;
+}
+
+.popover-item small {
+  color: var(--muted);
+  font-size: var(--fs-label);
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.areas-popover a:hover .popover-item small,
+.areas-popover a.active .popover-item small {
+  color: var(--blue-600);
+}
+
+.areas-popover a svg {
+  flex: 0 0 auto;
+  color: var(--muted-soft);
+}
+
+.areas-popover a:hover svg,
+.areas-popover a.active svg {
+  color: var(--blue-600);
+}
+
+/* Dentro de uma rota de tratamento o gatilho ficava aceso sem dizer qual. */
+.nav-current {
+  max-width: 15ch;
+  overflow: hidden;
+  color: var(--blue-600);
+  font-weight: 650;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Fora da pílula: público diferente, peso visual diferente. */
+.header-dentist {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  padding: 9px 12px;
+  border-radius: var(--radius-sm);
+  color: var(--muted);
+  font-family: var(--font-manrope), sans-serif;
+  font-size: var(--fs-fine);
+  font-weight: 650;
+  gap: 6px;
+  transition:
+    color 180ms ease,
+    background 180ms ease;
+}
+
+.header-dentist:hover,
+.header-dentist.active {
+  background: var(--surface-soft);
+  color: var(--navy-900);
 }

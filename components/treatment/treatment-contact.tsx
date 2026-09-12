@@ -1,6 +1,6 @@
 import { ContactForm } from "@/components/contact-form";
 import { WhatsAppButton } from "@/components/whatsapp-button";
-import type { TreatmentContent } from "@/lib/content";
+import { ctaLadder, type TreatmentContent } from "@/lib/content";
 
 /**
  * Bloco 8 — fechamento e ação.
@@ -9,7 +9,9 @@ import type { TreatmentContent } from "@/lib/content";
  * vida, não do procedimento. No meio da leitura esse tom soaria vago perto dos
  * blocos técnicos; aqui ele é o que faz decidir.
  *
- * WhatsApp primeiro, formulário depois — a mesma ordem do hero.
+ * WhatsApp primeiro, formulário depois — a mesma ordem do hero. O rótulo é o
+ * último degrau da escada: a esta altura a pessoa já sabe o que a avaliação é,
+ * então o botão pode dizer o que ela faz.
  */
 export function TreatmentContact({ content }: { content: TreatmentContent }) {
   return (
@@ -21,7 +23,7 @@ export function TreatmentContact({ content }: { content: TreatmentContent }) {
           <WhatsAppButton
             ctaId="cta-final-whatsapp"
             message={content.whatsappMessage}
-            label={content.primaryCta}
+            label={ctaLadder.consultation}
             className="button-whatsapp-solid"
           />
         </div>

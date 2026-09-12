@@ -3,28 +3,32 @@ import {
   BadgeCheck,
   Check,
   ChevronRight,
-  Handshake,
   MapPin,
   ShieldCheck,
 } from "lucide-react";
 import Link from "next/link";
-import { AudienceCards } from "@/components/audience-cards";
 import { ButtonContent } from "@/components/button-content";
 import { ContactForm } from "@/components/contact-form";
 import { DoctorPortrait } from "@/components/doctor-portrait";
-import { EditorialStory } from "@/components/editorial-story";
 import { FaqAccordion } from "@/components/faq-accordion";
 import { FloatingWhatsApp } from "@/components/floating-whatsapp";
+import { HeroBackdrop } from "@/components/hero-backdrop";
 import { JsonLd } from "@/components/json-ld";
 import { LocationSection } from "@/components/location-section";
 import { MotifThumb } from "@/components/motif-thumb";
+import { Reviews } from "@/components/reviews";
 import { TrustMarquee } from "@/components/trust-marquee";
 import { SectionWave } from "@/components/section-wave";
-import { SectionBackdrop } from "@/components/section-backdrop";
 import { WhatsAppButton } from "@/components/whatsapp-button";
-import { treatments } from "@/lib/content";
+import {
+  consultaEncaminhamento,
+  consultaParticular,
+  ctaLadder,
+  patientReviews,
+  treatments,
+} from "@/lib/content";
 import { faqSchema } from "@/lib/schema";
-import { siteConfig } from "@/lib/site";
+import { credentialFacts, siteConfig } from "@/lib/site";
 
 /**
  * Título, motivo visual e os três pontos de cada card vêm de `lib/content.ts`.
@@ -84,30 +88,70 @@ const areaCards: Array<{
 ];
 
 /**
- * Ordem deliberada: as cinco primeiras são as perguntas que travam o
- * agendamento. As clínicas vêm depois — quem chega decidido a marcar não
- * deveria rolar por seis respostas sobre diagnóstico para achar o horário.
+ * O que orienta uma decisão.
+ *
+ * Vive dentro do bloco de quem conduz a avaliação, e não numa seção própria de
+ * filosofia: credencial e critério respondem à mesma pergunta — "como esse
+ * profissional decide o que fazer?" — e separá-los produzia dois blocos
+ * grandes dizendo a mesma coisa em registros diferentes.
+ */
+const decisionCriteria = [
+  {
+    title: "Função antes de aparência",
+    text: "Mastigar, respirar, falar e se mover sem dor são o que a avaliação procura entender primeiro.",
+  },
+  {
+    title: "Indicação, não protocolo",
+    text: "O que vale para um caso não vale para todos. A conduta vem do que o exame e os exames mostram.",
+  },
+  {
+    title: "Alternativas explicadas",
+    text: "As opções são apresentadas com o que se espera de cada uma, inclusive as que não envolvem cirurgia.",
+  },
+  {
+    title: "Riscos ditos antes",
+    text: "Benefícios esperados, riscos e limites fazem parte da conversa antes de qualquer decisão sua.",
+  },
+  {
+    title: "Não operar também é conduta",
+    text: "Quando não há indicação cirúrgica, isso é dito com o motivo — e o cuidado segue por outro caminho.",
+  },
+];
+
+/**
+ * As quatro dúvidas que decidem o agendamento ficam ABERTAS, dentro da seção
+ * da primeira consulta. Estavam no acordeão, e acordeão fechado é conteúdo
+ * invisível: quem não clica não lê justamente o que o faria marcar.
+ */
+const consultationQuestions = [
+  consultaEncaminhamento,
+  {
+    question: "Preciso chegar com exames em mãos?",
+    answer:
+      "Não. Os exames que você já tem adiantam a conversa. Os que faltarem são solicitados depois da avaliação, e apenas quando acrescentam informação ao seu caso.",
+  },
+  {
+    question: "A consulta já define uma cirurgia?",
+    answer:
+      "Não. A avaliação serve para compreender a queixa, investigar as causas e discutir possibilidades. Dependendo do diagnóstico, o cuidado pode ser conservador ou envolver outros profissionais. A cirurgia só é considerada quando há indicação.",
+  },
+  consultaParticular,
+];
+
+/**
+ * Dúvidas RESIDUAIS. As que travam a decisão subiram para a seção da primeira
+ * consulta; o que sobrou aqui é logística de quem já decidiu procurar.
  */
 const homeFaqs = [
   {
     question: "Como faço para agendar uma avaliação?",
     answer:
-      "Pelo WhatsApp ou pelo formulário no fim desta página. A equipe responde em horário comercial, explica como funciona a avaliação e orienta o que levar na primeira consulta.",
+      "Pelo WhatsApp ou pelo formulário nesta página. A equipe responde em horário comercial, explica como funciona a avaliação e orienta o que levar na primeira consulta.",
   },
   {
-    question: "O atendimento é por convênio ou particular?",
+    question: "Onde e em que horários acontece o atendimento?",
     answer:
-      "O atendimento é particular, sem convênios. A equipe informa o valor da consulta antes do agendamento. Os custos de um eventual tratamento dependem das etapas propostas após a avaliação e são apresentados antes da sua decisão.",
-  },
-  {
-    question: "Onde acontece o atendimento?",
-    answer:
-      "Em João Pessoa, PB. Confirme o endereço e as orientações de chegada com a equipe no agendamento.",
-  },
-  {
-    question: "Qual é o horário de atendimento?",
-    answer:
-      "A equipe responde em horário comercial. Pelo WhatsApp ou formulário, você pode consultar os dias e horários disponíveis para atendimento.",
+      "Em João Pessoa, PB, em horário comercial. Confirme o endereço, os dias disponíveis e as orientações de chegada com a equipe no agendamento.",
   },
   {
     question: "Existe avaliação online?",
@@ -118,16 +162,6 @@ const homeFaqs = [
     question: "O que trata um cirurgião buco-maxilo-facial?",
     answer:
       "O especialista cuida de alterações dos maxilares, da face e da articulação da mandíbula. Dor ou travamento ao abrir a boca, dentes ausentes e mordida que não encaixa estão entre os motivos para buscar avaliação. Alguns casos de apneia também podem precisar da participação desse profissional.",
-  },
-  {
-    question: "Toda avaliação resulta em cirurgia?",
-    answer:
-      "Não. A avaliação serve para compreender as queixas, investigar as causas e discutir possibilidades. Dependendo do diagnóstico, o cuidado pode ser conservador ou envolver outros profissionais. A cirurgia só é considerada quando há indicação.",
-  },
-  {
-    question: "É necessário encaminhamento de outro dentista?",
-    answer:
-      "Nem sempre. O paciente pode solicitar uma avaliação diretamente. Quando já existe acompanhamento, a comunicação entre profissionais ajuda a integrar o cuidado.",
   },
   {
     question: "O formulário confirma um horário?",
@@ -142,15 +176,17 @@ export default function Home() {
 
   return (
     <>
-      <JsonLd data={faqSchema(homeFaqs)} />
+      <JsonLd data={faqSchema([...consultationQuestions, ...homeFaqs])} />
 
       <main data-rota="home">
-        {/* A raiz é onde a identidade profissional completa fica apresentada:
-            nome, especialidade e registro visíveis já na primeira dobra. Numa
-            marca pessoal o rosto é o ativo de conversão, não uma ilustração. */}
-        <section className="home-hero">
+        {/* Bloco 1 — quem atende e o que ele faz, respondido de uma vez: a
+            identidade completa, a credencial verificável e os dois caminhos de
+            ação na mesma dobra. Numa marca pessoal o rosto é o ativo de
+            conversão, não uma ilustração. */}
+        <section className="home-hero photo-hero">
+          <HeroBackdrop page="home" />
           <div className="container home-hero-grid">
-            <div className="home-hero-copy page-enter">
+            <div className="home-hero-copy hero-photo-copy page-enter">
               <span className="eyebrow">
                 {siteConfig.specialty} · {siteConfig.city}
               </span>
@@ -214,60 +250,11 @@ export default function Home() {
           </div>
         </section>
 
-        <TrustMarquee
-          items={[
-            "Avaliação antes da indicação",
-            "Opções explicadas com clareza",
-            "Planejamento com seu dentista",
-            "Certificação Board (FBCOMS)",
-          ]}
-        />
+        <TrustMarquee items={credentialFacts} />
 
-        {/* Sobe da quinta para a segunda posição: o site é dele, e quem chega
-            por indicação ou por busca de nome vem verificar quem é. */}
-        <section className="section about-section section-soft-edge section-with-wave" id="sobre">
-          <div className="container about-grid">
-            <DoctorPortrait variant="authority" />
-            <div className="about-copy">
-              <span className="section-kicker light">Quem conduz a avaliação</span>
-              <h2>
-                Ser ouvido faz parte de ser bem cuidado.
-              </h2>
-              <p>
-                Talvez você já tenha tentado aliviar o incômodo ou recebido
-                opiniões diferentes. A consulta com o Dr. Adriano começa pela
-                sua história: o que dói, o que você deixou de fazer e o que
-                espera melhorar.
-              </p>
-              <p>
-                A investigação reúne exame clínico e, quando necessários,
-                exames complementares. As opções são discutidas com seus
-                benefícios, limites e cuidados para que você participe da
-                decisão. Se já existe outro profissional acompanhando o caso,
-                o planejamento considera esse cuidado.
-              </p>
-              <ul className="credential-list">
-                {siteConfig.credentials.map((credential) => (
-                  <li key={credential}>
-                    <BadgeCheck size={18} aria-hidden="true" />
-                    {credential}
-                  </li>
-                ))}
-              </ul>
-              <p>{siteConfig.boardContext}</p>
-              <p>
-                <a className="text-link light-link" href={siteConfig.boardCertificate} target="_blank" rel="noopener noreferrer">
-                  Ver certificado do Board (2026)
-                </a>
-              </p>
-              <Link className="text-link light-link" href="#areas">
-                Ver as áreas de atuação <ArrowRight size={16} aria-hidden="true" />
-              </Link>
-            </div>
-          </div>
-          <SectionWave from="transparent" to="var(--white)" flip />
-        </section>
-
+        {/* Bloco 2 — roteamento. É o trabalho principal da home, e por isso
+            vem antes da biografia: quem chega por sintoma ou por anúncio
+            precisa achar a própria condição, não a trajetória do profissional. */}
         <section className="section areas-section" id="areas">
           <div className="container">
             <div className="section-heading split-heading">
@@ -325,31 +312,57 @@ export default function Home() {
           </div>
         </section>
 
-        <EditorialStory
-          id="sua-rotina"
-          title="O que faz falta na sua rotina merece espaço na consulta."
-          description="Conte o que você evita, o que já tentou e o que gostaria de retomar. Esse é o ponto de partida para investigar seu caso e conversar sobre as possibilidades de cuidado."
-          href="#processo"
-        />
-
-        <section className="section audience-section" id="publicos">
-          <div className="container">
-            <div className="section-heading centered-heading">
-              <span className="pill-badge">
-                <Handshake size={13} aria-hidden="true" />
-                Para quem atendemos
-              </span>
-              <h2>Uma dúvida sua. Um caso do seu paciente.</h2>
+        {/* Bloco 3 — quem conduz E como decide, juntos. O currículo completo
+            fica em /sobre: a home apresenta o profissional, não conta a
+            trajetória inteira. */}
+        <section className="section about-section section-soft-edge section-with-wave" id="sobre">
+          <div className="container about-grid">
+            <DoctorPortrait variant="authority" />
+            <div className="about-copy">
+              <span className="section-kicker light">Quem conduz a avaliação</span>
+              <h2>{siteConfig.fullName}</h2>
+              <p className="authority-role">
+                {siteConfig.specialty} · {siteConfig.registry}
+              </p>
+              <ul className="credential-list">
+                {siteConfig.credentials.map((credential) => (
+                  <li key={credential}>
+                    <BadgeCheck size={18} aria-hidden="true" />
+                    {credential}
+                  </li>
+                ))}
+              </ul>
+              <p>{siteConfig.boardContext}</p>
               <p>
-                Escolha o caminho para conversar com a equipe, seja para buscar
-                cuidado ou discutir um encaminhamento.
+                A consulta começa pela sua história: o que dói, o que você
+                deixou de fazer e o que espera melhorar. A investigação reúne
+                exame clínico e, quando necessários, exames complementares.
+              </p>
+
+              <ul className="decision-criteria">
+                {decisionCriteria.map((item) => (
+                  <li key={item.title}>
+                    <strong>{item.title}</strong>
+                    <span>{item.text}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <p className="authority-links">
+                <a className="text-link light-link" href={siteConfig.boardCertificate} target="_blank" rel="noopener noreferrer">
+                  Ver certificado do Board (2026)
+                </a>
+                <Link className="text-link light-link" href="/sobre">
+                  Conhecer a formação completa <ArrowRight size={16} aria-hidden="true" />
+                </Link>
               </p>
             </div>
-
-            <AudienceCards />
           </div>
+          <SectionWave from="transparent" to="var(--sand-100)" flip />
         </section>
 
+        {/* Bloco 4 — processo e as quatro dúvidas que decidem o agendamento,
+            na mesma seção. Eram três blocos: processo, objeções e FAQ. */}
         <section className="section consultation-section" id="processo">
           <div className="container">
             <div className="section-heading centered-heading">
@@ -380,32 +393,32 @@ export default function Home() {
                 </p>
               </article>
             </div>
+
+            <dl className="open-questions">
+              {consultationQuestions.map((item) => (
+                <div key={item.question}>
+                  <dt>{item.question}</dt>
+                  <dd>{item.answer}</dd>
+                </div>
+              ))}
+            </dl>
           </div>
         </section>
 
-        <section className="section faq-section section-with-wave" id="duvidas">
-          <SectionBackdrop />
-          <div className="container faq-layout">
-            <div className="section-heading centered-heading">
-              <span className="pill-badge">Dúvidas frequentes</span>
-              <h2>As perguntas que costumam vir antes de marcar.</h2>
-            </div>
-
-            <FaqAccordion items={homeFaqs} />
-
-            <div className="faq-foot">
-              <p>Não encontrou sua dúvida?</p>
-              <WhatsAppButton
-                ctaId="cta-duvidas-whatsapp"
-                message="Olá, tenho uma dúvida que não encontrei no site."
-                label="Perguntar pelo WhatsApp"
-                className="button-whatsapp-solid"
+        {/* Bloco 5 — prova social. Sem relato aprovado, não renderiza: o
+            espaço vazio é preferível ao depoimento inventado. */}
+        {Boolean(patientReviews.length) && (
+          <section className="section reviews-section" id="avaliacoes">
+            <div className="container">
+              <Reviews
+                items={patientReviews}
+                title="O que os pacientes dizem sobre o atendimento"
               />
             </div>
-          </div>
-          <SectionWave from="transparent" to="var(--navy-950)" />
-        </section>
+          </section>
+        )}
 
+        {/* Bloco 6 — contato e o que sobrou de dúvida. */}
         <section className="section contact-section" id="contato">
           <div className="container">
             <div className="closing-copy">
@@ -419,7 +432,7 @@ export default function Home() {
               <WhatsAppButton
                 ctaId="cta-final-whatsapp"
                 message={whatsappMessage}
-                label="Quero entender meu caso"
+                label={ctaLadder.consultation}
                 className="button-whatsapp-solid"
               />
             </div>
@@ -431,9 +444,25 @@ export default function Home() {
               title="Vamos começar pela sua dúvida."
               description="Deixe seu contato para saber como agendar. A equipe responde pelo WhatsApp em horário comercial; os detalhes clínicos ficam para a consulta."
             />
+
+            <div className="closing-faq" id="duvidas">
+              <h2>Dúvidas que costumam sobrar.</h2>
+              <FaqAccordion items={homeFaqs} />
+            </div>
+
+            <p className="closing-dentist">
+              É dentista e quer discutir um caso?{" "}
+              <Link className="text-link light-link" href="/para-dentistas">
+                Conheça o canal profissional
+                <ArrowRight size={15} aria-hidden="true" />
+              </Link>
+            </p>
           </div>
         </section>
 
+        {/* Bloco 7 — onde isso acontece. Fecha a página: quem decidiu marcar
+            sai daqui com endereço, horário e como chegar, e quem ainda não
+            decidiu não precisa rolar por isso para chegar ao contato. */}
         <LocationSection />
       </main>
 

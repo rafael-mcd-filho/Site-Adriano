@@ -1,23 +1,29 @@
 import Link from "next/link";
 import { ArrowRight, Check } from "lucide-react";
 import { Highlight } from "@/components/highlight";
+import { ObjectionList } from "@/components/objection-list";
 import { VisualMotif } from "@/components/visual-motif";
-import type { TreatmentContent } from "@/lib/content";
+import { WhatsAppButton } from "@/components/whatsapp-button";
+import { ctaLadder, type TreatmentContent } from "@/lib/content";
 
 /**
- * Bloco 4 — a solução do PAS.
+ * "Como avaliamos e decidimos o caminho" — a seção principal da página.
  *
- * É aqui que o motivo visual vive agora. No hero ele era decoração ao lado da
- * manchete; nesta seção ele ilustra exatamente o que o texto está explicando,
- * que é onde ele sempre funcionou melhor.
+ * Eram duas: método e objeções. Separadas, respondiam à mesma pergunta por
+ * caminhos diferentes — o que é analisado, e por que o que a pessoa já ouviu
+ * não encerra o assunto. Juntas, o raciocínio aparece inteiro: primeiro o
+ * critério, depois o que ele desfaz.
  *
- * Este bloco substitui o "mecanismo único" das páginas de venda de produto:
- * em cirurgia, o diferencial legítimo é o método de diagnóstico, não um
- * mecanismo de marca inventado.
+ * O CTA intermediário fecha o bloco porque é aqui que a compreensão é maior e
+ * a ansiedade, menor. Antes desta mudança havia botão no hero e só voltava a
+ * haver sete telas adiante, na primeira consulta.
  */
-export function TreatmentMethod({ content }: { content: TreatmentContent }) {
+export function TreatmentDecision({ content }: { content: TreatmentContent }) {
   return (
-    <section className="section section-mist method-section">
+    <section
+      className="section section-mist method-section decision-section"
+      id="avaliacao"
+    >
       <div className="container method-grid">
         <div className="method-copy">
           <span className="section-kicker">{content.methodEyebrow}</span>
@@ -60,6 +66,23 @@ export function TreatmentMethod({ content }: { content: TreatmentContent }) {
           type={content.motif}
           label={content.navLabel}
           summary={content.visualSummary}
+        />
+      </div>
+
+      {/* Segunda metade do mesmo raciocínio: o que a avaliação responde às
+          conclusões que a pessoa já trouxe de outro lugar. */}
+      <div className="container decision-objections">
+        <h3>{content.objectionsTitle}</h3>
+        <ObjectionList items={content.objections} />
+      </div>
+
+      <div className="container decision-cta">
+        <p>{content.midCtaQuestion}</p>
+        <WhatsAppButton
+          ctaId="cta-metodo-whatsapp"
+          message={content.whatsappMessage}
+          label={ctaLadder.method}
+          className="button-whatsapp-solid"
         />
       </div>
     </section>

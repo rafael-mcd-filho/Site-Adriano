@@ -1,0 +1,27 @@
+/* Rota /sobre. Todo seletor começa em [data-rota="sobre"].
+   Fatia de globals.css — a ordem dos @import lá é significativa. */
+
+/* O hero desta rota não tem motivo visual: quem chega aqui veio ver a pessoa,
+   não a condição. Sem a ilustração, o fundo precisa vir daqui — os heros de
+   tratamento herdam o deles de 05-temas-por-motivo.css. */
+[data-rota="sobre"] .about-hero {
+  background:
+    radial-gradient(circle at 88% 12%, rgba(var(--blue-400-rgb), 0.16), transparent 42%),
+    var(--ivory);
+}
+
+/* O certificado aparece sobre o navy da explicação do Board, e não sobre o
+   cinza da seção de autoridade: a legenda precisa do contraste invertido. */
+[data-rota="sobre"] .method-section .certificate-caption {
+  color: #c5d0dd;
+}
+
+[data-rota="sobre"] .method-section .certificate-preview span {
+  color: var(--blue-200);
+}
+
+/* A seção de atuação usa o cinza da autoridade, mas sem a grade de duas
+   colunas dela: aqui são três cartões lado a lado. */
+[data-rota="sobre"] .authority-section .section-heading {
+  max-width: 62ch;
+}

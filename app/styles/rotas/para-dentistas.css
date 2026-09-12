@@ -16,10 +16,8 @@
  * aqui: mova para o arquivo dono em app/styles/.
  */
 
-/* Esta rota não tem o bloco editorial com foto entre "casos que chegam" e
-   "antes de encaminhar", então as duas caem brancas em sequência. O degrau de
-   areia separa as duas sem mexer nas páginas de tratamento, onde a foto já faz
-   esse trabalho. */
-[data-rota="para-dentistas"] .objections-section {
-  background: var(--sand-100);
-}
+/* A seção de objeções deixou de existir nesta rota: o que precisa ficar
+   claro entre os profissionais virou um sub-bloco dentro de escopo e
+   devolutiva, que já é a pergunta que ela respondia. O ritmo de superfícies
+   passou a ser resolvido pela ordem das seções — branco, navy, areia, branco,
+   navy —, sem precisar de degrau extra aqui. */

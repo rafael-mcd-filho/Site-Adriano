@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import {
+  ArrowRight,
+  BadgeCheck,
   Check,
   CircleHelp,
   Clock8,
@@ -13,17 +15,20 @@ import Link from "next/link";
 import { ButtonContent } from "@/components/button-content";
 import { ContactForm } from "@/components/contact-form";
 import { DoctorPortrait } from "@/components/doctor-portrait";
-import { FaqSection } from "@/components/faq-section";
+import { FaqAccordion } from "@/components/faq-accordion";
 import { FloatingWhatsApp } from "@/components/floating-whatsapp";
+import { HeroBackdrop } from "@/components/hero-backdrop";
 import { JsonLd } from "@/components/json-ld";
 import { ObjectionList } from "@/components/objection-list";
 import { PainList } from "@/components/pain-list";
+import { Reviews } from "@/components/reviews";
 import { SectionWave } from "@/components/section-wave";
 import { TrustMarquee } from "@/components/trust-marquee";
 import { WhatsAppButton } from "@/components/whatsapp-button";
+import { colleagueReviews } from "@/lib/content";
 import { pageMetadata } from "@/lib/metadata";
 import { breadcrumbSchema, faqSchema } from "@/lib/schema";
-import { siteConfig } from "@/lib/site";
+import { credentialFacts, siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = pageMetadata({
   title: "Encaminhamento para Cirurgia Buco-Maxilo-Facial",
@@ -45,6 +50,59 @@ const painItems = [
   "Você precisa esclarecer a indicação antes de orientar o paciente.",
 ];
 
+const cases = [
+  "Implantes complexos e reconstrução óssea.",
+  "Cirurgia e prótese de articulação temporomandibular.",
+  "Cirurgia ortognática em conjunto com a sua ortodontia.",
+  "Avaliação de apneia com componente esquelético.",
+  "Casos buco-maxilo-faciais que pedem discussão antes da conduta.",
+];
+
+/**
+ * Escopo, em duas colunas explícitas.
+ *
+ * O que mais tranquiliza um clínico não é o que o cirurgião faz — é o que ele
+ * NÃO faz. Isso estava implícito em "planejamento com seu dentista", e
+ * implícito não tranquiliza ninguém que teme perder o paciente.
+ */
+const scope = {
+  mine: [
+    "Avaliação buco-maxilo-facial e definição da indicação cirúrgica.",
+    "Reconstrução óssea e a etapa cirúrgica dos implantes.",
+    "Procedimentos na ATM, dos minimamente invasivos à prótese articular.",
+    "Cirurgia ortognática e o acompanhamento pós-operatório dela.",
+  ],
+  yours: [
+    "A reabilitação protética e a escolha da prótese.",
+    "A condução ortodôntica, antes e depois da etapa cirúrgica.",
+    "O acompanhamento clínico e preventivo de rotina.",
+    "A relação com o paciente, que continua sendo sua.",
+  ],
+};
+
+/**
+ * Devolutiva descrita como PROCESSO, não como promessa.
+ *
+ * A frase "seu paciente continua sendo seu" foi removida numa revisão
+ * anterior, com razão: era um compromisso sobre comportamento futuro que o
+ * site não pode garantir. O que ocupa o lugar dela não é outra promessa — é o
+ * que efetivamente se combina, que o colega pode conferir na primeira conversa.
+ */
+const handback = [
+  {
+    title: "O que é comunicado",
+    text: "Os achados da avaliação, a conduta proposta ou realizada, os cuidados necessários e a orientação para a etapa seguinte do seu plano.",
+  },
+  {
+    title: "Quando",
+    text: "Depois da avaliação, e novamente ao fim da etapa cirúrgica. Prazos e marcos são combinados no primeiro contato, conforme o caso.",
+  },
+  {
+    title: "Por qual canal",
+    text: "Pelo canal profissional combinado entre os dois. Dados que identifiquem o paciente não circulam por canais abertos.",
+  },
+];
+
 /** Objeções reais ao encaminhamento, sem prometer controle sobre o paciente. */
 const objections = [
   {
@@ -62,14 +120,6 @@ const objections = [
     reality:
       "Encaminhar para avaliação não pressupõe operar. Os achados podem indicar novas investigações, cuidado conservador ou uma revisão conjunta da sequência proposta.",
   },
-];
-
-const cases = [
-  "Implantes complexos e reconstrução óssea.",
-  "Cirurgia e prótese de articulação temporomandibular.",
-  "Cirurgia ortognática em conjunto com a sua ortodontia.",
-  "Avaliação de apneia com componente esquelético.",
-  "Casos buco-maxilo-faciais que pedem discussão antes da conduta.",
 ];
 
 const flow: Array<{ title: string; text: string; icon: typeof Send }> = [
@@ -95,26 +145,17 @@ const flow: Array<{ title: string; text: string; icon: typeof Send }> = [
   },
 ];
 
+/** Dúvidas residuais: escopo e devolutiva já estão abertos acima. */
 const professionalFaqs = [
   {
-    question: "Como fica o acompanhamento que já realizo?",
+    question: "Posso discutir um caso antes de encaminhar?",
     answer:
-      "O encaminhamento leva em conta o tratamento que você já conduz. No contato profissional, apresente o plano em andamento para alinhar a participação especializada e a continuidade do acompanhamento. O paciente participa das decisões sobre o próprio cuidado.",
+      "Sim. O primeiro contato pode ser para esclarecer a dúvida e orientar o encaminhamento. Não é necessário chegar com uma conduta fechada; a avaliação do paciente poderá ser necessária para defini-la.",
   },
   {
     question: "E se os achados mudarem a conduta?",
     answer:
       "Novos achados podem exigir revisão do plano. A comunicação entre os profissionais ajuda a alinhar as mudanças e as orientações ao paciente, considerando as condições clínicas e a segurança do atendimento.",
-  },
-  {
-    question: "Quais informações de retorno devo combinar?",
-    answer:
-      "Vale alinhar desde o encaminhamento os achados da avaliação, a conduta proposta ou realizada, os cuidados necessários e a orientação para a etapa seguinte. Combine também como essas informações serão compartilhadas.",
-  },
-  {
-    question: "Posso discutir um caso antes de encaminhar?",
-    answer:
-      "Sim. O primeiro contato pode ser para esclarecer a dúvida e orientar o encaminhamento. Não é necessário chegar com uma conduta fechada; a avaliação do paciente poderá ser necessária para defini-la.",
   },
   {
     question: "Como fica a parte financeira?",
@@ -128,6 +169,13 @@ const professionalFaqs = [
   },
 ];
 
+/**
+ * Sete blocos. A autoridade técnica sobe para logo depois das situações
+ * clínicas: o colega decide pela formação antes de se preocupar com o
+ * processo. Escopo e devolutiva entram na mesma seção porque respondem à mesma
+ * insegurança — o que acontece com o paciente dele e com a participação dele
+ * no caso.
+ */
 export default function ParaDentistasPage() {
   return (
     <>
@@ -139,9 +187,10 @@ export default function ParaDentistasPage() {
       />
 
       <main data-rota="para-dentistas">
-        <section className="dentist-hero section-soft-edge">
+        <section className="dentist-hero section-soft-edge photo-hero">
+          <HeroBackdrop page="para-dentistas" />
           <div className="container dentist-hero-grid">
-            <div className="page-enter">
+            <div className="hero-photo-copy page-enter">
               <span className="eyebrow">Canal profissional</span>
               <h1>
                 A etapa cirúrgica precisa avançar.{" "}
@@ -198,15 +247,10 @@ export default function ParaDentistasPage() {
           </div>
         </section>
 
-        <TrustMarquee
-          items={[
-            "Discussão de casos",
-            "Planejamento conjunto",
-            "Informações de retorno alinhadas",
-            "Continuidade do acompanhamento",
-          ]}
-        />
+        <TrustMarquee items={credentialFacts} />
 
+        {/* 2 — quando faz sentido conversar: as situações e os tipos de caso
+            no mesmo bloco, porque respondem juntos a "isso é para mim?". */}
         <section className="section section-white pain-section">
           <div className="container">
             <div className="section-heading">
@@ -215,6 +259,18 @@ export default function ParaDentistasPage() {
             </div>
 
             <PainList items={painItems} />
+
+            <div className="case-block">
+              <h3>Os casos que costumam chegar aqui</h3>
+              <ul className="case-list">
+                {cases.map((item) => (
+                  <li key={item}>
+                    <Check size={17} aria-hidden="true" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
 
             <aside className="consequence-panel">
               <span className="consequence-icon" aria-hidden="true">
@@ -233,72 +289,104 @@ export default function ParaDentistasPage() {
           </div>
         </section>
 
-        <section className="section objections-section">
-          <div className="container">
-            <div className="section-heading">
-              <span className="section-kicker">Antes do encaminhamento</span>
-              <h2>O que precisa ficar claro entre os profissionais.</h2>
-            </div>
+        <SectionWave to="var(--navy-800)" />
 
-            <ObjectionList items={objections} />
-          </div>
-        </section>
-
-        {/* Sai da areia das objeções desta rota, não do branco. */}
-        <SectionWave from="var(--sand-100)" />
-        <section className="section section-mist method-section">
-          <div className="container professional-grid">
-            <div>
-              <span className="section-kicker">Atuação conjunta</span>
-              <h2>A cirurgia faz parte de um cuidado que já começou.</h2>
-              <p>
-                O histórico, os exames e o objetivo do encaminhamento dão
-                contexto à avaliação. Esse diálogo aproxima a etapa
-                especializada do plano restaurador, ortodôntico ou clínico
-                que o paciente já segue.
-              </p>
-            </div>
-            <ul className="case-list">
-              {cases.map((item) => (
-                <li key={item}>
-                  <Check size={17} aria-hidden="true" />
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
-
-        <SectionWave from="var(--navy-800)" to="var(--surface)" flip />
-        <section className="section authority-section">
-          <div className="container authority-grid">
-            <DoctorPortrait variant="authority" />
-            <div className="authority-copy">
-              <span className="section-kicker light">Com quem discutir o caso</span>
+        {/* 3 — autoridade técnica, em registro de colega: formação e banca
+            antes de qualquer explicação de processo. */}
+        <section className="section section-mist method-section" id="formacao">
+          <div className="container method-grid">
+            <div className="method-copy">
+              <span className="section-kicker">Com quem discutir o caso</span>
               <h2>{siteConfig.fullName}</h2>
               <p className="authority-role">
                 {siteConfig.specialty} · {siteConfig.registry}
               </p>
-              <ul className="authority-credentials">
+              <ul className="method-points">
                 {siteConfig.credentials.map((credential) => (
                   <li key={credential}>
-                    <Handshake size={17} aria-hidden="true" />
+                    <BadgeCheck size={16} aria-hidden="true" />
                     {credential}
                   </li>
                 ))}
               </ul>
-              <p>
-                Atuação em cirurgia buco-maxilo-facial, em {siteConfig.city}.
-              </p>
               <p>{siteConfig.boardContext}</p>
-              <a className="text-link light-link" href={siteConfig.boardCertificate} target="_blank" rel="noopener noreferrer">
-                Ver certificado do Board (2026)
-              </a>
+              <p>
+                O histórico, os exames e o objetivo do encaminhamento dão
+                contexto à avaliação. Esse diálogo aproxima a etapa
+                especializada do plano restaurador, ortodôntico ou clínico que
+                o paciente já segue.
+              </p>
+              <p className="authority-links">
+                <a className="text-link" href={siteConfig.boardCertificate} target="_blank" rel="noopener noreferrer">
+                  Ver certificado do Board (2026)
+                </a>
+                <Link className="text-link" href="/sobre">
+                  Formação completa <ArrowRight size={16} aria-hidden="true" />
+                </Link>
+              </p>
+            </div>
+
+            <DoctorPortrait variant="authority" />
+          </div>
+        </section>
+
+        <SectionWave from="var(--navy-800)" to="var(--sand-100)" flip />
+
+        {/* 4 — escopo e devolutiva. A insegurança é uma só: o que acontece com
+            o paciente dele e com a participação dele no caso. */}
+        <section className="section journey-section" id="escopo">
+          <div className="container">
+            <div className="section-heading centered-heading">
+              <span className="pill-badge">Escopo e devolutiva</span>
+              <h2>O que eu conduzo, o que continua com você.</h2>
+            </div>
+
+            <div className="scope-grid">
+              <article>
+                <h3>O que o Dr. Adriano conduz</h3>
+                <ul className="case-list">
+                  {scope.mine.map((item) => (
+                    <li key={item}>
+                      <Check size={17} aria-hidden="true" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </article>
+              <article>
+                <h3>O que permanece com você</h3>
+                <ul className="case-list">
+                  {scope.yours.map((item) => (
+                    <li key={item}>
+                      <Check size={17} aria-hidden="true" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            </div>
+
+            <div className="handback">
+              <h3>Como a devolutiva é combinada</h3>
+              <dl className="open-questions">
+                {handback.map((item) => (
+                  <div key={item.title}>
+                    <dt>{item.title}</dt>
+                    <dd>{item.text}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+
+            <div className="objections-inline">
+              <h3>O que precisa ficar claro entre os profissionais</h3>
+              <ObjectionList items={objections} />
             </div>
           </div>
         </section>
 
-        <section className="section consultation-section">
+        {/* 5 — fluxo. */}
+        <section className="section consultation-section" id="fluxo">
           <div className="container">
             <div className="section-heading centered-heading">
               <span className="pill-badge">O fluxo</span>
@@ -326,18 +414,21 @@ export default function ParaDentistasPage() {
           </div>
         </section>
 
-        <FaqSection
-          items={professionalFaqs}
-          badge="Dúvidas profissionais"
-          title="Dúvidas antes do primeiro encaminhamento."
-          subtitle="As informações clínicas detalhadas são discutidas em canal adequado."
-          footText="Quer conversar sobre um possível encaminhamento?"
-          ctaId="cta-duvidas-dentistas-whatsapp"
-          whatsappMessage={whatsappMessage}
-          whatsappLabel="Discutir um caso"
-          id="duvidas-profissionais"
-        />
+        {/* 6 — confiança entre colegas. Relato de colega não envolve dado de
+            saúde e é a prova mais eficiente desta página. Sem material
+            autorizado, não renderiza. */}
+        {Boolean(colleagueReviews.length) && (
+          <section className="section reviews-section" id="colegas">
+            <div className="container">
+              <Reviews
+                items={colleagueReviews}
+                title="O que dizem os profissionais que encaminham"
+              />
+            </div>
+          </section>
+        )}
 
+        {/* 7 — dúvidas residuais e contato, juntos. */}
         <section className="section contact-section" id="contato">
           <div className="container">
             <div className="closing-copy">
@@ -362,6 +453,17 @@ export default function ParaDentistasPage() {
               title="Inicie uma conversa sobre o caso."
               description="Informe seu nome, WhatsApp e o objetivo do contato. Não envie dados identificáveis do paciente pelo formulário."
             />
+
+            <div className="closing-faq" id="duvidas-profissionais">
+              <h2>Dúvidas antes do primeiro encaminhamento.</h2>
+              <FaqAccordion items={professionalFaqs} />
+            </div>
+
+            <p className="closing-dentist">
+              <Handshake size={16} aria-hidden="true" />
+              As informações clínicas detalhadas são discutidas em canal
+              adequado, nunca por mensagem aberta.
+            </p>
           </div>
         </section>
       </main>

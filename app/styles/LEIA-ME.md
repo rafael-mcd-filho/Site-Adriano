@@ -43,11 +43,20 @@ A escala, da paleta de `01-tokens-e-base.css`:
 
 | Papel | Token | Onde |
 |---|---|---|
-| claro | `--white` | objeções, primeira consulta, dor |
-| quente | `--sand-100` | jornada, dois públicos |
-| frio | `--surface` | quem conduz, dúvidas |
-| escuro | `--navy-800` | método |
-| mais escuro | `--navy-950` | faixa de destaques, contato |
+| claro | `--white` | dor + consequência, primeira consulta |
+| quente | `--sand-100` | jornada, escopo, avaliações |
+| frio | `--surface` | confiança (quem conduz + prova) |
+| escuro | `--navy-800` | decisão (método + objeções) |
+| mais escuro | `--navy-950` | faixa de credenciais, contato |
+
+Ordem resultante nas rotas de tratamento, depois da fusão de seções:
+
+    hero (navy) · dor+consequência (branco) · decisão (navy-800) ·
+    jornada (areia) · confiança (cinza) · consulta (branco) · contato (navy-950)
+
+Na home, o bloco de avaliações não renderiza enquanto não houver relato
+aprovado. Sem ele, a primeira consulta encostaria no marfim da localização —
+por isso `rotas/home.css` dá o degrau quente à consulta desta rota.
 
 `--ivory` (#f8f6f4) não serve como quebra: ao lado de branco, ninguém enxerga a
 diferença.
@@ -80,6 +89,8 @@ A ordem importa: cada um pode sobrescrever os anteriores. Não reordene os
 | `15-tratamento-responsivo.css` | Cortes de largura dos blocos de tratamento |
 | `16-rodape-e-obrigado.css` | Onda do rodapé e página de confirmação |
 | `17-divida-…` / `18-divida-…` | Camada final. Ver abaixo |
+| `19-movimento.css` | Revelação ao rolar |
+| `20-blocos-fundidos.css` | Seções nascidas da união de outras duas: dor + consequência, método + objeções, credencial + prova, consulta + dúvidas, contato + FAQ |
 | `rotas/*.css` | Uma rota cada, via `[data-rota="…"]` |
 
 ## A camada final (`17-` e `18-`)

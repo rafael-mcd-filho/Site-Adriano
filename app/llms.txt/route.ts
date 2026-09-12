@@ -29,6 +29,9 @@ export function GET() {
     "- [Início](" +
       siteConfig.url +
       "/): apresentação, áreas de atuação, como funciona a avaliação e formas de contato.",
+    "- [Dr. Adriano Rocha Germano](" +
+      siteConfig.url +
+      "/sobre): formação, certificação Board do Colégio Brasileiro de CTBMF e critérios de indicação.",
     ...areas,
     "- [Para dentistas](" +
       siteConfig.url +

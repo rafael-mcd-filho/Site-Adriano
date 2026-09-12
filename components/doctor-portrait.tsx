@@ -1,5 +1,6 @@
 import Image from "next/image";
-import { ArrowUpRight, BadgeCheck } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight, ArrowUpRight, BadgeCheck } from "lucide-react";
 import { siteConfig } from "@/lib/site";
 
 /** Sem foto fornecida: assinatura gráfica no hero e documento real na autoridade. */
@@ -30,6 +31,10 @@ export function DoctorPortrait({
         <span className="identity-monogram">ARG</span>
         <span className="identity-signature">Antes de indicar, entender.</span>
       </div>
+      {/* A identidade é a autoria do que vem abaixo: sem ela, o visitante lê
+          quatro seções de conteúdo clínico assinadas por ninguém. O link para
+          a formação completa evita que a página precise carregar o currículo
+          inteiro só para responder "quem é esse profissional?". */}
       <figcaption>
             <strong>{siteConfig.fullName}</strong>
             <span>{siteConfig.specialty}</span>
@@ -37,6 +42,9 @@ export function DoctorPortrait({
               {siteConfig.registry}
             </span>
             <span className="identity-board"><BadgeCheck size={16} aria-hidden="true" /> Certificação Board · FBCOMS</span>
+            <Link className="identity-link" href="/sobre">
+              Conhecer a formação <ArrowRight size={14} aria-hidden="true" />
+            </Link>
       </figcaption>
     </figure>
   );

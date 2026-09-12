@@ -97,6 +97,31 @@ export default async function ObrigadoPage({
             })}
           </ol>
 
+          {/* Dois acréscimos, não uma nova jornada comercial: salvar o número
+              evita que a resposta chegue de um desconhecido — é onde mais se
+              perde lead depois do envio —, e os links respondem o que a pessoa
+              costuma querer saber enquanto espera. */}
+          <div className="thanks-extra">
+            <p>
+              <strong>Salve o contato da equipe.</strong> O retorno vem pelo
+              WhatsApp, em horário comercial. Com o número salvo, a mensagem não
+              chega de um desconhecido.
+            </p>
+            <ul>
+              <li>
+                <Link href="/#processo">Como funciona a primeira consulta</Link>
+              </li>
+              <li>
+                <Link href="/sobre">Quem é o Dr. Adriano Rocha Germano</Link>
+              </li>
+              <li>
+                <a href={siteConfig.instagram} target="_blank" rel="noopener noreferrer">
+                  Instagram do Dr. Adriano
+                </a>
+              </li>
+            </ul>
+          </div>
+
           <p className="thanks-note">
             Evite enviar exames, diagnósticos ou informações clínicas por canais
             abertos. O meio adequado é indicado no retorno. O envio deste

@@ -3,12 +3,12 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
+  Activity,
+  ArrowRight,
   ChevronDown,
-  CircleHelp,
   Handshake,
   Home,
   MessageCircle,
-  Sparkles,
   Stethoscope,
   User,
   X,
@@ -30,29 +30,32 @@ const headerWhatsAppMessage =
 /** Ícones ficam aqui, não em `lib/site.ts`: navegação é dado, ícone é interface. */
 const navIcons: Record<string, LucideIcon> = {
   "/": Home,
-  "/#sobre": User,
+  "/sobre": User,
   "/#processo": Stethoscope,
   "/para-dentistas": Handshake,
-  "/#duvidas": CircleHelp,
 };
 
-/** Itens antes e depois do grupo "Áreas de atuação" na pílula do desktop. */
+/**
+ * A pílula do desktop guarda só o que o PACIENTE usa.
+ *
+ * "Dúvidas" saiu: depois que o FAQ passou a viver dentro da seção de contato,
+ * ele apontava para o mesmo lugar que o botão do cabeçalho — dois alvos, um
+ * destino. O link continua no rodapé, onde quem procura por ele olha.
+ *
+ * "Para dentistas" saiu da pílula e virou um link menor ao lado do CTA: é
+ * outro público, e disputar espaço com os itens do paciente não ajudava
+ * nenhum dos dois. O colega procura ativamente; ele acha.
+ */
 const navBefore = [
   { label: "Início", href: "/" },
-  { label: "Dr. Adriano", href: "/#sobre" },
-];
-
-const navAfter = [
-  { label: "Para dentistas", href: "/para-dentistas" },
-  { label: "Dúvidas", href: "/#duvidas" },
+  { label: "Dr. Adriano", href: "/sobre" },
 ];
 
 const mobileLinks = [
   { label: "Início", href: "/" },
-  { label: "Dr. Adriano", href: "/#sobre" },
+  { label: "Dr. Adriano", href: "/sobre" },
   { label: "Como funciona", href: "/#processo" },
   { label: "Para dentistas", href: "/para-dentistas" },
-  { label: "Dúvidas", href: "/#duvidas" },
 ];
 
 const focusableSelector =
@@ -67,8 +70,9 @@ export function Header() {
   const menuRef = useRef<HTMLDivElement>(null);
   const toggleRef = useRef<HTMLButtonElement>(null);
   const isWhatsAppConfigured = Boolean(siteConfig.whatsappNumber);
-  const inArea = areaNavigation.some((item) => item.href === pathname);
-  const contactHref = pathname === "/" || pathname === "/para-dentistas" || inArea
+  const currentArea = areaNavigation.find((item) => item.href === pathname);
+  const inArea = Boolean(currentArea);
+  const contactHref = pathname === "/" || pathname === "/para-dentistas" || pathname === "/sobre" || inArea
     ? "#contato"
     : "/#contato";
 
@@ -231,8 +235,14 @@ export function Header() {
                   aria-current={inArea ? "page" : undefined}
                   onClick={() => setAreasOpen((value) => !value)}
                 >
-                  <Sparkles size={13} aria-hidden="true" />
+                  <Activity size={13} aria-hidden="true" />
                   Áreas de atuação
+                  {/* Dentro de uma rota de tratamento, o gatilho ficava aceso
+                      sem dizer qual. Nomear a área economiza um clique para
+                      quem só quer saber onde está. */}
+                  {currentArea && (
+                    <span className="nav-current">· {currentArea.label}</span>
+                  )}
                   <ChevronDown size={12} aria-hidden="true" className="nav-chevron" />
                 </button>
 
@@ -241,7 +251,7 @@ export function Header() {
                   className={areasOpen ? "areas-popover is-open" : "areas-popover"}
                   hidden={!areasOpen}
                 >
-                  <span className="popover-label">Avaliação especializada</span>
+                  <span className="popover-label">Comece pelo que incomoda</span>
                   {areaNavigation.map((item) => (
                     <Link
                       key={item.href}
@@ -250,17 +260,31 @@ export function Header() {
                       aria-current={pathname === item.href ? "page" : undefined}
                       onClick={() => setAreasOpen(false)}
                     >
-                      {item.label}
-                      <span aria-hidden="true">↗</span>
+                      <span className="popover-item">
+                        <strong>{item.label}</strong>
+                        <small>{item.hint}</small>
+                      </span>
+                      {/* A seta era ↗, que em qualquer interface significa
+                          "abre fora do site". São cinco links internos. */}
+                      <ArrowRight size={15} aria-hidden="true" />
                     </Link>
                   ))}
                 </div>
               </div>
-
-              {navAfter.map((item) => (
-                <NavLink key={item.href} href={item.href} label={item.label} />
-              ))}
             </div>
+
+            <Link
+              className={
+                pathname === "/para-dentistas"
+                  ? "header-dentist active"
+                  : "header-dentist"
+              }
+              href="/para-dentistas"
+              aria-current={pathname === "/para-dentistas" ? "page" : undefined}
+            >
+              <Handshake size={14} aria-hidden="true" />
+              Para dentistas
+            </Link>
           </nav>
 
           <a
@@ -349,7 +373,7 @@ export function Header() {
           ))}
           </div>
 
-          <p className="mobile-area-label">Áreas de atuação</p>
+          <p className="mobile-area-label">Comece pelo que incomoda</p>
           {areaNavigation.map((item) => (
             <Link
               className="mobile-area-link"
@@ -357,8 +381,11 @@ export function Header() {
               href={item.href}
               onClick={closeMenu}
             >
-              {item.label}
-              <span aria-hidden="true">↗</span>
+              <span className="popover-item">
+                <strong>{item.label}</strong>
+                <small>{item.hint}</small>
+              </span>
+              <ArrowRight size={16} aria-hidden="true" />
             </Link>
           ))}
         </nav>

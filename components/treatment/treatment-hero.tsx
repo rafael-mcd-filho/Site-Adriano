@@ -1,30 +1,25 @@
 import Link from "next/link";
 import { Check, CircleHelp } from "lucide-react";
+import { ButtonContent } from "@/components/button-content";
 import { DoctorPortrait } from "@/components/doctor-portrait";
+import { HeroBackdrop } from "@/components/hero-backdrop";
 import { Highlight } from "@/components/highlight";
 import { WhatsAppButton } from "@/components/whatsapp-button";
 import type { TreatmentContent } from "@/lib/content";
 
-/**
- * Bloco 1 do AIDA. Duas mudanças em relação à versão institucional: o rosto do
- * profissional ocupa a coluna visual — numa marca pessoal ele é o ativo de
- * conversão, não uma ilustração — e o WhatsApp é o botão cheio.
- *
- * O formulário continua existindo como caminho secundário: em tráfego frio de
- * saúde o degrau de menor atrito converte várias vezes mais, mas há quem
- * prefira não mandar mensagem.
- */
+/** Abertura com fotografia ilustrativa, identificação e caminhos de contato. */
 export function TreatmentHero({ content }: { content: TreatmentContent }) {
   return (
     <section
       className={
         "inner-hero treatment-hero treatment-hero-" +
         content.motif +
-        " section-soft-edge"
+        " section-soft-edge photo-hero"
       }
     >
+      <HeroBackdrop page={content.slug} />
       <div className="container inner-hero-grid">
-        <div className="inner-hero-copy page-enter">
+        <div className="inner-hero-copy hero-photo-copy page-enter">
           <span className="eyebrow">{content.eyebrow}</span>
           <h1>
             <Highlight
@@ -51,13 +46,15 @@ export function TreatmentHero({ content }: { content: TreatmentContent }) {
               label={content.primaryCta}
               className="button-whatsapp-solid"
             />
+            {/* Segundo degrau da escada, não um link de rodapé: atende quem
+                ainda não quer falar, mas quer saber no que está se metendo. */}
             <Link
-              id="cta-hero-formulario"
-              data-cta="cta-hero-formulario"
-              className="text-link hero-secondary-link"
+              id="cta-hero-consulta"
+              data-cta="cta-hero-consulta"
+              className="button button-secondary button-motion"
               href="#consulta"
             >
-              Como funciona a consulta
+              <ButtonContent>Ver como funciona a consulta</ButtonContent>
             </Link>
           </div>
 

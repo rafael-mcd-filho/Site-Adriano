@@ -1,0 +1,638 @@
+/* Blocos que nasceram da fusão de seções.
+   Fatia de globals.css — a ordem dos @import lá é significativa.
+
+   Este arquivo só estiliza nomes NOVOS. Nenhuma regra aqui disputa seletor com
+   a camada final (17- e 18-): quando um bloco fundido reaproveita uma classe
+   antiga — `.method-section`, `.authority-section`, `.objection-list` —, o que
+   entra aqui é apenas o que muda por causa do novo contexto, sempre debaixo de
+   um seletor de contexto próprio.
+
+   Por que fundir: cada seção grande precisa responder a uma pergunta
+   DIFERENTE do visitante. Duas seções que respondem a mesma pergunta viram
+   rolagem, não persuasão. */
+
+/* ── "Isso parece com o seu caso?" — sintomas + consequência ───────────── */
+.pain-consequence {
+  display: grid;
+  align-items: center;
+  margin-top: clamp(38px, 5vw, 58px);
+  padding-top: clamp(32px, 4vw, 46px);
+  border-top: 1px solid var(--border);
+  gap: clamp(28px, 4vw, 54px);
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+}
+
+.pain-consequence-photo {
+  position: relative;
+  overflow: hidden;
+  min-width: 0;
+  margin: 0;
+  border-radius: var(--radius-xl);
+}
+
+.pain-consequence-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.pain-consequence-photo figcaption {
+  position: absolute;
+  right: 12px;
+  bottom: 10px;
+  padding: 4px 9px;
+  border-radius: var(--radius-sm);
+  background: rgba(var(--navy-950-rgb), 0.62);
+  color: var(--white);
+  font-size: var(--fs-label);
+  letter-spacing: 0.02em;
+}
+
+.pain-consequence-copy {
+  min-width: 0;
+}
+
+.pain-consequence-copy h3 {
+  margin-bottom: 12px;
+  font-size: var(--fs-h3);
+  letter-spacing: -0.025em;
+}
+
+.pain-consequence-copy p {
+  max-width: 66ch;
+  font-size: var(--fs-sm);
+}
+
+/* A frase que desarma. Fica visualmente separada do resto porque é ela que
+   autoriza a pessoa a continuar lendo sem se sentir empurrada para a cirurgia. */
+.pain-consequence-note {
+  margin-top: 16px;
+  padding-left: 16px;
+  border-left: 3px solid var(--blue-400);
+  color: var(--muted);
+}
+
+/* Link da identidade do hero para a formação completa. Sem ele, cada página
+   teria de carregar o currículo inteiro só para responder "quem é?". */
+.identity-link {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 10px;
+  color: var(--blue-600);
+  font-family: var(--font-manrope), sans-serif;
+  font-size: var(--fs-label);
+  font-weight: 700;
+  gap: 5px;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  transition: color 180ms ease;
+}
+
+.identity-link:hover {
+  color: var(--navy-800);
+}
+
+/* ── "Como avaliamos e decidimos" — método + objeções + CTA ────────────── */
+/* A seção herda o fundo navy de `.method-section`. As objeções vinham de um
+   bloco claro, então tudo que dependia do branco é redeclarado aqui — e só
+   dentro de `.decision-section`, para não mexer na lista da página de
+   dentistas, que continua sobre areia. */
+.decision-objections,
+.decision-cta {
+  margin-top: clamp(46px, 6vw, 76px);
+}
+
+.decision-objections > h3 {
+  margin-bottom: 22px;
+  color: var(--white);
+  font-size: var(--fs-h3);
+  letter-spacing: -0.025em;
+}
+
+.decision-section .objection-list li {
+  border-top-color: rgba(var(--blue-400-rgb), 0.26);
+}
+
+.decision-section .objection-list strong {
+  color: var(--white);
+}
+
+.decision-section .objection-list p {
+  color: #e5ebf2;
+}
+
+.decision-section .objection-list .objection-glyph {
+  color: var(--blue-200);
+}
+
+.decision-cta {
+  display: grid;
+  justify-items: center;
+  padding-top: clamp(30px, 4vw, 44px);
+  border-top: 1px solid rgba(var(--blue-400-rgb), 0.26);
+  gap: 18px;
+  text-align: center;
+}
+
+.decision-cta p {
+  max-width: 54ch;
+  margin: 0;
+  color: var(--white);
+  font-family: var(--font-manrope), sans-serif;
+  font-size: var(--fs-lead);
+  font-weight: 650;
+  letter-spacing: -0.02em;
+}
+
+/* ── "Por que confiar" — credencial + prova na mesma seção ─────────────── */
+.authority-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 26px;
+}
+
+.trust-case,
+.trust-reviews {
+  margin-top: clamp(40px, 5vw, 64px);
+}
+
+.trust-reviews .decision-cta {
+  margin-top: clamp(32px, 4vw, 46px);
+  padding-top: clamp(26px, 3vw, 36px);
+  border-top-color: var(--border);
+}
+
+/* ── Prova social ──────────────────────────────────────────────────────── */
+.reviews-section {
+  background: var(--sand-100);
+}
+
+.reviews-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  gap: 12px 24px;
+}
+
+.reviews-head h3 {
+  margin: 0;
+  font-size: var(--fs-h3);
+  letter-spacing: -0.025em;
+}
+
+.reviews-rating {
+  display: inline-flex;
+  align-items: center;
+  color: var(--blue-600);
+  font-size: var(--fs-sm);
+  gap: 8px;
+  text-decoration: none;
+}
+
+.reviews-rating strong {
+  font-family: var(--font-manrope), sans-serif;
+  font-size: var(--fs-lead);
+  font-weight: 800;
+}
+
+.reviews-grid {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.review-card {
+  display: grid;
+  margin: 0;
+  padding: 26px 26px 22px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  background: var(--white);
+  gap: 12px;
+}
+
+.review-card svg {
+  color: var(--blue-400);
+}
+
+.review-card p {
+  margin: 0;
+  font-size: var(--fs-sm);
+}
+
+.review-card footer {
+  color: var(--muted);
+  font-size: var(--fs-label);
+}
+
+/* ── Caso conduzido, dentro da trilha de etapas ────────────────────────── */
+.clinical-case {
+  margin-top: clamp(38px, 5vw, 56px);
+  padding: clamp(26px, 3vw, 38px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  background: var(--white);
+}
+
+.clinical-case-head {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 22px;
+  gap: 18px;
+}
+
+.clinical-case-head .consultation-icon {
+  flex: 0 0 auto;
+  margin-bottom: 0;
+}
+
+.clinical-case-head h3 {
+  margin: 4px 0 0;
+  font-size: var(--fs-h3);
+  letter-spacing: -0.025em;
+}
+
+.clinical-case-steps {
+  display: grid;
+  margin: 0;
+  gap: 16px;
+}
+
+.clinical-case-steps dt {
+  margin-bottom: 4px;
+  color: var(--blue-600);
+  font-family: var(--font-manrope), sans-serif;
+  font-size: var(--fs-label);
+  font-weight: 750;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.clinical-case-steps dd {
+  max-width: 72ch;
+  margin: 0;
+  font-size: var(--fs-sm);
+}
+
+.clinical-case-note {
+  margin: 24px 0 0;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: var(--fs-label);
+}
+
+/* ── Dúvidas abertas ───────────────────────────────────────────────────── */
+/* Acordeão fechado é conteúdo invisível. As perguntas que decidem o
+   agendamento ficam abertas; o acordeão fica com o que sobra. */
+.open-questions {
+  display: grid;
+  margin: clamp(30px, 4vw, 44px) 0 0;
+  gap: 0;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.open-questions > div {
+  padding: 22px 0;
+  border-top: 1px solid var(--border);
+}
+
+.open-questions dt {
+  margin-bottom: 7px;
+  color: var(--navy-950);
+  font-family: var(--font-manrope), sans-serif;
+  font-size: var(--fs-lead);
+  font-weight: 650;
+  letter-spacing: -0.025em;
+}
+
+.open-questions dd {
+  max-width: 62ch;
+  margin: 0;
+  padding-right: 24px;
+  font-size: var(--fs-sm);
+}
+
+/* ── Critérios de decisão, na home e em /sobre ─────────────────────────── */
+.decision-criteria {
+  display: grid;
+  margin: 26px 0;
+  padding: 0;
+  gap: 14px;
+  list-style: none;
+}
+
+.decision-criteria li {
+  padding-left: 16px;
+  border-left: 2px solid rgba(var(--blue-400-rgb), 0.45);
+}
+
+.decision-criteria strong {
+  display: block;
+  margin-bottom: 3px;
+  font-family: var(--font-manrope), sans-serif;
+  font-size: var(--fs-sm);
+  font-weight: 750;
+  letter-spacing: -0.015em;
+}
+
+.decision-criteria span {
+  font-size: var(--fs-sm);
+}
+
+.decision-criteria-wide {
+  margin-top: clamp(32px, 4vw, 46px);
+  gap: 20px 34px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+/* ── Contato que também encerra as dúvidas ─────────────────────────────── */
+/* O acordeão nasceu para superfície clara. Aqui ele fecha a página sobre o
+   navy do contato, então cor de texto, borda e o sinal de "+" são
+   redeclarados — nada disso vale fora de `.contact-section`. */
+.closing-faq {
+  margin-top: clamp(46px, 6vw, 72px);
+}
+
+.closing-faq h2 {
+  margin-bottom: 22px;
+  color: var(--white);
+}
+
+.closing-faq .faq-card {
+  border-color: rgba(var(--blue-400-rgb), 0.28);
+  background: rgba(var(--blue-50-rgb), 0.05);
+}
+
+.closing-faq .faq-item + .faq-item {
+  border-top-color: rgba(var(--blue-400-rgb), 0.22);
+}
+
+.closing-faq .faq-toggle {
+  color: var(--white);
+}
+
+.closing-faq .faq-toggle:hover {
+  color: var(--blue-200);
+}
+
+.closing-faq .faq-toggle:focus-visible {
+  outline-color: var(--blue-200);
+}
+
+.closing-faq .faq-sign {
+  background: rgba(var(--blue-400-rgb), 0.16);
+  color: var(--blue-200);
+}
+
+.closing-faq .faq-item.is-open .faq-sign {
+  background: var(--blue-200);
+  color: var(--navy-950);
+}
+
+.closing-faq .faq-panel-inner p {
+  color: #dbe3ec;
+}
+
+.closing-dentist {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: clamp(34px, 4vw, 50px) 0 0;
+  padding-top: 24px;
+  border-top: 1px solid rgba(var(--blue-400-rgb), 0.2);
+  color: #c5d0dd;
+  font-size: var(--fs-sm);
+  gap: 8px 12px;
+}
+
+.closing-dentist svg {
+  color: var(--blue-200);
+}
+
+.closing-dentist .text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ── /sobre ────────────────────────────────────────────────────────────── */
+.credentials-list {
+  display: grid;
+  margin: clamp(30px, 4vw, 42px) 0 0;
+  padding: 0;
+  gap: 18px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  list-style: none;
+}
+
+.credentials-list li {
+  display: flex;
+  align-items: flex-start;
+  padding: 24px 26px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  background: var(--ivory);
+  gap: 16px;
+}
+
+.credentials-list .consultation-icon {
+  flex: 0 0 auto;
+  margin-bottom: 0;
+}
+
+.credentials-list strong {
+  display: block;
+  margin-bottom: 6px;
+  font-family: var(--font-manrope), sans-serif;
+  font-size: var(--fs-lead);
+  font-weight: 650;
+  letter-spacing: -0.025em;
+}
+
+.credentials-list p {
+  margin: 0;
+  font-size: var(--fs-sm);
+}
+
+.integration-grid {
+  display: grid;
+  margin-top: clamp(30px, 4vw, 42px);
+  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.integration-grid article {
+  padding: 28px 26px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  background: var(--white);
+}
+
+.integration-grid h3 {
+  margin-bottom: 10px;
+  font-size: var(--fs-lead);
+}
+
+.integration-grid p {
+  margin: 0;
+  font-size: var(--fs-sm);
+}
+
+.closing-areas {
+  margin-top: clamp(46px, 6vw, 72px);
+}
+
+.closing-areas h2 {
+  margin-bottom: 20px;
+  color: var(--white);
+}
+
+.closing-areas ul {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  gap: 2px;
+  list-style: none;
+}
+
+.closing-areas a {
+  display: grid;
+  align-items: center;
+  padding: 18px 0;
+  border-top: 1px solid rgba(var(--blue-400-rgb), 0.2);
+  color: var(--white);
+  gap: 2px 16px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  text-decoration: none;
+  transition: color 180ms ease;
+}
+
+.closing-areas a:hover {
+  color: var(--blue-200);
+}
+
+.closing-areas a strong {
+  font-family: var(--font-manrope), sans-serif;
+  font-size: var(--fs-lead);
+  font-weight: 650;
+  letter-spacing: -0.025em;
+}
+
+.closing-areas a span {
+  color: #c5d0dd;
+  font-size: var(--fs-sm);
+  grid-column: 1;
+}
+
+.closing-areas a svg {
+  color: var(--blue-200);
+  grid-row: 1 / span 2;
+}
+
+/* ── Confirmação ───────────────────────────────────────────────────────── */
+.thanks-extra {
+  display: grid;
+  max-width: 760px;
+  margin: clamp(34px, 4vw, 48px) auto 0;
+  padding: 26px 28px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  background: var(--ivory);
+  gap: 14px;
+}
+
+.thanks-extra p {
+  margin: 0;
+  font-size: var(--fs-sm);
+}
+
+.thanks-extra ul {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  gap: 8px 26px;
+  list-style: none;
+}
+
+.thanks-extra a {
+  color: var(--blue-600);
+  font-size: var(--fs-sm);
+  font-weight: 650;
+}
+
+/* ── Para dentistas: escopo e devolutiva ───────────────────────────────── */
+.case-block {
+  margin-top: clamp(34px, 4vw, 48px);
+}
+
+.case-block h3,
+.handback h3,
+.objections-inline h3 {
+  margin-bottom: 16px;
+  font-size: var(--fs-h3);
+  letter-spacing: -0.025em;
+}
+
+.scope-grid {
+  display: grid;
+  margin-top: clamp(30px, 4vw, 42px);
+  gap: 24px 40px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.scope-grid article {
+  padding: 28px 26px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  background: var(--white);
+}
+
+.scope-grid h3 {
+  margin-bottom: 14px;
+  font-size: var(--fs-lead);
+}
+
+.handback,
+.objections-inline {
+  margin-top: clamp(38px, 5vw, 56px);
+}
+
+.handback .open-questions {
+  margin-top: 0;
+}
+
+/* ── Cortes de largura ─────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .pain-consequence {
+    grid-template-columns: 1fr;
+  }
+
+  .pain-consequence-photo {
+    order: 2;
+  }
+}
+
+@media (max-width: 600px) {
+  .open-questions dd {
+    padding-right: 0;
+  }
+
+  .clinical-case-head {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .decision-cta p {
+    font-size: var(--fs-sm);
+  }
+
+  .closing-areas a {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+}

@@ -132,8 +132,18 @@
     font-weight: 600;
   }
 
-  .mobile-area-link span {
+  /* A seta era um `span` com "↗"; virou SVG quando o ícone passou a ser uma
+     seta interna. O `span` agora é o par nome + sintoma, e pintá-lo de azul
+     apagaria a diferença entre as duas linhas. */
+  .mobile-area-link svg {
+    flex: 0 0 auto;
     color: var(--blue-200);
+  }
+
+  /* O menu mobile é escuro: a linha de sintoma precisa do tom claro, não do
+     `--muted` que serve ao popover branco do desktop. */
+  .mobile-area-link .popover-item small {
+    color: rgba(255, 255, 255, 0.58);
   }
 
   .mobile-menu-foot {

@@ -23,6 +23,91 @@ export const neutralFormOptions = [
   "Outro assunto.",
 ];
 
+/**
+ * Escada de compromisso dos CTAs.
+ *
+ * O rótulo muda quando a pessoa avançou de etapa mental, nunca por variedade:
+ * repetir o mesmo botão três vezes não persuade, e trocar o texto sem que nada
+ * tenha mudado na cabeça do leitor só confunde. A palavra "avaliação" só
+ * aparece depois que a página explicou o que ela é.
+ */
+export const ctaLadder = {
+  /** Fim da seção de decisão: a pessoa entendeu o raciocínio. */
+  method: "Quero saber se isso se aplica ao meu caso",
+  /** Fim do bloco de confiança: credencial e prova já foram lidas. */
+  trust: "Quero conversar sobre uma avaliação",
+  /** Fim da primeira consulta: ela já sabe o que vai acontecer. */
+  consultation: "Quero solicitar minha avaliação",
+  /** Atalho flutuante, o degrau de menor compromisso da página. */
+  floating: "Falar com a equipe",
+} as const;
+
+export type Faq = { question: string; answer: string };
+
+/**
+ * Relato de paciente ou de colega.
+ *
+ * Só entra com origem e autorização verificadas. Enquanto a lista estiver
+ * vazia, o bloco de prova não renderiza — um espaço vazio é melhor do que um
+ * depoimento inventado, e publicidade em saúde não comporta o segundo.
+ */
+export type Review = {
+  text: string;
+  /** Como o autor pode ser identificado sem expor dado de saúde. */
+  author: string;
+  /** Origem verificável: "Google", "Enviado por e-mail em 00/00", etc. */
+  source?: string;
+};
+
+export const patientReviews: Review[] = [];
+export const colleagueReviews: Review[] = [];
+
+/**
+ * Caso conduzido, no formato que as regras de publicidade comportam:
+ * situação, avaliação, opções, decisão e acompanhamento — sem imagem, sem
+ * identificação e sem sugerir que o mesmo desfecho se repete.
+ *
+ * Depende de material real do cirurgião. Enquanto `clinicalCase` estiver
+ * indefinido na rota, o cartão não aparece.
+ */
+export type ClinicalCase = {
+  title: string;
+  situation: string;
+  evaluation: string;
+  options: string;
+  decision: string;
+  followUp: string;
+};
+
+/**
+ * As dúvidas práticas que travam o agendamento. Ficam ABERTAS dentro da
+ * primeira consulta, não no acordeão: quem não clica não lê, e essas quatro
+ * são justamente as que decidem se a pessoa marca.
+ */
+export const consultaEncaminhamento: Faq = {
+  question: "Preciso de encaminhamento de outro profissional?",
+  answer:
+    "Não. Você pode buscar a avaliação diretamente. Quando já existe um profissional acompanhando o caso, a comunicação entre os dois ajuda a integrar o cuidado.",
+};
+
+export const consultaExames: Faq = {
+  question: "Preciso chegar com exames em mãos?",
+  answer:
+    "Não. Os exames que você já tem adiantam a conversa. Os que faltarem são solicitados depois da avaliação, e apenas quando acrescentam informação ao seu caso.",
+};
+
+export const consultaParticular: Faq = {
+  question: "Como funciona o atendimento particular?",
+  answer:
+    "O atendimento é particular, sem convênios. A equipe informa o valor da consulta antes do agendamento. Havendo proposta de tratamento, os custos são apresentados conforme as etapas do seu caso, antes de você decidir começar.",
+};
+
+export const consultaSegundaOpiniao: Faq = {
+  question: "Posso procurar só para ouvir uma segunda opinião?",
+  answer:
+    "Pode. Esclarecer uma indicação que você já recebeu é um motivo legítimo de consulta. A análise pode confirmar a orientação anterior ou apontar outras possibilidades.",
+};
+
 export type TreatmentContent = {
   slug: string;
   lastReviewed?: string;
@@ -37,13 +122,14 @@ export type TreatmentContent = {
   intro: string;
   /** Três selos curtos abaixo do H1. Método e credencial, nunca resultado. */
   heroBadges: [string, string, string];
-  /** Quatro destaques específicos para a faixa contínua após o hero. */
-  highlights: [string, string, string, string];
   /** Rótulo do botão primário, específico da intenção da página. */
   primaryCta: string;
   note: string;
 
-  /* ── Bloco 2 — dor e consequência ───────────────────────────────────── */
+  /* ── Bloco 2 — "Isso parece com o seu caso?" ─────────────────────────
+     Sintomas e consequência vivem na MESMA seção. Eram duas, e as duas
+     respondiam a mesma pergunta do visitante — reconhecimento —, o que fazia
+     a página gastar uma tela e meia antes de oferecer qualquer resposta. */
   /** Abre a seção na voz da página. O padrão do componente é o genérico. */
   painKicker?: string;
   painTitle: string;
@@ -70,12 +156,21 @@ export type TreatmentContent = {
    */
   consequenceText: string;
 
-  /* ── Bloco 3 — o que já foi tentado ─────────────────────────────────── */
+  /* ── Bloco 3 — "Como avaliamos e decidimos o caminho" ────────────────
+     Método e objeções clínicas numa seção só. Separados, o leitor recebia
+     duas vezes o mesmo assunto: o que é avaliado e o que não decorre do que
+     ele já ouviu. `objectionsTitle` vira subtítulo dentro do bloco. */
   objectionsKicker?: string;
   objectionsTitle: string;
   objections: Array<{ belief: string; reality: string }>;
 
-  /* ── Bloco 4 — método ───────────────────────────────────────────────── */
+  /**
+   * Pergunta que antecede o CTA intermediário, no fim da seção de decisão.
+   * O rótulo do botão é o mesmo em todas as rotas (`ctaLadder.method`): o que
+   * muda de página para página é a dúvida, não o degrau de compromisso.
+   */
+  midCtaQuestion: string;
+
   methodEyebrow: string;
   methodTitle: string;
   methodTitleHighlight?: string;
@@ -91,14 +186,26 @@ export type TreatmentContent = {
   methodHighlight?: string;
   methodPoints: string[];
   crossLink?: { label: string; href: string };
-  journey?: {
+  /* ── Bloco 4 — "Como funciona o tratamento" ──────────────────────────
+     Obrigatória nas cinco rotas: a pergunta "e depois que eu marco?" é a que
+     mais adia contato nas páginas em que o desfecho é incerto. O caso
+     conduzido, quando existir, entra como cartão DENTRO desta seção — não
+     como um bloco de portfólio à parte. */
+  journey: {
     kicker?: string;
     title: string;
     intro: string;
     steps: Array<{ title: string; text: string }>;
   };
 
-  /* ── Bloco 5 — quem conduz ──────────────────────────────────────────── */
+  /** Só com material real, desidentificado e aprovado pelo cirurgião. */
+  clinicalCase?: ClinicalCase;
+
+  /* ── Bloco 5 — "Por que confiar nessa avaliação" ─────────────────────
+     Credencial e prova social numa seção só: a primeira responde "ele é
+     qualificado?", a segunda "ele é bom com gente como eu?". Separadas,
+     viravam dois blocos grandes dizendo a mesma coisa em registros
+     diferentes. */
   /**
    * Parágrafo de contexto do bloco de autoridade. Nome, registro e credenciais
    * continuam vindo de `siteConfig` — só a atuação relevante PARA ESTA página
@@ -106,7 +213,9 @@ export type TreatmentContent = {
    */
   authorityBody?: string;
 
-  /* ── Bloco 6 — primeira consulta ────────────────────────────────────── */
+  /* ── Bloco 6 — "Sua primeira consulta" ───────────────────────────────
+     Processo e dúvidas práticas juntos. As quatro perguntas que decidem o
+     agendamento ficam abertas aqui; o acordeão fica com o que sobra. */
   consultationKicker?: string;
   /**
    * O bloco que antecede o botão final.
@@ -123,32 +232,27 @@ export type TreatmentContent = {
   consultationOutcome: string;
   consultationNote: string;
 
-  /* ── Bloco 7 e 8 ────────────────────────────────────────────────────── */
+  /** Abertas, dentro da primeira consulta. Exatamente quatro. */
+  consultationQuestions: [Faq, Faq, Faq, Faq];
+
+  /* ── Bloco 7 — contato ──────────────────────────────────────────────── */
   /**
-   * Exatamente seis. A lista longa fazia o leitor rolar por respostas que não
-   * eram a dele e desistir antes do contato, que vem logo abaixo.
-   *
-   * Critério para escolher: não repita o que o bloco de objeções já responde
-   * nesta mesma página. Com seis lugares, uma pergunta repetida custa uma
-   * dúvida sem resposta.
+   * Dúvidas RESIDUAIS, de quatro a seis. O FAQ não é depósito de objeção: o
+   * que impede a conversão está aberto nos blocos principais, e repetir aqui
+   * o que a seção de decisão ou a primeira consulta já responderam gasta um
+   * lugar que faltará para a pergunta de alguém.
    */
-  faqs: [
-    { question: string; answer: string },
-    { question: string; answer: string },
-    { question: string; answer: string },
-    { question: string; answer: string },
-    { question: string; answer: string },
-    { question: string; answer: string },
-  ];
+  faqs: Faq[];
   faqTitle: string;
   closingTitle: string;
   closingText: string;
 
   /**
-   * Somente relatos reais, com origem e autorização verificadas. Manter vazio
-   * enquanto o cliente não fornecer conteúdo aprovado; não usar exemplos.
+   * Relatos desta rota. Sem eles, o bloco de confiança usa `patientReviews`.
+   * Só preencher quando houver material real e pertinente à experiência desta
+   * página — selecionar à força um relato por rota produz prova artificial.
    */
-  testimonials: string[];
+  reviews?: Review[];
   proofKicker?: string;
   proofTitle?: string;
 
@@ -173,21 +277,9 @@ export type TreatmentContent = {
 };
 
 /**
- * Respostas que servem a mais de uma página. Ficam nomeadas, e não num bloco
- * que entra inteiro, porque cada página escolhe quais cabem nas suas seis.
+ * Resposta que serve a mais de uma página. Fica nomeada, e não num bloco que
+ * entra inteiro, porque cada página escolhe quais cabem nas suas quatro a seis.
  */
-const faqValores = {
-  question: "Como saber o valor da consulta e do tratamento?",
-  answer:
-    "O atendimento é particular. A equipe informa o valor da consulta antes do agendamento. Se houver proposta de tratamento, os custos são apresentados conforme as etapas do seu caso, antes de você decidir começar.",
-};
-
-const faqSegundaOpiniao = {
-  question: "E se eu só quiser uma segunda opinião sobre o que já me disseram?",
-  answer:
-    "Você pode buscar uma avaliação para esclarecer uma indicação anterior. Os exames e relatórios que você já tem ajudam, junto com as dúvidas que ficaram. A análise pode confirmar a orientação recebida ou apontar outras possibilidades.",
-};
-
 const faqDentista = {
   question: "Meu dentista continua acompanhando o meu caso?",
   answer:
@@ -205,12 +297,6 @@ export const treatments: Record<string, TreatmentContent> = {
     intro:
       "O cansaço acompanha o dia, a concentração falha e o ronco preocupa quem dorme ao seu lado. Se você investiga ou já trata apneia obstrutiva, a avaliação buco-maxilo-facial ajuda a esclarecer se a posição dos maxilares participa da dificuldade para respirar durante o sono.",
     heroBadges: ["Em conjunto com a equipe do sono", "Maxilares e respiração", "João Pessoa"],
-    highlights: [
-      "Integração com a equipe do sono",
-      "Análise dos maxilares e da respiração",
-      "Revisão dos exames do sono",
-      "Orientação sobre os próximos passos",
-    ],
     primaryCta: "Quero avaliar meu caso",
     note: "Uma avaliação para orientar o cuidado do sono. Sem compromisso com cirurgia.",
 
@@ -229,6 +315,8 @@ export const treatments: Record<string, TreatmentContent> = {
     consequenceText:
       "Trabalhar com atenção, aproveitar o tempo com a família e sentir que a noite trouxe descanso. Na consulta, conte como o cansaço tem limitado seu dia. Ronco e cansaço, sozinhos, não confirmam apneia: o diagnóstico e os exames do sono mostram o que precisa de cuidado.",
 
+    midCtaQuestion:
+      "Os seus maxilares participam da sua apneia? Isso só pode ser avaliado junto com o exame do sono.",
     objectionsKicker: "Antes de pensar em cirurgia",
     objectionsTitle: "O que vale esclarecer antes de pensar em cirurgia.",
     objections: [
@@ -252,8 +340,42 @@ export const treatments: Record<string, TreatmentContent> = {
       "Posição dos maxilares e relação com a passagem de ar.",
       "Tratamentos em uso, dificuldades e resposta ao acompanhamento.",
     ],
+    journey: {
+      kicker: "Como funciona o cuidado",
+      title: "Da avaliação à decisão, junto com quem acompanha seu sono.",
+      intro:
+        "A participação buco-maxilo-facial é uma etapa dentro de um cuidado que continua sendo multidisciplinar. Conhecer a sequência ajuda a entender onde ela entra.",
+      steps: [
+        {
+          title: "1. Avaliação da face e da via aérea",
+          text: "A consulta reúne suas queixas, o exame da face e os estudos do sono que você já tem, para entender se a posição dos maxilares participa da dificuldade para respirar.",
+        },
+        {
+          title: "2. Discussão com a equipe do sono",
+          text: "Os achados são discutidos com o médico e os demais profissionais que acompanham você. Exames complementares podem ser necessários antes de qualquer definição.",
+        },
+        {
+          title: "3. Decisão e acompanhamento",
+          text: "As possibilidades são apresentadas com benefícios esperados, riscos e alternativas. O acompanhamento do sono continua, havendo ou não indicação cirúrgica.",
+        },
+      ],
+    },
     authorityBody:
       "O Dr. Adriano atua na avaliação e no tratamento de alterações dos maxilares e da face. Na investigação da apneia obstrutiva, sua participação é analisar se a posição dos maxilares influencia a passagem de ar, sempre em conjunto com o médico e os demais profissionais que acompanham o seu sono.",
+    consultationQuestions: [
+      consultaEncaminhamento,
+      {
+        question: "Preciso levar a polissonografia?",
+        answer:
+          "Se você já tem, leve: ela adianta a conversa. Se não tem, a avaliação começa pelo exame da face e pelo que você contar sobre suas noites. Não é preciso repetir exames por conta própria.",
+      },
+      {
+        question: "A consulta já define uma cirurgia?",
+        answer:
+          "Não. A avaliação buco-maxilo-facial esclarece se a estrutura dos maxilares tem participação no seu quadro. A cirurgia é discutida em casos selecionados, depois da análise conjunta com a equipe do sono.",
+      },
+      consultaParticular,
+    ],
     preparation: {
       title: "Para marcar, basta querer entender suas noites.",
       text: "Se você já tem polissonografia ou relatórios de quem acompanha seu sono, eles adiantam a conversa. Se não tem, a avaliação começa pelo exame da face e pelo que você contar.",
@@ -267,13 +389,11 @@ export const treatments: Record<string, TreatmentContent> = {
       { question: "Quem faz o diagnóstico de apneia do sono?", answer: "A investigação é conduzida por um médico, que avalia sintomas e histórico e indica o estudo do sono apropriado, como a polissonografia. A avaliação buco-maxilo-facial complementa esse cuidado quando há suspeita de participação da anatomia dos maxilares." },
       { question: "Toda apneia precisa de cirurgia?", answer: "Não. Existem diferentes tipos e causas de apneia. A cirurgia dos maxilares pode ser considerada em casos selecionados de apneia obstrutiva, após análise da anatomia, da gravidade, dos tratamentos e da saúde geral." },
       { question: "Qual é o papel do cirurgião buco-maxilo-facial?", answer: "Avaliar se a posição e a estrutura dos maxilares contribuem para a obstrução da passagem de ar. Essa análise é discutida com os demais profissionais para definir se há alguma indicação de cuidado nessa área." },
-      { question: "Preciso repetir a polissonografia antes da consulta?", answer: "Os exames que você já tem bastam para começar. A necessidade de atualizar ou complementar o estudo do sono depende da história clínica e da orientação dos profissionais envolvidos; não é preciso repetir exames por conta própria." },
-      faqValores,
-      faqSegundaOpiniao,
+      { question: "Já uso CPAP. Devo interromper para ser avaliado?", answer: "Não. Mantenha o tratamento e o acompanhamento que você já faz. A avaliação buco-maxilo-facial esclarece uma parte do quadro; qualquer mudança no tratamento é decidida com a equipe responsável pelo seu sono." },
     ],
     closingTitle: "Entenda o que pode estar por trás de noites sem descanso.",
     closingText: "Se você investiga ou já trata apneia, converse com a equipe sobre a avaliação dos maxilares. Entender essa parte do quadro pode ajudar a definir um cuidado mais adequado ao seu sono.",
-    testimonials: [],
+    /* Sem relato aprovado: o bloco de confiança omite a prova social. */
     visualSummary: { kicker: "Sono e respiração", title: "Entender a respiração para orientar o cuidado do sono.", cues: ["Ronco", "Pausas respiratórias", "Cansaço ao acordar"] },
     formQuestion: "Como podemos ajudar?",
     formOptions: neutralFormOptions,
@@ -294,12 +414,6 @@ export const treatments: Record<string, TreatmentContent> = {
     titleHighlight: "não há osso suficiente",
     intro: "Isso não encerra a avaliação. Se o plano de mastigar com mais conforto parou nessa resposta, vale esclarecer o motivo. Em casos selecionados, a reconstrução óssea pode criar suporte para futuros implantes. A avaliação mostra se essa possibilidade faz sentido para você.",
     heroBadges: ["Avaliação da perda óssea", "Planejamento com seu dentista", "João Pessoa"],
-    highlights: [
-      "Avaliação do osso disponível",
-      "Planejamento para a futura prótese",
-      "Etapas e alternativas explicadas",
-      "Cuidado integrado com seu dentista",
-    ],
     primaryCta: "Quero avaliar minhas possibilidades",
     note: "Traga os exames que já tem. A primeira decisão é esclarecer suas possibilidades.",
 
@@ -316,6 +430,8 @@ export const treatments: Record<string, TreatmentContent> = {
     consequenceTitle: "Uma resposta útil precisa explicar o que é possível e por quê",
     consequenceText: "A falta de osso pode interromper o plano que você imaginava para os dentes. A avaliação especializada reúne a região da perda, os tecidos, sua saúde e a futura prótese para discutir caminhos concretos. Ela pode identificar possibilidades ou confirmar limites, com os motivos e as alternativas explicados.",
 
+    midCtaQuestion:
+      "A resposta que você recebeu vale para a região que você precisa reabilitar? É isso que a avaliação esclarece.",
     objectionsKicker: "Sobre a falta de osso",
     objectionsTitle: "Pouco osso: o que essa informação permite concluir?",
     objections: [
@@ -340,8 +456,42 @@ export const treatments: Record<string, TreatmentContent> = {
       "Etapas de reconstrução, cicatrização e reavaliação.",
     ],
     crossLink: { label: "Entenda como a reconstrução se relaciona aos implantes", href: "/implantes-dentarios" },
+    journey: {
+      kicker: "Como funciona o tratamento",
+      title: "Do que falta ao plano de reabilitação.",
+      intro:
+        "Reconstruir não é um fim em si: é uma etapa para viabilizar a reabilitação que você precisa. A sequência e os intervalos dependem da região e do seu caso.",
+      steps: [
+        {
+          title: "1. Entender o que falta e para quê",
+          text: "Exame da região, imagens disponíveis e a reabilitação que você quer alcançar. É essa combinação que define se há o que reconstruir e com qual finalidade.",
+        },
+        {
+          title: "2. Reconstrução e cicatrização",
+          text: "Havendo indicação, o plano detalha a técnica, os materiais, os riscos e o tempo de cicatrização necessário antes de qualquer implante.",
+        },
+        {
+          title: "3. Reavaliação para a reabilitação",
+          text: "As condições obtidas são reavaliadas junto com o seu dentista. A partir delas, o plano protético é retomado ou revisto.",
+        },
+      ],
+    },
     authorityBody:
       "O Dr. Adriano atua na avaliação e no tratamento de alterações dos maxilares e da face. Quando a falta de osso interrompe um plano de reabilitação, sua participação é analisar as condições da região e discutir, junto com o dentista que acompanha você, o que pode ser reconstruído e com qual finalidade.",
+    consultationQuestions: [
+      consultaEncaminhamento,
+      {
+        question: "Preciso levar a tomografia?",
+        answer:
+          "Se você já tem tomografia ou um plano de tratamento anterior, leve: eles adiantam a conversa. Se não tem, a avaliação começa pelo exame da região e pelo que você quer reabilitar.",
+      },
+      {
+        question: "A consulta já define um enxerto?",
+        answer:
+          "Não. A avaliação esclarece o que a falta de osso significa na região que você precisa reabilitar. Reconstruir só entra na proposta quando houver necessidade e condições, e a orientação pode ser outra.",
+      },
+      consultaParticular,
+    ],
     preparation: {
       title: "Para marcar, não precisa ter nada em mãos.",
       text: "Se você já tem tomografia ou um plano de tratamento anterior, eles adiantam a conversa. Se não tem, a avaliação começa pelo exame da região e pelo que você quer reabilitar.",
@@ -357,11 +507,10 @@ export const treatments: Record<string, TreatmentContent> = {
       { question: "Vou ficar sem dentes durante as etapas?", answer: "As opções provisórias são analisadas conforme a área tratada e a necessidade de proteger a cicatrização. O que pode ser utilizado no seu caso deve ser discutido no planejamento." },
       { question: "Como é o desconforto e a recuperação?", answer: "Anestesia e cuidados após o procedimento fazem parte do plano. Pode haver dor, inchaço e restrições temporárias. A intensidade e o tempo de recuperação variam conforme a cirurgia e são discutidos antes da decisão." },
       { question: "Diabetes, pressão alta ou medicamentos interferem?", answer: "Podem influenciar os cuidados e a indicação. Informe seu histórico e todos os medicamentos em uso. Quando necessário, a avaliação é integrada ao médico que acompanha você." },
-      faqValores,
     ],
     closingTitle: "A dúvida sobre a falta de osso pode dar lugar a uma decisão mais clara.",
     closingText: "Agende uma avaliação para entender o que a perda óssea significa no seu caso. Vamos conversar sobre os caminhos de reabilitação que merecem ser considerados — e sobre os que não valem para você.",
-    testimonials: [],
+    /* Sem relato aprovado: o bloco de confiança omite a prova social. */
     visualSummary: { kicker: "Osso e reabilitação", title: "Reconstruir com um objetivo para os seus dentes.", cues: ["Perda óssea", "Enxerto ósseo", "Futura prótese"] },
     formQuestion: "Como podemos ajudar?",
     formOptions: neutralFormOptions,
@@ -382,12 +531,6 @@ export const treatments: Record<string, TreatmentContent> = {
     titleHighlight: "estala, dói ou parece travar",
     intro: "Se você escolhe o que comer por receio da dor ou evita abrir bem a boca, a mandíbula já interfere na rotina. A avaliação de DTM e ATM investiga a origem dos sintomas para orientar cuidados que busquem recuperar conforto e movimento.",
     heroBadges: ["Investigação da dor", "Cuidados além da cirurgia", "João Pessoa"],
-    highlights: [
-      "Investigação da origem da dor",
-      "Avaliação dos movimentos da mandíbula",
-      "Cuidados além da cirurgia",
-      "Integração com outros profissionais",
-    ],
     primaryCta: "Quero investigar minha dor na mandíbula",
     note: "Você pode buscar ajuda mesmo sem diagnóstico. A avaliação não pressupõe cirurgia.",
 
@@ -404,6 +547,8 @@ export const treatments: Record<string, TreatmentContent> = {
     consequenceTitle: "Você quer voltar a fazer coisas simples sem pensar tanto na dor",
     consequenceText: "Uma refeição, uma conversa longa, um bocejo. Quando a mandíbula passa a exigir atenção o tempo todo, investigar a causa ajuda a escolher o cuidado, em vez de repetir tentativas sem orientação. Dor persistente, por si só, não significa dano progressivo nem necessidade de cirurgia.",
 
+    midCtaQuestion:
+      "Sua dor já foi investigada, ou só tratada? A diferença muda o que vem a seguir.",
     objectionsKicker: "Sobre estalos, placas e cirurgia",
     objectionsTitle: "Já tentou aliviar a dor e ainda tem dúvidas?",
     objections: [
@@ -423,8 +568,42 @@ export const treatments: Record<string, TreatmentContent> = {
     ],
     methodHighlight: "Muitos quadros começam com cuidados conservadores",
     methodPoints: ["Histórico da dor e impacto na mastigação.", "Exame dos movimentos, músculos e articulações.", "Exames de imagem apenas quando necessários.", "Tratamentos anteriores e integração com outros profissionais."],
+    journey: {
+      kicker: "Como funciona o cuidado",
+      title: "Uma linha de cuidado que começa pelo conservador.",
+      intro:
+        "O caminho não é o mesmo para todo mundo, mas a sequência é: entender a origem, tratar com o que for menos invasivo e reavaliar o que mudou.",
+      steps: [
+        {
+          title: "1. Investigação da origem",
+          text: "Histórico da dor, exame dos movimentos, dos músculos e da articulação. Imagens são solicitadas apenas quando acrescentam informação à investigação.",
+        },
+        {
+          title: "2. Cuidado conservador e acompanhamento",
+          text: "Quando indicado, o cuidado começa por orientação de hábitos, fisioterapia e outros recursos conforme o diagnóstico. A resposta é acompanhada e o plano, ajustado.",
+        },
+        {
+          title: "3. Reavaliação e possibilidades",
+          text: "Se os sintomas persistem, a investigação é revista. Procedimentos na ATM entram em situações selecionadas, com benefícios, riscos e alternativas discutidos antes.",
+        },
+      ],
+    },
     authorityBody:
       "O Dr. Adriano atua na avaliação e no tratamento de alterações dos maxilares, da face e da articulação da mandíbula. Nos quadros de dor e limitação de movimento, sua participação começa pela investigação da origem dos sintomas, considerando os cuidados conservadores antes de discutir qualquer indicação cirúrgica.",
+    consultationQuestions: [
+      consultaEncaminhamento,
+      {
+        question: "Preciso levar exames ou a placa que uso?",
+        answer:
+          "Se você tem imagens da articulação ou usa uma placa, leve: elas adiantam a conversa. Se não tem, a avaliação começa pelo exame dos movimentos e pelo que você já tentou.",
+      },
+      {
+        question: "A consulta já define uma cirurgia?",
+        answer:
+          "Não. O cuidado costuma começar por opções conservadoras. Procedimentos são reservados a situações selecionadas, conforme o diagnóstico, os achados e a resposta ao tratamento.",
+      },
+      consultaParticular,
+    ],
     preparation: {
       title: "Para marcar, basta a dor que você sente.",
       text: "Se você já tem imagens da articulação ou usa uma placa, elas adiantam a conversa. Se não tem, a avaliação começa pelo exame dos movimentos e pelo que você já tentou.",
@@ -439,12 +618,11 @@ export const treatments: Record<string, TreatmentContent> = {
       { question: "Vou precisar operar?", answer: "Não é possível definir pela presença de dor ou estalos. O cuidado costuma começar com opções conservadoras. Procedimentos cirúrgicos são reservados a situações selecionadas, considerando diagnóstico, alterações encontradas e resposta ao tratamento." },
       { question: "Estalo sem dor precisa de tratamento?", answer: "Estalos isolados, sem dor e sem limitação dos movimentos, são comuns e geralmente não exigem tratamento. Se houver dor, travamento ou mudança na abertura da boca, esses sinais devem ser avaliados." },
       { question: "Quanto tempo leva para melhorar? A dor pode voltar?", answer: "A resposta varia com a causa, a conduta e os fatores envolvidos. Os sintomas podem oscilar ou reaparecer, por isso o acompanhamento permite ajustar o cuidado. Não há um prazo ou resultado igual para todos." },
-      faqValores,
-      faqSegundaOpiniao,
+      { question: "Dor de cabeça e zumbido têm relação com a mandíbula?", answer: "Pode haver relação em alguns casos, mas as duas queixas têm outras causas possíveis. O histórico e o exame ajudam a diferenciar e a definir se outro profissional deve participar da investigação." },
     ],
     closingTitle: "A dor está escolhendo o que você come? Vamos investigar.",
     closingText: "Agende uma avaliação para conversar sobre como a mandíbula interfere no seu dia. O próximo passo é entender a causa e discutir um cuidado orientado ao que você precisa recuperar na rotina.",
-    testimonials: [],
+    /* Sem relato aprovado: o bloco de confiança omite a prova social. */
     visualSummary: { kicker: "Articulação e músculos", title: "Investigar a dor. Cuidar do movimento.", cues: ["Dor na mandíbula", "Estalos", "Travamento"] },
     formQuestion: "Como podemos ajudar?",
     formOptions: neutralFormOptions,
@@ -465,12 +643,6 @@ export const treatments: Record<string, TreatmentContent> = {
     titleHighlight: "mordida não encaixa",
     intro: "Cortar os alimentos com os dentes, fechar os lábios sem esforço e se sentir à vontade com o próprio rosto podem fazer parte da mesma preocupação. A avaliação com o cirurgião e o ortodontista esclarece se a posição dos maxilares participa do incômodo e quais tratamentos considerar.",
     heroBadges: ["Integração com a ortodontia", "Função e estrutura facial", "João Pessoa"],
-    highlights: [
-      "Planejamento com seu ortodontista",
-      "Análise da mordida e da face",
-      "Etapas e recuperação explicadas",
-      "Indicação conforme o seu caso",
-    ],
     primaryCta: "Quero entender se tenho indicação",
     note: "Você não precisa chegar decidido a operar. O primeiro passo é entender a indicação.",
 
@@ -487,6 +659,8 @@ export const treatments: Record<string, TreatmentContent> = {
     consequenceTitle: "Mastigar melhor e se sentir bem com a própria face merecem uma conversa",
     consequenceText: "O que dificulta sua mastigação e o que incomoda na aparência devem ser ouvidos juntos. A avaliação relaciona essas expectativas à estrutura dos maxilares e explica quais mudanças são possíveis. Tempo de aparelho, recuperação e rotina de trabalho também entram na decisão desde o começo.",
 
+    midCtaQuestion:
+      "Aparelho, cirurgia ou os dois? A diferença está na posição dos maxilares, e ela precisa ser avaliada.",
     objectionsKicker: "Aparelho, face e recuperação",
     objectionsTitle: "E o aparelho, as mudanças no rosto e a volta à rotina?",
     objections: [
@@ -517,6 +691,20 @@ export const treatments: Record<string, TreatmentContent> = {
     },
     authorityBody:
       "O Dr. Adriano atua na avaliação e no tratamento de alterações dos maxilares e da face. Nos casos de alteração da mordida, sua participação é diferenciar a posição dos dentes da posição dos maxilares e planejar as etapas em conjunto com o ortodontista que acompanha você.",
+    consultationQuestions: [
+      consultaEncaminhamento,
+      {
+        question: "Preciso levar a documentação ortodôntica?",
+        answer:
+          "Se você já está em tratamento, a documentação e o contato do seu ortodontista adiantam a conversa. Se ainda não está, a avaliação começa pelo exame da mordida e pelo que incomoda você.",
+      },
+      {
+        question: "A consulta já define uma cirurgia?",
+        answer:
+          "Não. A avaliação diferencia a posição dos dentes da posição dos maxilares. Algumas alterações são tratadas só com ortodontia; havendo indicação cirúrgica, ela é discutida com o ortodontista antes de qualquer decisão.",
+      },
+      consultaParticular,
+    ],
     preparation: {
       title: "Para marcar, basta a dúvida.",
       text: "Se você já está em tratamento ortodôntico, o contato do seu ortodontista adianta a conversa. Se ainda não está, a avaliação começa pelo exame da mordida e pelo que incomoda você.",
@@ -532,11 +720,10 @@ export const treatments: Record<string, TreatmentContent> = {
       { question: "Como é a recuperação e o afastamento do trabalho?", answer: "Pode haver inchaço, desconforto, alterações de sensibilidade e restrições temporárias de alimentação e atividade. O retorno ao trabalho depende do procedimento, do tipo de atividade e da evolução. Esses cuidados são discutidos antes da cirurgia e acompanhados depois." },
       { question: "Vou ficar com a boca imobilizada?", answer: "Os recursos de fixação e a necessidade de elásticos ou limitações de movimento dependem da técnica e do caso. A equipe explica as orientações previstas para alimentação, higiene e movimentação antes do procedimento." },
       { question: "Minha mastigação ou respiração pode melhorar?", answer: "A melhora da função pode ser um objetivo quando a alteração dos maxilares participa da dificuldade. Benefícios para mastigação ou respiração dependem da causa e da indicação. Queixas respiratórias exigem investigação específica e, quando necessário, avaliação multidisciplinar." },
-      faqValores,
     ],
     closingTitle: "Antes de decidir sobre a cirurgia, entenda o que pode mudar para você.",
     closingText: "Agende uma avaliação para conversar sobre mastigação, face e expectativas. Com a participação do ortodontista, você pode discutir a indicação e conhecer as etapas antes de escolher como seguir.",
-    testimonials: [],
+    /* Sem relato aprovado: o bloco de confiança omite a prova social. */
     visualSummary: { kicker: "Mordida e face", title: "Planejar a função sem deixar suas expectativas de lado.", cues: ["Mastigação", "Posição dos maxilares", "Mudanças faciais"] },
     formQuestion: "Como podemos ajudar?",
     formOptions: neutralFormOptions,
@@ -557,12 +744,6 @@ export const treatments: Record<string, TreatmentContent> = {
     titleHighlight: "comer e sorrir",
     intro: "Quando falta um dente ou a prótese incomoda, até uma refeição simples pede adaptações. Implantes podem fazer parte da reabilitação para buscar mais conforto ao mastigar. A avaliação esclarece se são uma opção para você e como planejar os dentes que eles vão sustentar.",
     heroBadges: ["Avaliação para implantes", "Planejamento com seu dentista", "João Pessoa"],
-    highlights: [
-      "Avaliação do osso e da gengiva",
-      "Implante e prótese no mesmo plano",
-      "Etapas e cuidados explicados",
-      "Orientação para a manutenção",
-    ],
     primaryCta: "Quero saber se posso fazer implante",
     note: "Conheça as opções e as etapas antes de decidir pelo tratamento.",
 
@@ -579,6 +760,8 @@ export const treatments: Record<string, TreatmentContent> = {
     consequenceTitle: "O plano começa pelo que faz falta no seu dia a dia",
     consequenceText: "A reabilitação deve considerar os alimentos que você evita, o conforto para falar e o que incomoda na prótese atual. Os implantes dão suporte aos dentes da prótese e podem contribuir para essas funções quando indicados. A avaliação relaciona seus objetivos às condições da boca e aos cuidados de manutenção.",
 
+    midCtaQuestion:
+      "Seu osso e sua mordida comportam um implante? É exatamente essa pergunta que a avaliação responde.",
     objectionsKicker: "O que costuma travar a decisão",
     objectionsTitle: "Prótese removível, pouco osso ou medo de operar: vale conversar.",
     objections: [
@@ -610,6 +793,20 @@ export const treatments: Record<string, TreatmentContent> = {
     },
     authorityBody:
       "O Dr. Adriano atua na avaliação e no tratamento de alterações dos maxilares e da face. Na reabilitação com implantes, sua participação é a etapa cirúrgica, planejada junto com o dentista responsável pela prótese para que o implante atenda ao que a sua mastigação precisa.",
+    consultationQuestions: [
+      consultaEncaminhamento,
+      {
+        question: "Preciso levar radiografia ou tomografia?",
+        answer:
+          "Se você já tem, leve: elas adiantam a conversa. Se não tem, a avaliação começa pelo exame da boca e pelo que você quer voltar a comer. Exames adicionais são solicitados só quando necessários.",
+      },
+      {
+        question: "A consulta já define a cirurgia?",
+        answer:
+          "Não. A avaliação esclarece se os implantes são uma opção, o que falta analisar e se a boca precisa de algum preparo. A proposta, com etapas, cuidados e alternativas, vem antes de qualquer decisão sua.",
+      },
+      consultaParticular,
+    ],
     preparation: {
       title: "Para marcar, não precisa juntar nada.",
       text: "Se você já tem radiografia ou tomografia, elas adiantam a conversa. Se não tem, a avaliação começa pelo exame da boca e pelo que você quer voltar a comer.",
@@ -625,11 +822,10 @@ export const treatments: Record<string, TreatmentContent> = {
       { question: "Vou ficar sem dente durante o processo?", answer: "As possibilidades de prótese provisória são analisadas no planejamento. Elas dependem da região, da estabilidade obtida e da necessidade de proteger a cicatrização; não são iguais em todos os casos." },
       { question: "Quais são os riscos e os cuidados depois?", answer: "Podem ocorrer infecção, dificuldades de cicatrização ou falha na integração do implante, entre outros riscos. Saúde geral, tabagismo, higiene e condições locais influenciam o cuidado. Consultas de acompanhamento e manutenção da prótese continuam necessárias após o tratamento." },
       faqDentista,
-      faqValores,
     ],
     closingTitle: "O que você gostaria de mudar na próxima vez que se sentar à mesa?",
     closingText: "Se a falta de dentes ou a prótese limita suas refeições, agende uma avaliação. Vamos entender o que incomoda e discutir se os implantes podem fazer parte de um plano para reabilitar sua mastigação.",
-    testimonials: [],
+    /* Sem relato aprovado: o bloco de confiança omite a prova social. */
     visualSummary: { kicker: "Dentes e mastigação", title: "O implante sustenta a prótese. O plano considera sua rotina.", cues: ["Osso e gengiva", "Mastigação", "Futura prótese"] },
     formQuestion: "Como podemos ajudar?",
     formOptions: neutralFormOptions,

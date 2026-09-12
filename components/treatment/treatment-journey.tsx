@@ -1,4 +1,5 @@
 import { HeartPulse, Search, Waypoints } from "lucide-react";
+import { ClinicalCaseCard } from "@/components/clinical-case";
 import type { TreatmentContent } from "@/lib/content";
 
 /**
@@ -8,10 +9,19 @@ import type { TreatmentContent } from "@/lib/content";
  */
 const stepIcons = [Search, Waypoints, HeartPulse];
 
-/** Uma trilha mantém a sequência de cuidado visível no desktop e no celular. */
+/**
+ * "Como funciona o tratamento" — a trilha de etapas, agora nas cinco rotas.
+ *
+ * Existia só em implantes e ortognática. As três que não tinham eram
+ * justamente aquelas em que o desfecho é incerto por natureza — apneia, DTM e
+ * reconstrução —, e é nelas que "o que acontece depois que eu marco?" mais
+ * adia o contato.
+ *
+ * Quando há caso aprovado, ele entra como cartão AQUI, ao fim da trilha: é a
+ * mesma pergunta que as etapas respondem, só que na prática. Um bloco de
+ * portfólio à parte responderia duas vezes.
+ */
 export function TreatmentJourney({ content }: { content: TreatmentContent }) {
-  if (!content.journey) return null;
-
   return (
     <section className="section journey-section" id="etapas">
       <div className="container">
@@ -46,6 +56,8 @@ export function TreatmentJourney({ content }: { content: TreatmentContent }) {
             );
           })}
         </ol>
+
+        <ClinicalCaseCard item={content.clinicalCase} />
       </div>
     </section>
   );

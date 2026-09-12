@@ -10,6 +10,9 @@ const routes: Array<{
   changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"];
 }> = [
   { path: "", priority: 1, changeFrequency: "monthly" },
+  /* Destino da busca por nome e do link da bio: ranqueia melhor que a âncora
+     que existia na home. */
+  { path: "/sobre", priority: 0.9, changeFrequency: "monthly" },
   { path: "/apneia-do-sono", priority: 0.8, changeFrequency: "yearly" },
   { path: "/implantes-dentarios", priority: 0.8, changeFrequency: "yearly" },
   { path: "/reconstrucao-ossea", priority: 0.8, changeFrequency: "yearly" },

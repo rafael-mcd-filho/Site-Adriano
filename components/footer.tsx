@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowUpRight, Clock3, MapPin, ShieldCheck } from "lucide-react";
+import { ArrowRight, Clock3, MapPin, ShieldCheck } from "lucide-react";
 import { areaNavigation, schemaName, siteConfig } from "@/lib/site";
 
 /**
@@ -72,6 +72,9 @@ export function Footer() {
               </a>
             </li>
             <li>
+              <Link href="/sobre">Dr. Adriano Rocha Germano</Link>
+            </li>
+            <li>
               <Link href="/para-dentistas">Para dentistas</Link>
             </li>
             <li>
@@ -99,7 +102,7 @@ export function Footer() {
             </li>
           </ul>
           <Link className="footer-action" href="/#contato">
-            Quero entender meu caso <ArrowUpRight size={16} aria-hidden="true" />
+            Quero entender meu caso <ArrowRight size={16} aria-hidden="true" />
           </Link>
         </div>
       </div>

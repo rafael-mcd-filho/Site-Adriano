@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { WhatsAppIcon } from "@/components/whatsapp-button";
+import { ctaLadder } from "@/lib/content";
 import {
   getWhatsAppHref,
   siteConfig,
@@ -69,17 +70,13 @@ export function FloatingWhatsApp({ message }: { message: string }) {
       )}
       target={isConfigured ? "_blank" : undefined}
       rel={isConfigured ? "noopener noreferrer" : undefined}
-      aria-label={isConfigured ? "Falar com a equipe pelo WhatsApp" : "Ir para o formulário de contato"}
+      aria-label={isConfigured ? ctaLadder.floating + " pelo WhatsApp" : ctaLadder.floating + " pelo formulário de contato"}
       aria-hidden={!ready}
       tabIndex={ready ? 0 : -1}
-      title={
-        isConfigured
-          ? "Falar pelo WhatsApp"
-          : "Solicitar contato da equipe"
-      }
+      title={isConfigured ? "Falar pelo WhatsApp" : "Solicitar contato da equipe"}
     >
       <WhatsAppIcon size={22} />
-      <span>{isConfigured ? "WhatsApp" : "Contato"}</span>
+      <span>{ctaLadder.floating}</span>
     </a>
   );
 }

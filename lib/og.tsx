@@ -54,6 +54,12 @@ export const ogCards = {
     footer: "Entenda a indicação e a jornada com seu ortodontista",
     alt: "Cirurgia ortognática planejada em conjunto com a ortodontia",
   },
+  sobre: {
+    eyebrow: "DR. ADRIANO ROCHA GERMANO",
+    title: "Cirurgião bucomaxilofacial em João Pessoa.",
+    footer: "Certificação Board FBCOMS · Banca de examinadores · CRO-PB 12753",
+    alt: "Formação e credenciais do Dr. Adriano Rocha Germano",
+  },
   "para-dentistas": {
     eyebrow: "CANAL PROFISSIONAL",
     title: "A etapa cirúrgica precisa avançar. O cuidado precisa continuar.",

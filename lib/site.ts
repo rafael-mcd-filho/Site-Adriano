@@ -81,12 +81,60 @@ export const siteConfig = {
 /** O modo demo diz respeito ao atendimento, não à identidade já confirmada. */
 export const schemaName = siteConfig.fullName;
 
+/**
+ * Faixa logo abaixo do hero.
+ *
+ * Eram quatro atributos por página — "avaliação antes da indicação", "opções
+ * explicadas com clareza". Boas mensagens, mas afirmadas pelo próprio
+ * anunciante: no lugar onde o visitante ainda decide se fica, o que reduz
+ * incerteza é fato verificável, não adjetivo. Os atributos continuam ditos nas
+ * seções, onde há espaço para sustentá-los.
+ */
+export const credentialFacts: [string, string, string, string] = [
+  siteConfig.registry,
+  "Certificação Board · FBCOMS 2026",
+  "Banca de examinadores do Board",
+  "Atendimento particular · " + siteConfig.city,
+];
+
+/**
+ * Navegação por área.
+ *
+ * `hint` existe porque o menu listava nomes de procedimento, e quem chega não
+ * sabe o nome do procedimento — a própria home diz isso ("você não precisa
+ * saber o nome do tratamento"). Quem ronca não procura por "apneia do sono"
+ * num menu de dentista; quem ouviu "não tem osso" não procura por
+ * "reconstrução óssea". A linha de sintoma transforma o índice em triagem.
+ *
+ * Escrita na língua da pessoa, não na do prontuário, e sem prometer desfecho:
+ * são os sinais que levam alguém a procurar, não o que o tratamento resolve.
+ */
 export const areaNavigation = [
-  { label: "Apneia do sono", href: "/apneia-do-sono" },
-  { label: "Implantes dentários", href: "/implantes-dentarios" },
-  { label: "Reconstrução óssea", href: "/reconstrucao-ossea" },
-  { label: "DTM e ATM", href: "/cirurgia-atm" },
-  { label: "Cirurgia ortognática", href: "/cirurgia-ortognatica" },
+  {
+    label: "Apneia do sono",
+    href: "/apneia-do-sono",
+    hint: "Ronco · pausas na respiração · cansaço ao acordar",
+  },
+  {
+    label: "Implantes dentários",
+    href: "/implantes-dentarios",
+    hint: "Falta de dentes · prótese que incomoda",
+  },
+  {
+    label: "Reconstrução óssea",
+    href: "/reconstrucao-ossea",
+    hint: "“Não tem osso suficiente para implante”",
+  },
+  {
+    label: "DTM e ATM",
+    href: "/cirurgia-atm",
+    hint: "Dor na mandíbula · estalos · travamento",
+  },
+  {
+    label: "Cirurgia ortognática",
+    href: "/cirurgia-ortognatica",
+    hint: "Mordida que não encaixa · esforço para mastigar",
+  },
 ];
 
 /** Telefones em formato E.164, sem duplicar quando WhatsApp e fixo coincidem. */
