@@ -34,6 +34,7 @@ export const metadata: Metadata = pageMetadata({
     "Formação, certificação Board do Colégio Brasileiro de CTBMF e critérios de indicação do Dr. Adriano Rocha Germano, cirurgião bucomaxilofacial em João Pessoa.",
   path: "/sobre",
   ogSlug: "sobre",
+  absoluteTitle: true,
 });
 
 const whatsappMessage =

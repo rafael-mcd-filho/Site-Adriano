@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { siteConfig } from "@/lib/site";
 
 export default function robots(): MetadataRoute.Robots {
-  if (siteConfig.isDemo) {
+  if (!siteConfig.isIndexable) {
     return {
       rules: {
         userAgent: "*",

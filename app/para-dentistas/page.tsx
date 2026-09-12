@@ -31,7 +31,7 @@ import { breadcrumbSchema, faqSchema } from "@/lib/schema";
 import { credentialFacts, siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Encaminhamento para Cirurgia Buco-Maxilo-Facial",
+  title: "Encaminhamento Buco-Maxilo-Facial",
   socialTitle: "Para dentistas | Dr. Adriano",
   description:
     "Discuta indicação, etapa cirúrgica e continuidade do cuidado com o Dr. Adriano Rocha Germano. Encaminhamento buco-maxilo-facial em João Pessoa.",

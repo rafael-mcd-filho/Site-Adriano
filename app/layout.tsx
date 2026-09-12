@@ -60,13 +60,8 @@ export const metadata: Metadata = {
     description: siteConfig.description,
     images: [homeOgImage.url],
   },
-  robots: siteConfig.isDemo
+  robots: siteConfig.isIndexable
     ? {
-        index: false,
-        follow: false,
-        noarchive: true,
-      }
-    : {
         index: true,
         follow: true,
         googleBot: {
@@ -76,6 +71,11 @@ export const metadata: Metadata = {
           "max-snippet": -1,
           "max-video-preview": -1,
         },
+      }
+    : {
+        index: false,
+        follow: false,
+        noarchive: true,
       },
 };
 
@@ -127,8 +127,25 @@ const structuredData = {
       url: siteConfig.url,
       image: siteConfig.url + homeOgImage.url,
       inLanguage: "pt-BR",
-      priceRange: "$$",
+      /*
+       * `priceRange: "$$"` saiu. Era um dado que ninguém verificou, num site
+       * cuja regra é não publicar o que não dá para comprovar — e faixa de
+       * preço é justamente o tipo de informação que a publicidade odontológica
+       * não comporta. O campo é opcional para o Google.
+       *
+       * `address` entrou: o nó do consultório declarava `areaServed` mas
+       * nenhum endereço, e endereço é o que o Google usa para entender um
+       * negócio local. Fica no nível de cidade enquanto o endereço definitivo
+       * não existir — verdadeiro e incompleto, em vez de inventado.
+       */
       medicalSpecialty: "OralAndMaxillofacialSurgery",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "João Pessoa",
+        addressRegion: "PB",
+        addressCountry: "BR",
+        ...(siteConfig.address ? { streetAddress: siteConfig.address } : {}),
+      },
       areaServed: {
         "@type": "City",
         name: "João Pessoa",

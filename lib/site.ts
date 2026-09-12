@@ -4,17 +4,42 @@
  * Endereço, telefone e horários ainda usam dados de demonstração; o modo demo
  * permanece ativo até a configuração dessas informações de atendimento.
  */
-const isDemo = process.env.NEXT_PUBLIC_SITE_IS_DEMO !== "false";
+/**
+ * Indexação e dados de demonstração eram a MESMA chave, e isso tornava o site
+ * impossível de publicar: `NEXT_PUBLIC_SITE_IS_DEMO=false` era a única forma
+ * de sair do `noindex`, e ela também apagava endereço, telefone e mapa. Quem
+ * quisesse aparecer na busca tinha de escolher entre publicar dado falso e
+ * publicar sem dado nenhum.
+ *
+ * Agora são duas decisões separadas:
+ *
+ * - `isIndexable` diz se o site pode ser rastreado. Passou a ser o padrão:
+ *   um site que existe para ser encontrado não deveria depender de alguém
+ *   lembrar de destravá-lo. `NEXT_PUBLIC_SITE_NOINDEX=true` fecha de volta.
+ * - `NEXT_PUBLIC_SITE_IS_DEMO` continua dizendo se os dados de atendimento
+ *   ainda são provisórios.
+ *
+ * O acoplamento que sobrou é de propósito e vai no sentido seguro: **abrir o
+ * índice desliga o modo demo**. Nada de demonstração chega ao Google, porque
+ * endereço inventado indexado manda paciente para a porta de um estranho.
+ * O resultado é um site incompleto e honesto — a seção de localização pede
+ * para confirmar com a equipe — em vez de um site completo e mentiroso.
+ */
+const isPreviewDeploy = process.env.NEXT_PUBLIC_VERCEL_ENV === "preview";
+export const isIndexable =
+  !isPreviewDeploy && process.env.NEXT_PUBLIC_SITE_NOINDEX !== "true";
+
+const wantsDemoData = process.env.NEXT_PUBLIC_SITE_IS_DEMO !== "false";
+const isDemo = wantsDemoData && !isIndexable;
 
 /**
- * Valor de demonstração: vale apenas enquanto `isDemo` for true e vira string
- * vazia no momento em que o site sai do modo demo.
+ * Valor de demonstração: vira string vazia assim que o site pode ser indexado
+ * ou quando o modo demo é desligado explicitamente.
  *
  * A trava é deliberada. Endereço, telefone e mapa inventados que vazassem para
  * produção mandariam paciente para a porta errada e fariam alguém ligar para o
- * número de um estranho. Assim, esquecer de preencher a variável de ambiente
- * quebra a seção de forma visível — em vez de publicar mentira com aparência
- * de verdade.
+ * número de um estranho. Assim, faltar a variável de ambiente quebra a seção
+ * de forma visível — em vez de publicar mentira com aparência de verdade.
  */
 const demo = (value: string) => (isDemo ? value : "");
 
@@ -76,6 +101,7 @@ export const siteConfig = {
       "https://maps.google.com/maps?q=Bairro%20dos%20Estados%2C%20Jo%C3%A3o%20Pessoa%2C%20PB&z=14&output=embed",
     ),
   isDemo,
+  isIndexable,
 };
 
 /** O modo demo diz respeito ao atendimento, não à identidade já confirmada. */

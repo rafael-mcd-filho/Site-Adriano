@@ -94,6 +94,29 @@ A home encurtou 1,9 tela. **As rotas de tratamento ficaram mais altas**, e isso 
 
 Se o comprimento das rotas de tratamento incomodar na revisão, o corte mais honesto é a ilustração do motivo visual no celular, que ocupa cerca de 340 px de decoração dentro da seção de decisão.
 
+## 6.1 Indexação e SEO
+
+Indexação e dados de demonstração eram a mesma chave, e isso tornava o site impossível de publicar: `NEXT_PUBLIC_SITE_IS_DEMO=false` era a única saída do `noindex`, e ela também apagava endereço, telefone e mapa. Quem quisesse aparecer na busca tinha de escolher entre publicar dado falso e publicar sem dado nenhum.
+
+Agora são duas decisões. `isIndexable` é o padrão — um site que existe para ser encontrado não deveria depender de alguém lembrar de destravá-lo — e `NEXT_PUBLIC_SITE_NOINDEX=true` fecha de volta. Deploys de preview da Vercel saem do índice sozinhos. O acoplamento que sobrou vai no sentido seguro: **abrir o índice desliga o modo demo**, então nada de demonstração chega ao Google.
+
+Defeitos encontrados e corrigidos na revisão:
+
+| Defeito | Efeito | Correção |
+|---|---|---|
+| `pageMetadata` devolvia `index, follow` sempre | A home estava `noindex` e as rotas de tratamento, `/sobre` e `/para-dentistas` estavam indexáveis — o contrário do pretendido. O `robots.txt` bloqueava tudo antes, então ninguém percebia. | A trava global passou a valer antes do parâmetro da página. |
+| `robots.txt` com `Disallow: /` | Nenhuma página era rastreada. | Passou a depender de `isIndexable`; agora declara o sitemap e libera o rastreio. |
+| Política de privacidade `noindex` e no sitemap | Contradição que o Search Console reporta como "URL enviada marcada como noindex". | A página passou a usar `pageMetadata`, valendo a intenção documentada no sitemap. |
+| Seis títulos entre 66 e 74 caracteres | Truncados no resultado de busca. O template do layout soma " \| Dr. Adriano" a cada um. | Encurtados para 43–57, preservando termo principal e cidade. |
+| `/sobre` com "Dr. Adriano" duas vezes no título | "Dr. Adriano Rocha Germano \| Cirurgião Bucomaxilofacial \| Dr. Adriano". | `absoluteTitle` ignora o sufixo do layout. |
+| Nó `Dentist` sem `address` | Endereço é o campo que o Google usa para entender um negócio local. | Adicionado no nível de cidade — verdadeiro e incompleto, em vez de inventado. |
+| `priceRange: "$$"` | Dado que ninguém verificou, num site cuja regra é não publicar o que não se comprova. | Removido. O campo é opcional. |
+| Bloco de endereço vazio fora do modo demo | Rótulo "Endereço" sem nada embaixo, parecendo falha de carregamento. | Linha de espera: "Confirmado com a equipe no agendamento". |
+
+Estado final, nas nove rotas: um H1, canonical absoluto, `index, follow`, título de 37 a 57 caracteres, descrição de 137 a 157, cartão social próprio, dados estruturados sem campo inventado e nenhuma imagem sem `alt`.
+
+Duas observações que não são defeito. `preload` no hero é a prop correta do `next/image` no Next 16 — `priority` está deprecada e apenas delega para ela. E o texto da política de privacidade continua sendo uma minuta pendente de revisão jurídica: ela passou a ser indexável por coerência com o sitemap, mas o conteúdo ainda precisa dos dados do controlador.
+
 ## 7. Critérios de aceite da especificação
 
 - [x] Nenhuma página passa de oito blocos grandes.

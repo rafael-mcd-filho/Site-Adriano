@@ -1,17 +1,25 @@
 import type { Metadata } from "next";
 import { Cookie, Database, LockKeyhole, MessageCircle, ShieldCheck } from "lucide-react";
+import { pageMetadata } from "@/lib/metadata";
 import { schemaName } from "@/lib/site";
 
-export const metadata: Metadata = {
+/*
+ * A página declarava `index: false` e, ao mesmo tempo, `app/sitemap.ts` a
+ * listava com o comentário de que ela é "indexável de propósito". Sitemap e
+ * página diziam coisas opostas, e o Search Console reporta isso como erro
+ * ("URL enviada marcada como noindex").
+ *
+ * Vale a intenção documentada no sitemap: quem procura a política precisa
+ * achá-la sem depender do link do rodapé. `pageMetadata` ainda submete a
+ * decisão à trava global de indexação.
+ */
+export const metadata: Metadata = pageMetadata({
   title: "Política de Privacidade",
   description:
-    "Saiba como os dados enviados pelo formulário e pelos canais de contato são tratados.",
-  robots: {
-    index: false,
-    follow: true,
-  },
-  alternates: { canonical: "/politica-de-privacidade" },
-};
+    "Como os dados enviados pelo formulário e pelos canais de contato do Dr. Adriano Rocha Germano são tratados, e como exercer seus direitos.",
+  path: "/politica-de-privacidade",
+  ogSlug: "politica-de-privacidade",
+});
 
 export default function PrivacyPage() {
   return (

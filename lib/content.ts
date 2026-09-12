@@ -5,7 +5,7 @@ import type { PainIcon } from "@/components/pain-list";
  * YMYL: o Google pondera recência explícita. Quando uma página for revisada
  * sozinha, defina `lastReviewed` só nela.
  */
-export const contentLastReviewed = "2026-09-11";
+export const contentLastReviewed = "2026-09-12";
 
 /**
  * Opções do formulário das páginas de tratamento.
@@ -402,7 +402,7 @@ export const treatments: Record<string, TreatmentContent> = {
       description: "Deixe seu nome e WhatsApp. A equipe explica como funciona a consulta e quais exames do sono ajudam na avaliação.",
     },
     whatsappMessage: "Olá, vi a página sobre apneia do sono e gostaria de saber como funciona a avaliação buco-maxilo-facial.",
-    metadata: { title: "Apneia do Sono em João Pessoa | Avaliação Buco-Maxilo-Facial", description: "Ronco, pausas na respiração e cansaço ao acordar? Entenda o papel dos maxilares na apneia do sono e da avaliação multidisciplinar em João Pessoa." },
+    metadata: { title: "Apneia do Sono em João Pessoa", description: "Ronco, pausas na respiração e cansaço ao acordar? Entenda o papel dos maxilares na apneia do sono e da avaliação multidisciplinar em João Pessoa." },
   },
 
   "reconstrucao-ossea": {
@@ -519,7 +519,7 @@ export const treatments: Record<string, TreatmentContent> = {
       description: "Deixe seu nome e WhatsApp. A equipe explica como funciona a consulta e quais exames ajudam a avaliar a região da perda óssea.",
     },
     whatsappMessage: "Olá, vi a página sobre reconstrução óssea e gostaria de saber como avaliar minhas possibilidades de reabilitação.",
-    metadata: { title: "Reconstrução Óssea em João Pessoa | Enxerto para Implantes", description: "Ouviu que não há osso suficiente para implante? Entenda como a reconstrução e o enxerto ósseo são avaliados em João Pessoa, com indicação individual." },
+    metadata: { title: "Reconstrução Óssea e Enxerto em João Pessoa", description: "Ouviu que não há osso suficiente para implante? Entenda como a reconstrução e o enxerto ósseo são avaliados em João Pessoa, com indicação individual." },
   },
 
   "cirurgia-atm": {
@@ -631,7 +631,7 @@ export const treatments: Record<string, TreatmentContent> = {
       description: "Deixe seu nome e WhatsApp. A equipe explica como funciona a consulta e responde o que você precisar antes de marcar.",
     },
     whatsappMessage: "Olá, vi a página sobre DTM e ATM e gostaria de saber como funciona a avaliação da mandíbula.",
-    metadata: { title: "DTM e ATM em João Pessoa | Dor na Mandíbula e Tratamento", description: "Dor na mandíbula, estalos ou travamento? Conheça a avaliação de DTM e ATM em João Pessoa, os cuidados conservadores e quando a cirurgia é considerada." },
+    metadata: { title: "DTM e ATM: Dor na Mandíbula em João Pessoa", description: "Dor na mandíbula, estalos ou travamento? Conheça a avaliação de DTM e ATM em João Pessoa, os cuidados conservadores e quando a cirurgia é considerada." },
   },
 
   "cirurgia-ortognatica": {
@@ -732,7 +732,7 @@ export const treatments: Record<string, TreatmentContent> = {
       description: "Deixe seu nome e WhatsApp. A equipe explica como funciona a consulta e qual documentação ortodôntica levar.",
     },
     whatsappMessage: "Olá, vi a página sobre cirurgia ortognática e gostaria de entender como funciona a avaliação de indicação.",
-    metadata: { title: "Cirurgia Ortognática em João Pessoa | Indicação e Etapas", description: "Mordida que não encaixa ou dificuldade para mastigar? Entenda a indicação, o papel do ortodontista e a jornada da cirurgia ortognática em João Pessoa." },
+    metadata: { title: "Cirurgia Ortognática em João Pessoa", description: "Mordida que não encaixa ou dificuldade para mastigar? Entenda a indicação, o papel do ortodontista e a jornada da cirurgia ortognática em João Pessoa." },
   },
 
   "implantes-dentarios": {
@@ -834,7 +834,7 @@ export const treatments: Record<string, TreatmentContent> = {
       description: "Deixe seu nome e WhatsApp. A equipe explica como funciona a consulta e quais exames ajudam a avaliar o suporte para implantes.",
     },
     whatsappMessage: "Olá, vi a página de implantes dentários e gostaria de saber como funciona a avaliação para o meu caso.",
-    metadata: { title: "Implantes Dentários em João Pessoa | Avalie seu Caso", description: "Perdeu dentes ou sente incômodo com a prótese? Conheça a avaliação para implantes dentários em João Pessoa: osso, gengiva, mordida e futura reabilitação." },
+    metadata: { title: "Implantes Dentários em João Pessoa", description: "Perdeu dentes ou sente incômodo com a prótese? Conheça a avaliação para implantes dentários em João Pessoa: osso, gengiva, mordida e futura reabilitação." },
   },
 
 

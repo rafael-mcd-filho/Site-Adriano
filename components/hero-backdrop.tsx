@@ -18,6 +18,12 @@ export function HeroBackdrop({ page }: { page: string }) {
   return (
     <>
       <div className="hero-photo-backdrop" aria-hidden="true">
+        {/*
+          `preload` é a prop atual do next/image no Next 16; `priority` está
+          deprecada e apenas delega para ela. Esta imagem cobre o hero inteiro,
+          então é o elemento de maior renderização (LCP) de todas as rotas, e
+          LCP é uma das métricas que o Google pondera — vale manter marcada.
+        */}
         <Image
           src={src}
           alt=""

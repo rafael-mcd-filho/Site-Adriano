@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import type { TreatmentContent } from "@/lib/content";
 import { ogImageFor, type OgSlug } from "@/lib/og";
+import { siteConfig } from "@/lib/site";
 
 export const siteName = "Dr. Adriano BMF";
 
@@ -13,6 +14,12 @@ type PageMetadataInput = {
   socialTitle?: string;
   /** Páginas de confirmação existem para medir conversão, não para ranquear. */
   index?: boolean;
+  /**
+   * Ignora o sufixo " | Dr. Adriano" do layout. Serve às páginas cujo título
+   * já traz o nome: sem isto, `/sobre` saía como "Dr. Adriano Rocha Germano |
+   * Cirurgião Bucomaxilofacial | Dr. Adriano".
+   */
+  absoluteTitle?: boolean;
 };
 
 /**
@@ -51,14 +58,24 @@ export function pageMetadata({
   ogSlug = "home",
   socialTitle,
   index = true,
+  absoluteTitle = false,
 }: PageMetadataInput): Metadata {
   const image = ogImageFor(ogSlug);
 
   return {
-    title,
+    title: absoluteTitle ? { absolute: title } : title,
     description,
     alternates: { canonical: path },
-    robots: index ? indexableRobots : noIndexRobots,
+    /*
+     * A trava global vem primeiro.
+     *
+     * Sem ela, `pageMetadata` devolvia `index, follow` sempre — e como o
+     * `noindex` do modo demo vivia só no layout, as rotas filhas o
+     * SOBRESCREVIAM. O resultado era a home fora do índice e as páginas de
+     * tratamento dentro: exatamente ao contrário do que se queria, e sem que
+     * ninguém percebesse, porque o robots.txt bloqueava tudo antes.
+     */
+    robots: index && siteConfig.isIndexable ? indexableRobots : noIndexRobots,
     openGraph: {
       type: "website",
       locale: "pt_BR",

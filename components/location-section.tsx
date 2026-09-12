@@ -69,10 +69,20 @@ export function LocationSection() {
           </p>
 
           <div className="info-blocks">
+            {/*
+              Sem endereço definitivo, `addressLines` é uma lista vazia e o
+              bloco aparecia com o rótulo e nada embaixo. A linha de espera diz
+              a verdade — o local existe, é confirmado no agendamento — em vez
+              de deixar um campo órfão parecendo erro de carregamento.
+            */}
             <InfoBlock
               icon={<MapPin size={18} />}
               label="Endereço"
-              lines={siteConfig.addressLines}
+              lines={
+                siteConfig.addressLines.length
+                  ? siteConfig.addressLines
+                  : ["Confirmado com a equipe no agendamento"]
+              }
             />
             <InfoBlock
               icon={<Phone size={18} />}
