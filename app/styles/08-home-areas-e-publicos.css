@@ -1,0 +1,305 @@
+/* Blocos da home: selo em pílula, áreas de atuação e os dois públicos.
+   Fatia de globals.css — a ordem dos @import lá é significativa. */
+
+.pill-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+  color: var(--blue-600);
+  font-family: var(--font-source-sans), sans-serif;
+  font-size: var(--fs-label);
+  font-weight: 800;
+  gap: 6px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.centered-heading .pill-badge {
+  margin-bottom: 18px;
+}
+/* Áreas de atuação */
+.areas-section {
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.areas-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+}
+
+.area-card {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  flex-direction: column;
+  border: 1px solid rgba(var(--navy-800-rgb), 0.1);
+  border-radius: var(--radius-lg);
+  background: var(--white);
+  box-shadow: var(--shadow-sm);
+  transition:
+    transform 260ms ease,
+    box-shadow 260ms ease;
+}
+
+.area-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-4px);
+}
+
+/* Marca desenhada em vez de foto: nada a baixar, nada de licença de banco de
+   imagem e nenhuma foto genérica de consultório num site clínico. */
+.area-visual {
+  position: relative;
+  display: grid;
+  height: 132px;
+  flex: 0 0 auto;
+  place-items: center;
+  background: linear-gradient(150deg, var(--surface), var(--blue-50));
+  color: var(--blue-600);
+}
+
+.motif-thumb {
+  width: 92px;
+  height: 92px;
+  transition: transform 500ms ease;
+}
+
+.area-card:hover .motif-thumb {
+  transform: scale(1.06);
+}
+
+.area-badge {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  background: var(--navy-800);
+  color: var(--white);
+  font-family: var(--font-source-sans), sans-serif;
+  font-size: var(--fs-micro);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.area-badge-teal {
+  background: var(--blue-600);
+}
+
+.area-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.area-body h3 {
+  margin-bottom: 8px;
+  font-size: var(--fs-body);
+}
+
+.area-body > p {
+  margin-bottom: 15px;
+  font-size: var(--fs-fine);
+  line-height: 1.55;
+}
+
+.area-cues {
+  display: grid;
+  flex: 1;
+  margin: 0 0 18px;
+  padding: 0;
+  gap: 7px;
+  list-style: none;
+}
+
+.area-cues li {
+  display: flex;
+  align-items: flex-start;
+  color: var(--ink);
+  font-size: var(--fs-fine);
+  gap: 8px;
+  line-height: 1.4;
+}
+
+.area-cues svg {
+  flex: 0 0 auto;
+  margin-top: 4px;
+  color: var(--blue-600);
+}
+
+.area-link {
+  display: inline-flex;
+  align-items: center;
+  margin-top: auto;
+  color: var(--blue-600);
+  font-size: var(--fs-fine);
+  font-weight: 700;
+  gap: 4px;
+  transition: color 180ms ease;
+}
+
+/* Estica a área clicável para o card inteiro sem transformar o card num link
+   gigante: o nome acessível continua sendo "Saiba mais sobre X". */
+.area-link::after {
+  position: absolute;
+  content: "";
+  inset: 0;
+}
+
+.area-card:hover .area-link {
+  color: var(--navy-800);
+}
+
+.area-link:focus-visible {
+  outline: 2px solid var(--blue-600);
+  outline-offset: 3px;
+}
+
+/* Dois públicos */
+.audience-section {
+  background: var(--white);
+}
+
+.audience-grid {
+  display: grid;
+  align-items: stretch;
+  gap: 26px;
+  grid-template-columns: 1fr 1fr;
+}
+
+.audience-card {
+  display: flex;
+  overflow: hidden;
+  flex-direction: column;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  background: var(--white);
+  box-shadow: var(--shadow-sm);
+}
+
+.audience-visual {
+  position: relative;
+  display: grid;
+  height: 176px;
+  place-items: center;
+  background: linear-gradient(140deg, var(--surface), var(--blue-50));
+  color: var(--blue-600);
+}
+
+.audience-dentista .audience-visual {
+  background: linear-gradient(140deg, var(--blue-50), var(--blue-100));
+  color: var(--navy-800);
+}
+
+.audience-visual .motif-thumb {
+  width: 118px;
+  height: 118px;
+}
+
+.audience-badge {
+  position: absolute;
+  bottom: 16px;
+  left: 20px;
+  padding: 6px 13px;
+  border-radius: var(--radius-pill);
+  background: var(--blue-600);
+  color: var(--white);
+  font-family: var(--font-source-sans), sans-serif;
+  font-size: var(--fs-label);
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.audience-dentista .audience-badge {
+  background: var(--navy-800);
+}
+
+.audience-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: clamp(24px, 3vw, 32px);
+}
+
+.audience-body h3 {
+  margin-bottom: 10px;
+  font-size: var(--fs-h3);
+}
+
+.audience-body > p {
+  margin-bottom: 24px;
+  font-size: var(--fs-sm);
+}
+
+.audience-label {
+  margin: 0 0 12px;
+  color: var(--muted);
+  font-size: var(--fs-label);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.audience-list {
+  display: grid;
+  margin: 0 0 24px;
+  padding: 0;
+  gap: 9px;
+  list-style: none;
+}
+
+.audience-list li {
+  display: flex;
+  align-items: flex-start;
+  color: var(--ink);
+  font-size: var(--fs-sm);
+  gap: 10px;
+  line-height: 1.5;
+}
+
+.audience-check {
+  display: grid;
+  width: 20px;
+  height: 20px;
+  flex: 0 0 auto;
+  margin-top: 2px;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--blue-600);
+}
+
+.audience-pills {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+  gap: 8px;
+}
+
+.audience-pills span {
+  padding: 6px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  background: var(--ivory);
+  color: var(--navy-900);
+  font-size: var(--fs-fine);
+  font-weight: 600;
+}
+
+.audience-actions {
+  display: grid;
+  margin-top: auto;
+  gap: 10px;
+  grid-template-columns: 1fr 1fr;
+}
+
+.audience-actions .button {
+  width: 100%;
+}

@@ -1,0 +1,168 @@
+/* Onda do rodapé, cor da onda conforme a seção final e a página de confirmação.
+   Fatia de globals.css — a ordem dos @import lá é significativa. */
+
+/* Onda do rodapé
+   O recorte da cor da última seção invadindo o rodapé. `line-height: 0` no
+   invólucro não é decorativo: sem ele o SVG herda a linha de texto do bloco e
+   sobra uma fresta de alguns pixels entre a onda e o rodapé. */
+/* Página de confirmação */
+.thanks-hero {
+  padding-block: clamp(84px, 11vw, 132px);
+  text-align: center;
+}
+
+.thanks-hero-inner {
+  display: grid;
+  justify-items: center;
+  max-width: 720px;
+  margin-inline: auto;
+}
+
+.thanks-hero-inner h1 {
+  margin-block: 20px 18px;
+}
+
+.thanks-hero-inner > p {
+  max-width: 52ch;
+  font-size: var(--fs-lead);
+}
+
+.thanks-hero-inner .hero-actions {
+  justify-content: center;
+}
+
+.thanks-steps {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  gap: 30px;
+  grid-template-columns: repeat(3, 1fr);
+  list-style: none;
+  text-align: center;
+}
+
+.thanks-steps li {
+  padding: 0 20px;
+}
+
+.thanks-steps li > svg {
+  margin: 0 auto 15px;
+  color: var(--blue-600);
+}
+
+.thanks-steps h3 {
+  margin-bottom: 9px;
+  font-size: var(--fs-lead);
+}
+
+.thanks-steps p {
+  font-size: var(--fs-sm);
+}
+
+.thanks-note {
+  max-width: 700px;
+  margin: 54px auto 0;
+  padding-top: 30px;
+  border-top: 1px solid var(--border);
+  font-size: var(--fs-fine);
+  text-align: center;
+}
+
+.error-digest {
+  margin-top: 26px;
+  color: var(--muted);
+  font-size: var(--fs-fine);
+}
+
+.error-digest code {
+  font-size: var(--fs-fine);
+}
+
+@media (max-width: 800px) {
+  .thanks-steps {
+    grid-template-columns: 1fr;
+    gap: 34px;
+  }
+}
+
+.footer-wave {
+  background: var(--navy-800);
+  line-height: 0;
+}
+
+.footer-wave svg {
+  display: block;
+  width: 100%;
+  height: clamp(30px, 4vw, 56px);
+}
+
+/* A cor da onda acompanha a seção que fecha a página. A ordem das regras é
+   o desempate: a home tem formulário E localização, e é a localização que
+   fica por último na página — por isso a regra dela vem depois. */
+.site-footer {
+  --footer-wave-fill: var(--white);
+}
+
+#conteudo:has(.not-found) + .site-footer {
+  --footer-wave-fill: var(--ivory);
+}
+
+#conteudo:has(.contact-section) + .site-footer {
+  --footer-wave-fill: var(--navy-800);
+}
+
+#conteudo:has(.location-section) + .site-footer {
+  --footer-wave-fill: var(--ivory);
+}
+
+/* Responsivo dos blocos novos */
+@media (max-width: 1080px) {
+  .areas-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .audience-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 800px) {
+  /* Sem espaço lateral para o cartão flutuar, ele volta ao fluxo e vira o
+     fecho do bloco visual. */
+  .location-grid {
+    gap: 34px;
+  }
+
+  .location-map {
+    min-height: 290px;
+    aspect-ratio: 4 / 3;
+  }
+
+}
+
+@media (max-width: 600px) {
+  /* A versão clara vira lista de duas colunas no celular por causa do número
+     em círculo. A escura não tem esse número, então segue em coluna. */
+  .audience-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .audience-visual {
+    height: 148px;
+  }
+
+  .audience-visual .motif-thumb {
+    width: 96px;
+    height: 96px;
+  }
+
+  .faq-card {
+    padding-inline: 14px;
+  }
+
+  .location-cta {
+    width: 100%;
+  }
+}

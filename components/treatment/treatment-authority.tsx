@@ -1,9 +1,16 @@
 import { BadgeCheck, MapPin, ShieldCheck } from "lucide-react";
 import { DoctorPortrait } from "@/components/doctor-portrait";
+import type { TreatmentContent } from "@/lib/content";
 import { siteConfig } from "@/lib/site";
 
-/** Credenciais fornecidas pelo cliente, com acesso ao documento de suporte. */
-export function TreatmentAuthority() {
+/**
+ * Credenciais fornecidas pelo cliente, com acesso ao documento de suporte.
+ *
+ * Nome, registro e credenciais vêm de `siteConfig` porque são os mesmos em
+ * qualquer página. Só o parágrafo de atuação muda: repetir o mesmo texto nas
+ * cinco rotas não ajuda o leitor nem o Google.
+ */
+export function TreatmentAuthority({ content }: { content: TreatmentContent }) {
   return (
     <section className="section authority-section">
       <div className="container authority-grid">
@@ -26,10 +33,8 @@ export function TreatmentAuthority() {
           </ul>
 
           <p>
-            O Dr. Adriano atua na avaliação e no tratamento de alterações dos
-            maxilares, da face e da articulação da mandíbula. Suas queixas, os
-            exames e o cuidado que você já recebe ajudam a orientar a conduta,
-            com integração entre profissionais quando necessária.
+            {content.authorityBody ??
+              "O Dr. Adriano atua na avaliação e no tratamento de alterações dos maxilares, da face e da articulação da mandíbula. Suas queixas, os exames e o cuidado que você já recebe ajudam a orientar a conduta, com integração entre profissionais quando necessária."}
           </p>
 
           <div className="authority-facts">

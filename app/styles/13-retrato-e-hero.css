@@ -1,0 +1,146 @@
+/* Retrato do profissional, selos do hero e o WhatsApp como botão primário.
+   Fatia de globals.css — a ordem dos @import lá é significativa. */
+
+/* ── Retrato do profissional ──────────────────────────────────────────── */
+.doctor-portrait {
+  display: grid;
+  margin: 0;
+  gap: 18px;
+}
+
+.portrait-frame {
+  position: relative;
+  display: grid;
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  align-content: center;
+  justify-items: center;
+  border: 1px dashed rgba(var(--navy-800-rgb), 0.22);
+  border-radius: var(--radius-xl);
+  background:
+    radial-gradient(circle at 30% 20%, rgba(var(--blue-400-rgb), 0.28), transparent 55%),
+    var(--blue-50);
+  gap: 16px;
+}
+
+.portrait-initial {
+  color: rgba(var(--navy-800-rgb), 0.16);
+  font-family: var(--font-manrope), sans-serif;
+  font-size: 120px;
+  font-weight: 800;
+  letter-spacing: -0.08em;
+  line-height: 1;
+}
+
+.portrait-marker {
+  display: inline-flex;
+  align-items: center;
+  padding: 7px 14px;
+  border-radius: var(--radius-pill);
+  background: var(--white);
+  color: var(--muted);
+  font-size: var(--fs-label);
+  font-weight: 700;
+  gap: 7px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.doctor-portrait figcaption {
+  display: grid;
+  gap: 3px;
+}
+
+.doctor-portrait figcaption strong {
+  color: var(--navy-950);
+  font-family: var(--font-manrope), sans-serif;
+  font-size: var(--fs-lead);
+  font-weight: 650;
+  letter-spacing: -0.025em;
+}
+
+.doctor-portrait figcaption span {
+  color: var(--muted);
+  font-size: var(--fs-fine);
+}
+
+.portrait-registry {
+  color: var(--blue-600) !important;
+  font-weight: 700;
+}
+
+/* Sobre fundo escuro o traço e o texto invertem. */
+.about-section .portrait-frame,
+.authority-section .portrait-frame {
+  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.about-section .portrait-initial,
+.authority-section .portrait-initial {
+  color: rgba(255, 255, 255, 0.12);
+}
+
+.about-section .portrait-marker,
+.authority-section .portrait-marker {
+  background: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.portrait-note {
+  color: rgba(255, 255, 255, 0.5) !important;
+  font-size: var(--fs-label) !important;
+}
+
+.hero-name {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--blue-600);
+  font-size: var(--fs-lead);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* ── Selos do hero ────────────────────────────────────────────────────── */
+.hero-badges {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 26px 0 28px;
+  padding: 0;
+  gap: 14px 24px;
+  list-style: none;
+}
+
+.hero-badges li {
+  display: inline-flex;
+  align-items: center;
+  padding: 0;
+  color: var(--navy-900);
+  font-size: var(--fs-fine);
+  font-weight: 600;
+  gap: 7px;
+}
+
+.hero-badges svg {
+  color: var(--blue-600);
+}
+
+/* WhatsApp como botão primário: em tráfego frio de saúde é o degrau de menor
+   atrito, e o contorno que ele tinha o deixava com peso de botão secundário. */
+.button-whatsapp-solid,
+.button-whatsapp.button-whatsapp-solid {
+  border-color: var(--whatsapp);
+  background: var(--whatsapp);
+  color: var(--white);
+}
+
+.button-whatsapp-solid:hover {
+  border-color: var(--whatsapp-dark);
+  background: var(--whatsapp-dark);
+  color: var(--white);
+}
+
+.button-whatsapp-solid .button-circle {
+  background: var(--white);
+  color: var(--whatsapp);
+}

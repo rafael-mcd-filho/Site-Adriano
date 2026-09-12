@@ -1,0 +1,72 @@
+/* Tokens por motivo visual (--page-accent, --page-dark) e fundo do hero de cada um.
+   Fatia de globals.css — a ordem dos @import lá é significativa. */
+
+.treatment-page {
+  --page-accent: var(--blue-600);
+  --page-accent-soft: var(--surface);
+  --page-dark: var(--navy-800);
+}
+
+.treatment-page-air {
+  --page-accent: var(--blue-400);
+  --page-accent-soft: var(--blue-50);
+  --page-dark: var(--navy-950);
+}
+
+.treatment-page-implant {
+  --page-accent: var(--sand-600);
+  --page-accent-soft: var(--sand-50);
+  --page-dark: var(--navy-800);
+}
+
+.treatment-page-layers {
+  --page-accent: var(--blue-600);
+  --page-accent-soft: var(--surface);
+  --page-dark: var(--navy-800);
+}
+
+.treatment-page-joint {
+  --page-accent: var(--sand-800);
+  --page-accent-soft: var(--sand-100);
+  --page-dark: var(--navy-700);
+}
+
+.treatment-page-alignment {
+  --page-accent: var(--navy-700);
+  --page-accent-soft: var(--surface-soft);
+  --page-dark: var(--navy-900);
+}
+
+.treatment-hero {
+  background-color: var(--ivory);
+  background-image:
+    radial-gradient(circle at 12% 10%, color-mix(in srgb, var(--page-accent) 15%, transparent), transparent 28%),
+    linear-gradient(115deg, rgba(255, 255, 255, 0.65), transparent 62%);
+}
+
+.treatment-hero-implant {
+  background:
+    linear-gradient(90deg, transparent 0 68%, rgba(var(--sand-600-rgb), 0.07) 68%),
+    repeating-linear-gradient(90deg, transparent 0 79px, rgba(var(--sand-600-rgb), 0.07) 80px),
+    var(--ivory);
+}
+
+.treatment-hero-layers {
+  background:
+    radial-gradient(ellipse at 90% 0%, rgba(var(--blue-600-rgb), 0.22), transparent 35%),
+    linear-gradient(165deg, var(--sand-50) 0 54%, var(--surface) 54% 100%);
+}
+
+.treatment-hero-joint {
+  background:
+    radial-gradient(circle at 89% 48%, transparent 0 12%, rgba(var(--sand-800-rgb), 0.09) 12.2% 13%, transparent 13.2% 20%, rgba(var(--sand-800-rgb), 0.07) 20.2% 21%, transparent 21.2%),
+    var(--sand-50);
+}
+
+.treatment-hero-alignment {
+  background:
+    linear-gradient(rgba(var(--navy-700-rgb), 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(var(--navy-700-rgb), 0.055) 1px, transparent 1px),
+    linear-gradient(145deg, var(--surface-soft), var(--surface));
+  background-size: 42px 42px, 42px 42px, auto;
+}

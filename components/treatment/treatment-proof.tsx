@@ -19,8 +19,10 @@ export function TreatmentProof({ content }: { content: TreatmentContent }) {
     <section className="section proof-section">
       <div className="container">
         <div className="section-heading centered-heading">
-          <span className="pill-badge">O que dizem os pacientes</span>
-          <h2>Relatos de quem passou pela avaliação.</h2>
+          <span className="pill-badge">
+            {content.proofKicker ?? "O que dizem os pacientes"}
+          </span>
+          <h2>{content.proofTitle ?? "Relatos de quem passou pela avaliação."}</h2>
           {siteConfig.isDemo && (
             <p className="demo-note">
               Textos de demonstração. Serão substituídos por relatos reais,

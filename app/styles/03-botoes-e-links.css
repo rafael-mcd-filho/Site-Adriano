@@ -1,0 +1,102 @@
+/* Botões, botão de WhatsApp, links de texto e variantes sobre fundo escuro.
+   Fatia de globals.css — a ordem dos @import lá é significativa. */
+
+.button {
+  display: inline-flex;
+  min-height: 52px;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 13px 21px;
+  border: 1px solid var(--navy-800);
+  border-radius: var(--radius-sm);
+  background: var(--navy-800);
+  color: var(--white);
+  cursor: pointer;
+  font-family: var(--font-manrope), sans-serif;
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  transition:
+    transform 180ms ease,
+    background 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.button:hover {
+  border-color: var(--navy-950);
+  background: var(--navy-950);
+  box-shadow: 0 10px 22px rgba(var(--navy-950-rgb), 0.16);
+  transform: translateY(-2px);
+}
+
+.button-small {
+  min-height: 42px;
+  padding: 9px 15px;
+  font-size: var(--fs-fine);
+}
+
+.button-secondary {
+  border-color: var(--border);
+  background: var(--white);
+  color: var(--navy-900);
+}
+
+.button-secondary:hover {
+  border-color: var(--blue-600);
+  background: var(--surface);
+  color: var(--blue-600);
+}
+
+.button-whatsapp {
+  border-color: rgba(22, 140, 85, 0.28);
+  background: transparent;
+  color: var(--whatsapp);
+}
+
+.button-whatsapp:hover {
+  border-color: var(--whatsapp);
+  background: var(--whatsapp-soft);
+  color: var(--whatsapp-deep);
+}
+
+/* O ícone permanece ao lado do texto durante hover e foco. */
+.button-motion {
+  position: relative;
+  overflow: hidden;
+  padding-right: 58px;
+}
+
+.button-label { position: relative; z-index: 1; }
+.button-circle {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border-radius: var(--radius-xs);
+  background: rgba(255, 255, 255, 0.14);
+  color: inherit;
+  transform: translateY(-50%);
+}
+.button-secondary .button-circle { background: var(--surface); }
+.button-whatsapp .button-circle { background: var(--whatsapp-soft); }
+.button-motion.button-small { padding-right: 48px; }
+.button-motion.button-small .button-circle { width: 30px; height: 30px; right: 7px; }
+/* Variante para seções escuras: fundo claro sobre navy. */
+.header-cta {
+  flex: 0 0 auto;
+}
+
+.header-cta .button-circle {
+  background: var(--whatsapp);
+  color: var(--white);
+}
+
+.mobile-menu-button,
+.mobile-menu {
+  display: none;
+}

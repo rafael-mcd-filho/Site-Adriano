@@ -1,0 +1,412 @@
+/* Blocos 2 a 8 das rotas de tratamento: dor, objeções, método, autoridade, prova, primeira consulta e fechamento.
+   Fatia de globals.css — a ordem dos @import lá é significativa. */
+
+/* ── Bloco 2 — dor e consequência ─────────────────────────────────────── */
+.pain-list {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  gap: 12px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  list-style: none;
+}
+
+.pain-item {
+  display: flex;
+  align-items: flex-start;
+  padding: 20px 22px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--white);
+  color: var(--ink);
+  font-size: var(--fs-sm);
+  gap: 14px;
+  line-height: 1.55;
+}
+
+.pain-mark {
+  width: 4px;
+  height: 22px;
+  flex: 0 0 auto;
+  margin-top: 2px;
+  border-radius: var(--radius-pill);
+  background: var(--blue-200);
+}
+
+/* A agitação é factual: o que muda são as opções disponíveis, não um risco
+   inventado. Por isso o painel é sóbrio — sem vermelho, sem ícone de alerta. */
+.consequence-panel {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 26px;
+  padding: 26px 28px;
+  border: 1px solid rgba(var(--navy-800-rgb), 0.12);
+  border-radius: var(--radius-xl);
+  background: var(--blue-50);
+  gap: 18px;
+}
+
+.consequence-icon {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: var(--radius-md);
+  background: var(--white);
+  color: var(--navy-800);
+}
+
+.consequence-panel strong {
+  display: block;
+  margin-bottom: 7px;
+  color: var(--navy-950);
+  font-family: var(--font-manrope), sans-serif;
+  font-size: var(--fs-lead);
+  font-weight: 650;
+  letter-spacing: -0.02em;
+}
+
+.consequence-panel p {
+  max-width: 68ch;
+  margin: 0;
+  font-size: var(--fs-sm);
+}
+
+/* ── Bloco 3 — o que já foi tentado ───────────────────────────────────── */
+.objections-section {
+  background: var(--ivory);
+}
+
+.objection-list {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  gap: 2px;
+  list-style: none;
+}
+
+.objection-list li {
+  display: flex;
+  align-items: flex-start;
+  padding: 26px 28px;
+  border: 1px solid var(--border);
+  background: var(--white);
+  gap: 20px;
+}
+
+.objection-list li:first-child {
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+}
+
+.objection-list li:last-child {
+  border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+}
+
+.objection-index {
+  color: var(--blue-200);
+  font-family: var(--font-manrope), sans-serif;
+  font-size: var(--fs-h3);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+}
+
+.objection-list strong {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--navy-950);
+  font-family: var(--font-manrope), sans-serif;
+  font-size: var(--fs-lead);
+  font-weight: 650;
+  letter-spacing: -0.025em;
+}
+
+.objection-list p {
+  max-width: 70ch;
+  margin: 0;
+  font-size: var(--fs-sm);
+}
+
+/* ── Bloco 4 — método ─────────────────────────────────────────────────── */
+.method-grid {
+  display: grid;
+  align-items: center;
+  gap: clamp(40px, 6vw, 82px);
+  grid-template-columns: 1.05fr 0.95fr;
+}
+
+.method-copy h2 {
+  margin-bottom: 18px;
+}
+
+.method-copy p {
+  max-width: 56ch;
+  margin-bottom: 16px;
+}
+
+.method-points {
+  display: grid;
+  margin: 26px 0;
+  padding: 0;
+  gap: 11px;
+  list-style: none;
+}
+
+.method-points li {
+  display: flex;
+  align-items: flex-start;
+  color: var(--ink);
+  font-size: var(--fs-sm);
+  gap: 11px;
+}
+
+.method-points svg {
+  flex: 0 0 auto;
+  margin-top: 3px;
+  color: var(--blue-600);
+}
+
+/* ── Bloco 5 — autoridade ─────────────────────────────────────────────── */
+.authority-grid {
+  display: grid;
+  align-items: center;
+  gap: clamp(36px, 5vw, 70px);
+  grid-template-columns: 0.8fr 1.2fr;
+}
+
+.authority-copy h2 {
+  margin-bottom: 8px;
+  color: var(--white);
+}
+
+.authority-role {
+  margin-bottom: 26px;
+  color: var(--blue-200);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+}
+
+.authority-credentials {
+  display: grid;
+  margin: 0 0 26px;
+  padding: 0;
+  gap: 12px;
+  list-style: none;
+}
+
+.authority-credentials li {
+  display: flex;
+  align-items: flex-start;
+  color: rgba(255, 255, 255, 0.86);
+  font-size: var(--fs-sm);
+  gap: 12px;
+  line-height: 1.5;
+}
+
+.authority-credentials svg {
+  flex: 0 0 auto;
+  margin-top: 3px;
+  color: var(--blue-200);
+}
+
+.authority-facts {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 24px;
+  gap: 10px;
+}
+
+.authority-facts span {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: var(--radius-pill);
+  color: rgba(255, 255, 255, 0.85);
+  font-size: var(--fs-fine);
+  font-weight: 600;
+  gap: 8px;
+}
+
+.authority-facts svg {
+  color: var(--blue-200);
+}
+
+/* ── Bloco 6 — prova ──────────────────────────────────────────────────── */
+.proof-section {
+  background: var(--ivory);
+}
+
+.proof-grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.proof-card {
+  display: grid;
+  margin: 0;
+  padding: 28px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  background: var(--white);
+  align-content: start;
+  box-shadow: var(--shadow-sm);
+  gap: 14px;
+}
+
+.proof-card > svg {
+  color: var(--blue-200);
+}
+
+.proof-card p {
+  margin: 0;
+  color: var(--ink);
+  font-size: var(--fs-sm);
+  font-style: italic;
+  line-height: 1.65;
+}
+
+.proof-card footer {
+  color: var(--muted);
+  font-size: var(--fs-label);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* ── Bloco 7 — primeira consulta ──────────────────────────────────────── */
+.consultation-section {
+  background: var(--white);
+}
+
+.consultation-grid,
+.flow-grid {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  gap: 20px;
+  list-style: none;
+}
+
+.consultation-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.flow-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.consultation-card,
+.flow-grid li {
+  position: relative;
+  padding: 30px 28px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  background: var(--ivory);
+}
+
+.consultation-icon {
+  display: grid;
+  width: 50px;
+  height: 50px;
+  margin-bottom: 20px;
+  place-items: center;
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  color: var(--blue-600);
+}
+
+.flow-index {
+  position: absolute;
+  top: 22px;
+  right: 24px;
+  color: rgba(var(--navy-800-rgb), 0.1);
+  font-family: var(--font-manrope), sans-serif;
+  font-size: 40px;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.consultation-card h3,
+.flow-grid h3 {
+  margin-bottom: 10px;
+  font-size: var(--fs-lead);
+}
+
+.consultation-card p,
+.flow-grid p {
+  margin: 0;
+  font-size: var(--fs-sm);
+}
+
+.consultation-card ul {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  gap: 9px;
+  list-style: none;
+}
+
+.consultation-card li {
+  display: flex;
+  align-items: flex-start;
+  color: var(--ink);
+  font-size: var(--fs-fine);
+  gap: 9px;
+  line-height: 1.45;
+}
+
+.consultation-card li svg {
+  flex: 0 0 auto;
+  margin-top: 4px;
+  color: var(--blue-600);
+}
+
+/* O antiupsell é o elemento que mais desarma este público — por isso ele tem
+   destaque próprio, e não vira uma linha perdida dentro de um card. */
+.consultation-note {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  margin-top: 34px;
+  padding: 26px 30px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  background: var(--surface);
+  gap: 16px 28px;
+  text-align: center;
+}
+
+.consultation-note p {
+  margin: 0;
+  color: var(--navy-900);
+  font-family: var(--font-manrope), sans-serif;
+  font-size: var(--fs-lead);
+  font-weight: 650;
+  letter-spacing: -0.02em;
+}
+
+/* ── Bloco 8 — fechamento ─────────────────────────────────────────────── */
+.closing-copy {
+  display: grid;
+  justify-items: center;
+  max-width: 720px;
+  margin: 0 auto 46px;
+  gap: 16px;
+  text-align: center;
+}
+
+.closing-copy h2 {
+  color: var(--white);
+}
+
+.closing-copy p {
+  max-width: 56ch;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: var(--fs-lead);
+}

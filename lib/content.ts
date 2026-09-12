@@ -35,14 +35,25 @@ export type TreatmentContent = {
   intro: string;
   /** Três selos curtos abaixo do H1. Método e credencial, nunca resultado. */
   heroBadges: [string, string, string];
+  /** Quatro destaques específicos para a faixa contínua após o hero. */
+  highlights: [string, string, string, string];
   /** Rótulo do botão primário, específico da intenção da página. */
   primaryCta: string;
   note: string;
 
   /* ── Bloco 2 — dor e consequência ───────────────────────────────────── */
+  /** Abre a seção na voz da página. O padrão do componente é o genérico. */
+  painKicker?: string;
   painTitle: string;
   /** Em linguagem de vida real, não de prontuário. */
   painItems: string[];
+  /**
+   * Foto do bloco editorial. Decidido aqui, e não por `motif` dentro do
+   * componente: motivo visual é linguagem gráfica, foto é escolha editorial —
+   * amarrar uma na outra obriga a inventar um motivo para trocar de imagem.
+   */
+  painImage?: "consultation" | "sleep";
+  storyEyebrow?: string;
   consequenceTitle: string;
   /**
    * Agitação factual: o que muda de OPÇÕES com o tempo. Nunca medo fabricado
@@ -52,8 +63,8 @@ export type TreatmentContent = {
   consequenceText: string;
 
   /* ── Bloco 3 — o que já foi tentado ─────────────────────────────────── */
+  objectionsKicker?: string;
   objectionsTitle: string;
-  objectionsPosition?: "before-method" | "after-journey";
   objections: Array<{ belief: string; reality: string }>;
 
   /* ── Bloco 4 — método ───────────────────────────────────────────────── */
@@ -64,12 +75,22 @@ export type TreatmentContent = {
   methodPoints: string[];
   crossLink?: { label: string; href: string };
   journey?: {
+    kicker?: string;
     title: string;
     intro: string;
     steps: Array<{ title: string; text: string }>;
   };
 
+  /* ── Bloco 5 — quem conduz ──────────────────────────────────────────── */
+  /**
+   * Parágrafo de contexto do bloco de autoridade. Nome, registro e credenciais
+   * continuam vindo de `siteConfig` — só a atuação relevante PARA ESTA página
+   * muda, para que as cinco rotas não repitam o mesmo texto ao Google.
+   */
+  authorityBody?: string;
+
   /* ── Bloco 6 — primeira consulta ────────────────────────────────────── */
+  consultationKicker?: string;
   whatToBring: string[];
   consultationTitle: string;
   consultationIntro: string;
@@ -87,6 +108,8 @@ export type TreatmentContent = {
    * enquanto o cliente não fornecer conteúdo aprovado; não usar exemplos.
    */
   testimonials: string[];
+  proofKicker?: string;
+  proofTitle?: string;
 
   visualSummary: {
     kicker: string;
@@ -95,6 +118,12 @@ export type TreatmentContent = {
   };
   formQuestion: string;
   formOptions: string[];
+  /** Copy do formulário de contato do fecho. */
+  contactForm?: {
+    eyebrow?: string;
+    title?: string;
+    description?: string;
+  };
   whatsappMessage: string;
   metadata: {
     title: string;
@@ -132,9 +161,16 @@ export const treatments: Record<string, TreatmentContent> = {
     intro:
       "O cansaço acompanha o dia, a concentração falha e o ronco preocupa quem dorme ao seu lado. Se você investiga ou já trata apneia obstrutiva, a avaliação buco-maxilo-facial ajuda a esclarecer se a posição dos maxilares participa da dificuldade para respirar durante o sono.",
     heroBadges: ["Em conjunto com a equipe do sono", "Maxilares e respiração", "João Pessoa"],
+    highlights: [
+      "Integração com a equipe do sono",
+      "Análise dos maxilares e da respiração",
+      "Revisão dos exames do sono",
+      "Orientação sobre os próximos passos",
+    ],
     primaryCta: "Quero avaliar meu caso",
     note: "Uma avaliação para orientar o cuidado do sono. Sem compromisso com cirurgia.",
 
+    painKicker: "Como têm sido suas noites?",
     painTitle: "Dormir a noite inteira não significa, necessariamente, descansar bem.",
     painItems: [
       "Levanta da cama sem disposição e sente que já começa o dia cansado.",
@@ -142,10 +178,13 @@ export const treatments: Record<string, TreatmentContent> = {
       "Quem dorme ao seu lado relata ronco alto, pausas na respiração ou despertares com engasgo.",
       "Já trata apneia, mas as dificuldades com o tratamento ainda atrapalham suas noites.",
     ],
+    painImage: "sleep",
+    storyEyebrow: "O que você quer recuperar",
     consequenceTitle: "O que você quer recuperar é a disposição para viver o dia",
     consequenceText:
       "Trabalhar com atenção, aproveitar o tempo com a família e sentir que a noite trouxe descanso. Na consulta, conte como o cansaço tem limitado seu dia. Ronco e cansaço, sozinhos, não confirmam apneia: o diagnóstico e os exames do sono mostram o que precisa de cuidado.",
 
+    objectionsKicker: "Antes de pensar em cirurgia",
     objectionsTitle: "O que vale esclarecer antes de pensar em cirurgia.",
     objections: [
       { belief: "Roncar significa que tenho apneia?", reality: "Não necessariamente. Ronco e apneia podem ocorrer juntos, mas o diagnóstico depende de avaliação médica e, quando indicado, de um estudo do sono." },
@@ -167,6 +206,8 @@ export const treatments: Record<string, TreatmentContent> = {
       "Posição dos maxilares e relação com a passagem de ar.",
       "Tratamentos em uso, dificuldades e resposta ao acompanhamento.",
     ],
+    authorityBody:
+      "O Dr. Adriano atua na avaliação e no tratamento de alterações dos maxilares e da face. Na investigação da apneia obstrutiva, sua participação é analisar se a posição dos maxilares influencia a passagem de ar, sempre em conjunto com o médico e os demais profissionais que acompanham o seu sono.",
     whatToBring: [
       "Estudos do sono, como a polissonografia, se já tiver.",
       "Relatórios dos profissionais que acompanham seu sono.",
@@ -193,6 +234,10 @@ export const treatments: Record<string, TreatmentContent> = {
     visualSummary: { kicker: "Sono e respiração", title: "Entender a respiração para orientar o cuidado do sono.", cues: ["Ronco", "Pausas respiratórias", "Cansaço ao acordar"] },
     formQuestion: "Como podemos ajudar?",
     formOptions: neutralFormOptions,
+    contactForm: {
+      title: "Converse sobre a avaliação do sono.",
+      description: "Deixe seu nome e WhatsApp. A equipe explica como funciona a consulta e quais exames do sono ajudam na avaliação.",
+    },
     whatsappMessage: "Olá, vi a página sobre apneia do sono e gostaria de saber como funciona a avaliação buco-maxilo-facial.",
     metadata: { title: "Apneia do Sono em João Pessoa | Avaliação Buco-Maxilo-Facial", description: "Ronco, pausas na respiração e cansaço ao acordar? Entenda o papel dos maxilares na apneia do sono e da avaliação multidisciplinar em João Pessoa." },
   },
@@ -206,9 +251,16 @@ export const treatments: Record<string, TreatmentContent> = {
     titleHighlight: "não há osso suficiente",
     intro: "Isso não encerra a avaliação. Se o plano de mastigar com mais conforto parou nessa resposta, vale esclarecer o motivo. Em casos selecionados, a reconstrução óssea pode criar suporte para futuros implantes. A avaliação mostra se essa possibilidade faz sentido para você.",
     heroBadges: ["Avaliação da perda óssea", "Planejamento com seu dentista", "João Pessoa"],
+    highlights: [
+      "Avaliação do osso disponível",
+      "Planejamento para a futura prótese",
+      "Etapas e alternativas explicadas",
+      "Cuidado integrado com seu dentista",
+    ],
     primaryCta: "Quero avaliar minhas possibilidades",
     note: "Traga os exames que já tem. A primeira decisão é esclarecer suas possibilidades.",
 
+    painKicker: "Onde o seu plano parou?",
     painTitle: "Você queria uma solução para os dentes. Ficou com mais perguntas.",
     painItems: [
       "A prótese incomoda ao comer, mas você ouviu que não há osso para um implante.",
@@ -216,9 +268,11 @@ export const treatments: Record<string, TreatmentContent> = {
       "Recebeu indicação de enxerto sem entender o que muda nas etapas e na recuperação.",
       "Tem receio de começar um tratamento sem saber o que será possível ao final.",
     ],
+    storyEyebrow: "O que uma avaliação deve responder",
     consequenceTitle: "Uma resposta útil precisa explicar o que é possível e por quê",
     consequenceText: "A falta de osso pode interromper o plano que você imaginava para os dentes. A avaliação especializada reúne a região da perda, os tecidos, sua saúde e a futura prótese para discutir caminhos concretos. Ela pode identificar possibilidades ou confirmar limites, com os motivos e as alternativas explicados.",
 
+    objectionsKicker: "Sobre a falta de osso",
     objectionsTitle: "Pouco osso: o que essa informação permite concluir?",
     objections: [
       { belief: "Disseram que não tenho osso. Ainda vale avaliar?", reality: "Sim, para entender o que essa informação significa na região que você precisa reabilitar. Os exames e o exame clínico permitem discutir possibilidades de reconstrução ou explicar por que a orientação anterior continua adequada." },
@@ -241,6 +295,8 @@ export const treatments: Record<string, TreatmentContent> = {
       "Etapas de reconstrução, cicatrização e reavaliação.",
     ],
     crossLink: { label: "Entenda como a reconstrução se relaciona aos implantes", href: "/implantes-dentarios" },
+    authorityBody:
+      "O Dr. Adriano atua na avaliação e no tratamento de alterações dos maxilares e da face. Quando a falta de osso interrompe um plano de reabilitação, sua participação é analisar as condições da região e discutir, junto com o dentista que acompanha você, o que pode ser reconstruído e com qual finalidade.",
     whatToBring: ["Tomografia ou radiografias, se já tiver.", "Pareceres e planos de tratamento anteriores.", "Informações sobre a prótese que usa e o acompanhamento atual.", "Lista de medicamentos e exames recentes disponíveis."],
     consultationTitle: "Uma avaliação para retomar a conversa sobre suas possibilidades.",
     consultationIntro: "Você conta o que deseja reabilitar e o que já ouviu sobre a falta de osso. O exame da região e as imagens disponíveis ajudam a esclarecer essa informação e a necessidade de novos exames.",
@@ -265,6 +321,10 @@ export const treatments: Record<string, TreatmentContent> = {
     visualSummary: { kicker: "Osso e reabilitação", title: "Reconstruir com um objetivo para os seus dentes.", cues: ["Perda óssea", "Enxerto ósseo", "Futura prótese"] },
     formQuestion: "Como podemos ajudar?",
     formOptions: neutralFormOptions,
+    contactForm: {
+      title: "Converse sobre suas possibilidades.",
+      description: "Deixe seu nome e WhatsApp. A equipe explica como funciona a consulta e quais exames ajudam a avaliar a região da perda óssea.",
+    },
     whatsappMessage: "Olá, vi a página sobre reconstrução óssea e gostaria de saber como avaliar minhas possibilidades de reabilitação.",
     metadata: { title: "Reconstrução Óssea em João Pessoa | Enxerto para Implantes", description: "Ouviu que não há osso suficiente para implante? Entenda como a reconstrução e o enxerto ósseo são avaliados em João Pessoa, com indicação individual." },
   },
@@ -278,9 +338,16 @@ export const treatments: Record<string, TreatmentContent> = {
     titleHighlight: "estala, dói ou parece travar",
     intro: "Se você escolhe o que comer por receio da dor ou evita abrir bem a boca, a mandíbula já interfere na rotina. A avaliação de DTM e ATM investiga a origem dos sintomas para orientar cuidados que busquem recuperar conforto e movimento.",
     heroBadges: ["Investigação da dor", "Cuidados além da cirurgia", "João Pessoa"],
+    highlights: [
+      "Investigação da origem da dor",
+      "Avaliação dos movimentos da mandíbula",
+      "Cuidados além da cirurgia",
+      "Integração com outros profissionais",
+    ],
     primaryCta: "Quero investigar minha dor na mandíbula",
     note: "Você pode buscar ajuda mesmo sem diagnóstico. A avaliação não pressupõe cirurgia.",
 
+    painKicker: "O que a dor já mudou na sua rotina?",
     painTitle: "Quando mastigar, conversar ou bocejar traz desconforto.",
     painItems: [
       "Deixa alimentos de lado ou mastiga com cuidado porque a mandíbula dói.",
@@ -288,9 +355,11 @@ export const treatments: Record<string, TreatmentContent> = {
       "Percebe estalos com dor ou teme que a mandíbula trave durante uma refeição.",
       "Já usou placa ou tentou outros cuidados, mas o incômodo continua voltando.",
     ],
+    storyEyebrow: "O que você quer voltar a fazer",
     consequenceTitle: "Você quer voltar a fazer coisas simples sem pensar tanto na dor",
     consequenceText: "Uma refeição, uma conversa longa, um bocejo. Quando a mandíbula passa a exigir atenção o tempo todo, investigar a causa ajuda a escolher o cuidado, em vez de repetir tentativas sem orientação. Dor persistente, por si só, não significa dano progressivo nem necessidade de cirurgia.",
 
+    objectionsKicker: "Sobre estalos, placas e cirurgia",
     objectionsTitle: "Já tentou aliviar a dor e ainda tem dúvidas?",
     objections: [
       { belief: "Todo estalo é um problema que precisa de cirurgia?", reality: "Não. Estalos sem dor ou limitação são comuns e, em geral, não precisam de tratamento. Quando há dor ou dificuldade de movimento, a avaliação ajuda a entender o quadro." },
@@ -308,6 +377,8 @@ export const treatments: Record<string, TreatmentContent> = {
       "Procedimentos na ATM são considerados em situações selecionadas. Podem envolver técnicas minimamente invasivas e, em casos específicos, cirurgia aberta ou prótese articular. A indicação exige discutir os benefícios possíveis, os riscos e as alternativas.",
     ],
     methodPoints: ["Histórico da dor e impacto na mastigação.", "Exame dos movimentos, músculos e articulações.", "Exames de imagem apenas quando necessários.", "Tratamentos anteriores e integração com outros profissionais."],
+    authorityBody:
+      "O Dr. Adriano atua na avaliação e no tratamento de alterações dos maxilares, da face e da articulação da mandíbula. Nos quadros de dor e limitação de movimento, sua participação começa pela investigação da origem dos sintomas, considerando os cuidados conservadores antes de discutir qualquer indicação cirúrgica.",
     whatToBring: ["Ressonância, tomografia ou outros exames, se já tiver.", "A placa que utiliza, se for o caso.", "Informações sobre tratamentos já realizados e sua resposta.", "Lista de medicamentos, inclusive os usados para dor."],
     consultationTitle: "O que piora sua dor? O que você já deixou de fazer por causa dela?",
     consultationIntro: "A consulta começa por essas respostas e pelo que já foi tentado. O exame avalia os músculos, a articulação e os movimentos da boca; imagens são solicitadas quando acrescentam informação à investigação.",
@@ -330,6 +401,10 @@ export const treatments: Record<string, TreatmentContent> = {
     visualSummary: { kicker: "Articulação e músculos", title: "Investigar a dor. Cuidar do movimento.", cues: ["Dor na mandíbula", "Estalos", "Travamento"] },
     formQuestion: "Como podemos ajudar?",
     formOptions: neutralFormOptions,
+    contactForm: {
+      title: "Converse sobre a dor na mandíbula.",
+      description: "Deixe seu nome e WhatsApp. A equipe explica como funciona a consulta e o que levar sobre os tratamentos que você já fez.",
+    },
     whatsappMessage: "Olá, vi a página sobre DTM e ATM e gostaria de saber como funciona a avaliação da mandíbula.",
     metadata: { title: "DTM e ATM em João Pessoa | Dor na Mandíbula e Tratamento", description: "Dor na mandíbula, estalos ou travamento? Conheça a avaliação de DTM e ATM em João Pessoa, os cuidados conservadores e quando a cirurgia é considerada." },
   },
@@ -343,9 +418,16 @@ export const treatments: Record<string, TreatmentContent> = {
     titleHighlight: "mordida não encaixa",
     intro: "Cortar os alimentos com os dentes, fechar os lábios sem esforço e se sentir à vontade com o próprio rosto podem fazer parte da mesma preocupação. A avaliação com o cirurgião e o ortodontista esclarece se a posição dos maxilares participa do incômodo e quais tratamentos considerar.",
     heroBadges: ["Integração com a ortodontia", "Função e estrutura facial", "João Pessoa"],
+    highlights: [
+      "Planejamento com seu ortodontista",
+      "Análise da mordida e da face",
+      "Etapas e recuperação explicadas",
+      "Indicação conforme o seu caso",
+    ],
     primaryCta: "Quero entender se tenho indicação",
     note: "Você não precisa chegar decidido a operar. O primeiro passo é entender a indicação.",
 
+    painKicker: "Onde o incômodo aparece?",
     painTitle: "O incômodo aparece na refeição, na foto e no espelho.",
     painItems: [
       "Precisa adaptar a forma de morder porque os dentes da frente não cortam bem os alimentos.",
@@ -353,10 +435,11 @@ export const treatments: Record<string, TreatmentContent> = {
       "A posição do queixo ou a diferença entre os lados da face incomoda você.",
       "Seu ortodontista falou em cirurgia e surgiram dúvidas sobre a mudança no rosto e a recuperação.",
     ],
+    storyEyebrow: "O que entra na conversa",
     consequenceTitle: "Mastigar melhor e se sentir bem com a própria face merecem uma conversa",
     consequenceText: "O que dificulta sua mastigação e o que incomoda na aparência devem ser ouvidos juntos. A avaliação relaciona essas expectativas à estrutura dos maxilares e explica quais mudanças são possíveis. Tempo de aparelho, recuperação e rotina de trabalho também entram na decisão desde o começo.",
 
-    objectionsPosition: "after-journey",
+    objectionsKicker: "Aparelho, face e recuperação",
     objectionsTitle: "E o aparelho, as mudanças no rosto e a volta à rotina?",
     objections: [
       { belief: "Toda mordida que não encaixa precisa de cirurgia?", reality: "Não. Algumas alterações podem ser tratadas com ortodontia. A relação entre dentes e maxilares, a função e suas necessidades ajudam a definir se uma etapa cirúrgica deve ser considerada." },
@@ -374,6 +457,7 @@ export const treatments: Record<string, TreatmentContent> = {
     ],
     methodPoints: ["Relação entre os dentes e os maxilares.", "Mastigação, fechamento dos lábios e queixas funcionais.", "Análise facial, exames e documentação ortodôntica.", "Objetivos e sequência definidos com o ortodontista."],
     journey: {
+      kicker: "A jornada completa",
       title: "Da primeira avaliação aos ajustes da mordida.",
       intro: "Conhecer as etapas ajuda a planejar o aparelho, a eventual cirurgia e o período de recuperação. A sequência e os intervalos são definidos para o seu caso.",
       steps: [
@@ -382,6 +466,8 @@ export const treatments: Record<string, TreatmentContent> = {
         { title: "3. Recuperação e continuidade", text: "O acompanhamento orienta alimentação, higiene e retorno às atividades. A ortodontia pode continuar com os ajustes da mordida, conforme a evolução." },
       ],
     },
+    authorityBody:
+      "O Dr. Adriano atua na avaliação e no tratamento de alterações dos maxilares e da face. Nos casos de alteração da mordida, sua participação é diferenciar a posição dos dentes da posição dos maxilares e planejar as etapas em conjunto com o ortodontista que acompanha você.",
     whatToBring: ["Documentação ortodôntica e exames disponíveis.", "Contato do ortodontista, se já estiver em acompanhamento.", "Informações sobre tratamentos anteriores e medicamentos.", "Dúvidas sobre função, mudanças faciais e recuperação."],
     consultationTitle: "Traga o que incomoda na mordida e o que você espera do tratamento.",
     consultationIntro: "Você conta suas dificuldades para comer, suas expectativas sobre a face e os receios sobre a cirurgia. O exame e a documentação ortodôntica ajudam a relacionar essas questões à posição dos dentes e dos maxilares.",
@@ -406,6 +492,10 @@ export const treatments: Record<string, TreatmentContent> = {
     visualSummary: { kicker: "Mordida e face", title: "Planejar a função sem deixar suas expectativas de lado.", cues: ["Mastigação", "Posição dos maxilares", "Mudanças faciais"] },
     formQuestion: "Como podemos ajudar?",
     formOptions: neutralFormOptions,
+    contactForm: {
+      title: "Converse sobre a indicação.",
+      description: "Deixe seu nome e WhatsApp. A equipe explica como funciona a consulta e qual documentação ortodôntica levar.",
+    },
     whatsappMessage: "Olá, vi a página sobre cirurgia ortognática e gostaria de entender como funciona a avaliação de indicação.",
     metadata: { title: "Cirurgia Ortognática em João Pessoa | Indicação e Etapas", description: "Mordida que não encaixa ou dificuldade para mastigar? Entenda a indicação, o papel do ortodontista e a jornada da cirurgia ortognática em João Pessoa." },
   },
@@ -419,9 +509,16 @@ export const treatments: Record<string, TreatmentContent> = {
     titleHighlight: "comer e sorrir",
     intro: "Quando falta um dente ou a prótese incomoda, até uma refeição simples pede adaptações. Implantes podem fazer parte da reabilitação para buscar mais conforto ao mastigar. A avaliação esclarece se são uma opção para você e como planejar os dentes que eles vão sustentar.",
     heroBadges: ["Avaliação para implantes", "Planejamento com seu dentista", "João Pessoa"],
+    highlights: [
+      "Avaliação do osso e da gengiva",
+      "Implante e prótese no mesmo plano",
+      "Etapas e cuidados explicados",
+      "Orientação para a manutenção",
+    ],
     primaryCta: "Quero saber se posso fazer implante",
     note: "Conheça as opções e as etapas antes de decidir pelo tratamento.",
 
+    painKicker: "O que ficou mais difícil?",
     painTitle: "O que você gostaria de voltar a fazer com mais conforto?",
     painItems: [
       "Mastigar sem precisar escolher sempre o mesmo lado da boca.",
@@ -429,10 +526,11 @@ export const treatments: Record<string, TreatmentContent> = {
       "Conversar e sorrir sem concentrar a atenção no espaço deixado por um dente.",
       "Encontrar uma opção para os dentes que você perdeu há anos.",
     ],
+    storyEyebrow: "Por onde o plano começa",
     consequenceTitle: "O plano começa pelo que faz falta no seu dia a dia",
     consequenceText: "A reabilitação deve considerar os alimentos que você evita, o conforto para falar e o que incomoda na prótese atual. Os implantes dão suporte aos dentes da prótese e podem contribuir para essas funções quando indicados. A avaliação relaciona seus objetivos às condições da boca e aos cuidados de manutenção.",
 
-    objectionsPosition: "after-journey",
+    objectionsKicker: "O que costuma travar a decisão",
     objectionsTitle: "Prótese removível, pouco osso ou medo de operar: vale conversar.",
     objections: [
       { belief: "Uso prótese removível. Posso colocar implantes?", reality: "Em alguns casos, sim. É preciso avaliar o osso, os tecidos e o tipo de prótese adequado à sua boca. A conversa também inclui o que você poderá usar durante a transição entre as etapas." },
@@ -451,6 +549,7 @@ export const treatments: Record<string, TreatmentContent> = {
     methodPoints: ["Quantidade de osso e saúde da gengiva.", "Posição do implante em relação à futura prótese.", "Mordida, saúde geral e fatores de cicatrização.", "Higiene, manutenção e acompanhamento após a reabilitação."],
     crossLink: { label: "Pouco osso? Entenda quando considerar reconstrução óssea", href: "/reconstrucao-ossea" },
     journey: {
+      kicker: "Etapas da reabilitação",
       title: "Do dente que faz falta à reabilitação planejada.",
       intro: "O plano explica as etapas, a cicatrização e o que poderá ser usado provisoriamente. Saber como o processo funciona ajuda você a organizar a rotina.",
       steps: [
@@ -459,6 +558,8 @@ export const treatments: Record<string, TreatmentContent> = {
         { title: "3. Reabilitar e acompanhar", text: "A prótese é planejada com seu dentista conforme as condições obtidas. Higiene e consultas de manutenção fazem parte do cuidado contínuo." },
       ],
     },
+    authorityBody:
+      "O Dr. Adriano atua na avaliação e no tratamento de alterações dos maxilares e da face. Na reabilitação com implantes, sua participação é a etapa cirúrgica, planejada junto com o dentista responsável pela prótese para que o implante atenda ao que a sua mastigação precisa.",
     whatToBring: ["Radiografia ou tomografia, se já tiver.", "Informações sobre próteses e tratamentos anteriores.", "Lista de medicamentos e condições de saúde.", "Exames recentes e contato do dentista que acompanha você, se houver."],
     consultationTitle: "Vamos conversar sobre o que falta para você mastigar com mais conforto.",
     consultationIntro: "Você conta quais dentes perdeu, o que evita comer e como se sente com a prótese atual, se usa uma. O exame da boca e as imagens disponíveis ajudam a entender o suporte para uma reabilitação.",
@@ -481,6 +582,10 @@ export const treatments: Record<string, TreatmentContent> = {
     visualSummary: { kicker: "Dentes e mastigação", title: "O implante sustenta a prótese. O plano considera sua rotina.", cues: ["Osso e gengiva", "Mastigação", "Futura prótese"] },
     formQuestion: "Como podemos ajudar?",
     formOptions: neutralFormOptions,
+    contactForm: {
+      title: "Converse sobre a reabilitação.",
+      description: "Deixe seu nome e WhatsApp. A equipe explica como funciona a consulta e quais exames ajudam a avaliar o suporte para implantes.",
+    },
     whatsappMessage: "Olá, vi a página de implantes dentários e gostaria de saber como funciona a avaliação para o meu caso.",
     metadata: { title: "Implantes Dentários em João Pessoa | Avalie seu Caso", description: "Perdeu dentes ou sente incômodo com a prótese? Conheça a avaliação para implantes dentários em João Pessoa: osso, gengiva, mordida e futura reabilitação." },
   },

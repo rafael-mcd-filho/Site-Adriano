@@ -1,0 +1,17 @@
+/* A raiz. Blocos exclusivos dela (áreas de atuação, dois públicos) já moram em 08-home-areas-e-publicos.css; aqui ficam só ajustes que valem para a home e para mais nenhuma rota.
+ *
+ * Regras daqui valem para ESTA rota e mais nenhuma. Todo seletor começa com
+ * [data-rota="home"], que o <main> da rota carrega.
+ *
+ * Este arquivo é carregado depois de todos os outros, então ele vence sem
+ * precisar de !important.
+ *
+ * Exemplo:
+ *
+ *   [data-rota="home"] .pain-section {
+ *     padding-block: 120px;
+ *   }
+ *
+ * Se a regra passar a valer para mais de uma rota, ela não pertence mais
+ * aqui: mova para o arquivo dono em app/styles/.
+ */

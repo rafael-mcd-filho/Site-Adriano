@@ -107,3 +107,17 @@ Conferência em navegador: home, cinco tratamentos, dentistas e privacidade em l
 ### Destaque da faixa de confiança
 
 Após solicitação do cliente, a faixa da home passou a ter texto branco de 18px (17px no celular), ícones de 22px e rolagem horizontal contínua de 48 segundos por ciclo. Botão Pausar/Retomar, pausa ao passar o mouse sobre o conteúdo e pausa fora da tela. A cópia visual é ocultada de leitores de tela. A preferência de movimento reduzido mostra o conjunto completo em uma lista estática. Conferidos visualmente desktop e celular, ciclo com conjuntos de mesma largura, ausência de transbordamento e funcionamento da pausa/retomada; lint e build passaram.
+
+### Revisão da faixa após novo retorno do cliente
+
+Esta revisão substitui o comportamento de pausa descrito acima. Removidos o botão Pausar/Retomar, a pausa ao passar o mouse e o estado de pausa em JavaScript. A faixa usa animação CSS contínua, com quatro destaques específicos para cada página: Home, cinco tratamentos e Para dentistas. A preferência de movimento reduzido do dispositivo continua mostrando todos os destaques sem animação; a cópia visual permanece oculta dos leitores de tela.
+
+Na Home, os quatro atributos são: avaliação antes da indicação, opções explicadas com clareza, planejamento com seu dentista e certificação Board (FBCOMS). Nos tratamentos, os destaques apresentam características da avaliação e do cuidado já descritas em cada página. Conferidos quatro itens por página, ausência de botão, animação ativa e ausência de rolagem horizontal nas sete páginas em 390px. Lint e build passaram.
+
+### Integração das imagens com as ondas
+
+As ondas passaram a fazer parte das seções com fundo, com a área acima da curva transparente. Assim, a fotografia do FAQ continua até a curva na Home, nos cinco tratamentos e em Para dentistas. O mesmo ajuste foi aplicado à seção de apresentação da Home e às faixas fotográficas de Ortognática e Implantes, que precedem a seção azul de avaliação.
+
+As imagens foram preservadas. A curva usa a cor da seção seguinte, com uma pequena sobreposição das camadas para eliminar frestas de renderização. Mantidos o espaço antes dos CTAs, as legendas das imagens e o espaçamento do conteúdo após a onda.
+
+Conferência visual em desktop (1440px) e mobile (390px): FAQ da Home, foto de Ortognática e transição de Implantes. Nas sete páginas, verificados fundos transparentes das ondas internas, cores iguais às seções seguintes e ausência de rolagem horizontal em 390px. Lint, build e `git diff --check` passaram.

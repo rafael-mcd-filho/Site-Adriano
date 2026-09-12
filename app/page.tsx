@@ -144,7 +144,7 @@ export default function Home() {
     <>
       <JsonLd data={faqSchema(homeFaqs)} />
 
-      <main>
+      <main data-rota="home">
         {/* A raiz é onde a identidade profissional completa fica apresentada:
             nome, especialidade e registro visíveis já na primeira dobra. Numa
             marca pessoal o rosto é o ativo de conversão, não uma ilustração. */}
@@ -214,11 +214,18 @@ export default function Home() {
           </div>
         </section>
 
-        <TrustMarquee />
+        <TrustMarquee
+          items={[
+            "Avaliação antes da indicação",
+            "Opções explicadas com clareza",
+            "Planejamento com seu dentista",
+            "Certificação Board (FBCOMS)",
+          ]}
+        />
 
         {/* Sobe da quinta para a segunda posição: o site é dele, e quem chega
             por indicação ou por busca de nome vem verificar quem é. */}
-        <section className="section about-section section-soft-edge" id="sobre">
+        <section className="section about-section section-soft-edge section-with-wave" id="sobre">
           <div className="container about-grid">
             <DoctorPortrait variant="authority" />
             <div className="about-copy">
@@ -258,9 +265,9 @@ export default function Home() {
               </Link>
             </div>
           </div>
+          <SectionWave from="transparent" to="var(--white)" flip />
         </section>
 
-        <SectionWave from="var(--navy-800)" to="var(--white)" flip />
         <section className="section areas-section" id="areas">
           <div className="container">
             <div className="section-heading split-heading">
@@ -376,7 +383,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="section faq-section" id="duvidas">
+        <section className="section faq-section section-with-wave" id="duvidas">
           <SectionBackdrop />
           <div className="container faq-layout">
             <div className="section-heading centered-heading">
@@ -396,9 +403,9 @@ export default function Home() {
               />
             </div>
           </div>
+          <SectionWave from="transparent" to="var(--navy-950)" />
         </section>
 
-        <SectionWave to="var(--navy-950)" />
         <section className="section contact-section" id="contato">
           <div className="container">
             <div className="closing-copy">

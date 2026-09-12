@@ -1,0 +1,144 @@
+/* Container, espaçamento de seção, títulos de seção, heros e utilitários.
+   Fatia de globals.css — a ordem dos @import lá é significativa. */
+
+.section {
+  position: relative;
+  padding-block: clamp(82px, 10vw, 132px);
+}
+
+.section-white {
+  background: var(--white);
+}
+
+.section-mist {
+  background: var(--surface);
+}
+
+.section-soft-edge {
+  position: relative;
+}
+
+.eyebrow,
+.section-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 18px;
+  color: var(--blue-600);
+  font-family: var(--font-manrope), sans-serif;
+  font-size: var(--fs-label);
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.eyebrow::before,
+.section-kicker::before {
+  width: 24px;
+  height: 1px;
+  background: currentColor;
+  content: "";
+}
+
+.section-kicker.light {
+  color: var(--blue-400);
+}
+
+.section-heading {
+  margin-bottom: 54px;
+}
+
+.split-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(260px, 0.65fr);
+  align-items: end;
+  gap: 70px;
+}
+
+.split-heading h2 {
+  max-width: 780px;
+  margin-bottom: 0;
+}
+
+.split-heading > p {
+  margin-bottom: 5px;
+}
+
+.centered-heading {
+  max-width: 780px;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.centered-heading .section-kicker {
+  justify-content: center;
+}
+
+.centered-heading p {
+  max-width: 610px;
+  margin-inline: auto;
+  font-size: var(--fs-lead);
+}
+
+.home-hero,
+.inner-hero,
+.dentist-hero,
+.legal-hero,
+.thanks-hero {
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 17% 15%, rgba(var(--blue-400-rgb), 0.22), transparent 27%),
+    var(--ivory);
+  color: var(--ink);
+}
+
+.home-hero-grid,
+.inner-hero-grid {
+  display: grid;
+  min-height: 700px;
+  grid-template-columns: minmax(0, 1.02fr) minmax(420px, 0.98fr);
+  align-items: center;
+  gap: clamp(44px, 6vw, 92px);
+  padding-block: clamp(85px, 9vw, 130px);
+}
+
+.home-hero-copy,
+.inner-hero-copy {
+  position: relative;
+  z-index: 3;
+}
+
+.home-hero-copy h1 {
+  max-width: 790px;
+  margin-bottom: 27px;
+}
+
+.home-hero-copy > p,
+.inner-hero-copy > p {
+  max-width: 660px;
+  margin-bottom: 30px;
+  color: var(--muted);
+  font-size: clamp(var(--fs-body), 1.7vw, var(--fs-lead));
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.hero-proof {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 19px;
+  margin-top: 29px;
+  color: var(--navy-700);
+  font-size: var(--fs-fine);
+  font-weight: 700;
+}
+
+.hero-proof span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}

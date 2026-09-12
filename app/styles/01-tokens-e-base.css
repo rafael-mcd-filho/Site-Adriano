@@ -1,0 +1,274 @@
+/* Variáveis de cor e tipografia, reset, títulos, parágrafos e o destaque de texto do H1.
+   Fatia de globals.css — a ordem dos @import lá é significativa. */
+
+/* ============================================================
+   PALETA — 6 âncoras da identidade + tints/shades derivados
+   dentro do mesmo matiz. Trocar a paleta = trocar as âncoras.
+
+   #223853  navy       #dacfc0  areia
+   #373737  grafite    #999999  cinza
+   #c8d1d9  cinza-azul #84a9ff → #f5f8ff  gradiente azul
+   ============================================================ */
+:root {
+  /* Navy — âncora --navy-800. Matiz 214°, saturação 42%. */
+  --navy-950: #101a28;
+  --navy-900: #18273a;
+  --navy-800: #223853;
+  --navy-700: #2f4d74;
+  --navy-600: var(--blue-600); /* degrau mais claro do navy = degrau escuro do azul */
+
+  /* Azul de destaque — âncoras --blue-400 e --blue-50. Matiz 222°.
+     --blue-400 sobre navy dá 4,96:1; sobre branco NÃO passa em AA,
+     por isso texto e ícone em fundo claro usam --blue-600. */
+  --blue-600: #3e6598;
+  --blue-400: #84a9ff;
+  --blue-200: #b8cdff;
+  --blue-100: #dbe6ff;
+  --blue-50: #f5f8ff;
+
+  /* Areia — âncora --sand-500. Matiz 35°, saturação 26%. */
+  --sand-800: #7a6548;
+  --sand-600: #aa916e;
+  --sand-500: #dacfc0;
+  --sand-400: #cabba5;
+  --sand-100: #ece7df;
+  --sand-50: #f4f0ec;
+
+  /* Neutros — âncoras --ink, --muted-soft e --border.
+     #999999 tem 2,85:1 sobre branco e reprova em AA para corpo de
+     texto: fica em --muted-soft (texto grande, ícone, ornamento) e
+     --muted usa o tom derivado de 5,0:1. */
+  --ink: #373737;
+  --muted: #5c6570;
+  --muted-soft: #999999;
+  --border: #c8d1d9;
+  --surface: #eaedf0;
+  --surface-soft: #f3f5f7;
+  --ivory: #f8f6f4;
+  --white: #ffffff;
+
+  /* Canais RGB das mesmas âncoras, para as versões com transparência.
+     Uso: rgba(var(--navy-800-rgb), 0.08) */
+  --navy-950-rgb: 16, 26, 40;
+  --navy-800-rgb: 34, 56, 83;
+  --navy-700-rgb: 47, 77, 116;
+  --blue-600-rgb: 62, 101, 152;
+  --blue-400-rgb: 132, 169, 255;
+  --blue-50-rgb: 245, 248, 255;
+  --sand-800-rgb: 122, 101, 72;
+  --sand-600-rgb: 170, 145, 110;
+  --surface-rgb: 234, 237, 240;
+
+  /* Fora da paleta por decisão. Verde do WhatsApp: marca externa, a
+     troca custaria o reconhecimento imediato do CTA. Vermelho de erro:
+     cor semântica, precisa se distinguir do resto da interface. */
+  --whatsapp: #0f7a49;
+  --whatsapp-dark: #0f7a49;
+  --whatsapp-deep: #087642;
+  --whatsapp-light: #a9e7c8;
+  --whatsapp-soft: #e9f7ef;
+  --error: #a93d36;
+  --error-dark: #7c2e29;
+  --error-soft: #fff2f1;
+
+  --shadow-sm: 0 10px 30px rgba(16, 26, 40, 0.07);
+  --shadow-md: 0 24px 70px rgba(16, 26, 40, 0.13);
+  /* Um raio para toda a interface. Círculos e anatomia pertencem ao desenho. */
+  --radius-ui: 12px;
+  --radius-xs: var(--radius-ui);
+  --radius-sm: var(--radius-ui);
+  --radius-md: var(--radius-ui);
+  --radius-lg: var(--radius-ui);
+  --radius-xl: var(--radius-ui);
+  --radius-pill: var(--radius-ui);
+
+  --container: 1180px;
+
+  /* Escala tipográfica — sete degraus, razão ~1.15.
+     Nada de font-size solto: toda declaração aponta para um destes tokens.
+     --fs-micro é exceção reservada a legendas dentro das ilustrações. */
+  --fs-micro: 10px;
+  --fs-label: 11px;
+  --fs-fine: 13px;
+  --fs-sm: 15px;
+  --fs-body: 17px;
+  --fs-lead: 20px;
+  --fs-h3: 24px;
+  --fs-h2: clamp(2rem, 3.4vw, 3.55rem);
+  --fs-h1: clamp(2.55rem, 4.9vw, 5rem);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 92px;
+}
+
+body {
+  margin: 0;
+  background: var(--white);
+  color: var(--ink);
+  font-family: var(--font-source-sans), "Segoe UI", sans-serif;
+  font-size: var(--fs-body);
+  line-height: 1.65;
+  text-rendering: optimizeLegibility;
+}
+
+body,
+button,
+input {
+  -webkit-font-smoothing: antialiased;
+}
+
+body:has(.mobile-menu.open) {
+  overflow: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+img,
+svg {
+  display: block;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+h1,
+h2,
+h3,
+.brand {
+  font-family: var(--font-manrope), "Segoe UI", sans-serif;
+}
+
+h1,
+h2 {
+  color: var(--navy-950);
+  letter-spacing: -0.045em;
+  line-height: 1.07;
+}
+
+h1 {
+  font-size: var(--fs-h1);
+  font-weight: 650;
+}
+
+h2 {
+  font-size: var(--fs-h2);
+  font-weight: 630;
+}
+
+h3 {
+  color: var(--navy-900);
+  letter-spacing: -0.025em;
+  line-height: 1.25;
+}
+
+p {
+  color: var(--muted);
+}
+
+/* Gradiente em vez de pseudo-elemento: com box-decoration-break o traço
+   acompanha a quebra de linha, que é o caso no celular. Um pseudo-elemento
+   posicionado rodaria só no compositor, mas cobriria as duas linhas de uma
+   vez quando o título quebrasse.
+
+   Regra de uso: no máximo um destaque por seção, sempre sobre o trecho que
+   responde à objeção — não sobre o que soa bonito. Dois destaques na mesma
+   tela anulam um ao outro. */
+.mark-accent {
+  background-image: linear-gradient(
+    transparent 63%,
+    var(--mark-color, rgba(var(--blue-400-rgb), 0.55)) 63%
+  );
+  background-repeat: no-repeat;
+  background-size: 0 100%;
+  animation: markSweep 760ms cubic-bezier(0.22, 0.68, 0.24, 1) 420ms both;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+@keyframes markSweep {
+  from {
+    background-size: 0 100%;
+  }
+  to {
+    background-size: 100% 100%;
+  }
+}
+
+/* Dentro de parágrafo o traço é mais discreto que no h1: o corpo tem peso
+   menor e uma faixa cheia competiria com a leitura. Sem animação, porque
+   estes trechos entram por rolagem e o movimento tardio distrai. */
+.mark-soft {
+  background-image: linear-gradient(
+    transparent 66%,
+    var(--mark-color, rgba(var(--blue-400-rgb), 0.42)) 66%
+  );
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  color: var(--navy-900);
+  font-weight: 650;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+/* Sobre os fundos navy o traço claro sumiria; ali o destaque vira cor. */
+.about-section .mark-soft,
+.authority-section .mark-soft {
+  background-image: none;
+  color: var(--blue-200);
+}
+
+::selection {
+  background: var(--blue-600);
+  color: var(--white);
+}
+
+:focus-visible {
+  outline: 3px solid rgba(var(--blue-600-rgb), 0.42);
+  outline-offset: 3px;
+}
+
+.container {
+  width: min(calc(100% - 48px), var(--container));
+  margin-inline: auto;
+}
+
+.skip-link {
+  position: fixed;
+  z-index: 999;
+  top: 12px;
+  left: 12px;
+  padding: 10px 16px;
+  border-radius: var(--radius-sm);
+  background: var(--white);
+  color: var(--navy-950);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-150%);
+  transition: transform 180ms ease;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}

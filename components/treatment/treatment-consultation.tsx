@@ -18,7 +18,9 @@ export function TreatmentConsultation({ content }: { content: TreatmentContent }
     <section className="section consultation-section" id="consulta">
       <div className="container">
         <div className="section-heading centered-heading">
-          <span className="pill-badge">A primeira consulta</span>
+          <span className="pill-badge">
+            {content.consultationKicker ?? "A primeira consulta"}
+          </span>
           <h2>{content.consultationTitle}</h2>
         </div>
 

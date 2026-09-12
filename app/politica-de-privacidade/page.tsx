@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 export default function PrivacyPage() {
   return (
-    <main>
+    <main data-rota="politica-de-privacidade">
       <section className="legal-hero section-soft-edge">
         <div className="container legal-heading">
           <span className="eyebrow">Privacidade e transparência</span>

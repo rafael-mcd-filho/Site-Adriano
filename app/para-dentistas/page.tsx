@@ -17,6 +17,7 @@ import { FaqSection } from "@/components/faq-section";
 import { FloatingWhatsApp } from "@/components/floating-whatsapp";
 import { JsonLd } from "@/components/json-ld";
 import { SectionWave } from "@/components/section-wave";
+import { TrustMarquee } from "@/components/trust-marquee";
 import { WhatsAppButton } from "@/components/whatsapp-button";
 import { pageMetadata } from "@/lib/metadata";
 import { breadcrumbSchema, faqSchema } from "@/lib/schema";
@@ -135,7 +136,7 @@ export default function ParaDentistasPage() {
         ])}
       />
 
-      <main>
+      <main data-rota="para-dentistas">
         <section className="dentist-hero section-soft-edge">
           <div className="container dentist-hero-grid">
             <div className="page-enter">
@@ -194,6 +195,15 @@ export default function ParaDentistasPage() {
             <DoctorPortrait />
           </div>
         </section>
+
+        <TrustMarquee
+          items={[
+            "Discussão de casos",
+            "Planejamento conjunto",
+            "Informações de retorno alinhadas",
+            "Continuidade do acompanhamento",
+          ]}
+        />
 
         <section className="section section-white pain-section">
           <div className="container">
@@ -344,7 +354,6 @@ export default function ParaDentistasPage() {
           id="duvidas-profissionais"
         />
 
-        <SectionWave to="var(--navy-950)" />
         <section className="section contact-section" id="contato">
           <div className="container">
             <div className="closing-copy">

@@ -5,7 +5,7 @@ type SectionWaveProps = {
   className?: string;
 };
 
-/** Joins two section colors; `flip` mirrors the curve horizontally. */
+/** Dentro de uma seção com imagem, `from="transparent"` preserva o fundo até a curva. */
 export function SectionWave({
   from = "var(--white)",
   to = "var(--navy-800)",

@@ -1,6 +1,7 @@
 import { FaqAccordion, type Faq } from "@/components/faq-accordion";
 import { WhatsAppButton } from "@/components/whatsapp-button";
 import { SectionBackdrop } from "@/components/section-backdrop";
+import { SectionWave } from "@/components/section-wave";
 
 type FaqSectionProps = {
   items: Faq[];
@@ -26,7 +27,7 @@ export function FaqSection({
   id = "duvidas",
 }: FaqSectionProps) {
   return (
-    <section className="section faq-section" id={id}>
+    <section className="section faq-section section-with-wave" id={id}>
       <SectionBackdrop />
       <div className="container faq-layout">
         <div className="section-heading centered-heading">
@@ -46,6 +47,7 @@ export function FaqSection({
           />
         </div>
       </div>
+      <SectionWave from="transparent" to="var(--navy-950)" />
     </section>
   );
 }

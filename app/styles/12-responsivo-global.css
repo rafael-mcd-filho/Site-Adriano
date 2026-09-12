@@ -1,0 +1,460 @@
+/* Os três cortes de largura que valem para o site inteiro (1080, 800 e 600px). Ajuste de rota não entra aqui.
+   Fatia de globals.css — a ordem dos @import lá é significativa. */
+
+@media (max-width: 1080px) {
+  .desktop-nav {
+    display: none;
+  }
+
+  .header-inner {
+    justify-content: space-between;
+  }
+
+  .header-cta {
+    margin-left: auto;
+  }
+
+  .mobile-menu-button {
+    display: grid;
+    width: 44px;
+    height: 44px;
+    place-items: center;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--white);
+    color: var(--navy-900);
+    cursor: pointer;
+  }
+
+  /* Overlay cobre a viewport inteira, header incluído — por isso ele traz a
+     própria assinatura e o próprio botão de fechar. */
+  .mobile-menu {
+    position: fixed;
+    z-index: 500;
+    display: flex;
+    overflow-y: auto;
+    flex-direction: column;
+    padding: 16px 0 34px;
+    background: var(--navy-950);
+    inset: 0;
+    opacity: 0;
+    overscroll-behavior: contain;
+    pointer-events: none;
+    /* `visibility` tira os links da ordem de tabulação enquanto o menu está
+       fechado. Só com opacity eles seguiam focáveis por teclado dentro de um
+       container aria-hidden. O atraso mantém a transição de saída. */
+    visibility: hidden;
+    transition:
+      opacity 200ms ease,
+      visibility 0s linear 200ms;
+  }
+
+  .mobile-menu.open {
+    opacity: 1;
+    pointer-events: auto;
+    visibility: visible;
+    transition:
+      opacity 200ms ease,
+      visibility 0s;
+  }
+
+  .mobile-menu-top,
+  .mobile-menu-inner,
+  .mobile-menu-foot {
+    width: min(calc(100% - 48px), var(--container));
+    margin-inline: auto;
+  }
+
+  .mobile-menu-top {
+    display: flex;
+    min-height: 62px;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 26px;
+  }
+
+  .mobile-menu-close {
+    display: grid;
+    width: 40px;
+    height: 40px;
+    place-items: center;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--white);
+    cursor: pointer;
+    transition: background 180ms ease;
+  }
+
+  .mobile-menu-close:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .mobile-menu-inner {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+  }
+
+  .mobile-menu-inner > a {
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--white);
+    font-family: var(--font-manrope), sans-serif;
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    transition: color 200ms ease;
+  }
+
+  .mobile-menu-inner > a:hover,
+  .mobile-menu-inner > a:focus-visible {
+    color: var(--blue-200);
+  }
+
+  .mobile-area-label {
+    margin: 26px 0 4px;
+    color: var(--blue-200);
+    font-size: var(--fs-label);
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .mobile-area-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    color: rgba(255, 255, 255, 0.82);
+    font-size: var(--fs-body);
+    font-weight: 600;
+  }
+
+  .mobile-area-link span {
+    color: var(--blue-200);
+  }
+
+  .mobile-menu-foot {
+    margin-top: 30px;
+  }
+
+  .mobile-menu-foot .mobile-whatsapp {
+    width: 100%;
+    border-color: var(--blue-600);
+    background: var(--blue-600);
+  }
+
+  .mobile-credentials {
+    margin-top: 20px;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: var(--fs-label);
+    line-height: 1.6;
+  }
+
+  .home-hero-grid,
+  .inner-hero-grid {
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 42px;
+  }
+
+  .visual-motif {
+    max-width: 430px;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1.25fr 0.75fr 0.75fr;
+  }
+
+  .footer-grid > div:last-child {
+    grid-column: 2 / 4;
+  }
+}
+
+@media (max-width: 800px) {
+  .container {
+    width: min(calc(100% - 34px), var(--container));
+  }
+
+  .header-cta {
+    display: none;
+  }
+
+  .home-hero-grid,
+  .inner-hero-grid,
+  .dentist-hero-grid {
+    min-height: auto;
+    grid-template-columns: 1fr;
+    gap: 55px;
+    padding-block: 72px 95px;
+  }
+
+  .home-hero-copy,
+  .inner-hero-copy,
+  .dentist-hero-grid > div:first-child {
+    order: 1;
+  }
+
+  /* A identificação e o CTA precedem o retrato nas telas menores. */
+  .home-hero-grid > .doctor-portrait,
+  .inner-hero-grid > .doctor-portrait,
+  .dentist-hero-grid > .doctor-portrait {
+    order: 2;
+  }
+
+  .visual-motif {
+    width: min(100%, 470px);
+    order: 2;
+    justify-self: center;
+  }
+
+  .inner-hero {
+    min-height: auto;
+  }
+
+  .split-heading,
+  .about-grid,
+  .location-grid,
+  .professional-grid,
+  .legal-layout,
+  .contact-card {
+    grid-template-columns: 1fr;
+  }
+
+  .split-heading {
+    gap: 22px;
+  }
+  .areas-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .about-grid {
+    gap: 55px;
+  }
+  .authority-grid {
+    grid-template-columns: auto 1fr;
+    gap: 40px;
+  }
+  .legal-index {
+    position: static;
+  }
+
+  .contact-card {
+    gap: 35px;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .footer-grid > div:last-child {
+    grid-column: auto;
+  }
+
+  .footer-brand {
+    grid-column: 1 / 3;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding-block: 20px;
+  }
+
+  .case-list {
+    grid-template-columns: 1fr;
+  }
+  .legal-layout {
+    gap: 50px;
+  }
+
+  .legal-index {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .legal-index span {
+    grid-column: 1 / 3;
+  }
+}
+
+@media (max-width: 600px) {
+  /* A escala inteira desce um degrau no celular — os tokens mudam,
+     nenhum componente precisa saber disso. */
+  :root {
+    --fs-body: 16px;
+    --fs-lead: 18px;
+    --fs-h3: 21px;
+    --fs-h2: clamp(1.9rem, 8.7vw, 2.9rem);
+    --fs-h1: clamp(2.4rem, 11.5vw, 3.6rem);
+  }
+
+  .container {
+    width: min(calc(100% - 28px), var(--container));
+  }
+
+  .header-inner {
+    min-height: 68px;
+  }
+
+  .brand-mark {
+    width: 38px;
+    height: 38px;
+  }
+
+  .brand-copy strong {
+    font-size: var(--fs-sm);
+  }
+
+  .mobile-menu-top,
+  .mobile-menu-inner,
+  .mobile-menu-foot {
+    width: min(calc(100% - 28px), var(--container));
+  }
+
+  .mobile-menu-inner > a {
+    font-size: 24px;
+  }
+
+  .section {
+    padding-block: 78px;
+  }
+
+  .home-hero-grid,
+  .inner-hero-grid,
+  .dentist-hero-grid {
+    padding-block: 58px 82px;
+  }
+
+  .home-hero-copy > p,
+  .inner-hero-copy > p,
+  .hero-actions {
+    display: grid;
+    width: 100%;
+  }
+
+  .hero-actions .button {
+    width: 100%;
+  }
+  .hero-proof {
+    display: grid;
+    gap: 8px;
+  }
+
+  .visual-motif {
+    max-width: 430px;
+    min-height: 525px;
+    aspect-ratio: auto;
+  }
+
+  .visual-stage {
+    min-height: 310px;
+  }
+
+  .visual-caption {
+    padding: 21px 20px 16px;
+  }
+
+  .visual-caption strong {
+    font-size: var(--fs-body);
+  }
+
+  .visual-cues > span {
+    min-height: 72px;
+    padding: 12px 9px;
+    font-size: var(--fs-micro);
+  }
+  .treatment-page-air .mobile-signal-mark i:nth-child(1) { top: 9px; }
+  .treatment-page-air .mobile-signal-mark i:nth-child(2) { top: 20px; width: 36px; }
+  .treatment-page-air .mobile-signal-mark i:nth-child(3) { top: 31px; width: 27px; }
+  .treatment-page-implant .mobile-signal-mark i:nth-child(1) { top: 3px; width: 34px; height: 16px; }
+  .treatment-page-implant .mobile-signal-mark i:nth-child(2) { top: 19px; height: 17px; border-radius: 2px 2px 8px 8px; }
+  .treatment-page-implant .mobile-signal-mark i:nth-child(3) { top: 36px; height: 2px; border-width: 1px 0 0; }
+  .treatment-page-layers .mobile-signal-mark i:nth-child(1) { top: 2px; width: 30px; }
+  .treatment-page-layers .mobile-signal-mark i:nth-child(2) { top: 13px; width: 38px; }
+  .treatment-page-layers .mobile-signal-mark i:nth-child(3) { top: 24px; }
+  .treatment-page-joint .mobile-signal-mark i:nth-child(2) { width: 22px; height: 22px; }
+  .treatment-page-joint .mobile-signal-mark i:nth-child(3) { width: 7px; height: 7px; background: var(--page-accent); }
+
+  .treatment-page-alignment .mobile-signal-mark i:nth-child(1) { width: 46px; height: 1px; border-width: 1px 0 0; }
+  .treatment-page-alignment .mobile-signal-mark i:nth-child(2) { width: 1px; height: 42px; border-width: 0 0 0 1px; }
+  .treatment-page-alignment .mobile-signal-mark i:nth-child(3) { width: 13px; height: 13px; border-radius: 50%; }
+  .areas-grid,
+  .field-grid,
+  .reason-options {
+    grid-template-columns: 1fr;
+  }
+  .portrait-initial {
+    font-size: 96px;
+  }
+  .process-number {
+    width: 48px;
+    height: 48px;
+    grid-row: 1 / 4;
+    margin: 0 17px 0 0;
+  }
+  .authority-grid {
+    grid-template-columns: 1fr;
+  }
+  .contact-card,
+  .form-success {
+    grid-template-columns: 1fr;
+    padding: 27px 20px;
+  }
+
+  .form-success > * {
+    grid-column: 1 !important;
+  }
+
+  .form-success > svg {
+    margin-bottom: 8px;
+  }
+
+  .floating-whatsapp {
+    right: 14px;
+    bottom: 14px;
+    width: 54px;
+    height: 54px;
+    justify-content: center;
+    padding: 0;
+  }
+
+  .floating-whatsapp span {
+    display: none;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-brand {
+    grid-column: auto;
+  }
+
+  .footer-grid > div:last-child {
+    grid-column: auto;
+  }
+
+  .breadcrumb {
+    padding-top: 18px;
+  }
+
+  .clinical-note {
+    font-size: var(--fs-label);
+  }
+  .professional-grid {
+    gap: 38px;
+  }
+  .legal-index {
+    grid-template-columns: 1fr;
+  }
+
+  .legal-index span {
+    grid-column: auto;
+  }
+
+  .not-found {
+    min-height: 70vh;
+  }
+}

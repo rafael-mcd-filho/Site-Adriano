@@ -1,0 +1,231 @@
+/* Cabeçalho fixo, navegação, estado ao rolar e menu mobile.
+   Fatia de globals.css — a ordem dos @import lá é significativa. */
+
+/* Cabeçalho
+   A altura de `.header-inner` é fixa de propósito: a barra é sticky e ocupa
+   espaço no fluxo, então encolher a barra inteira ao rolar empurraria o
+   conteúdo para cima a cada scroll — layout shift que entra no CLS. A
+   compactação acontece dentro dela, no que cabe abaixo desse piso. */
+.site-header {
+  position: sticky;
+  z-index: 100;
+  top: 0;
+  border-bottom: 1px solid rgba(var(--navy-800-rgb), 0.08);
+  background: var(--white);
+  transition:
+    background 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease;
+}
+
+/* Fundo opaco ao rolar dispensa o blur — e é durante a rolagem que o
+   `backdrop-filter` custa mais repintura em aparelho fraco. */
+.site-header.is-scrolled {
+  border-bottom-color: rgba(var(--navy-800-rgb), 0.1);
+  background: var(--white);
+  backdrop-filter: none;
+  box-shadow: 0 4px 24px rgba(var(--navy-800-rgb), 0.06);
+}
+
+@media (max-width: 800px) {
+  .site-header {
+    background: var(--white);
+    backdrop-filter: none;
+  }
+}
+
+.header-inner {
+  display: flex;
+  min-height: 78px;
+  align-items: center;
+  gap: 20px;
+}
+
+.brand {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 11px;
+  color: var(--navy-950);
+}
+
+.brand-mark {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border-radius: 50% 50% 46% 54%;
+  background: var(--navy-800);
+  color: var(--white);
+  font-size: var(--fs-lead);
+  font-weight: 700;
+  letter-spacing: -0.08em;
+  transform: rotate(-4deg);
+  transition:
+    width 220ms ease,
+    height 220ms ease;
+}
+
+.site-header.is-scrolled .brand-mark {
+  width: 36px;
+  height: 36px;
+}
+
+.brand-copy {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.08;
+}
+
+.brand-copy strong {
+  font-size: var(--fs-sm);
+  letter-spacing: -0.025em;
+}
+
+.brand-copy small {
+  margin-top: 4px;
+  color: var(--blue-600);
+  font-family: var(--font-source-sans), sans-serif;
+  font-size: var(--fs-label);
+  font-weight: 700;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.desktop-nav {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Estados opacos preservam o contraste, inclusive sobre seções escuras. */
+.nav-pill {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 5px;
+  border: 1px solid rgba(var(--navy-800-rgb), 0.08);
+  border-radius: var(--radius-md);
+  background: var(--surface-soft);
+  transition:
+    padding 220ms ease,
+    background 220ms ease,
+    border-color 220ms ease;
+}
+
+.site-header.is-scrolled .nav-pill {
+  padding: 5px;
+  border-color: var(--border);
+  background: var(--surface-soft);
+}
+
+.nav-link {
+  position: relative;
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  gap: 5px;
+  padding: 9px 12px;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--navy-800);
+  cursor: pointer;
+  font-family: var(--font-source-sans), sans-serif;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  list-style: none;
+  white-space: nowrap;
+  transition:
+    background 180ms ease,
+    color 180ms ease,
+    padding 220ms ease;
+}
+
+.site-header.is-scrolled .nav-link {
+  padding-block: 9px;
+}
+
+.nav-link:hover {
+  background: var(--sand-100);
+  color: var(--navy-950);
+}
+
+/* Sem halo sobre os rótulos: seleção usa preenchimento sólido. */
+.nav-link.active {
+  background: var(--navy-800);
+  color: var(--white);
+}
+
+.nav-chevron {
+  transition: transform 200ms ease;
+}
+
+.nav-link[aria-expanded="true"] .nav-chevron {
+  transform: rotate(180deg);
+}
+
+.nav-group {
+  position: relative;
+}
+
+.areas-popover {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 50%;
+  z-index: 20;
+  display: none;
+  width: 320px;
+  padding: 6px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--white);
+  box-shadow: var(--shadow-md);
+  transform: translateX(-50%);
+}
+
+.areas-popover.is-open {
+  display: grid;
+  animation: popoverIn 180ms ease both;
+}
+
+.areas-popover::before {
+  position: absolute;
+  top: -8px;
+  left: calc(50% - 8px);
+  width: 15px;
+  height: 15px;
+  border-top: 1px solid var(--border);
+  border-left: 1px solid var(--border);
+  background: var(--white);
+  content: "";
+  transform: rotate(45deg);
+}
+
+.popover-label {
+  padding: 7px 10px 9px;
+  color: var(--muted);
+  font-size: var(--fs-label);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.areas-popover a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 11px 10px;
+  border-radius: var(--radius-sm);
+  color: var(--navy-900);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+}
+
+.areas-popover a:hover,
+.areas-popover a.active {
+  background: var(--surface);
+  color: var(--blue-600);
+}

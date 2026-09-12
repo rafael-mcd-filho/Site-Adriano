@@ -8,7 +8,9 @@ export function TreatmentJourney({ content }: { content: TreatmentContent }) {
     <section className="section journey-section" id="etapas">
       <div className="container">
         <div className="section-heading centered-heading">
-          <span className="pill-badge">Etapas do tratamento</span>
+          <span className="pill-badge">
+            {content.journey.kicker ?? "Etapas do tratamento"}
+          </span>
           <h2>{content.journey.title}</h2>
           <p>{content.journey.intro}</p>
         </div>

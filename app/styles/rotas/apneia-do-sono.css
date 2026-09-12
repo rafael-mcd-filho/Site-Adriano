@@ -1,0 +1,17 @@
+/* Apneia do sono.
+ *
+ * Regras daqui valem para ESTA rota e mais nenhuma. Todo seletor começa com
+ * [data-rota="apneia-do-sono"], que o <main> da rota carrega.
+ *
+ * Este arquivo é carregado depois de todos os outros, então ele vence sem
+ * precisar de !important.
+ *
+ * Exemplo:
+ *
+ *   [data-rota="apneia-do-sono"] .pain-section {
+ *     padding-block: 120px;
+ *   }
+ *
+ * Se a regra passar a valer para mais de uma rota, ela não pertence mais
+ * aqui: mova para o arquivo dono em app/styles/.
+ */

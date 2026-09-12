@@ -1,0 +1,199 @@
+/* DÍVIDA. Ajustes de contraste e leitura aplicados por cima dos arquivos acima. Ver LEIA-ME.md.
+   Fatia de globals.css — a ordem dos @import lá é significativa. */
+
+/* Revisão de leitura: contraste estável, conteúdo aberto e poucos contornos. */
+.header-cta .button-circle { background: rgba(255, 255, 255, .14); }
+.mobile-credentials { color: #c8d1d9; font-size: var(--fs-fine); }
+.mobile-menu-close { min-width: 44px; min-height: 44px; }
+.mobile-primary-links { display: grid; grid-template-columns: 1fr 1fr; gap: 0 18px; }
+.mobile-primary-links a { display: flex; min-height: 44px; align-items: center; padding-block: 10px; border-bottom: 1px solid rgba(255,255,255,.16); color: white; font-size: var(--fs-body); }
+.mobile-menu-inner > .mobile-area-link { padding-block: 12px; font-size: var(--fs-lead); }
+.mobile-menu-top { margin-bottom: 14px; }
+.mobile-area-label { margin-top: 20px; }
+:focus-visible { outline: 3px solid var(--blue-600); outline-offset: 4px; }
+.mobile-menu :focus-visible, .contact-section :focus-visible,
+.authority-section :focus-visible, .about-section :focus-visible {
+  outline-color: var(--blue-200);
+}
+.hero-actions { align-items: center; }
+.hero-secondary-link { min-height: 48px; padding: 10px 0; }
+.home-hero-grid, .inner-hero-grid {
+  min-height: 620px;
+  gap: clamp(36px, 5vw, 70px);
+  padding-block: clamp(52px, 6vw, 82px);
+  grid-template-columns: minmax(0, 1.15fr) minmax(340px, .85fr);
+}
+.home-hero-copy h1, .inner-hero-copy h1 { font-size: clamp(2.5rem, 4.4vw, 4.5rem); }
+.home-hero, .inner-hero, .dentist-hero {
+  background: var(--white);
+}
+.home-hero-copy > p, .inner-hero-copy > p { line-height: 1.6; }
+.mark-accent { --mark-color: rgba(218,207,192,.8); }
+.doctor-portrait-hero {
+  overflow: hidden;
+  gap: 0;
+  border: 1px solid #d2d9df;
+  border-radius: var(--radius-lg);
+  background: var(--white);
+}
+.identity-art {
+  position: relative;
+  display: grid;
+  min-height: 290px;
+  overflow: hidden;
+  place-content: center;
+  padding: 38px;
+  background: var(--navy-800);
+  color: var(--sand-500);
+  text-align: center;
+}
+.identity-contours { position: absolute; inset: 0; width: 100%; height: 100%; stroke: #dacfc0; stroke-width: 1; opacity: .2; }
+.identity-monogram { position: relative; font-family: Georgia, serif; font-size: 80px; line-height: 1.2; letter-spacing: -.08em; }
+.identity-signature { position: relative; margin-top: 20px; color: #ece7df; font-size: var(--fs-sm); }
+.doctor-portrait-hero figcaption { padding: 24px 28px; gap: 5px; }
+.doctor-portrait-hero figcaption strong { font-size: var(--fs-body); }
+.identity-board { display: flex; align-items: center; gap: 7px; margin-top: 10px; color: var(--navy-800) !important; }
+.certificate-preview { display: block; overflow: hidden; border: 1px solid var(--border); border-radius: var(--radius-md); background: white; }
+.certificate-preview img { display: block; width: 100%; height: auto; }
+.certificate-preview > span { display: flex; justify-content: space-between; padding: 15px 20px; border-top: 1px solid var(--border); color: var(--navy-800); font-size: var(--fs-sm); font-weight: 700; }
+.certificate-preview:hover > span { background: var(--sand-50); }
+.doctor-portrait .certificate-caption { color: #c8d1d9; font-size: var(--fs-fine); }
+.authority-grid, .about-grid { align-items: center; }
+/* Formas orgânicas ficam dentro do desenho, sem recortar a legenda. */
+.visual-motif { border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); }
+.visual-stage * { animation-iteration-count: 1; }
+.pain-list { gap: 0 36px; }
+.pain-item { padding: 20px 0; border: 0; border-top: 1px solid var(--border); border-radius: 0; background: transparent; font-size: var(--fs-body); }
+.pain-mark { width: 6px; height: 6px; margin-top: 10px; background: var(--blue-600); }
+.consequence-panel { border: 0; border-left: 3px solid var(--sand-600); border-radius: 0; background: var(--sand-50); }
+.consequence-icon { display: none; }
+.objections-section .container { display: grid; grid-template-columns: .8fr 1.2fr; gap: 60px; align-items: start; }
+.objection-list { gap: 0; }
+.objection-list li { padding: 24px 0; border: 0; border-top: 1px solid var(--border); background: transparent; }
+.objection-list li:first-child, .objection-list li:last-child { border-radius: 0; }
+.objection-index { color: var(--blue-600); font-size: var(--fs-fine); padding-top: 4px; }
+.journey-section { background: var(--sand-50); }
+.journey-track { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 30px; margin: 0; padding: 0; list-style: none; }
+.journey-track li { position: relative; border-top: 1px solid var(--sand-400); padding-top: 28px; }
+.journey-number { display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: 50%; background: var(--navy-800); color: white; font-size: var(--fs-fine); margin-bottom: 20px; }
+.journey-track h3 { font-size: var(--fs-lead); }
+.journey-track p { font-size: var(--fs-body); margin-bottom: 0; }
+.consultation-overview { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 48px; }
+.consultation-card { border: 0; border-radius: 0; padding: 0; background: transparent; }
+.consultation-icon { width: 38px; height: 38px; border-radius: var(--radius-sm); margin-bottom: 14px; }
+.consultation-card p { font-size: var(--fs-body); }
+.consultation-preparation { margin-top: 32px; border-block: 1px solid var(--border); }
+.consultation-preparation summary { display: flex; align-items: center; gap: 12px; min-height: 64px; padding-block: 16px; cursor: pointer; color: var(--navy-800); font-weight: 700; list-style: none; }
+.consultation-preparation summary::-webkit-details-marker { display: none; }
+.consultation-preparation summary > svg { flex: 0 0 auto; }
+.consultation-preparation summary > svg:last-child { margin-left: auto; transition: transform 180ms ease; }
+.consultation-preparation[open] summary > svg:last-child { transform: rotate(180deg); }
+.consultation-preparation ul { display: grid; gap: 10px; margin: 0; padding: 0 0 22px; list-style: none; }
+.consultation-preparation li { display: flex; align-items: baseline; gap: 10px; }
+.consultation-preparation li svg { flex: 0 0 auto; color: var(--blue-600); }
+.consultation-note { border: 0; border-radius: var(--radius-md); background: var(--blue-50); }
+.contact-fields { display: grid; min-width: 0; padding: 0; margin: 0; border: 0; gap: 20px; }
+.contact-fields:disabled input, .contact-fields:disabled button { cursor: not-allowed; }
+.contact-fields:disabled .form-submit { background: var(--surface); border-color: var(--border); color: var(--muted); }
+.contact-fields:disabled .button-circle { display: none; }
+.contact-fields:disabled .button-motion { padding-inline: 21px; }
+.reason-option { min-height: 48px; }
+.field input { font-size: max(16px, 1em); }
+.page-enter > :nth-child(n) { animation-duration: 350ms; animation-delay: 0ms; }
+.stagger-card { animation: none; }
+.areas-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.area-card { box-shadow: none; border-radius: var(--radius-md); }
+.area-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+.area-body > p, .area-link { font-size: var(--fs-sm); }
+.area-cues { display: none; }
+.area-visual { height: 112px; }
+.audience-card { box-shadow: none; border-radius: var(--radius-md); }
+.audience-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; }
+.audience-actions .text-link { min-height: 44px; }
+#processo .consultation-grid { gap: 30px; }
+#processo .consultation-card { border-top: 2px solid var(--sand-500); padding-top: 24px; }
+.flow-grid li { border: 0; border-top: 1px solid var(--border); border-radius: 0; padding: 28px 0; background: transparent; }
+.flow-index { position: static; display: block; color: var(--blue-600); font-size: var(--fs-fine); margin-bottom: 16px; }
+
+@media (max-width: 1080px) {
+  .home-hero-grid, .inner-hero-grid { grid-template-columns: minmax(0, 1.2fr) minmax(280px, .8fr); gap: 30px; }
+}
+@media (max-width: 900px) {
+  .objections-section .container { grid-template-columns: 1fr; gap: 4px; }
+  .objections-section .section-heading { margin-bottom: 24px; }
+  .doctor-portrait-authority { width: min(100%, 460px); margin-inline: auto; }
+  .authority-grid .authority-copy { order: -1; }
+}
+@media (max-width: 800px) {
+  .home-hero-grid, .inner-hero-grid, .dentist-hero-grid { grid-template-columns: 1fr; padding-block: 38px 48px; min-height: 0; }
+  .home-hero-copy h1, .inner-hero-copy h1 { font-size: var(--fs-h1); }
+  .doctor-portrait-hero { display: grid; grid-template-columns: 78px 1fr; max-width: none; width: 100%; }
+  .identity-art { min-height: 0; padding: 10px; }
+  .identity-monogram { font-size: 28px; }
+  .identity-signature { display: none; }
+  .doctor-portrait-hero figcaption { padding: 16px; }
+  .doctor-portrait-hero figcaption strong { font-size: var(--fs-sm); }
+  .identity-board { margin-top: 4px; }
+  .about-grid { gap: 32px; }
+  .about-grid .about-copy { order: -1; }
+  .areas-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .audience-visual { height: 92px; }
+  .audience-visual .motif-thumb { width: 64px; height: 64px; margin-left: auto; margin-right: 22px; }
+  .audience-badge { left: 24px; bottom: 30px; }
+}
+@media (max-width: 600px) {
+  :root { --fs-h1: clamp(2.15rem, 9.4vw, 3rem); --fs-h2: clamp(1.75rem, 7.4vw, 2.35rem); }
+  .container { width: calc(100% - 36px); }
+  .section { padding-block: 56px; }
+  .section-heading { margin-bottom: 28px; }
+  .section-kicker, .eyebrow { letter-spacing: .1em; margin-bottom: 14px; }
+  .home-hero-copy h1, .inner-hero-copy h1 { margin-bottom: 20px; }
+  .home-hero-copy > p, .inner-hero-copy > p { margin-bottom: 22px; }
+  .hero-badges { gap: 12px 18px; margin-bottom: 28px; }
+  .hero-badges li { border: 0; border-radius: 0; background: transparent; padding: 0; }
+  .hero-actions { gap: 16px; }
+  .hero-actions .button { min-height: 54px; }
+  .hero-secondary-link { justify-content: center; }
+  .hero-proof { margin-top: 18px; }
+  .clinical-note { font-size: var(--fs-fine); }
+  .pain-item { padding-block: 17px; }
+  .consequence-panel { padding: 20px; margin-top: 18px; }
+  .objection-list li { flex-direction: row; gap: 14px; padding-block: 22px; }
+  .objection-list strong { font-size: var(--fs-body); }
+  .objection-list p { font-size: var(--fs-body); }
+  .journey-track { grid-template-columns: 1fr; gap: 0; }
+  .journey-track li { border-top: 0; border-left: 1px solid var(--sand-400); margin-left: 18px; padding: 0 0 30px 34px; }
+  .journey-track li:last-child { padding-bottom: 0; border-color: transparent; }
+  .journey-number { position: absolute; left: -19px; top: 0; width: 36px; height: 36px; }
+  .journey-track h3 { padding-top: 5px; }
+  .consultation-overview { grid-template-columns: 1fr; gap: 26px; }
+  .consultation-overview .consultation-card { padding-left: 52px; }
+  .consultation-overview .consultation-icon { position: absolute; left: 0; top: 0; }
+  .consultation-note { padding: 22px 18px; }
+  .areas-grid { display: flex; flex-direction: column; gap: 0; }
+  .area-card { display: grid; grid-template-columns: 62px 1fr; gap: 18px; border: 0; border-top: 1px solid var(--border); border-radius: 0; background: transparent; overflow: visible; }
+  .area-card:hover { transform: none; box-shadow: none; }
+  .area-visual { height: 62px; margin-top: 22px; border-radius: var(--radius-sm); }
+  .area-visual .motif-thumb { width: 52px; height: 52px; }
+  .area-badge { display: none; }
+  .area-body { padding: 22px 0; }
+  .area-body h3 { font-size: var(--fs-body); }
+  .area-body > p { margin-bottom: 10px; }
+  .area-link { min-height: 32px; }
+  .audience-body { padding: 24px; }
+  .audience-body > p { margin-bottom: 18px; }
+  .audience-list { margin-bottom: 18px; }
+  #processo .consultation-grid { gap: 0; }
+  #processo .consultation-card { margin-left: 6px; border-top: 0; border-left: 2px solid var(--sand-500); padding: 0 0 26px 24px; }
+  #processo .consultation-card::before { content: ""; position: absolute; top: 6px; left: -6px; width: 10px; height: 10px; border-radius: 50%; background: var(--blue-600); }
+  #processo .consultation-card:last-child { padding-bottom: 0; }
+  .method-grid { gap: 28px; }
+  .method-section .visual-motif { min-height: 340px; width: 100%; }
+  .method-section .visual-stage { min-height: 280px; }
+  .method-section .visual-cues > span { min-height: 50px; }
+  .contact-card { padding: 24px 18px; border-radius: var(--radius-md); }
+  .reason-options { grid-template-columns: 1fr; }
+  .closing-copy { text-align: left; justify-items: start; margin-bottom: 32px; }
+  .closing-copy .button { width: 100%; }
+  .faq-card { border-radius: var(--radius-md); box-shadow: none; }
+}

@@ -17,7 +17,9 @@ export function TreatmentObjections({ content }: { content: TreatmentContent }) 
     <section className="section objections-section">
       <div className="container">
         <div className="section-heading">
-          <span className="section-kicker">Antes de decidir</span>
+          <span className="section-kicker">
+            {content.objectionsKicker ?? "Antes de decidir"}
+          </span>
           <h2>{content.objectionsTitle}</h2>
         </div>
 

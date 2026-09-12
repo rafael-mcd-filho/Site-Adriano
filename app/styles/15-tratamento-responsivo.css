@@ -1,0 +1,58 @@
+/* Cortes de largura dos blocos de tratamento.
+   Fatia de globals.css — a ordem dos @import lá é significativa. */
+
+/* ── Responsivo ───────────────────────────────────────────────────────── */
+@media (max-width: 1080px) {
+  .flow-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 900px) {
+  .method-grid,
+  .authority-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .proof-grid,
+  .consultation-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .doctor-portrait {
+    max-width: 420px;
+  }
+}
+
+@media (max-width: 700px) {
+  .pain-list {
+    grid-template-columns: 1fr;
+  }
+
+  .consequence-panel {
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .objection-list li {
+    flex-direction: column;
+    padding: 22px;
+    gap: 10px;
+  }
+
+  .flow-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .consultation-note {
+    flex-direction: column;
+  }
+
+  .consultation-note .button {
+    width: 100%;
+  }
+
+  .hero-name {
+    font-size: var(--fs-body);
+  }
+}

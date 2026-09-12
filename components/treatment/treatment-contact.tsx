@@ -29,9 +29,15 @@ export function TreatmentContact({ content }: { content: TreatmentContent }) {
         <ContactForm
           available={Boolean(process.env.FORM_WEBHOOK_URL)}
           page={content.slug}
-          eyebrow="Prefere que a equipe entre em contato?"
-          title="Converse sobre a avaliação."
-          description="Deixe seu nome e WhatsApp para conversar sobre horários e funcionamento da consulta."
+          eyebrow={
+            content.contactForm?.eyebrow ??
+            "Prefere que a equipe entre em contato?"
+          }
+          title={content.contactForm?.title ?? "Converse sobre a avaliação."}
+          description={
+            content.contactForm?.description ??
+            "Deixe seu nome e WhatsApp para conversar sobre horários e funcionamento da consulta."
+          }
         />
       </div>
     </section>

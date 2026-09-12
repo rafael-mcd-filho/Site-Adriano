@@ -1,0 +1,109 @@
+/* Faixa de destaques que corre logo abaixo do hero.
+   Fatia de globals.css — a ordem dos @import lá é significativa. */
+
+/* Faixa de confiança
+   Marquee full-bleed logo abaixo do hero. A track duplicada é o que fecha o
+   laço: a animação corre até -50% e recomeça sem salto visível. */
+.trust-bar {
+  position: relative;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  min-height: 92px;
+  padding: 22px 0;
+  border-block: 1px solid #3e6598;
+  background: var(--navy-950);
+}
+
+.trust-window {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.trust-window::before,
+.trust-window::after {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  bottom: 0;
+  width: 36px;
+  height: 100%;
+  content: "";
+  pointer-events: none;
+}
+
+.trust-window::before {
+  left: 0;
+  background: linear-gradient(to right, var(--navy-950), transparent);
+}
+
+.trust-window::after {
+  right: 0;
+  background: linear-gradient(to left, var(--navy-950), transparent);
+}
+
+.trust-track {
+  display: flex;
+  width: max-content;
+  animation: trustScroll 48s linear infinite;
+}
+
+.trust-set {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: space-around;
+  min-width: 100vw;
+  gap: 48px;
+  padding-inline: 24px;
+}
+
+.trust-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--white);
+  font-family: var(--font-source-sans), sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.trust-item svg {
+  flex: 0 0 auto;
+  color: var(--blue-200);
+}
+
+@media (max-width: 600px) {
+  .trust-bar { min-height: 80px; padding: 18px 0; }
+  .trust-item { font-size: var(--fs-body); }
+  .trust-set { gap: 32px; padding-inline: 16px; }
+  .trust-window::before, .trust-window::after { width: 18px; }
+}
+
+@keyframes trustScroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+/* Utilitário: some da tela, permanece para o leitor de tela. */
+.sr-only {
+  position: absolute;
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  border: 0;
+  margin: -1px;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Selo de seção — versão em pílula, usada onde o traço do `.section-kicker`
+   ficaria solto (títulos centralizados e seções escuras). */
