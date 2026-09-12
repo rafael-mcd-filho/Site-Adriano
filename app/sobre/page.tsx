@@ -348,6 +348,12 @@ export default function SobrePage() {
               description="Deixe seu nome e WhatsApp. A equipe responde em horário comercial e explica como funciona a consulta."
             />
 
+            {/*
+              As cinco rotas do site são as áreas com captação ativa, não o
+              limite da atuação. Quem chega procurando tumor benigno ou
+              reconstrução microcirúrgica não encontrava nada — e era
+              justamente quem mais precisa saber que existe alguém.
+            */}
             <div className="closing-areas" id="areas">
               <h2>Áreas de atuação</h2>
               <ul>
@@ -365,6 +371,14 @@ export default function SobrePage() {
                   );
                 })}
               </ul>
+              <p className="closing-areas-note">
+                A atuação em cirurgia e traumatologia buco-maxilo-facial
+                também inclui reconstrução maxilofacial avançada com técnicas
+                microcirúrgicas, implantes faciais, prótese de articulação
+                temporomandibular e tumores benignos dos maxilares e da face.
+                Para discutir um caso assim,{" "}
+                <Link href="/para-dentistas">fale pelo canal profissional</Link>.
+              </p>
             </div>
           </div>
         </section>

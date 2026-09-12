@@ -42,18 +42,37 @@ export const metadata: Metadata = pageMetadata({
 const whatsappMessage =
   "Olá, sou dentista em João Pessoa e gostaria de conversar sobre um caso para encaminhamento.";
 
-/** Dúvidas do profissional que precisa integrar a etapa especializada. */
+/**
+ * Dúvidas do profissional que precisa integrar a etapa especializada.
+ *
+ * Não são só dentistas: o estudo do sono que aponta componente esquelético
+ * chega pelo médico, e a página endereçava apenas o consultório odontológico.
+ */
 const painItems = [
   "A reabilitação depende de uma avaliação óssea antes de avançar.",
   "A dúvida sobre a ATM persiste e você precisa discutir a conduta.",
   "O plano ortodôntico exige alinhar a participação da cirurgia.",
+  "O estudo do sono sugere componente esquelético e falta avaliar a face.",
   "Você precisa esclarecer a indicação antes de orientar o paciente.",
 ];
 
+/**
+ * O escopo declarado pelo próprio cirurgião.
+ *
+ * A lista cobria só as cinco rotas do site, e o site tem cinco rotas porque
+ * são as cinco com captação ativa — não porque sejam tudo o que ele faz. Para
+ * o colega que procura alguém capaz de conduzir um caso específico, a rota
+ * publicada não é a fronteira da competência: retalho microcirúrgico e tumor
+ * benigno são justamente os casos que um clínico não resolve sozinho e
+ * precisa saber a quem mandar.
+ */
 const cases = [
   "Implantes complexos e reconstrução óssea.",
+  "Reconstrução maxilofacial avançada, incluindo retalhos microcirúrgicos.",
+  "Implantes faciais e reabilitação de áreas da face.",
   "Cirurgia e prótese de articulação temporomandibular.",
   "Cirurgia ortognática em conjunto com a sua ortodontia.",
+  "Tumores benignos dos maxilares e da face.",
   "Avaliação de apneia com componente esquelético.",
   "Casos buco-maxilo-faciais que pedem discussão antes da conduta.",
 ];
@@ -68,9 +87,11 @@ const cases = [
 const scope = {
   mine: [
     "Avaliação buco-maxilo-facial e definição da indicação cirúrgica.",
-    "Reconstrução óssea e a etapa cirúrgica dos implantes.",
+    "Reconstrução óssea e a etapa cirúrgica dos implantes, dentários e faciais.",
+    "Reconstrução avançada, incluindo técnicas microcirúrgicas.",
     "Procedimentos na ATM, dos minimamente invasivos à prótese articular.",
     "Cirurgia ortognática e o acompanhamento pós-operatório dela.",
+    "Remoção de tumores benignos dos maxilares e da face.",
   ],
   yours: [
     "A reabilitação protética e a escolha da prótese.",
@@ -198,9 +219,10 @@ export default function ParaDentistasPage() {
               </h1>
               <p>
                 Seu paciente tem um plano em andamento e uma questão que pede
-                avaliação especializada. Discuta indicação, escopo e
-                continuidade do cuidado com o Dr. Adriano Rocha Germano,
-                cirurgião bucomaxilofacial em João Pessoa.
+                avaliação especializada. Dentistas, ortodontistas e médicos
+                discutem indicação, escopo e continuidade do cuidado com o
+                Dr. Adriano Rocha Germano, cirurgião bucomaxilofacial em
+                João Pessoa.
               </p>
 
               <ul className="hero-badges">

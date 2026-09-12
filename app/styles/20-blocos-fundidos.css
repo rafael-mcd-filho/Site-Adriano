@@ -534,6 +534,21 @@
   grid-row: 1 / span 2;
 }
 
+/* As cinco rotas são as áreas com captação ativa, não o limite da atuação. */
+.closing-areas-note {
+  max-width: 72ch;
+  margin: 22px 0 0;
+  padding-top: 20px;
+  border-top: 1px solid rgba(var(--blue-400-rgb), 0.2);
+  color: #c5d0dd;
+  font-size: var(--fs-sm);
+}
+
+.closing-areas-note a {
+  color: var(--blue-200);
+  text-decoration: underline;
+}
+
 /* ── Confirmação ───────────────────────────────────────────────────────── */
 .thanks-extra {
   display: grid;
