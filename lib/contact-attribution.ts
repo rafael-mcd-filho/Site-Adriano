@@ -1,11 +1,21 @@
-/** Dados de campanha do envio atual, sem cookies ou histórico de navegação. */
+/**
+ * Páginas que têm formulário. É lista permitida: um envio de página fora dela
+ * é recusado no servidor.
+ *
+ * Por isso toda rota nova com formulário precisa entrar aqui — `/sobre` e
+ * `/cirurgia-de-siso` nasceram sem esta linha, e os dois formulários seriam
+ * recusados com "não foi possível identificar este formulário" no dia em que
+ * o envio fosse ativado.
+ */
 export const contactPages = {
   home: { path: "/", label: "Página inicial" },
+  sobre: { path: "/sobre", label: "Sobre o Dr. Adriano" },
   "apneia-do-sono": { path: "/apneia-do-sono", label: "Apneia do sono" },
   "implantes-dentarios": { path: "/implantes-dentarios", label: "Implantes dentários" },
   "reconstrucao-ossea": { path: "/reconstrucao-ossea", label: "Reconstrução óssea" },
   "cirurgia-atm": { path: "/cirurgia-atm", label: "DTM e ATM" },
   "cirurgia-ortognatica": { path: "/cirurgia-ortognatica", label: "Cirurgia ortognática" },
+  "cirurgia-de-siso": { path: "/cirurgia-de-siso", label: "Cirurgia de siso" },
   "para-dentistas": { path: "/para-dentistas", label: "Para dentistas" },
 } as const;
 

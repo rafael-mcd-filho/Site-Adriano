@@ -15,3 +15,101 @@
  * Se a regra passar a valer para mais de uma rota, ela não pertence mais
  * aqui: mova para o arquivo dono em app/styles/.
  */
+
+/* Data da versão. É o que permite a quem aceitou a autorização de contato
+   saber se o texto que leu ainda é o que está em vigor. */
+[data-rota="politica-de-privacidade"] .legal-updated {
+  margin-top: 14px;
+  color: var(--muted);
+  font-size: var(--fs-fine);
+}
+
+/* O hero desta rota é claro: a data usa o tom neutro, com peso para ser
+   encontrada sem competir com o título. */
+[data-rota="politica-de-privacidade"] .legal-hero .legal-updated {
+  color: var(--muted);
+  font-weight: 650;
+}
+
+/* O essencial primeiro: quase ninguém lê treze seções antes de enviar um
+   formulário. O resumo não substitui o texto — só não obriga a lê-lo todo. */
+[data-rota="politica-de-privacidade"] .legal-summary {
+  padding: 24px 26px;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--blue-600);
+  border-radius: var(--radius-md);
+  background: var(--surface-soft);
+}
+
+[data-rota="politica-de-privacidade"] .legal-summary strong {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--navy-900);
+  font-family: var(--font-manrope), sans-serif;
+  font-size: var(--fs-lead);
+  font-weight: 700;
+}
+
+[data-rota="politica-de-privacidade"] .legal-summary ul,
+[data-rota="politica-de-privacidade"] .legal-list {
+  display: grid;
+  margin: 12px 0 16px;
+  padding-left: 20px;
+  gap: 8px;
+}
+
+[data-rota="politica-de-privacidade"] .legal-summary li,
+[data-rota="politica-de-privacidade"] .legal-list li {
+  font-size: var(--fs-body);
+  line-height: 1.6;
+}
+
+[data-rota="politica-de-privacidade"] .legal-list strong {
+  color: var(--navy-900);
+}
+
+[data-rota="politica-de-privacidade"] .legal-content h3 {
+  margin: 22px 0 8px;
+  font-size: var(--fs-lead);
+  letter-spacing: -0.015em;
+}
+
+[data-rota="politica-de-privacidade"] .legal-content a {
+  color: var(--blue-600);
+  text-decoration: underline;
+}
+
+/* Finalidade e base legal lado a lado: é o par que a LGPD exige que fique
+   claro, e em parágrafo corrido as duas coisas se misturavam. */
+[data-rota="politica-de-privacidade"] .legal-bases {
+  display: grid;
+  margin: 16px 0 18px;
+}
+
+[data-rota="politica-de-privacidade"] .legal-bases > div {
+  display: grid;
+  padding: 16px 0;
+  border-top: 1px solid var(--border);
+  gap: 6px 28px;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+}
+
+[data-rota="politica-de-privacidade"] .legal-bases > div:last-child {
+  border-bottom: 1px solid var(--border);
+}
+
+[data-rota="politica-de-privacidade"] .legal-bases dt {
+  color: var(--navy-900);
+  font-weight: 650;
+}
+
+[data-rota="politica-de-privacidade"] .legal-bases dd {
+  margin: 0;
+  color: var(--muted);
+}
+
+@media (max-width: 800px) {
+  [data-rota="politica-de-privacidade"] .legal-bases > div {
+    grid-template-columns: 1fr;
+  }
+}
