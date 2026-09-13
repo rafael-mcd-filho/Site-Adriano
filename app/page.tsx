@@ -9,6 +9,7 @@ import Link from "next/link";
 import { ButtonContent } from "@/components/button-content";
 import { ContactForm } from "@/components/contact-form";
 import { DoctorPortrait } from "@/components/doctor-portrait";
+import { MediaPlaceholder } from "@/components/media-placeholder";
 import { FaqAccordion } from "@/components/faq-accordion";
 import { FloatingWhatsApp } from "@/components/floating-whatsapp";
 import { HeroBackdrop } from "@/components/hero-backdrop";
@@ -383,6 +384,8 @@ export default function Home() {
               <span className="pill-badge">Como funciona</span>
               <h2>Você não precisa chegar com todas as respostas.</h2>
             </div>
+            <div className="editorial-support-grid">
+            <MediaPlaceholder kind="doctor-consultation" />
             <div className="consultation-grid">
               <article className="consultation-card">
                 <h3>1. Saiba como agendar</h3>
@@ -408,6 +411,7 @@ export default function Home() {
               </article>
             </div>
 
+            </div>
             <dl className="open-questions">
               {consultationQuestions.map((item) => (
                 <div key={item.question}>
@@ -421,16 +425,14 @@ export default function Home() {
 
         {/* Bloco 5 — prova social. Sem relato aprovado, não renderiza: o
             espaço vazio é preferível ao depoimento inventado. */}
-        {Boolean(patientReviews.length) && (
-          <section className="section reviews-section" id="avaliacoes">
+                  <section className="section reviews-section" id="avaliacoes">
             <div className="container">
-              <Reviews
+              {patientReviews.length ? <Reviews
                 items={patientReviews}
                 title="O que os pacientes dizem sobre o atendimento"
-              />
+              /> : <MediaPlaceholder kind="reviews-patients" className="reviews-media-reserved" />}
             </div>
           </section>
-        )}
 
         {/* Bloco 6 — contato e o que sobrou de dúvida. */}
         <section className="section contact-section" id="contato">

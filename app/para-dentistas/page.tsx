@@ -15,6 +15,7 @@ import Link from "next/link";
 import { ButtonContent } from "@/components/button-content";
 import { ContactForm } from "@/components/contact-form";
 import { DoctorPortrait } from "@/components/doctor-portrait";
+import { MediaPlaceholder } from "@/components/media-placeholder";
 import { FaqAccordion } from "@/components/faq-accordion";
 import { FloatingWhatsApp } from "@/components/floating-whatsapp";
 import { HeroBackdrop } from "@/components/hero-backdrop";
@@ -400,6 +401,8 @@ export default function ParaDentistasPage() {
 
             <div className="handback">
               <h3>Como a devolutiva é combinada</h3>
+              <div className="editorial-support-grid">
+              <MediaPlaceholder kind="doctor-planning" />
               <dl className="open-questions">
                 {handback.map((item) => (
                   <div key={item.title}>
@@ -408,6 +411,7 @@ export default function ParaDentistasPage() {
                   </div>
                 ))}
               </dl>
+              </div>
             </div>
 
             <div className="objections-inline">
@@ -449,16 +453,14 @@ export default function ParaDentistasPage() {
         {/* 6 — confiança entre colegas. Relato de colega não envolve dado de
             saúde e é a prova mais eficiente desta página. Sem material
             autorizado, não renderiza. */}
-        {Boolean(colleagueReviews.length) && (
-          <section className="section reviews-section" id="colegas">
+                  <section className="section reviews-section" id="colegas">
             <div className="container">
-              <Reviews
+              {colleagueReviews.length ? <Reviews
                 items={colleagueReviews}
                 title="O que dizem os profissionais que encaminham"
-              />
+              /> : <MediaPlaceholder kind="reviews-colleagues" className="reviews-media-reserved" />}
             </div>
           </section>
-        )}
 
         {/* 7 — dúvidas residuais e contato, juntos. */}
         <section className="section contact-section" id="contato">

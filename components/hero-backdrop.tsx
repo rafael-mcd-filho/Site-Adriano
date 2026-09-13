@@ -8,6 +8,8 @@ const heroImages: Record<string, string> = {
   "cirurgia-atm": "/images/heroes/hero-atm-v1.webp",
   "cirurgia-ortognatica": "/images/heroes/hero-ortognatica-v1.webp",
   "para-dentistas": "/images/heroes/hero-dentistas-v1.webp",
+  // Ambientação ilustrativa existente enquanto a fotografia dedicada é produzida.
+  "cirurgia-de-siso": "/images/editorial/consulta-contexto.webp",
 };
 
 /** Fotografia decorativa: pessoas e ambientes não representam o profissional. */

@@ -2,14 +2,25 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight, BadgeCheck } from "lucide-react";
 import { siteConfig } from "@/lib/site";
+import { MediaPlaceholder } from "@/components/media-placeholder";
+import { mediaReplacements } from "@/lib/media-replacements";
 
-/** Sem foto fornecida: assinatura gráfica no hero e documento real na autoridade. */
+/** Foto pendente explicitamente identificada; o certificado fornecido é preservado. */
 export function DoctorPortrait({
   variant = "hero",
 }: {
-  variant?: "hero" | "authority";
+  variant?: "hero" | "authority" | "certificate";
 }) {
   if (variant === "authority") {
+    return (
+      <div className="doctor-authority-media">
+        <MediaPlaceholder kind="doctor-portrait" />
+        <div className="doctor-certificate-small"><DoctorPortrait variant="certificate" /></div>
+      </div>
+    );
+  }
+  if (variant === "certificate") {
+    if (!siteConfig.boardCertificate) return <MediaPlaceholder kind="certificate" />;
     return (
       <figure className="doctor-portrait doctor-portrait-authority">
         <a className="certificate-preview" href={siteConfig.boardCertificate} target="_blank" rel="noopener noreferrer" aria-label="Ampliar certificado do Board de 2026, em nova aba">
@@ -21,15 +32,9 @@ export function DoctorPortrait({
     );
   }
   return (
-    <figure className={"doctor-portrait doctor-portrait-" + variant}>
-      <div className="identity-art" aria-hidden="true">
-        <svg className="identity-contours" viewBox="0 0 400 340" fill="none">
-          <ellipse cx="220" cy="165" rx="150" ry="200" transform="rotate(30 220 165)" />
-          <ellipse cx="220" cy="165" rx="124" ry="174" transform="rotate(30 220 165)" />
-          <ellipse cx="220" cy="165" rx="98" ry="148" transform="rotate(30 220 165)" />
-        </svg>
-        <span className="identity-monogram">ARG</span>
-        <span className="identity-signature">Antes de indicar, entender.</span>
+    <figure className={"doctor-portrait doctor-portrait-" + variant + " doctor-portrait-reserved"}>
+      <div className="doctor-placeholder-frame">
+        <Image src={mediaReplacements["doctor-portrait"]?.src ?? "/images/placeholders/doctor-portrait.svg"} alt={mediaReplacements["doctor-portrait"]?.alt ?? "Imagem do doutor aqui — substituir pelo retrato real do Dr. Adriano."} width={960} height={1200} sizes="(max-width: 600px) 160px, (max-width: 800px) 200px, 420px" />
       </div>
       {/* A identidade é a autoria do que vem abaixo: sem ela, o visitante lê
           quatro seções de conteúdo clínico assinadas por ninguém. O link para

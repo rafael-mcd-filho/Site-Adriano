@@ -8,6 +8,7 @@ export type MotifType =
   | "layers"
   | "joint"
   | "alignment"
+  | "wisdom"
   | "planning"
   | "wisdom";
 
@@ -108,6 +109,15 @@ export function MotifThumb({ type }: { type: MotifType }) {
           </g>
           <path d="M10 80c22-7 54-7 76 0" opacity="0.45" />
           <circle cx="70" cy="76.6" r="2.6" fill="currentColor" stroke="none" opacity="0.6" />
+        </>
+      )}
+
+      {type === "wisdom" && (
+        <>
+          <path d="M20 45v30h60V45" opacity="0.45" />
+          <path d="M25 22c-10-2-10 14-5 21l4 21 5-15 6 15 4-21c5-9 4-23-5-21l-4 3z" />
+          <g transform="rotate(-38 62 52)"><path d="M56 29c-10-2-10 14-5 21l4 21 5-15 6 15 4-21c5-9 4-23-5-21l-4 3z" /></g>
+          <path d="M16 81c23-9 39-3 66-12" strokeDasharray="3 4" />
         </>
       )}
 

@@ -1,6 +1,8 @@
 import Image from "next/image";
 import { PainList } from "@/components/pain-list";
 import type { TreatmentContent } from "@/lib/content";
+import { MediaPlaceholder } from "@/components/media-placeholder";
+import { AnatomyIllustration } from "@/components/anatomy-illustration";
 
 /**
  * "Isso parece com o seu caso?" — sintomas e consequência na mesma seção.
@@ -34,7 +36,11 @@ export function TreatmentPain({ content }: { content: TreatmentContent }) {
         <PainList items={content.painItems} icons={content.painIcons} />
 
         <div className="pain-consequence">
-          <figure className="pain-consequence-photo">
+          {content.slug === "cirurgia-de-siso" ? <AnatomyIllustration type="wisdom-positions" />
+            : content.slug === "cirurgia-ortognatica" ? <AnatomyIllustration type="bite" />
+            : content.slug === "cirurgia-atm" ? <MediaPlaceholder kind="doctor-examination" />
+            : content.slug === "reconstrucao-ossea" ? <MediaPlaceholder kind="doctor-consultation" />
+            : <figure className="pain-consequence-photo">
             <Image
               src={imageSrc}
               alt=""
@@ -44,7 +50,7 @@ export function TreatmentPain({ content }: { content: TreatmentContent }) {
               sizes="(max-width: 900px) 100vw, 420px"
             />
             <figcaption>Imagem ilustrativa</figcaption>
-          </figure>
+          </figure>}
 
           <div className="pain-consequence-copy">
             <span className="section-kicker">

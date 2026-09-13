@@ -1,25 +1,19 @@
 import { FileText } from "lucide-react";
 import type { ClinicalCase } from "@/lib/content";
+import { MediaPlaceholder, type MediaPlaceholderKind } from "@/components/media-placeholder";
 
-/**
- * Um caso conduzido, em cartão, DENTRO da seção de etapas.
- *
- * Antes e depois está vedado na publicidade odontológica, e imagem de
- * procedimento também. O que resta — e faz o mesmo trabalho — é a narrativa da
- * condução: a situação, o que a avaliação encontrou, o que foi discutido, o
- * que foi decidido e como seguiu. Ela demonstra raciocínio clínico, que é
- * justamente o que este site vende, sem prometer que o desfecho se repete.
- *
- * Não existe galeria: o cartão vive junto das etapas porque responde a mesma
- * pergunta que elas — "como isso acontece na prática?". Um bloco de portfólio
- * à parte responderia a mesma coisa uma segunda vez.
- *
- * Sem `clinicalCase` na rota, nada é renderizado. Enquanto o cirurgião não
- * fornecer casos reais, desidentificados e aprovados por ele, este espaço fica
- * vazio — inventar um caso é outro problema, não uma solução de conversão.
- */
-export function ClinicalCaseCard({ item }: { item?: ClinicalCase }) {
-  if (!item) return null;
+/** Caso real quando fornecido; reserva visual explícita enquanto o material está pendente. */
+export function ClinicalCaseCard({ item, placeholderKind }: { item?: ClinicalCase; placeholderKind?: MediaPlaceholderKind }) {
+  if (!item) return placeholderKind ? (
+    <div className="clinical-case-reserved">
+      <MediaPlaceholder kind={placeholderKind} />
+      <div>
+        <span className="section-kicker">Material a inserir</span>
+        <h3>Espaço para um caso real deste tratamento</h3>
+        <p>A imagem definitiva será acompanhada do contexto da avaliação, do planejamento e do acompanhamento. Este espaço ainda não apresenta um caso clínico.</p>
+      </div>
+    </div>
+  ) : null;
 
   const steps: Array<[string, string]> = [
     ["A situação", item.situation],

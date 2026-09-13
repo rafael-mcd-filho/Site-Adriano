@@ -1,0 +1,26 @@
+{
+  "status": "Geração raster bloqueada pelo limite de uso do imagegen (429). Nenhuma fotografia nova gerada nesta etapa.",
+  "mode": "built-in imagegen",
+  "assets": [
+    {
+      "key": "hero-siso-v1",
+      "dir": "heroes",
+      "prompt": "Use case: photorealistic-natural. Asset type: wide background hero for a Brazilian oral and maxillofacial surgery website, 16:9. A calm tasteful consultation desk with a small scientifically plausible dental teaching model of the back of a lower jaw and its last molar, model ivory resin, notebook closed, soft natural window light. Dark navy wall and very large empty dark space on LEFT two thirds for white website text; model and warm sand-colored wood surfaces concentrated on RIGHT third. Match quiet credible healthcare editorial photography, muted blue navy and warm beige palette, natural textures, not extravagant luxury. No people, no hands, no doctor, no instruments for extraction, no blood, no procedure, no logos, no lettering, no watermark. This is a generic illustrative environment, not a depiction of a real clinic. Deliver one landscape image."
+    },
+    {
+      "key": "implantes-refeicao-v1",
+      "dir": "editorial",
+      "prompt": "Use case: photorealistic-natural. Asset type: 4:3 editorial supporting photograph for a Brazilian dental implants website about everyday eating and quality of life. Candid scene at a modest warm home dining table, an adult man around 60 in muted navy shirt sitting comfortably with an adult woman of similar age, calmly talking over a normal lunch, relaxed natural expressions, not staring at camera and not exaggerated smiling. Simple plate of rice vegetables and soft cooked food, normal cutlery. Natural window light, warm beige and restrained navy palette, realistic skin and hands, accessible everyday atmosphere, subjects within central 70 percent for responsive crop. This image conveys everyday life, NOT a treatment result, NOT real patients of a particular doctor. No clinical scene, no visible dental prosthesis, no before-after, no text, no logos, no watermark. One coherent landscape photograph."
+    },
+    {
+      "key": "siso-posicoes-v1",
+      "dir": "editorial",
+      "prompt": "Use case: scientific-educational. Asset type: 4:3 educational illustration, not a real clinical case, for an oral surgery page about wisdom tooth assessment. Three separate clean side-view schematic dental teaching models on a warm ivory background, evenly spaced horizontally with generous margins. Each simplified panel shows a lower second molar and neighboring third molar, ivory crowns and roots within softly colored blue-grey mandibular bone and muted dusty-rose gum tissue. Panel 1: third molar upright and erupted above gum. Panel 2: third molar upright but partly covered by gum. Panel 3: third molar tilted forward, impacted below gum beside the second molar. Make tooth crowns and their roots continuous and coherent, each third molar distinct from its neighbor. Elegant precise matte 3D educational illustration, simple and approachable, navy and muted blue details. No open mouth, no gore, no blood, no forceps, no nerves, no claims, no arrows or labels, no lettering, no watermark. This is a conceptual overview, not exact diagnostic anatomy or a surgical instruction. One image containing the three teaching models, no decorative clutter."
+    },
+    {
+      "key": "ortognatica-mordida-v1",
+      "dir": "editorial",
+      "prompt": "Use case: scientific-educational. Asset type: 4:3 supporting illustration for an oral and maxillofacial surgery website, explains upper and lower dental arches and their relationship, not a clinical result. One clear lateral three-quarter view of a simplified dental teaching model, upper maxilla and lower mandible with coherent ivory teeth and subtle muted dusty-rose gum borders. Mouth almost closed with visible narrow space between upper and lower rows, no exaggerated abnormality, no dramatic misalignment. Upper and lower supporting bone shaded slightly differently with blue-grey and sand colors to distinguish them, accurate plausible continuity of crowns and roots. Premium matte 3D scientific educational style, warm ivory background, restrained navy accents, centered composition with breathing room, gentle shadows and no clutter. No face, no person, no real patient, no braces, no surgery, no blood, no before-after comparisons, no treatment guarantees, no text or labels, no watermark. This illustration simply localizes the upper and lower jaw and bite."
+    }
+  ]
+}

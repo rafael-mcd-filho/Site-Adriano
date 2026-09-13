@@ -43,6 +43,8 @@
    Seções que nasceram da união de outras duas. Só nomes novos: nenhuma regra
    aqui disputa seletor com a camada final. */
 @import "./styles/20-blocos-fundidos.css";
+@import "./styles/21-imagens-editoriais.css";
+@import "./styles/22-diagramas-clinicos.css";
 
 /* ── Por rota ───────────────────────────────────────────────────────────
    Cada arquivo alcança só a sua rota, via [data-rota="…"]. Carregados por

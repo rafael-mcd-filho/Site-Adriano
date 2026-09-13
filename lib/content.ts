@@ -113,7 +113,7 @@ export type TreatmentContent = {
   lastReviewed?: string;
   navLabel: string;
   eyebrow: string;
-  motif: "air" | "implant" | "layers" | "joint" | "alignment";
+  motif: "air" | "implant" | "layers" | "joint" | "alignment" | "wisdom";
 
   /* ── Bloco 1 — hero ─────────────────────────────────────────────────── */
   title: string;
@@ -845,7 +845,7 @@ export const treatments: Record<string, TreatmentContent> = {
     slug: "cirurgia-de-siso",
     navLabel: "Cirurgia de siso",
     eyebrow: "Cirurgia de siso em João Pessoa",
-    motif: "layers",
+    motif: "wisdom",
     title: "Precisa mesmo tirar o siso?",
     titleHighlight: "Precisa mesmo tirar",
     intro:

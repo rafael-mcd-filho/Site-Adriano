@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { ContactForm } from "@/components/contact-form";
 import { DoctorPortrait } from "@/components/doctor-portrait";
+import { MediaPlaceholder } from "@/components/media-placeholder";
 import { FloatingWhatsApp } from "@/components/floating-whatsapp";
 import { JsonLd } from "@/components/json-ld";
 import { Reviews } from "@/components/reviews";
@@ -153,6 +154,8 @@ export default function SobrePage() {
               <h2>Quase três décadas entre a universidade, o hospital e o consultório.</h2>
             </div>
 
+            <div className="editorial-support-grid">
+            <MediaPlaceholder kind="doctor-congress" />
             <ol className="career-timeline">
               {professionalTimeline.map((item) => (
                 <li key={item.title}>
@@ -164,6 +167,7 @@ export default function SobrePage() {
                 </li>
               ))}
             </ol>
+            </div>
 
             <p className="career-registry">
               <BadgeCheck size={17} aria-hidden="true" />
@@ -211,7 +215,7 @@ export default function SobrePage() {
               </a>
             </div>
 
-            <DoctorPortrait variant="authority" />
+            <DoctorPortrait variant="certificate" />
           </div>
         </section>
 
@@ -230,6 +234,8 @@ export default function SobrePage() {
               </p>
             </div>
 
+            <div className="editorial-support-grid">
+            <MediaPlaceholder kind="doctor-consultation" />
             <ul className="decision-criteria decision-criteria-wide">
               {decisionAxis.map((item) => (
                 <li key={item.title}>
@@ -238,6 +244,7 @@ export default function SobrePage() {
                 </li>
               ))}
             </ul>
+            </div>
           </div>
         </section>
 
@@ -277,6 +284,7 @@ export default function SobrePage() {
                   <MapPin size={20} />
                 </span>
                 <h3>Onde é o atendimento</h3>
+                <MediaPlaceholder kind="reception" compact className="integration-media" />
                 <p>
                   Dois consultórios, em {siteConfig.serviceArea}, cada um com
                   WhatsApp próprio. Endereços, mapas e rotas estão na página
@@ -288,16 +296,14 @@ export default function SobrePage() {
         </section>
 
         {/* 6 — experiência de pacientes. Sem relato aprovado, não renderiza. */}
-        {Boolean(patientReviews.length) && (
-          <section className="section reviews-section" id="avaliacoes">
+                  <section className="section reviews-section" id="avaliacoes">
             <div className="container">
-              <Reviews
+              {patientReviews.length ? <Reviews
                 items={patientReviews}
                 title="O que os pacientes dizem sobre o atendimento"
-              />
+              /> : <MediaPlaceholder kind="reviews-patients" className="reviews-media-reserved" />}
             </div>
           </section>
-        )}
 
         {/* 7 — áreas e contato encerram juntos. */}
         <section className="section contact-section" id="contato">

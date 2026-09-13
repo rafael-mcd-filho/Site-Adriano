@@ -1,5 +1,6 @@
 import { Clock3, MapPin, Navigation } from "lucide-react";
 import { WhatsAppButton } from "@/components/whatsapp-button";
+import { MediaPlaceholder } from "@/components/media-placeholder";
 import {
   locationMapEmbed,
   locationMapsLink,
@@ -30,6 +31,10 @@ function LocationCard({ location }: { location: PracticeLocation }) {
         />
       </div>
 
+      <div className="location-photo-pair">
+        <MediaPlaceholder kind="facade" slot={"facade-" + location.id} caption={"Foto da fachada em " + location.city + " a inserir."} />
+        <MediaPlaceholder kind="reception" slot={"reception-" + location.id} caption={"Foto da recepção em " + location.city + " a inserir."} />
+      </div>
       <div className="location-card-body">
         <span className="section-kicker">
           {location.city} · {location.state}

@@ -1,0 +1,13 @@
+/* Ilustrações educativas: rótulos em HTML e desenhos locais ampliáveis. */
+.anatomy-illustration { margin: 0; min-width: 0; color: #263e55; }
+.anatomy-illustration img { display: block; width: 100%; height: auto; border-radius: 18px; }
+.anatomy-illustration figcaption { padding: 12px 4px 0; font-size: 13px; line-height: 1.55; }
+.visual-motif .anatomy-illustration { margin: 18px; }
+.visual-motif .anatomy-illustration figcaption { color: inherit; }
+.visual-motif .anatomy-stage { min-height: 0; align-self: center; }
+.visual-motif .anatomy-stage .anatomy-illustration { color: inherit; }
+.anatomy-legend { display: flex; gap: 8px 16px; flex-wrap: wrap; padding: 12px 4px 0; list-style: none; margin: 0; }
+.anatomy-legend li { font-size: 14px; line-height: 1.5; }
+.anatomy-legend b { display: inline-grid; place-items: center; width: 22px; height: 22px; margin-right: 5px; border-radius: 50%; background: #263e55; color: #fff; font-size: 12px; }
+.planning-diagram { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 12px; padding: 36px 18px; }
+.planning-diagram span { padding: 12px 16px; border: 1px solid currentColor; border-radius: 12px; }

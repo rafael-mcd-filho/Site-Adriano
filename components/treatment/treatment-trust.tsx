@@ -6,6 +6,7 @@ import { Reviews } from "@/components/reviews";
 import { WhatsAppButton } from "@/components/whatsapp-button";
 import { ctaLadder, patientReviews, type TreatmentContent } from "@/lib/content";
 import { siteConfig } from "@/lib/site";
+import { MediaPlaceholder } from "@/components/media-placeholder";
 
 /**
  * "Por que confiar nessa avaliação" — credencial e prova numa seção só.
@@ -93,7 +94,7 @@ export function TreatmentTrust({
 
       {/* Sem relato aprovado, `Reviews` não renderiza nada e a seção termina
           na credencial — que é o que existe de prova verificável hoje. */}
-      {Boolean(reviews.length) && (
+      {reviews.length ? (
         <div className="container trust-reviews">
           <Reviews items={reviews} />
           <div className="decision-cta">
@@ -104,6 +105,10 @@ export function TreatmentTrust({
               className="button-whatsapp-solid"
             />
           </div>
+        </div>
+      ) : (
+        <div className="container trust-reviews">
+          <MediaPlaceholder kind="reviews-patients" className="reviews-media-reserved" />
         </div>
       )}
     </section>
