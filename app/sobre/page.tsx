@@ -18,7 +18,7 @@ import { Reviews } from "@/components/reviews";
 import { SectionWave } from "@/components/section-wave";
 import { TrustMarquee } from "@/components/trust-marquee";
 import { WhatsAppButton } from "@/components/whatsapp-button";
-import { ctaLadder, patientReviews, treatments } from "@/lib/content";
+import { patientReviews, treatments } from "@/lib/content";
 import { pageMetadata } from "@/lib/metadata";
 import { breadcrumbSchema } from "@/lib/schema";
 import {
@@ -41,6 +41,29 @@ export const metadata: Metadata = pageMetadata({
 const whatsappMessage =
   "Olá, vi a página do Dr. Adriano e gostaria de entender como funciona a avaliação.";
 
+const careerGroups = [
+  {
+    id: "formacao-academica",
+    title: "Formação",
+    items: professionalTimeline.filter((item) =>
+      ["Graduação em Odontologia", "Especialista em Cirurgia e Traumatologia Buco-Maxilo-Facial", "Mestrado e doutorado", "Pós-doutorado"].includes(item.title),
+    ),
+  },
+  {
+    id: "experiencia",
+    title: "Experiência",
+    items: professionalTimeline.filter((item) =>
+      ["Professor da UFRN, por concurso", "Hospital Infantil Varela Santiago"].includes(item.title),
+    ),
+  },
+  {
+    id: "reconhecimento",
+    title: "Reconhecimento",
+    items: professionalTimeline.filter((item) =>
+      ["Presidente do Colégio Brasileiro de Cirurgia e Traumatologia Buco-Maxilo-Facial", "Certificação Board e banca de examinadores"].includes(item.title),
+    ),
+  },
+];
 
 /**
  * O eixo da indicação, em quatro afirmações. É o conteúdo humano que estava na
@@ -50,7 +73,7 @@ const whatsappMessage =
 const decisionAxis = [
   {
     title: "Avaliar antes de indicar",
-    text: "A consulta existe para entender a origem da queixa. Nenhuma conduta é definida antes do exame e dos exames que o caso pedir.",
+    text: "Histórico, exame clínico e exames complementares ajudam a compreender a queixa e os fatores envolvidos.",
   },
   {
     title: "Explicar as alternativas",
@@ -131,22 +154,20 @@ export default function SobrePage() {
                   id="cta-hero-areas"
                   data-cta="cta-hero-areas"
                   className="text-link hero-secondary-link"
-                  href="#areas"
+                  href="#formacao"
                 >
-                  Ver as áreas de atuação
+                  Ver formação e credenciais
                 </Link>
               </div>
             </div>
 
-            <DoctorPortrait />
+            <DoctorPortrait profileHref="#formacao" />
           </div>
         </section>
 
         <TrustMarquee items={credentialFacts} />
 
-        {/* 2 — formação e credenciais, em uma seção só. A ordem é
-            cronológica porque a trajetória é a informação: graduação, pós,
-            cátedra, entidade. O registro profissional fecha o bloco. */}
+        {/* A trajetória é agrupada por significado, preservando os fatos e anos informados. */}
         <section className="section section-white credentials-section" id="formacao">
           <div className="container">
             <div className="section-heading">
@@ -154,25 +175,42 @@ export default function SobrePage() {
               <h2>Quase três décadas entre a universidade, o hospital e o consultório.</h2>
             </div>
 
-            <div className="editorial-support-grid">
-            <MediaPlaceholder kind="doctor-congress" />
-            <ol className="career-timeline">
-              {professionalTimeline.map((item) => (
-                <li key={item.title}>
-                  <span className="career-year">{item.year ?? ""}</span>
-                  <div>
-                    <strong>{item.title}</strong>
-                    <p>{item.detail}</p>
-                  </div>
-                </li>
+            <nav className="career-navigation" aria-label="Navegar pela trajetória profissional">
+              {careerGroups.map((group) => (
+                <a key={group.id} href={"#" + group.id}>{group.title}</a>
               ))}
-            </ol>
+              <a href="#board">Ver certificação</a>
+            </nav>
+
+            <div className="career-groups">
+              {careerGroups.map((group) => (
+                <article className="career-group" id={group.id} key={group.id}>
+                  <h3>{group.title}</h3>
+                  <ol className="career-timeline">
+                    {group.items.map((item) => (
+                      <li key={item.title}>
+                        {item.year && <span className="career-year">{item.year}</span>}
+                        <strong>{item.title}</strong>
+                        <p>{item.detail}</p>
+                      </li>
+                    ))}
+                  </ol>
+                </article>
+              ))}
             </div>
 
             <p className="career-registry">
               <BadgeCheck size={17} aria-hidden="true" />
               {siteConfig.registry} · especialista registrado nos dois estados
             </p>
+
+            <div className="career-editorial">
+              <MediaPlaceholder kind="doctor-congress" compact caption="Foto real em congresso a inserir, com nome do evento e ano confirmados." />
+              <aside className="personal-note-placeholder" aria-label="Espaço reservado para fala pessoal">
+                <span className="section-kicker">Fala pessoal do doutor a inserir</span>
+                <p>Espaço reservado para um texto real do Dr. Adriano sobre sua trajetória e a forma como conversa com os pacientes antes de decidir um tratamento.</p>
+              </aside>
+            </div>
           </div>
         </section>
 
@@ -184,25 +222,16 @@ export default function SobrePage() {
           <div className="container method-grid">
             <div className="method-copy">
               <span className="section-kicker">A certificação</span>
-              <h2>O que é esse Board, e por que ele importa para você.</h2>
+              <h2>Uma certificação examinada por profissionais da especialidade.</h2>
               <p>
                 O Colégio Brasileiro de Cirurgia e Traumatologia Buco-Maxilo-Facial
-                mantém um processo de certificação próprio, separado do registro
-                profissional. Ele avalia formação, experiência e conhecimento do
-                cirurgião por meio de uma banca de examinadores da própria
-                especialidade.
+                mantém uma certificação voluntária que avalia formação, experiência
+                e conhecimento do cirurgião. Ela é separada do registro profissional
+                no Conselho de Odontologia.
               </p>
               <p>
-                O registro no Conselho autoriza o exercício da profissão. A
-                certificação do Board é voluntária e diz outra coisa: que o
-                trabalho daquele profissional foi examinado pelos pares. Em 2026,
-                o Dr. Adriano recebeu essa certificação e passou a integrar a
-                banca que avalia outros cirurgiões.
-              </p>
-              <p>
-                Antes disso, em 2023 e 2024, presidiu o próprio Colégio
-                Brasileiro — a entidade nacional da especialidade, que mantém
-                essa certificação. {siteConfig.boardContext}
+                O certificado de 2026 registra a certificação do Dr. Adriano
+                e sua participação na banca de examinadores. {siteConfig.boardContext}
               </p>
 
               <a
@@ -226,11 +255,10 @@ export default function SobrePage() {
           <div className="container">
             <div className="section-heading centered-heading">
               <span className="pill-badge">O que orienta a conduta</span>
-              <h2>Quando operar é o caminho, e quando não é.</h2>
+              <h2>A indicação considera benefícios, riscos e alternativas.</h2>
               <p>
-                Quase nenhum site publica quando não opera. Estes são os
-                critérios que orientam a decisão aqui, e eles valem nas cinco
-                áreas de atuação.
+                Estes critérios orientam a decisão nas diferentes áreas de
+                atuação, desde o acompanhamento até um possível tratamento cirúrgico.
               </p>
             </div>
 
@@ -287,23 +315,24 @@ export default function SobrePage() {
                 <MediaPlaceholder kind="reception" compact className="integration-media" />
                 <p>
                   Dois consultórios, em {siteConfig.serviceArea}, cada um com
-                  WhatsApp próprio. Endereços, mapas e rotas estão na página
-                  inicial.
+                  WhatsApp próprio.
                 </p>
+                <Link className="text-link light-link" href="/#local">Ver endereços e como chegar <ArrowRight size={16} aria-hidden="true" /></Link>
               </article>
             </div>
           </div>
         </section>
 
-        {/* 6 — experiência de pacientes. Sem relato aprovado, não renderiza. */}
-                  <section className="section reviews-section" id="avaliacoes">
-            <div className="container">
-              {patientReviews.length ? <Reviews
-                items={patientReviews}
-                title="O que os pacientes dizem sobre o atendimento"
-              /> : <MediaPlaceholder kind="reviews-patients" className="reviews-media-reserved" />}
-            </div>
-          </section>
+        {/* A reserva identifica a prova real que ainda precisa ser fornecida. */}
+        <section className="section reviews-section" id="avaliacoes">
+          <div className="container">
+            {patientReviews.length ? (
+              <Reviews items={patientReviews} title="O que os pacientes dizem sobre o atendimento" />
+            ) : (
+              <MediaPlaceholder kind="reviews-patients" className="reviews-media-reserved" />
+            )}
+          </div>
+        </section>
 
         {/* 7 — áreas e contato encerram juntos. */}
         <section className="section contact-section" id="contato">
@@ -311,16 +340,16 @@ export default function SobrePage() {
             <div className="closing-copy">
               <h2>Qual é a dúvida que trouxe você até aqui?</h2>
               <p>
-                Se algo na sua mastigação, na sua mandíbula ou no seu sono
-                mudou, a avaliação é o passo que esclarece o que está
-                acontecendo — antes de qualquer decisão sobre tratamento.
+                Mudanças na mastigação, na mandíbula ou no sono podem ser
+                o ponto de partida da conversa. Conte o que gostaria de entender.
               </p>
               <WhatsAppButton
                 ctaId="cta-final-whatsapp"
                 message={whatsappMessage}
-                label={ctaLadder.consultation}
+                label="Escolher consultório e falar com a equipe"
                 className="button-whatsapp-solid"
               />
+              <p className="contact-expectation">A equipe informa horários, valor da consulta e o que levar. A indicação de qualquer procedimento depende da avaliação.</p>
             </div>
 
             <ContactForm
@@ -332,7 +361,7 @@ export default function SobrePage() {
             />
 
             {/*
-              As cinco rotas do site são as áreas com captação ativa, não o
+              As rotas de tratamento são as áreas com captação ativa, não o
               limite da atuação. Quem chega procurando tumor benigno ou
               reconstrução microcirúrgica não encontrava nada — e era
               justamente quem mais precisa saber que existe alguém.

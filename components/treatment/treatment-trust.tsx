@@ -1,12 +1,12 @@
 import { BadgeCheck, MapPin, ShieldCheck } from "lucide-react";
 import Link from "next/link";
 import { ClinicalCaseCard } from "@/components/clinical-case";
-import { DoctorPortrait } from "@/components/doctor-portrait";
 import { Reviews } from "@/components/reviews";
 import { WhatsAppButton } from "@/components/whatsapp-button";
 import { ctaLadder, patientReviews, type TreatmentContent } from "@/lib/content";
 import { siteConfig } from "@/lib/site";
 import { MediaPlaceholder } from "@/components/media-placeholder";
+import styles from "./treatment-refinement.module.css";
 
 /**
  * "Por que confiar nessa avaliação" — credencial e prova numa seção só.
@@ -33,9 +33,9 @@ export function TreatmentTrust({
   const reviews = content.reviews ?? patientReviews;
 
   return (
-    <section className="section authority-section" id="confianca">
+    <section className={"section authority-section " + styles.trust} id="confianca">
       <div className="container authority-grid">
-        <DoctorPortrait variant="authority" />
+        <MediaPlaceholder kind="doctor-portrait" className={styles.portrait} />
 
         <div className="authority-copy">
           <span className="section-kicker light">Quem conduz a avaliação</span>
@@ -45,7 +45,11 @@ export function TreatmentTrust({
           </p>
 
           <ul className="authority-credentials">
-            {siteConfig.credentials.map((credential) => (
+            {[
+              "Mestre e doutor em Cirurgia Bucomaxilofacial pela UNICAMP.",
+              "Professor titular da UFRN e chefe do serviço da especialidade no HUOL.",
+              content.authorityFocus,
+            ].map((credential) => (
               <li key={credential}>
                 <BadgeCheck size={17} aria-hidden="true" />
                 {credential}
@@ -69,7 +73,6 @@ export function TreatmentTrust({
             </span>
           </div>
 
-          <p>{siteConfig.boardContext}</p>
           <p className="authority-links">
             <a
               className="text-link light-link"
@@ -92,25 +95,24 @@ export function TreatmentTrust({
         </div>
       )}
 
-      {/* Sem relato aprovado, `Reviews` não renderiza nada e a seção termina
-          na credencial — que é o que existe de prova verificável hoje. */}
+      {/* A ação de contato independe da disponibilidade de relatos reais. */}
       {reviews.length ? (
         <div className="container trust-reviews">
           <Reviews items={reviews} />
-          <div className="decision-cta">
-            <WhatsAppButton
-              ctaId="cta-confianca-whatsapp"
-              message={content.whatsappMessage}
-              label={ctaLadder.trust}
-              className="button-whatsapp-solid"
-            />
-          </div>
         </div>
       ) : (
         <div className="container trust-reviews">
           <MediaPlaceholder kind="reviews-patients" className="reviews-media-reserved" />
         </div>
       )}
+      <div className={"container " + styles.trustAction}>
+        <WhatsAppButton
+          ctaId="cta-confianca-whatsapp"
+          message={content.whatsappMessage}
+          label={content.trustCta ?? ctaLadder.trust}
+          className="button-whatsapp-solid"
+        />
+      </div>
     </section>
   );
 }

@@ -23,7 +23,6 @@ import { WhatsAppButton } from "@/components/whatsapp-button";
 import {
   consultaEncaminhamento,
   consultaParticular,
-  ctaLadder,
   patientReviews,
   treatments,
 } from "@/lib/content";
@@ -68,7 +67,7 @@ const areaCards: Array<{
     badge: "Dor e movimento",
     tone: "navy",
     description:
-      "Escolher o que comer por medo da dor ou do travamento cansa. Investigue a origem do incômodo e os caminhos de cuidado.",
+      "Escolher o que comer por medo da dor ou do travamento cansa. Entenda os fatores associados ao incômodo e os caminhos de cuidado.",
     action: "Entender minha dor na mandíbula",
   },
   {
@@ -108,25 +107,23 @@ const areaCards: Array<{
  */
 const decisionCriteria = [
   {
-    title: "Função antes de aparência",
-    text: "Mastigar, respirar, falar e se mover sem dor são o que a avaliação procura entender primeiro.",
-  },
-  {
-    title: "Indicação, não protocolo",
-    text: "O que vale para um caso não vale para todos. A conduta vem do que o exame e os exames mostram.",
+    title: "Sua rotina orienta a avaliação",
+    text: "Mastigação, respiração e movimento ajudam a entender o que precisa de cuidado.",
   },
   {
     title: "Alternativas explicadas",
-    text: "As opções são apresentadas com o que se espera de cada uma, inclusive as que não envolvem cirurgia.",
+    text: "Você conhece as opções, inclusive acompanhamento e tratamentos sem cirurgia.",
   },
   {
-    title: "Riscos ditos antes",
-    text: "Benefícios esperados, riscos e limites fazem parte da conversa antes de qualquer decisão sua.",
+    title: "Decisão com clareza",
+    text: "Benefícios esperados, riscos e limites são discutidos antes de definir a conduta.",
   },
-  {
-    title: "Não operar também é conduta",
-    text: "Quando não há indicação cirúrgica, isso é dito com o motivo — e o cuidado segue por outro caminho.",
-  },
+];
+
+const homeCredentials = [
+  "Mestre e doutor em Cirurgia Bucomaxilofacial pela UNICAMP.",
+  "Professor titular da UFRN e chefe do serviço da especialidade no HUOL.",
+  "Certificado pelo Board e membro da banca de examinadores · 2026.",
 ];
 
 /**
@@ -139,12 +136,12 @@ const consultationQuestions = [
   {
     question: "Preciso chegar com exames em mãos?",
     answer:
-      "Não. Os exames que você já tem adiantam a conversa. Os que faltarem são solicitados depois da avaliação, e apenas quando acrescentam informação ao seu caso.",
+      "Leve os que já tiver. Você pode iniciar a avaliação sem exames; os necessários serão solicitados conforme o caso.",
   },
   {
     question: "A consulta já define uma cirurgia?",
     answer:
-      "Não. A avaliação serve para compreender a queixa, investigar as causas e discutir possibilidades. Dependendo do diagnóstico, o cuidado pode ser conservador ou envolver outros profissionais. A cirurgia só é considerada quando há indicação.",
+      "A consulta esclarece a queixa e as opções de cuidado. A conduta pode envolver acompanhamento, tratamento conservador ou outros profissionais; cirurgia depende de indicação.",
   },
   consultaParticular,
 ];
@@ -157,27 +154,17 @@ const homeFaqs = [
   {
     question: "Como faço para agendar uma avaliação?",
     answer:
-      "Pelo WhatsApp ou pelo formulário nesta página. A equipe responde em horário comercial, explica como funciona a avaliação e orienta o que levar na primeira consulta.",
+      "Escolha o consultório e fale pelo WhatsApp. A equipe informa valor, horários e o que levar. Se enviar uma solicitação de contato, aguarde o retorno da equipe para confirmar o agendamento.",
   },
   {
     question: "Onde e em que horários acontece o atendimento?",
     answer:
-      "Em dois consultórios: João Pessoa, no bairro de Miramar, e Natal, no Corporate Tower Center. O atendimento é de segunda a sexta, em horário comercial, com agendamento pelo WhatsApp de cada consultório — os endereços completos estão no fim desta página.",
+      "Em João Pessoa, no bairro de Miramar, e em Natal, no Corporate Tower Center. O atendimento acontece de segunda a sexta, em horário comercial, com agendamento. Os endereços e links de rota estão no fim desta página.",
   },
   {
     question: "Existe avaliação online?",
     answer:
       "A avaliação buco-maxilo-facial depende de exame clínico presencial. Exames de imagem podem ser necessários conforme o caso. O WhatsApp ajuda com agendamento e dúvidas sobre a consulta; não substitui o exame.",
-  },
-  {
-    question: "O que trata um cirurgião buco-maxilo-facial?",
-    answer:
-      "O especialista cuida de alterações dos maxilares, da face e da articulação da mandíbula. Dor ou travamento ao abrir a boca, dentes ausentes e mordida que não encaixa estão entre os motivos para buscar avaliação. Alguns casos de apneia também podem precisar da participação desse profissional.",
-  },
-  {
-    question: "O formulário confirma um horário?",
-    answer:
-      "Não. O formulário envia uma solicitação para a equipe, que entra em contato pelo WhatsApp em horário comercial.",
   },
 ];
 
@@ -209,8 +196,8 @@ export default function Home() {
               <p>
                 Você evita certos alimentos, sente a mandíbula doer ou acorda
                 sem descansar? Antes de falar em cirurgia, precisamos entender
-                o seu caso. Avaliação buco-maxilo-facial em João Pessoa para
-                investigar o que limita sua rotina e discutir como cuidar disso.
+                o seu caso. Avaliação buco-maxilo-facial em {siteConfig.serviceArea}
+                {" "}para investigar o que limita sua rotina e discutir como cuidar disso.
               </p>
 
               <ul className="hero-badges">
@@ -327,12 +314,26 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Bloco 3 — quem conduz E como decide, juntos. O currículo completo
+        {/* A prova social entra depois das áreas, antes da apresentação completa. */}
+        <section className="section reviews-section home-early-reviews" id="avaliacoes">
+          <div className="container">
+            {patientReviews.length ? (
+              <Reviews
+                items={patientReviews.slice(0, 3)}
+                title="O que os pacientes dizem sobre o atendimento"
+              />
+            ) : (
+              <MediaPlaceholder kind="reviews-patients" className="reviews-media-reserved" />
+            )}
+          </div>
+        </section>
+
+        {/* Quem conduz E como decide, juntos. O currículo completo
             fica em /sobre: a home apresenta o profissional, não conta a
             trajetória inteira. */}
         <section className="section about-section section-soft-edge section-with-wave" id="sobre">
           <div className="container about-grid">
-            <DoctorPortrait variant="authority" />
+            <MediaPlaceholder kind="doctor-portrait" className="home-authority-portrait" />
             <div className="about-copy">
               <span className="section-kicker light">Quem conduz a avaliação</span>
               <h2>{siteConfig.fullName}</h2>
@@ -340,18 +341,16 @@ export default function Home() {
                 {siteConfig.specialty} · {siteConfig.registry}
               </p>
               <ul className="credential-list">
-                {siteConfig.credentials.map((credential) => (
+                {homeCredentials.map((credential) => (
                   <li key={credential}>
                     <BadgeCheck size={18} aria-hidden="true" />
                     {credential}
                   </li>
                 ))}
               </ul>
-              <p>{siteConfig.boardContext}</p>
               <p>
-                A consulta começa pela sua história: o que dói, o que você
-                deixou de fazer e o que espera melhorar. A investigação reúne
-                exame clínico e, quando necessários, exames complementares.
+                A consulta começa pela sua história e reúne exame clínico e,
+                quando necessários, exames complementares.
               </p>
 
               <ul className="decision-criteria">
@@ -420,19 +419,17 @@ export default function Home() {
                 </div>
               ))}
             </dl>
+            <div className="home-process-action">
+              <WhatsAppButton
+                ctaId="cta-processo-whatsapp"
+                message={whatsappMessage}
+                label="Quero saber como preparar minha consulta"
+                className="button-whatsapp-solid"
+              />
+              <p>A equipe informa valor, horários e o que levar à avaliação.</p>
+            </div>
           </div>
         </section>
-
-        {/* Bloco 5 — prova social. Sem relato aprovado, não renderiza: o
-            espaço vazio é preferível ao depoimento inventado. */}
-                  <section className="section reviews-section" id="avaliacoes">
-            <div className="container">
-              {patientReviews.length ? <Reviews
-                items={patientReviews}
-                title="O que os pacientes dizem sobre o atendimento"
-              /> : <MediaPlaceholder kind="reviews-patients" className="reviews-media-reserved" />}
-            </div>
-          </section>
 
         {/* Bloco 6 — contato e o que sobrou de dúvida. */}
         <section className="section contact-section" id="contato">
@@ -440,17 +437,16 @@ export default function Home() {
             <div className="closing-copy">
               <h2>O que você gostaria de voltar a fazer com mais conforto?</h2>
               <p>
-                Comer sem receio, sorrir com mais confiança ou descansar melhor:
-                na consulta, conte o que faz falta na sua rotina. A avaliação é o primeiro
-                passo para entender as possibilidades de cuidado, sem
-                compromisso com um procedimento.
+                Conte o que faz falta na sua rotina. A avaliação é o primeiro
+                passo para entender as possibilidades de cuidado.
               </p>
               <WhatsAppButton
                 ctaId="cta-final-whatsapp"
                 message={whatsappMessage}
-                label={ctaLadder.consultation}
+                label="Escolher consultório e falar com a equipe"
                 className="button-whatsapp-solid"
               />
+              <p className="contact-expectation">A equipe informa horários, valor da consulta e o que levar. A indicação de qualquer procedimento depende da avaliação.</p>
             </div>
 
             <ContactForm

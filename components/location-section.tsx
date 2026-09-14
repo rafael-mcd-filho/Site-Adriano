@@ -2,7 +2,6 @@ import { Clock3, MapPin, Navigation } from "lucide-react";
 import { WhatsAppButton } from "@/components/whatsapp-button";
 import { MediaPlaceholder } from "@/components/media-placeholder";
 import {
-  locationMapEmbed,
   locationMapsLink,
   practiceLocations,
   siteConfig,
@@ -10,7 +9,7 @@ import {
 } from "@/lib/site";
 
 /**
- * Um consultório por cartão, cada um com o próprio mapa e o próprio WhatsApp.
+ * Um consultório por cartão, com rota no mapa e WhatsApp próprios.
  *
  * Eram um endereço e um telefone de demonstração. Com os dois consultórios
  * reais, a seção passou a responder a pergunta que a pessoa de fato traz —
@@ -21,19 +20,9 @@ import {
 function LocationCard({ location }: { location: PracticeLocation }) {
   return (
     <article className="location-card">
-      <div className="location-card-map">
-        <iframe
-          src={locationMapEmbed(location)}
-          title={"Mapa do consultório em " + location.city}
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-          allowFullScreen
-        />
-      </div>
-
       <div className="location-photo-pair">
-        <MediaPlaceholder kind="facade" slot={"facade-" + location.id} caption={"Foto da fachada em " + location.city + " a inserir."} />
-        <MediaPlaceholder kind="reception" slot={"reception-" + location.id} caption={"Foto da recepção em " + location.city + " a inserir."} />
+        <MediaPlaceholder kind="facade" compact slot={"facade-" + location.id} caption={"Fachada em " + location.city + " a inserir."} />
+        <MediaPlaceholder kind="reception" compact slot={"reception-" + location.id} caption={"Recepção em " + location.city + " a inserir."} />
       </div>
       <div className="location-card-body">
         <span className="section-kicker">
@@ -69,7 +58,7 @@ function LocationCard({ location }: { location: PracticeLocation }) {
             location.city +
             "."
           }
-          label={"WhatsApp " + location.whatsappDisplay}
+          label={"Falar com a equipe de " + location.city}
           number={location.whatsapp}
         />
       </div>

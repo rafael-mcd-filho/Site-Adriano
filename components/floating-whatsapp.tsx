@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { WhatsAppIcon } from "@/components/whatsapp-button";
 import { ctaLadder } from "@/lib/content";
 import {
@@ -22,6 +23,8 @@ const isConfigured = Boolean(siteConfig.whatsappNumber);
  */
 export function FloatingWhatsApp({ message }: { message: string }) {
   const [ready, setReady] = useState(false);
+  const pathname = usePathname();
+  const label = pathname === "/para-dentistas" ? "Discutir um caso" : ctaLadder.floating;
 
   useEffect(() => {
     const hero = document.querySelector<HTMLElement>(
@@ -70,13 +73,13 @@ export function FloatingWhatsApp({ message }: { message: string }) {
       )}
       target={isConfigured ? "_blank" : undefined}
       rel={isConfigured ? "noopener noreferrer" : undefined}
-      aria-label={isConfigured ? ctaLadder.floating + " pelo WhatsApp" : ctaLadder.floating + " pelo formulário de contato"}
+      aria-label={isConfigured ? label + " pelo WhatsApp" : label + " — ver opções de contato"}
       aria-hidden={!ready}
       tabIndex={ready ? 0 : -1}
       title={isConfigured ? "Falar pelo WhatsApp" : "Solicitar contato da equipe"}
     >
       <WhatsAppIcon size={22} />
-      <span>{ctaLadder.floating}</span>
+      <span>{label}</span>
     </a>
   );
 }

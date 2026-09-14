@@ -5,6 +5,7 @@ import { ObjectionList } from "@/components/objection-list";
 import { VisualMotif } from "@/components/visual-motif";
 import { WhatsAppButton } from "@/components/whatsapp-button";
 import { ctaLadder, type TreatmentContent } from "@/lib/content";
+import styles from "./treatment-refinement.module.css";
 
 /**
  * "Como avaliamos e decidimos o caminho" — a seção principal da página.
@@ -21,7 +22,7 @@ import { ctaLadder, type TreatmentContent } from "@/lib/content";
 export function TreatmentDecision({ content }: { content: TreatmentContent }) {
   return (
     <section
-      className="section section-mist method-section decision-section"
+      className={"section section-mist method-section decision-section " + styles.decision}
       id="avaliacao"
     >
       <div className="container method-grid">
@@ -54,6 +55,13 @@ export function TreatmentDecision({ content }: { content: TreatmentContent }) {
             ))}
           </ul>
 
+          {content.methodDetails && (
+            <details className={styles.methodDetails}>
+              <summary>{content.methodDetails.title}</summary>
+              <p>{content.methodDetails.text}</p>
+            </details>
+          )}
+
           {content.crossLink && (
             <Link className="text-link" href={content.crossLink.href}>
               {content.crossLink.label}
@@ -71,6 +79,20 @@ export function TreatmentDecision({ content }: { content: TreatmentContent }) {
 
       {/* Segunda metade do mesmo raciocínio: o que a avaliação responde às
           conclusões que a pessoa já trouxe de outro lugar. */}
+      <div className={styles.resolution}>
+      {content.decisionPaths && (
+        <div className={"container " + styles.paths}>
+          <h3>{content.decisionPaths.title}</h3>
+          <ul>
+            {content.decisionPaths.items.map((item, index) => (
+              <li key={item.title}>
+                <span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+                <div><h4>{item.title}</h4><p>{item.text}</p></div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
       <div className="container decision-objections">
         <h3>{content.objectionsTitle}</h3>
         <ObjectionList items={content.objections} />
@@ -81,9 +103,10 @@ export function TreatmentDecision({ content }: { content: TreatmentContent }) {
         <WhatsAppButton
           ctaId="cta-metodo-whatsapp"
           message={content.whatsappMessage}
-          label={ctaLadder.method}
+          label={content.methodCta ?? ctaLadder.method}
           className="button-whatsapp-solid"
         />
+      </div>
       </div>
     </section>
   );

@@ -21,3 +21,72 @@
    devolutiva, que já é a pergunta que ela respondia. O ritmo de superfícies
    passou a ser resolvido pela ordem das seções — branco, navy, areia, branco,
    navy —, sem precisar de degrau extra aqui. */
+
+[data-rota="para-dentistas"] .dentist-hero h1 {
+  font-size: clamp(2.1rem, 3.8vw, 3.7rem);
+  line-height: 1.12;
+}
+
+[data-rota="para-dentistas"] .scope-grid .case-list {
+  grid-template-columns: 1fr;
+}
+
+[data-rota="para-dentistas"] .professional-next-step {
+  display: grid;
+  justify-items: center;
+  gap: 12px;
+  margin-top: 28px;
+  text-align: center;
+}
+
+[data-rota="para-dentistas"] .professional-next-step p {
+  max-width: 580px;
+  margin: 0;
+  color: var(--muted);
+  font-size: var(--fs-sm);
+}
+
+@media (max-width: 600px) {
+  [data-rota="para-dentistas"] .dentist-hero h1 {
+    font-size: clamp(1.9rem, 7.1vw, 2.6rem);
+  }
+
+  [data-rota="para-dentistas"] .scope-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+
+  [data-rota="para-dentistas"] .scope-grid article {
+    padding: 22px 18px;
+  }
+
+  [data-rota="para-dentistas"] .handback {
+    margin-top: 28px;
+  }
+
+  [data-rota="para-dentistas"] .flow-grid {
+    gap: 0;
+  }
+
+  [data-rota="para-dentistas"] .flow-grid li {
+    padding: 20px 0 20px 52px;
+  }
+
+  [data-rota="para-dentistas"] .flow-grid .consultation-icon {
+    position: absolute;
+    top: 20px;
+    left: 0;
+    width: 38px;
+    height: 38px;
+    margin: 0;
+  }
+
+  [data-rota="para-dentistas"] .flow-index {
+    display: none;
+  }
+
+  [data-rota="para-dentistas"] .professional-next-step {
+    justify-items: stretch;
+    text-align: left;
+  }
+}

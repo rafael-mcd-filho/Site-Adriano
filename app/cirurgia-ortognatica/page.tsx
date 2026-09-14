@@ -32,7 +32,7 @@ export default function OrtognaticaPage() {
       <TreatmentPain content={content} />
       <SectionWave to="var(--navy-800)" />
       <TreatmentDecision content={content} />
-      <SectionWave from="var(--navy-800)" to="var(--sand-100)" flip />
+      <SectionWave from="var(--surface)" to="var(--sand-100)" flip />
       <TreatmentJourney content={content} />
       <TreatmentTrust content={content} />
       <TreatmentConsultation content={content} />

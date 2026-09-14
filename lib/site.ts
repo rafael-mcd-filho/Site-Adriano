@@ -223,7 +223,7 @@ export const schemaName = siteConfig.fullName;
 export const credentialFacts: [string, string, string, string] = [
   "Mestre e doutor · UNICAMP",
   "Professor titular · UFRN",
-  "Presidente do Colégio Brasileiro de Cirurgia Bucomaxilofacial · 2023–2024",
+  "Presidente do Colégio Brasileiro · 2023–2024",
   "Consultórios em " + siteConfig.serviceArea,
 ];
 

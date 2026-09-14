@@ -8,8 +8,10 @@ import { mediaReplacements } from "@/lib/media-replacements";
 /** Foto pendente explicitamente identificada; o certificado fornecido é preservado. */
 export function DoctorPortrait({
   variant = "hero",
+  profileHref = "/sobre",
 }: {
   variant?: "hero" | "authority" | "certificate";
+  profileHref?: string;
 }) {
   if (variant === "authority") {
     return (
@@ -47,7 +49,7 @@ export function DoctorPortrait({
               {siteConfig.registry}
             </span>
             <span className="identity-board"><BadgeCheck size={16} aria-hidden="true" /> Professor titular · UFRN</span>
-            <Link className="identity-link" href="/sobre">
+            <Link className="identity-link" href={profileHref}>
               Conhecer a formação <ArrowRight size={14} aria-hidden="true" />
             </Link>
       </figcaption>

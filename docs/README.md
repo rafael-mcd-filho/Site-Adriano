@@ -11,6 +11,7 @@
 
 ## 03 — Produto
 
+- [Implementação de copy e visual — 13/09/2026](./03-produto/implementacao-copy-visual-2026-09-13.md)
 - [Especificação completa de UX, copy e visual](./03-produto/especificacao-ux-copy-visual-todas-as-paginas.md)
 - [Assinaturas visuais específicas de cada página](./03-produto/assinaturas-visuais-por-pagina.md)
 - [Decisões confirmadas e especificação dos formulários](./03-produto/decisoes-confirmadas-e-formularios.md)

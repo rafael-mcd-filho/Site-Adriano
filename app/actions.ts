@@ -12,6 +12,7 @@ export type ContactFormState = {
     whatsapp?: string;
     message?: string;
     consent?: string;
+    professionalRole?: string;
   };
 };
 
@@ -30,10 +31,16 @@ export async function submitContact(
 ): Promise<ContactFormState> {
   const name = clean(formData.get("name"));
   const whatsapp = clean(formData.get("whatsapp"));
-  const message = clean(formData.get("message")).replace(/\r\n?/g, "\n");
+  const objective = clean(formData.get("message")).replace(/\r\n?/g, "\n");
   const consent = clean(formData.get("consent"));
   const company = clean(formData.get("company"));
   const page = clean(formData.get("page"));
+  const professional = page === "para-dentistas";
+  const professionalRole = professional ? clean(formData.get("professionalRole")) : "";
+  // Mantém o contrato do webhook e funciona também antes da hidratação do formulário.
+  const message = professional
+    ? [professionalRole ? "Profissão / especialidade: " + professionalRole : "", objective ? "Objetivo do contato: " + objective : ""].filter(Boolean).join("\n")
+    : objective;
   const originPage = getContactPage(page);
 
   if (company) {
@@ -62,6 +69,12 @@ export async function submitContact(
 
   if (message.length > 1000 || /[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/.test(message)) {
     errors.message = "Escreva uma mensagem com até 1.000 caracteres.";
+  }
+  if (professional && objective.length > 800) {
+    errors.message = "Descreva o objetivo do contato em até 800 caracteres.";
+  }
+  if (professionalRole.length > 100 || /[\u0000-\u001f\u007f]/.test(professionalRole)) {
+    errors.professionalRole = "Informe a profissão ou especialidade em até 100 caracteres.";
   }
 
   if (consent !== "yes") {

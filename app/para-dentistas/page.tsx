@@ -20,7 +20,6 @@ import { FaqAccordion } from "@/components/faq-accordion";
 import { FloatingWhatsApp } from "@/components/floating-whatsapp";
 import { HeroBackdrop } from "@/components/hero-backdrop";
 import { JsonLd } from "@/components/json-ld";
-import { ObjectionList } from "@/components/objection-list";
 import { PainList } from "@/components/pain-list";
 import { Reviews } from "@/components/reviews";
 import { SectionWave } from "@/components/section-wave";
@@ -29,7 +28,7 @@ import { WhatsAppButton } from "@/components/whatsapp-button";
 import { colleagueReviews } from "@/lib/content";
 import { pageMetadata } from "@/lib/metadata";
 import { breadcrumbSchema, faqSchema } from "@/lib/schema";
-import { credentialFacts, siteConfig } from "@/lib/site";
+import { siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = pageMetadata({
   title: "Encaminhamento Buco-Maxilo-Facial",
@@ -43,126 +42,72 @@ export const metadata: Metadata = pageMetadata({
 const whatsappMessage =
   "Olá, sou profissional de saúde e gostaria de conversar sobre um caso para encaminhamento.";
 
-/**
- * Dúvidas do profissional que precisa integrar a etapa especializada.
- *
- * Não são só dentistas: o estudo do sono que aponta componente esquelético
- * chega pelo médico, e a página endereçava apenas o consultório odontológico.
- */
+/** Situação e especialidade juntas, evitando duas listas sobre o mesmo caso. */
 const painItems = [
-  "A reabilitação depende de uma avaliação óssea antes de avançar.",
-  "A dúvida sobre a ATM persiste e você precisa discutir a conduta.",
-  "O plano ortodôntico exige alinhar a participação da cirurgia.",
-  "O estudo do sono sugere componente esquelético e falta avaliar a face.",
-  "Você precisa esclarecer a indicação antes de orientar o paciente.",
+  "Implantes e reconstrução óssea: avaliar o suporte e alinhar a etapa cirúrgica à reabilitação.",
+  "ATM: discutir sintomas persistentes, investigação e possibilidades de conduta.",
+  "Ortognática: integrar a avaliação dos maxilares ao planejamento ortodôntico.",
+  "Apneia: investigar a participação da estrutura facial junto ao cuidado do sono.",
+  "Reconstrução maxilofacial: discutir perdas extensas, implantes faciais e técnicas microcirúrgicas.",
+  "Outros casos bucomaxilofaciais: avaliar sisos, lesões e tumores benignos dos maxilares e da face.",
 ];
 
-/**
- * O escopo declarado pelo próprio cirurgião.
- *
- * A lista cobria só as cinco rotas do site, e o site tem cinco rotas porque
- * são as cinco com captação ativa — não porque sejam tudo o que ele faz. Para
- * o colega que procura alguém capaz de conduzir um caso específico, a rota
- * publicada não é a fronteira da competência: retalho microcirúrgico e tumor
- * benigno são justamente os casos que um clínico não resolve sozinho e
- * precisa saber a quem mandar.
- */
-const cases = [
-  "Implantes complexos e reconstrução óssea.",
-  "Reconstrução maxilofacial avançada, incluindo retalhos microcirúrgicos.",
-  "Implantes faciais e reabilitação de áreas da face.",
-  "Cirurgia e prótese de articulação temporomandibular.",
-  "Cirurgia ortognática em conjunto com a sua ortodontia.",
-  "Tumores benignos dos maxilares e da face.",
-  "Avaliação de apneia com componente esquelético.",
-  "Casos buco-maxilo-faciais que pedem discussão antes da conduta.",
+const professionalCredentials = [
+  "Mestre e doutor pela UNICAMP, com pós-doutorado no Hospital 12 de Octubre, em Madri.",
+  "Professor titular da UFRN e chefe do Serviço de Cirurgia Buco-Maxilo-Facial do HUOL.",
+  "Certificado pelo Board do Colégio Brasileiro e membro da banca de examinadores em 2026.",
 ];
 
-/**
- * Escopo, em duas colunas explícitas.
- *
- * O que mais tranquiliza um clínico não é o que o cirurgião faz — é o que ele
- * NÃO faz. Isso estava implícito em "planejamento com seu dentista", e
- * implícito não tranquiliza ninguém que teme perder o paciente.
- */
+/** Responsabilidades combinadas entre os profissionais em cada plano. */
 const scope = {
   mine: [
-    "Avaliação buco-maxilo-facial e definição da indicação cirúrgica.",
-    "Reconstrução óssea e a etapa cirúrgica dos implantes, dentários e faciais.",
-    "Reconstrução avançada, incluindo técnicas microcirúrgicas.",
-    "Procedimentos na ATM, dos minimamente invasivos à prótese articular.",
-    "Cirurgia ortognática e o acompanhamento pós-operatório dela.",
-    "Remoção de tumores benignos dos maxilares e da face.",
+    "Avaliação bucomaxilofacial e discussão da indicação com o encaminhador.",
+    "Planejamento e execução da etapa cirúrgica, quando indicada.",
+    "Acompanhamento pós-operatório e orientação dos cuidados dessa etapa.",
+    "Comunicação dos achados e das condições para prosseguir com o tratamento.",
   ],
   yours: [
-    "A reabilitação protética e a escolha da prótese.",
-    "A condução ortodôntica, antes e depois da etapa cirúrgica.",
-    "O acompanhamento clínico e preventivo de rotina.",
-    "A relação com o paciente, que continua sendo sua.",
+    "Reabilitação protética ou condução ortodôntica, conforme sua participação no plano.",
+    "Acompanhamento clínico e preventivo de rotina.",
+    "Próximas etapas do tratamento, alinhadas aos achados e à recuperação do paciente.",
   ],
 };
 
-/**
- * Devolutiva descrita como PROCESSO, não como promessa.
- *
- * A frase "seu paciente continua sendo seu" foi removida numa revisão
- * anterior, com razão: era um compromisso sobre comportamento futuro que o
- * site não pode garantir. O que ocupa o lugar dela não é outra promessa — é o
- * que efetivamente se combina, que o colega pode conferir na primeira conversa.
- */
+/** O canal e os marcos da devolutiva são combinados no primeiro contato. */
 const handback = [
   {
     title: "O que é comunicado",
-    text: "Os achados da avaliação, a conduta proposta ou realizada, os cuidados necessários e a orientação para a etapa seguinte do seu plano.",
+    text: "Achados, conduta proposta ou realizada, cuidados necessários e orientação para a próxima etapa do plano.",
   },
   {
     title: "Quando",
-    text: "Depois da avaliação, e novamente ao fim da etapa cirúrgica. Prazos e marcos são combinados no primeiro contato, conforme o caso.",
+    text: "Após a avaliação e ao fim da etapa cirúrgica, quando realizada. Os marcos são combinados conforme o caso.",
   },
   {
     title: "Por qual canal",
-    text: "Pelo canal profissional combinado entre os dois. Dados que identifiquem o paciente não circulam por canais abertos.",
-  },
-];
-
-/** Objeções reais ao encaminhamento, sem prometer controle sobre o paciente. */
-const objections = [
-  {
-    belief: "Preciso ter a indicação cirúrgica definida?",
-    reality:
-      "A dúvida clínica pode ser o motivo do contato. Apresente a hipótese, o que já foi realizado e o que precisa ser esclarecido antes de seguir.",
-  },
-  {
-    belief: "Como a etapa especializada entra no meu plano?",
-    reality:
-      "O planejamento considera o tratamento em andamento, os objetivos da etapa especializada e a sequência do acompanhamento. Esse alinhamento ajuda a orientar o paciente com mais clareza.",
-  },
-  {
-    belief: "E se a avaliação apontar outro caminho?",
-    reality:
-      "Encaminhar para avaliação não pressupõe operar. Os achados podem indicar novas investigações, cuidado conservador ou uma revisão conjunta da sequência proposta.",
+    text: "Pelo canal profissional combinado, adequado ao compartilhamento das informações clínicas.",
   },
 ];
 
 const flow: Array<{ title: string; text: string; icon: typeof Send }> = [
   {
     title: "Apresente a dúvida clínica",
-    text: "Comece pelo motivo do contato e pelo tratamento em andamento. A equipe orienta como compartilhar a documentação do caso.",
+    text: "Informe o motivo do contato. A equipe orienta como compartilhar a documentação do tratamento em andamento.",
     icon: MessageSquareText,
   },
   {
     title: "Alinhe a etapa especializada",
-    text: "Discuta o que precisa ser avaliado, os objetivos do encaminhamento e a participação de cada profissional.",
+    text: "Discuta os objetivos do encaminhamento e a participação de cada profissional.",
     icon: FileCheck2,
   },
   {
     title: "Integre os achados ao plano",
-    text: "A avaliação ajuda a definir a conduta e a sequência possível. Se houver indicação cirúrgica, ela passa a fazer parte desse planejamento.",
+    text: "A avaliação orienta a conduta. Se houver indicação cirúrgica, ela entra na sequência do planejamento.",
     icon: Send,
   },
   {
     title: "Combine a continuidade",
-    text: "Alinhe as informações de retorno, os cuidados necessários e o momento de seguir com as próximas etapas do tratamento.",
+    text: "Alinhe a devolutiva, os cuidados e o momento de seguir com as próximas etapas.",
     icon: RotateCcw,
   },
 ];
@@ -215,15 +160,13 @@ export default function ParaDentistasPage() {
             <div className="hero-photo-copy page-enter">
               <span className="eyebrow">Canal profissional</span>
               <h1>
-                A etapa cirúrgica precisa avançar.{" "}
-                <span className="mark-accent">O cuidado precisa continuar.</span>
+                Quando um caso pede avaliação bucomaxilofacial,{" "}
+                <span className="mark-accent">o cuidado precisa continuar integrado.</span>
               </h1>
               <p>
-                Seu paciente tem um plano em andamento e uma questão que pede
-                avaliação especializada. Dentistas, ortodontistas e médicos
-                discutem indicação, escopo e continuidade do cuidado com o
-                Dr. Adriano Rocha Germano, cirurgião bucomaxilofacial com
-                consultórios em João Pessoa e Natal.
+                Dentistas, ortodontistas e médicos podem discutir indicação,
+                responsabilidades e sequência do tratamento com o Dr. Adriano
+                Rocha Germano. Atendimento em João Pessoa e Natal.
               </p>
 
               <ul className="hero-badges">
@@ -252,9 +195,9 @@ export default function ParaDentistasPage() {
                   id="cta-hero-formulario"
                   data-cta="cta-hero-formulario"
                   className="button button-secondary button-motion"
-                  href="#contato"
+                  href={process.env.FORM_WEBHOOK_URL ? "#contato" : "#fluxo"}
                 >
-                  <ButtonContent>Deixar meu contato</ButtonContent>
+                  <ButtonContent>{process.env.FORM_WEBHOOK_URL ? "Solicitar retorno profissional" : "Ver como encaminhar"}</ButtonContent>
                 </Link>
               </div>
 
@@ -270,7 +213,12 @@ export default function ParaDentistasPage() {
           </div>
         </section>
 
-        <TrustMarquee items={credentialFacts} />
+        <TrustMarquee items={[
+          "Professor titular · UFRN",
+          "Chefe do serviço · HUOL",
+          "Presidente do Colégio Brasileiro · 2023–2024",
+          "Banca de examinadores do Board · 2026",
+        ]} />
 
         {/* 2 — quando faz sentido conversar: as situações e os tipos de caso
             no mesmo bloco, porque respondem juntos a "isso é para mim?". */}
@@ -283,18 +231,6 @@ export default function ParaDentistasPage() {
 
             <PainList items={painItems} />
 
-            <div className="case-block">
-              <h3>Os casos que costumam chegar aqui</h3>
-              <ul className="case-list">
-                {cases.map((item) => (
-                  <li key={item}>
-                    <Check size={17} aria-hidden="true" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
             <aside className="consequence-panel">
               <span className="consequence-icon" aria-hidden="true">
                 <Clock8 size={20} />
@@ -302,10 +238,9 @@ export default function ParaDentistasPage() {
               <div>
                 <strong>Clareza para orientar a próxima etapa</strong>
                 <p>
-                  Quando a dúvida clínica fica sem resposta, é difícil
-                  explicar ao paciente o que vem a seguir. Uma discussão do
-                  caso ajuda a organizar a investigação e a sequência do
-                  tratamento.
+                  O contato pode começar pela dúvida clínica. A avaliação
+                  especializada ajuda a organizar a conduta e não pressupõe
+                  indicação cirúrgica.
                 </p>
               </div>
             </aside>
@@ -325,29 +260,20 @@ export default function ParaDentistasPage() {
                 {siteConfig.specialty} · {siteConfig.registry}
               </p>
               <ul className="method-points">
-                {siteConfig.credentials.map((credential) => (
+                {professionalCredentials.map((credential) => (
                   <li key={credential}>
                     <BadgeCheck size={16} aria-hidden="true" />
                     {credential}
                   </li>
                 ))}
               </ul>
-              <p>{siteConfig.boardContext}</p>
               {/* Para o colega, a prova mais forte não é o título — é ter
                   formado outros cirurgiões e montado os serviços onde os
                   casos complexos da região são tratados. */}
               <p>
-                Fundou o Serviço de Cirurgia e Traumatologia Buco-Maxilo-Facial
-                e o programa de residência do Hospital Universitário Onofre
-                Lopes, onde é chefe do serviço, e coordena o atendimento de
-                crianças com anomalias bucomaxilofaciais — incluindo pacientes
-                fissurados e sindrômicos — no Hospital Infantil Varela Santiago.
-              </p>
-              <p>
-                O histórico, os exames e o objetivo do encaminhamento dão
-                contexto à avaliação. Esse diálogo aproxima a etapa
-                especializada do plano restaurador, ortodôntico ou clínico que
-                o paciente já segue.
+                Fundou o serviço e a residência de Cirurgia Buco-Maxilo-Facial
+                do HUOL e coordena o serviço para crianças com anomalias
+                bucomaxilofaciais no Hospital Infantil Varela Santiago.
               </p>
               <p className="authority-links">
                 <a className="text-link" href={siteConfig.boardCertificate} target="_blank" rel="noopener noreferrer">
@@ -371,7 +297,8 @@ export default function ParaDentistasPage() {
           <div className="container">
             <div className="section-heading centered-heading">
               <span className="pill-badge">Escopo e devolutiva</span>
-              <h2>O que eu conduzo, o que continua com você.</h2>
+              <h2>Responsabilidades claras em cada etapa do cuidado.</h2>
+              <p>A participação de cada profissional é combinada conforme o caso e o plano em andamento.</p>
             </div>
 
             <div className="scope-grid">
@@ -387,7 +314,7 @@ export default function ParaDentistasPage() {
                 </ul>
               </article>
               <article>
-                <h3>O que permanece com você</h3>
+                <h3>O que segue com o encaminhador</h3>
                 <ul className="case-list">
                   {scope.yours.map((item) => (
                     <li key={item}>
@@ -414,10 +341,6 @@ export default function ParaDentistasPage() {
               </div>
             </div>
 
-            <div className="objections-inline">
-              <h3>O que precisa ficar claro entre os profissionais</h3>
-              <ObjectionList items={objections} />
-            </div>
           </div>
         </section>
 
@@ -447,13 +370,21 @@ export default function ParaDentistasPage() {
                 );
               })}
             </ol>
+
+            <div className="professional-next-step">
+              <WhatsAppButton
+                ctaId="cta-fluxo-whatsapp"
+                message={whatsappMessage}
+                label="Discutir indicação e sequência do caso"
+                className="button-whatsapp-solid"
+              />
+              <p>A equipe orienta o primeiro contato e o canal para compartilhar a documentação.</p>
+            </div>
           </div>
         </section>
 
-        {/* 6 — confiança entre colegas. Relato de colega não envolve dado de
-            saúde e é a prova mais eficiente desta página. Sem material
-            autorizado, não renderiza. */}
-                  <section className="section reviews-section" id="colegas">
+        {/* 6 — espaço reservado para relatos reais de colegas. */}
+          <section className="section reviews-section" id="colegas">
             <div className="container">
               {colleagueReviews.length ? <Reviews
                 items={colleagueReviews}
@@ -475,17 +406,18 @@ export default function ParaDentistasPage() {
               <WhatsAppButton
                 ctaId="cta-final-whatsapp"
                 message={whatsappMessage}
-                label="Discutir um caso"
+                label="Falar com a equipe sobre um encaminhamento"
                 className="button-whatsapp-solid"
               />
             </div>
 
             <ContactForm
               page="para-dentistas"
+              variant="professional"
               available={Boolean(process.env.FORM_WEBHOOK_URL)}
               eyebrow="Canal profissional"
-              title="Inicie uma conversa sobre o caso."
-              description="Informe seu nome, WhatsApp e o objetivo do contato. Não envie dados identificáveis do paciente pelo formulário."
+              title="Solicite um retorno profissional."
+              description="Informe seu contato, área de atuação e o objetivo da conversa. A documentação clínica é compartilhada depois, pelo canal orientado pela equipe."
             />
 
             <div className="closing-faq" id="duvidas-profissionais">

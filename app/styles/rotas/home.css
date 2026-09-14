@@ -15,3 +15,78 @@
  * Se a regra passar a valer para mais de uma rota, ela não pertence mais
  * aqui: mova para o arquivo dono em app/styles/.
  */
+
+[data-rota="home"] .home-early-reviews {
+  padding-block: clamp(28px, 4vw, 48px);
+  border-top: 1px solid var(--border);
+}
+
+[data-rota="home"] .home-authority-portrait {
+  max-width: 360px;
+  justify-self: center;
+}
+
+[data-rota="home"] .about-grid {
+  gap: clamp(28px, 5vw, 64px);
+}
+
+[data-rota="home"] .credential-list {
+  margin-block: 24px;
+}
+
+[data-rota="home"] .credential-list li {
+  align-items: flex-start;
+}
+
+[data-rota="home"] .credential-list svg {
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+
+[data-rota="home"] .home-process-action {
+  display: grid;
+  justify-items: center;
+  gap: 12px;
+  margin-top: 28px;
+  text-align: center;
+}
+
+[data-rota="home"] .home-process-action p,
+[data-rota="home"] .contact-expectation {
+  max-width: 62ch;
+  margin: 0;
+  font-size: var(--fs-sm);
+}
+
+[data-rota="home"] .location-photo-pair .media-placeholder {
+  --media-placeholder-ratio: 16 / 10;
+}
+
+@media (max-width: 800px) {
+  [data-rota="home"] .home-authority-portrait {
+    max-width: 260px;
+  }
+
+  [data-rota="home"] #processo .editorial-support-grid > .media-placeholder {
+    max-width: 280px;
+  }
+}
+
+@media (max-width: 600px) {
+  [data-rota="home"] .section {
+    padding-block: 48px;
+  }
+
+  [data-rota="home"] .home-early-reviews {
+    padding-block: 28px;
+  }
+
+  [data-rota="home"] .home-process-action {
+    justify-items: stretch;
+    text-align: left;
+  }
+
+  [data-rota="home"] .location-card-body {
+    padding: 20px;
+  }
+}

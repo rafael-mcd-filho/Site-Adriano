@@ -1,6 +1,7 @@
 import { ContactForm } from "@/components/contact-form";
 import { WhatsAppButton } from "@/components/whatsapp-button";
-import { ctaLadder, type TreatmentContent } from "@/lib/content";
+import type { TreatmentContent } from "@/lib/content";
+import styles from "./treatment-refinement.module.css";
 
 /**
  * Bloco 8 — fechamento e ação.
@@ -23,9 +24,10 @@ export function TreatmentContact({ content }: { content: TreatmentContent }) {
           <WhatsAppButton
             ctaId="cta-final-whatsapp"
             message={content.whatsappMessage}
-            label={ctaLadder.consultation}
+            label="Escolher consultório e falar com a equipe"
             className="button-whatsapp-solid"
           />
+          <p className={styles.contactNote}>A equipe informa horários, valor da consulta e o que levar. A indicação de qualquer procedimento depende da avaliação.</p>
         </div>
 
         <ContactForm

@@ -78,10 +78,12 @@
 }
 
 @media (max-width: 600px) {
-  .trust-bar { min-height: 80px; padding: 18px 0; }
-  .trust-item { font-size: var(--fs-body); }
-  .trust-set { gap: 32px; padding-inline: 16px; }
-  .trust-window::before, .trust-window::after { width: 18px; }
+  .trust-bar { min-height: 0; padding: 20px; }
+  .trust-bar .trust-track { width: 100%; animation: none; transform: none; }
+  .trust-bar .trust-set { display: grid; min-width: 0; width: 100%; gap: 18px 16px; padding: 0; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; }
+  .trust-bar .trust-item { font-size: var(--fs-sm); white-space: normal; align-items: flex-start; line-height: 1.4; gap: 8px; }
+  .trust-bar .trust-item svg { width: 18px; height: 18px; margin-top: 2px; }
+  .trust-bar .trust-set[aria-hidden="true"], .trust-window::before, .trust-window::after { display: none; }
 }
 
 @keyframes trustScroll {

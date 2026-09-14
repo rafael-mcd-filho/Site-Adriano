@@ -49,8 +49,8 @@ const placeholders = {
     portrait: false,
   },
   "case-bone": {
-    title: "Caso real de reconstrução óssea aqui",
-    caption: "Espaço reservado para material real do caso, revisado e autorizado.",
+    title: "Tomografia e planejamento 3D reais aqui",
+    caption: "Imagens reais anonimizadas do volume ósseo e planejamento a inserir.",
     portrait: false,
   },
   "case-atm": {
@@ -64,13 +64,13 @@ const placeholders = {
     portrait: false,
   },
   "case-sleep": {
-    title: "Caso real de apneia aqui",
-    caption: "Espaço reservado para material real do caso, revisado e autorizado.",
+    title: "Exame do sono real aqui",
+    caption: "Espaço para exame anonimizado, com interpretação e acompanhamento revisados pelo doutor.",
     portrait: false,
   },
   "case-wisdom": {
-    title: "Caso real de siso aqui",
-    caption: "Espaço reservado para material real do caso, revisado e autorizado.",
+    title: "Panorâmica real anotada aqui",
+    caption: "Espaço reservado para radiografia anonimizada, anotada e autorizada.",
     portrait: false,
   },
   "reviews-patients": {

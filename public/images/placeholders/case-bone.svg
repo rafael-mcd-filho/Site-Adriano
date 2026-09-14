@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900" role="img" aria-labelledby="title description">
-  <title id="title">Caso real de reconstrução óssea aqui</title>
+  <title id="title">Tomografia e planejamento 3D aqui</title>
   <desc id="description">Espaço reservado, sem fotografia, resultado ou depoimento de demonstração.</desc>
   <rect width="1200" height="900" fill="#F3F0EA"/>
   <path d="M1020 0H1200V513C1025 387 910 220 1020 0Z" fill="#E4EAF0"/>
@@ -11,12 +11,10 @@
     <circle cx="103" cy="34" r="12"/>
     <path d="M19 96 54 58 79 82 97 65 125 96"/>
   </g>
-  <text x="600" y="448" text-anchor="middle" fill="#1C3147" font-family="Arial, Helvetica, sans-serif" font-size="76" font-weight="700" letter-spacing="-2">
-    <tspan x="600" dy="0">Caso real de</tspan>
-    <tspan x="600" dy="88.16">reconstrução</tspan>
-    <tspan x="600" dy="88.16">óssea aqui</tspan>
+  <text x="600" y="448" text-anchor="middle" fill="#1C3147" font-family="Arial, Helvetica, sans-serif" font-size="60" font-weight="700" letter-spacing="-2">
+    <tspan x="600" dy="0">Tomografia e</tspan>
+    <tspan x="600" dy="88.16">planejamento 3D aqui</tspan>
   </text>
   <path d="M562 740H638" stroke="#8DA4B9" stroke-width="4" stroke-linecap="round"/>
   <text x="600" y="802" text-anchor="middle" fill="#62768A" font-family="Arial, Helvetica, sans-serif" font-size="25">Material real a inserir</text>
 </svg>
-

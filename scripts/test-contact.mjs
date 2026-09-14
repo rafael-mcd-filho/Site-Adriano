@@ -78,7 +78,17 @@ function loadTs(file, imports, env) {
     assert.deepEqual(received.at(-1).body.attribution, { referrerOrigin: null, utm: {} });
     const unsafe = attribution.parseContactAttribution(JSON.stringify({ referrerOrigin: 'javascript:alert(1)', utm: { utm_source: 'lead@example.com', utm_medium: '83999990000' } }));
     assert.equal(JSON.stringify(unsafe), JSON.stringify({ referrerOrigin: null, utm: {} }));
-    console.log('Contact checks passed: delivery, attribution, validation, unavailable webhook and failure response.');
+    await assert.rejects(submitContact({}, form({ page: 'para-dentistas', professionalRole: 'Ortodontista', message: 'Alinhar um encaminhamento.' })), /REDIRECT:\/obrigado\?origem=para-dentistas/);
+    assert.equal(received.at(-1).body.message, 'Profissão / especialidade: Ortodontista\nObjetivo do contato: Alinhar um encaminhamento.');
+    assert.equal(received.at(-1).body.formId, 'contato-para-dentistas');
+    const beforeInvalidProfessional = received.length;
+    for (const invalid of [{ professionalRole: 'x'.repeat(101) }, { message: 'x'.repeat(801) }]) {
+      assert.equal((await submitContact({}, form({ page: 'para-dentistas', ...invalid }))).status, 'error');
+    }
+    assert.equal(received.length, beforeInvalidProfessional, 'Invalid professional fields must not reach webhook');
+    await assert.rejects(submitContact({}, form({ page: 'para-dentistas', professionalRole: 'x'.repeat(100), message: 'x'.repeat(800) })), /REDIRECT:/);
+    assert.ok(received.at(-1).body.message.length <= 1000);
+    console.log('Contact checks passed: patient and professional delivery, attribution, validation, unavailable webhook and failure response.');
   } finally {
     server.closeAllConnections();
     await new Promise(resolve => server.close(resolve));

@@ -4,6 +4,7 @@ import { JsonLd } from "@/components/json-ld";
 import { contentLastReviewed, type TreatmentContent } from "@/lib/content";
 import { breadcrumbSchema, faqSchema } from "@/lib/schema";
 import { siteConfig } from "@/lib/site";
+import { clinicalReviews } from "@/lib/editorial";
 
 /**
  * Casca das páginas de tratamento: dados estruturados, `main` com o tema do
@@ -39,7 +40,7 @@ export function TreatmentShell({
           url: pageUrl,
           inLanguage: "pt-BR",
           isPartOf: { "@id": siteConfig.url + "/#website" },
-          lastReviewed: reviewedAt,
+          ...(clinicalReviews[content.slug] ? { lastReviewed: clinicalReviews[content.slug].date, reviewedBy: { "@id": siteConfig.url + "/#person" } } : {}),
           dateModified: reviewedAt,
           about: {
             "@type": "MedicalCondition",

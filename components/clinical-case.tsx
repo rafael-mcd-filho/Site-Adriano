@@ -2,6 +2,15 @@ import { FileText } from "lucide-react";
 import type { ClinicalCase } from "@/lib/content";
 import { MediaPlaceholder, type MediaPlaceholderKind } from "@/components/media-placeholder";
 
+const reservedContext: Partial<Record<MediaPlaceholderKind, { title: string; text: string }>> = {
+  "case-implants": { title: "Do planejamento à prótese", text: "Espaço para um caso real com imagem do planejamento, implante e reabilitação protética. Inserir a situação inicial, a decisão e o acompanhamento autorizado." },
+  "case-bone": { title: "Tomografia e planejamento em 3D", text: "Espaço para imagens reais e anonimizadas da avaliação do volume ósseo e da reconstrução planejada, com contexto clínico e acompanhamento." },
+  "case-orthognathic": { title: "Planejamento facial e etapas do cuidado", text: "Espaço para um caso real que mostre o planejamento conjunto, a preparação ortodôntica e o acompanhamento após a cirurgia, com autorização." },
+  "case-wisdom": { title: "O que a imagem ajuda a avaliar", text: "Espaço para panorâmica real, anonimizada e anotada pelo doutor: posição do siso, dente vizinho e estruturas próximas. A legenda explicará os critérios da indicação." },
+  "case-sleep": { title: "Avaliação do sono e cuidado integrado", text: "Espaço para um relato real com exame do sono anonimizado, participação dos profissionais e acompanhamento. O material deve explicar as decisões, sem prometer o mesmo resultado." },
+  "case-atm": { title: "Da avaliação ao acompanhamento", text: "Espaço para um relato real sobre as queixas, os fatores considerados, as opções de cuidado e a evolução acompanhada. Usar apenas material revisado e autorizado." },
+};
+
 /** Caso real quando fornecido; reserva visual explícita enquanto o material está pendente. */
 export function ClinicalCaseCard({ item, placeholderKind }: { item?: ClinicalCase; placeholderKind?: MediaPlaceholderKind }) {
   if (!item) return placeholderKind ? (
@@ -9,8 +18,8 @@ export function ClinicalCaseCard({ item, placeholderKind }: { item?: ClinicalCas
       <MediaPlaceholder kind={placeholderKind} />
       <div>
         <span className="section-kicker">Material a inserir</span>
-        <h3>Espaço para um caso real deste tratamento</h3>
-        <p>A imagem definitiva será acompanhada do contexto da avaliação, do planejamento e do acompanhamento. Este espaço ainda não apresenta um caso clínico.</p>
+        <h3>{reservedContext[placeholderKind]?.title ?? "Espaço para um caso real deste tratamento"}</h3>
+        <p>{reservedContext[placeholderKind]?.text ?? "Material real a inserir, acompanhado do contexto da avaliação, do planejamento e do acompanhamento."}</p>
       </div>
     </div>
   ) : null;

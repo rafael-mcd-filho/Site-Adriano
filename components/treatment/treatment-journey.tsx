@@ -2,6 +2,7 @@ import { HeartPulse, Search, Waypoints } from "lucide-react";
 import { ClinicalCaseCard } from "@/components/clinical-case";
 import type { TreatmentContent } from "@/lib/content";
 import type { MediaPlaceholderKind } from "@/components/media-placeholder";
+import styles from "./treatment-refinement.module.css";
 
 const casePlaceholders: Record<string, MediaPlaceholderKind> = {
   "apneia-do-sono": "case-sleep",
@@ -48,7 +49,7 @@ export function TreatmentJourney({ content }: { content: TreatmentContent }) {
           Ela é decoração: quem usa leitor de tela recebe uma lista ordenada,
           que já carrega a ideia de sequência sem precisar enxergar o traço.
         */}
-        <ol className="journey-track">
+        <ol className={"journey-track " + styles.journeyTrack}>
           {content.journey.steps.map((step, index) => {
             const Icon = stepIcons[index] ?? Search;
 

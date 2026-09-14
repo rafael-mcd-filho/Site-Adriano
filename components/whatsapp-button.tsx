@@ -1,4 +1,5 @@
 import { ButtonContent } from "@/components/button-content";
+import { ConsultorioChooser } from "@/components/consultorio-chooser";
 import {
   getWhatsAppHref,
   originFromCtaId,
@@ -35,6 +36,7 @@ type WhatsAppButtonProps = {
   fallbackHref?: string;
   /** Número de outro consultório. Sem ele, usa o número principal do site. */
   number?: string;
+  chooseLocation?: boolean;
 };
 
 export function WhatsAppButton({
@@ -46,7 +48,11 @@ export function WhatsAppButton({
   source,
   fallbackHref = "#contato",
   number,
+  chooseLocation = label === "Escolher consultório e falar com a equipe",
 }: WhatsAppButtonProps) {
+  if (chooseLocation && !number) {
+    return <ConsultorioChooser label={label} message={message} ctaId={ctaId} source={source ?? originFromCtaId(ctaId)} className={(compact ? "button button-whatsapp button-motion button-small " : "button button-whatsapp button-motion ") + className} />;
+  }
   const displayLabel = isConfigured ? label : label
     .replace("Perguntar pelo WhatsApp", "Tirar uma dúvida")
     .replace("Complementar pelo WhatsApp", "Voltar ao contato")

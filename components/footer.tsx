@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { ArrowRight, Clock3, MapPin, ShieldCheck } from "lucide-react";
+import { Clock3, MapPin, ShieldCheck } from "lucide-react";
+import { FooterAction } from "@/components/footer-action";
 import {
   areaNavigation,
   practiceLocations,
@@ -47,7 +48,7 @@ export function Footer() {
           </Link>
           <p>
             Antes de falar em cirurgia, precisamos entender o seu caso.
-            Atendimento em cirurgia buco-maxilo-facial em João Pessoa.
+            Atendimento em cirurgia buco-maxilo-facial em João Pessoa e Natal.
           </p>
           {siteConfig.isDemo && (
             <span className="demo-badge">
@@ -114,9 +115,7 @@ export function Footer() {
               <span>{siteConfig.hours}</span>
             </li>
           </ul>
-          <Link className="footer-action" href="/#contato">
-            Quero entender meu caso <ArrowRight size={16} aria-hidden="true" />
-          </Link>
+          <FooterAction />
         </div>
       </div>
 

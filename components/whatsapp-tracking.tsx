@@ -95,6 +95,7 @@ export function WhatsAppTracking() {
         whatsapp_button_location: location,
         whatsapp_page_path: path,
         whatsapp_page_title: cleanText(document.title),
+        whatsapp_city: cleanText(link.dataset.ctaCity),
         whatsapp_phone: cleanText(
           new URL(link.href, window.location.href).pathname.replace(/\D/g, ""),
         ),

@@ -1,0 +1,15 @@
+.dialog { width: min(560px, calc(100% - 32px)); max-height: calc(100dvh - 32px); margin: auto; padding: 0; overflow: auto; border: 1px solid var(--border); border-radius: 22px; background: var(--white); color: var(--ink); box-shadow: var(--shadow-lg); text-align: left; }
+.dialog::backdrop { background: rgb(15 26 40 / 70%); }
+.content { position: relative; padding: 32px; }
+.dialog .content h2 { margin: 16px 0 12px; padding-right: 18px; color: var(--navy-950); font-size: clamp(24px, 4vw, 30px); }
+.dialog .content > p { color: var(--muted); font-size: var(--fs-sm); margin: 0; }
+.dialog .content :global(.section-kicker) { color: var(--blue-600); }
+.close { display: grid; place-items: center; position: absolute; right: 10px; top: 10px; width: 44px; height: 44px; border: 0; border-radius: 50%; background: var(--surface); color: var(--navy-950); cursor: pointer; }
+.locations { display: grid; gap: 12px; margin-top: 24px; }
+.locations a { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 14px; padding: 20px; border: 1px solid var(--border); border-radius: 14px; color: var(--navy-950); background: var(--surface); text-decoration: none; }
+.locations a:hover { border-color: var(--blue-600); background: var(--blue-50); }
+.locations strong, .locations small { display: block; }
+.locations strong { font-size: 20px; }
+.locations small { margin-top: 4px; line-height: 1.45; font-size: 14px; color: var(--muted); }
+.dialog :focus-visible { outline: 3px solid var(--blue-600); outline-offset: 3px; }
+@media (max-width: 600px) { .content { padding: 28px 20px 20px; } .locations a { padding: 16px; } }

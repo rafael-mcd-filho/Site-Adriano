@@ -63,6 +63,11 @@ const focusableSelector =
 
 export function Header() {
   const pathname = usePathname();
+  const professional = pathname === "/para-dentistas";
+  const contactLabel = professional ? "Discutir um caso" : "Entender meu caso";
+  const contactMessage = professional
+    ? "Olá, sou profissional de saúde e gostaria de discutir um encaminhamento com o Dr. Adriano."
+    : headerWhatsAppMessage;
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [areasOpen, setAreasOpen] = useState(false);
@@ -293,16 +298,16 @@ export function Header() {
             data-cta-channel={isWhatsAppConfigured ? "whatsapp" : "form"}
             className="button button-small button-motion header-cta"
             href={isWhatsAppConfigured ? getWhatsAppHref(
-              whatsappMessageWithSource(headerWhatsAppMessage, "cabeçalho do site"),
+              whatsappMessageWithSource(contactMessage, "cabeçalho do site"),
             ) : contactHref}
             target={isWhatsAppConfigured ? "_blank" : undefined}
             rel={isWhatsAppConfigured ? "noopener noreferrer" : undefined}
             aria-label={isWhatsAppConfigured
-              ? "Entender meu caso — falar com a equipe pelo WhatsApp"
-              : "Entender meu caso — ir para o formulário de contato"}
+              ? contactLabel + " — falar com a equipe pelo WhatsApp"
+              : contactLabel + " — ver opções de contato"}
           >
             <ButtonContent icon={WhatsAppIcon} seal="whatsapp">
-              Entender meu caso
+              {contactLabel}
             </ButtonContent>
           </a>
 
@@ -398,7 +403,7 @@ export function Header() {
             href={contactHref}
             onClick={closeMenu}
           >
-            <ButtonContent icon={MessageCircle}>Quero entender meu caso</ButtonContent>
+            <ButtonContent icon={MessageCircle}>{contactLabel}</ButtonContent>
           </Link>
 
           <p className="mobile-credentials">

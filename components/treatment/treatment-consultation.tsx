@@ -2,6 +2,8 @@ import { Clock3, ClipboardList, MessageSquareText } from "lucide-react";
 import { FaqAccordion } from "@/components/faq-accordion";
 import { WhatsAppButton } from "@/components/whatsapp-button";
 import { ctaLadder, type TreatmentContent } from "@/lib/content";
+import { ClinicalEditorial } from "@/components/clinical-editorial";
+import styles from "./treatment-refinement.module.css";
 
 /**
  * "Sua primeira consulta" — processo, dúvidas práticas e FAQ residual.
@@ -19,7 +21,7 @@ import { ctaLadder, type TreatmentContent } from "@/lib/content";
  */
 export function TreatmentConsultation({ content }: { content: TreatmentContent }) {
   return (
-    <section className="section consultation-section" id="consulta">
+    <section className={"section consultation-section " + styles.consultation} id="consulta">
       <div className="container">
         <div className="section-heading centered-heading">
           <span className="pill-badge">
@@ -85,6 +87,7 @@ export function TreatmentConsultation({ content }: { content: TreatmentContent }
           <h3>{content.faqTitle}</h3>
           <FaqAccordion items={content.faqs} />
         </div>
+        <ClinicalEditorial slug={content.slug} updatedAt={content.lastReviewed} />
       </div>
     </section>
   );

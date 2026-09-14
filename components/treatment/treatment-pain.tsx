@@ -37,7 +37,7 @@ export function TreatmentPain({ content }: { content: TreatmentContent }) {
 
         <div className="pain-consequence">
           {content.slug === "cirurgia-de-siso" ? <AnatomyIllustration type="wisdom-positions" />
-            : content.slug === "cirurgia-ortognatica" ? <AnatomyIllustration type="bite" />
+            : content.slug === "cirurgia-ortognatica" ? <MediaPlaceholder kind="doctor-planning" caption="Foto real do planejamento entre cirurgião e ortodontista a inserir." />
             : content.slug === "cirurgia-atm" ? <MediaPlaceholder kind="doctor-examination" />
             : content.slug === "reconstrucao-ossea" ? <MediaPlaceholder kind="doctor-consultation" />
             : <figure className="pain-consequence-photo">
@@ -60,8 +60,8 @@ export function TreatmentPain({ content }: { content: TreatmentContent }) {
             <p>{content.consequenceText}</p>
             <p className="pain-consequence-note">
               Esses sinais não significam, por si só, que você precise de
-              cirurgia. A avaliação existe para entender a origem e discutir o
-              melhor caminho.
+              cirurgia. A avaliação reúne suas queixas, o exame e os fatores
+              associados para discutir as opções de cuidado.
             </p>
           </div>
         </div>

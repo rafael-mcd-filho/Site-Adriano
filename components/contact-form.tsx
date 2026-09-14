@@ -16,6 +16,7 @@ type ContactFormProps = {
   title?: string;
   description?: string;
   available?: boolean;
+  variant?: "patient" | "professional";
 };
 
 /** Empilha no dataLayer mesmo sem GTM: quando ele entrar, a fila já existe. */
@@ -48,7 +49,9 @@ export function ContactForm({
   title = "Solicite uma avaliação.",
   description = "Preencha os dados abaixo. A equipe responderá pelo WhatsApp em horário comercial.",
   available = true,
+  variant = "patient",
 }: ContactFormProps) {
+  const isProfessional = variant === "professional";
   const [state, formAction, pending] = useActionState(
     submitContact,
     initialContactFormState,
@@ -59,19 +62,24 @@ export function ContactForm({
   // O funil do formulário precisa dos dois lados: quantos viram e quantos
   // enviaram. A conversão em si é marcada na /obrigado, que tem URL própria.
   useEffect(() => {
+    if (!available) return;
     track("form_view", { form_page: page });
     if (attributionInput.current) {
       attributionInput.current.value = JSON.stringify(
         captureContactAttribution(window.location.href, document.referrer),
       );
     }
-  }, [page]);
+  }, [page, available]);
 
   useEffect(() => {
     if (state.status === "error") {
       track("form_error", { form_page: page, form_message: state.message });
     }
   }, [state, page]);
+
+  // Sem integração ativa, os CTAs de WhatsApp da seção são o canal de contato.
+  // Não oferece campos que o visitante não pode enviar.
+  if (!available) return null;
 
   if (state.status === "success") {
     return (
@@ -80,7 +88,9 @@ export function ContactForm({
         <span className="section-kicker">Solicitação recebida</span>
         <h2>Obrigado pelo contato.</h2>
         <p>{state.message}</p>
-        <small>O envio deste formulário não confirma um agendamento.</small>
+        <small>{isProfessional
+          ? "A equipe dará continuidade ao contato profissional."
+          : "O envio deste formulário não confirma um agendamento."}</small>
       </div>
     );
   }
@@ -91,12 +101,6 @@ export function ContactForm({
         <span className="section-kicker">{eyebrow}</span>
         <h2>{title}</h2>
         <p>{description}</p>
-        {!available && (
-          <p className="form-message notice" role="note">
-            O contato por este formulário está temporariamente indisponível.
-            O preenchimento será liberado quando o canal estiver disponível.
-          </p>
-        )}
       </div>
 
       <form action={formAction} className="contact-form" noValidate>
@@ -110,7 +114,7 @@ export function ContactForm({
 
         <div className="field-grid">
           <div className="field">
-            <label htmlFor={"name-" + page}>Como podemos chamar você?</label>
+            <label htmlFor={"name-" + page}>{isProfessional ? "Nome do profissional" : "Como podemos chamar você?"}</label>
             <input
               id={"name-" + page}
               name="name"
@@ -130,7 +134,7 @@ export function ContactForm({
           </div>
 
           <div className="field">
-            <label htmlFor={"whatsapp-" + page}>Qual é o seu WhatsApp?</label>
+            <label htmlFor={"whatsapp-" + page}>{isProfessional ? "WhatsApp para retorno profissional" : "Qual é o seu WhatsApp?"}</label>
             <input
               id={"whatsapp-" + page}
               name="whatsapp"
@@ -155,20 +159,41 @@ export function ContactForm({
           </div>
         </div>
 
+        {isProfessional && (
+          <div className="field">
+            <label htmlFor={"professional-role-" + page}>Profissão / especialidade <span>(opcional)</span></label>
+            <input
+              id={"professional-role-" + page}
+              name="professionalRole"
+              type="text"
+              autoComplete="organization-title"
+              placeholder="Ex.: cirurgião-dentista, ortodontista, médico."
+              maxLength={100}
+              aria-invalid={Boolean(state.errors?.professionalRole)}
+              aria-describedby={state.errors?.professionalRole ? "professional-role-error-" + page : undefined}
+            />
+            {state.errors?.professionalRole && <span className="field-error" id={"professional-role-error-" + page}>{state.errors.professionalRole}</span>}
+          </div>
+        )}
+
         <div className="field">
-          <label htmlFor={"message-" + page}>Como podemos ajudar? <span>(opcional)</span></label>
+          <label htmlFor={"message-" + page}>{isProfessional ? "Objetivo do contato" : "Como podemos ajudar?"} <span>(opcional)</span></label>
           <textarea
             id={"message-" + page}
             name="message"
             rows={3}
-            maxLength={1000}
-            placeholder="Ex.: gostaria de saber os horários para uma consulta."
+            maxLength={isProfessional ? 800 : 1000}
+            placeholder={isProfessional
+              ? "Ex.: alinhar um encaminhamento ou discutir a sequência do tratamento."
+              : "Ex.: gostaria de saber os horários para uma consulta."}
             aria-invalid={Boolean(state.errors?.message)}
             aria-describedby={
               "message-help-" + page + (state.errors?.message ? " message-error-" + page : "")
             }
           />
-          <small id={"message-help-" + page}>Escreva apenas sua dúvida sobre o atendimento, sem informações clínicas.</small>
+          <small id={"message-help-" + page}>{isProfessional
+            ? "Descreva apenas o objetivo do contato. Não inclua nome, exames ou informações clínicas do paciente; a equipe orientará o canal para a documentação."
+            : "Escreva apenas sua dúvida sobre o atendimento, sem informações clínicas."}</small>
           {state.errors?.message && (
             <span className="field-error" id={"message-error-" + page}>{state.errors.message}</span>
           )}
@@ -213,7 +238,7 @@ export function ContactForm({
           {pending ? (
             "Enviando..."
           ) : (
-            <ButtonContent>Solicitar contato</ButtonContent>
+            <ButtonContent>{isProfessional ? "Solicitar retorno profissional" : "Solicitar contato"}</ButtonContent>
           )}
         </button>
 
