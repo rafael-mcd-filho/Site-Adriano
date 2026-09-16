@@ -1,7 +1,16 @@
 import { AnatomyIllustration } from "@/components/anatomy-illustration";
 
 type VisualMotifProps = {
-  type: "air" | "implant" | "layers" | "joint" | "alignment" | "wisdom" | "planning";
+  type:
+    | "air"
+    | "implant"
+    | "layers"
+    | "joint"
+    | "alignment"
+    | "pathology"
+    | "trauma"
+    | "wisdom"
+    | "planning";
   label?: string;
   summary?: {
     kicker: string;

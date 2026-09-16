@@ -8,6 +8,8 @@ const casePlaceholders: Record<string, MediaPlaceholderKind> = {
   "apneia-do-sono": "case-sleep",
   "implantes-dentarios": "case-implants",
   "reconstrucao-ossea": "case-bone",
+  "patologias-maxilofaciais": "case-pathology",
+  "trauma-bucomaxilofacial": "case-trauma",
   "cirurgia-atm": "case-atm",
   "cirurgia-ortognatica": "case-orthognathic",
   "cirurgia-de-siso": "case-wisdom",
@@ -21,7 +23,7 @@ const casePlaceholders: Record<string, MediaPlaceholderKind> = {
 const stepIcons = [Search, Waypoints, HeartPulse];
 
 /**
- * "Como funciona o tratamento" — a trilha de etapas, agora nas cinco rotas.
+ * "Como funciona o tratamento" — a trilha de etapas das páginas clínicas.
  *
  * Existia só em implantes e ortognática. As três que não tinham eram
  * justamente aquelas em que o desfecho é incerto por natureza — apneia, DTM e

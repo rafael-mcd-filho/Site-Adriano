@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400" role="img" aria-labelledby="title desc">
+  <title id="title">Região dos maxilares considerada na investigação de uma alteração</title>
+  <desc id="desc">Ilustração educativa esquemática com uma área observada, estruturas próximas e planejamento da investigação. Não representa anatomia individual nem diagnóstico.</desc>
+  <rect width="600" height="400" rx="24" fill="#F4F1EB"/>
+  <circle cx="500" cy="72" r="132" fill="#E5ECF1"/>
+  <g stroke-linecap="round" stroke-linejoin="round">
+    <path d="M112 149C171 91 261 78 354 104C426 124 475 171 487 227C455 212 420 205 384 207C319 211 273 248 213 253C169 257 131 240 105 211C96 191 98 169 112 149Z" fill="#D7E3E8" stroke="#7891A6" stroke-width="4"/>
+    <path d="M133 211C174 235 215 236 258 219C310 198 359 179 433 193C459 198 479 208 492 223C475 289 417 333 343 340C252 349 164 307 133 211Z" fill="#E6D6C5" stroke="#9D8672" stroke-width="4"/>
+    <g fill="#FFFDF6" stroke="#899BA9" stroke-width="2">
+      <rect x="180" y="186" width="29" height="35" rx="7" transform="rotate(-7 194 203)"/>
+      <rect x="214" y="180" width="29" height="37" rx="7" transform="rotate(-4 228 198)"/>
+      <rect x="249" y="174" width="29" height="38" rx="7" transform="rotate(-1 263 193)"/>
+      <rect x="284" y="172" width="29" height="38" rx="7"/>
+      <rect x="319" y="174" width="29" height="38" rx="7" transform="rotate(2 333 193)"/>
+      <rect x="354" y="179" width="29" height="37" rx="7" transform="rotate(5 368 197)"/>
+      <rect x="389" y="187" width="29" height="35" rx="7" transform="rotate(8 403 204)"/>
+    </g>
+    <path d="M165 274C247 301 351 303 449 270" fill="none" stroke="#708DA1" stroke-width="3" stroke-dasharray="7 7"/>
+    <path d="M355 225C377 209 410 216 422 239C435 264 419 291 390 293C362 295 342 274 345 249C346 239 349 231 355 225Z" fill="#B8CDFB" fill-opacity=".55" stroke="#466B8B" stroke-width="3"/>
+    <circle cx="389" cy="253" r="49" fill="none" stroke="#607C97" stroke-width="2" stroke-dasharray="6 6"/>
+    <path d="M389 193V210M389 296V313M329 253H346M432 253H449" stroke="#607C97" stroke-width="2"/>
+
+    <path d="M388 253L482 111" fill="none" stroke="#526F85" stroke-width="2" stroke-dasharray="5 4"/>
+    <circle cx="493" cy="93" r="15" fill="#294963"/>
+    <text x="493" y="99" text-anchor="middle" fill="white" font-size="18" font-family="Arial" font-weight="700">1</text>
+
+    <path d="M318 190L244 73" fill="none" stroke="#526F85" stroke-width="2" stroke-dasharray="5 4"/>
+    <circle cx="234" cy="56" r="15" fill="#294963"/>
+    <text x="234" y="62" text-anchor="middle" fill="white" font-size="18" font-family="Arial" font-weight="700">2</text>
+
+    <path d="M214 285L105 329" fill="none" stroke="#526F85" stroke-width="2" stroke-dasharray="5 4"/>
+    <circle cx="85" cy="337" r="15" fill="#294963"/>
+    <text x="85" y="343" text-anchor="middle" fill="white" font-size="18" font-family="Arial" font-weight="700">3</text>
+  </g>
+</svg>

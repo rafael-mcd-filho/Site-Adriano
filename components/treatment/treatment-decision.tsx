@@ -20,6 +20,11 @@ import styles from "./treatment-refinement.module.css";
  * haver sete telas adiante, na primeira consulta.
  */
 export function TreatmentDecision({ content }: { content: TreatmentContent }) {
+  const relatedLinks = [
+    ...(content.crossLink ? [content.crossLink] : []),
+    ...(content.crossLinks ?? []),
+  ];
+
   return (
     <section
       className={"section section-mist method-section decision-section " + styles.decision}
@@ -62,11 +67,15 @@ export function TreatmentDecision({ content }: { content: TreatmentContent }) {
             </details>
           )}
 
-          {content.crossLink && (
-            <Link className="text-link" href={content.crossLink.href}>
-              {content.crossLink.label}
-              <ArrowRight size={16} aria-hidden="true" />
-            </Link>
+          {relatedLinks.length > 0 && (
+            <div className={styles.relatedLinks}>
+              {relatedLinks.map((link) => (
+                <Link className="text-link" href={link.href} key={link.href}>
+                  {link.label}
+                  <ArrowRight size={16} aria-hidden="true" />
+                </Link>
+              ))}
+            </div>
           )}
         </div>
 

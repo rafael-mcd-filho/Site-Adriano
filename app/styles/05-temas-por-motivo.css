@@ -37,6 +37,18 @@
   --page-dark: var(--navy-900);
 }
 
+.treatment-page-pathology {
+  --page-accent: var(--blue-600);
+  --page-accent-soft: var(--blue-50);
+  --page-dark: var(--navy-900);
+}
+
+.treatment-page-trauma {
+  --page-accent: var(--sand-800);
+  --page-accent-soft: var(--sand-100);
+  --page-dark: var(--navy-950);
+}
+
 .treatment-hero {
   background-color: var(--ivory);
   background-image:
@@ -69,4 +81,20 @@
     linear-gradient(90deg, rgba(var(--navy-700-rgb), 0.055) 1px, transparent 1px),
     linear-gradient(145deg, var(--surface-soft), var(--surface));
   background-size: 42px 42px, 42px 42px, auto;
+}
+
+.treatment-hero-pathology {
+  background:
+    radial-gradient(circle at 86% 22%, rgba(var(--blue-600-rgb), 0.18), transparent 27%),
+    radial-gradient(circle at 78% 34%, transparent 0 9%, rgba(var(--blue-600-rgb), 0.08) 9.4% 10%, transparent 10.4%),
+    linear-gradient(150deg, var(--ivory), var(--surface));
+}
+
+.treatment-hero-trauma {
+  background:
+    linear-gradient(120deg, rgba(var(--navy-950-rgb), 0.04), transparent 54%),
+    linear-gradient(90deg, rgba(var(--navy-700-rgb), 0.06) 1px, transparent 1px),
+    linear-gradient(rgba(var(--navy-700-rgb), 0.06) 1px, transparent 1px),
+    var(--sand-50);
+  background-size: auto, 48px 48px, 48px 48px, auto;
 }

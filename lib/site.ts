@@ -256,6 +256,16 @@ export const areaNavigation = [
     hint: "“Não tem osso suficiente para implante”",
   },
   {
+    label: "Patologias maxilofaciais",
+    href: "/patologias-maxilofaciais",
+    hint: "Cisto ou tumor · alteração óssea encontrada em exame",
+  },
+  {
+    label: "Trauma bucomaxilofacial",
+    href: "/trauma-bucomaxilofacial",
+    hint: "Trauma na face · mordida alterada · dificuldade para abrir a boca",
+  },
+  {
     label: "DTM e ATM",
     href: "/cirurgia-atm",
     hint: "Dor na mandíbula · estalos · travamento",
@@ -271,6 +281,11 @@ export const areaNavigation = [
     hint: "Inflamação que volta · dente incluso · dúvida no raio-X",
   },
 ];
+
+/** Atuação confirmada que ainda não possui uma página clínica própria. */
+export const institutionalExpertise = [
+  "Fissuras e anomalias craniofaciais",
+] as const;
 
 /** Telefone de um consultório em formato E.164, para o schema. */
 export function schemaTelephone(location: PracticeLocation) {

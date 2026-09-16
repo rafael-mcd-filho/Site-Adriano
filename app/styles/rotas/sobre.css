@@ -104,6 +104,30 @@
   font-size: var(--fs-sm);
 }
 
+[data-rota="sobre"] .pediatric-section {
+  border-top: 1px solid var(--border);
+}
+
+[data-rota="sobre"] .pediatric-grid {
+  align-items: stretch;
+}
+
+[data-rota="sobre"] .pediatric-grid article {
+  display: flex;
+  flex-direction: column;
+}
+
+[data-rota="sobre"] .pediatric-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 28px;
+  margin-top: 28px;
+}
+
+[data-rota="sobre"] .pediatric-actions .text-link {
+  min-height: 44px;
+}
+
 @media (max-width: 900px) {
   [data-rota="sobre"] .career-groups {
     grid-template-columns: 1fr;
@@ -143,5 +167,10 @@
 
   [data-rota="sobre"] #conduta .editorial-support-grid > .media-placeholder {
     max-width: 280px;
+  }
+
+  [data-rota="sobre"] .pediatric-actions {
+    display: grid;
+    gap: 8px;
   }
 }

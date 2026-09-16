@@ -113,7 +113,15 @@ export type TreatmentContent = {
   lastReviewed?: string;
   navLabel: string;
   eyebrow: string;
-  motif: "air" | "implant" | "layers" | "joint" | "alignment" | "wisdom";
+  motif:
+    | "air"
+    | "implant"
+    | "layers"
+    | "joint"
+    | "alignment"
+    | "wisdom"
+    | "pathology"
+    | "trauma";
 
   /* ── Bloco 1 — hero ─────────────────────────────────────────────────── */
   title: string;
@@ -158,6 +166,8 @@ export type TreatmentContent = {
    * público desta especialidade já desconfia de quem promete demais.
    */
   consequenceText: string;
+  /** Esclarecimento final do bloco de reconhecimento; pode incluir triagem. */
+  painNote?: string;
 
   /* ── Bloco 3 — "Como avaliamos e decidimos o caminho" ────────────────
      Método e objeções clínicas numa seção só. Separados, o leitor recebia
@@ -195,8 +205,9 @@ export type TreatmentContent = {
     items: Array<{ title: string; text: string }>;
   };
   crossLink?: { label: string; href: string };
+  crossLinks?: Array<{ label: string; href: string }>;
   /* ── Bloco 4 — "Como funciona o tratamento" ──────────────────────────
-     Obrigatória nas seis rotas: a pergunta "e depois que eu marco?" é a que
+     Obrigatória nas páginas clínicas: a pergunta "e depois que eu marco?" é a que
      mais adia contato nas páginas em que o desfecho é incerto. O caso
      conduzido, quando existir, entra como cartão DENTRO desta seção — não
      como um bloco de portfólio à parte. */
@@ -218,11 +229,13 @@ export type TreatmentContent = {
   /**
    * Parágrafo de contexto do bloco de autoridade. Nome, registro e credenciais
    * continuam vindo de `siteConfig` — só a atuação relevante PARA ESTA página
-   * muda, para que as seis rotas apresentem o contexto pertinente ao paciente.
+   * muda, para que cada rota apresente o contexto pertinente ao paciente.
    */
   authorityBody?: string;
   /** Conduta relevante à rota; não representa uma nova credencial. */
   authorityFocus: string;
+  /** Prova institucional diretamente ligada à atuação descrita na rota. */
+  authorityLink?: { label: string; href: string };
 
   /* ── Bloco 6 — "Sua primeira consulta" ───────────────────────────────
      Processo e dúvidas práticas juntos. As perguntas que decidem o
@@ -490,6 +503,12 @@ export const treatments: Record<string, TreatmentContent> = {
       "Cicatrização e reavaliação antes da próxima etapa."
     ],
     crossLink: { label: "Entenda como a reconstrução se relaciona aos implantes", href: "/implantes-dentarios" },
+    crossLinks: [
+      {
+        label: "Se a perda óssea veio de cisto, tumor ou outra lesão, veja patologias maxilofaciais",
+        href: "/patologias-maxilofaciais",
+      },
+    ],
     journey: {
       kicker: "Etapas do tratamento",
       title: "Reconstruir com um objetivo para a reabilitação.",
@@ -1068,6 +1087,410 @@ export const treatments: Record<string, TreatmentContent> = {
       description: "Precisa mesmo tirar o siso? Entenda quando a remoção é indicada, quando acompanhar basta e como os casos próximos ao nervo são avaliados em João Pessoa.",
     },
   },
+
+  "patologias-maxilofaciais": {
+    slug: "patologias-maxilofaciais",
+    lastReviewed: "2026-09-15",
+    navLabel: "Patologias maxilofaciais",
+    eyebrow: "Patologias maxilofaciais em João Pessoa",
+    motif: "pathology",
+    title: "Cisto ou tumor no maxilar? Entenda o diagnóstico.",
+    titleHighlight: "Entenda o diagnóstico",
+    intro:
+      "Uma alteração pode surgir em um exame de rotina ou por sintomas como aumento de volume, dor e dormência. A avaliação reúne exame clínico e imagens; quando indicada, a biópsia ajuda a esclarecer a lesão.",
+    heroBadges: [
+      "Cistos e tumores dos maxilares",
+      "Biópsia quando indicada",
+      "Reconstrução planejada caso a caso",
+    ],
+    primaryCta: "Quero esclarecer meu exame",
+    methodCta: "Quero entender se preciso de biópsia",
+    trustCta: "Quero entender o próximo passo do meu caso",
+    note: "Nem toda lesão é câncer. A conduta depende do diagnóstico.",
+
+    painKicker: "Quando procurar avaliação",
+    painTitle: "Algumas alterações aparecem no exame antes de causar sintomas.",
+    painItems: [
+      "Seu dentista identificou uma imagem diferente em uma radiografia ou tomografia.",
+      "Você percebeu aumento de volume na gengiva, no céu da boca, na mandíbula ou na face.",
+      "Um dente ficou móvel, mudou de posição ou a prótese deixou de encaixar como antes.",
+      "Surgiram dor, dormência, alteração de sensibilidade ou uma ferida que não cicatriza.",
+    ],
+    painIcons: ["camadas", "rosto", "sorriso", "duvida"],
+    storyEyebrow: "O que o exame ainda não responde",
+    consequenceTitle: "O laudo inicia a investigação; não encerra o diagnóstico.",
+    consequenceText:
+      "A imagem ajuda a localizar a alteração, estimar sua extensão e observar a relação com dentes e estruturas próximas. O próximo passo pode depender também do exame clínico e, em alguns casos, da análise do tecido.",
+
+    objectionsKicker: "Antes de pensar no tratamento",
+    objectionsTitle: "O que vale esclarecer antes de decidir a conduta.",
+    objections: [
+      {
+        belief: "Se falaram em tumor, significa que é câncer?",
+        reality:
+          "Não. Existem tumores benignos e malignos, além de cistos e outras alterações. O termo usado no laudo não substitui a confirmação diagnóstica.",
+      },
+      {
+        belief: "A imagem já mostra exatamente o que é?",
+        reality:
+          "Ela pode sugerir possibilidades, mas nem sempre confirma a natureza da lesão. Em alguns casos, a biópsia e o exame anatomopatológico são necessários.",
+      },
+      {
+        belief: "Toda lesão precisa ser removida?",
+        reality:
+          "Não. A conduta pode envolver acompanhamento, biópsia, remoção cirúrgica ou cuidado integrado, conforme o diagnóstico, a localização e a evolução.",
+      },
+      {
+        belief: "Se não dói, posso deixar para depois?",
+        reality:
+          "Algumas alterações não provocam sintomas. O momento adequado para investigar depende dos achados; a ausência de dor, sozinha, não define que seja seguro esperar.",
+      },
+    ],
+    midCtaQuestion: "Você recebeu um laudo e ainda não entendeu o próximo passo?",
+
+    methodEyebrow: "Diagnóstico antes da conduta",
+    methodTitle: "Histórico, exame, imagem e análise do tecido respondem a perguntas diferentes.",
+    methodTitleHighlight: "respondem a perguntas diferentes",
+    methodBody: [
+      "Na consulta, são avaliados o local da alteração, o tempo de evolução, os sintomas, os dentes envolvidos e os exames já realizados. As imagens ajudam a entender os limites da lesão e sua relação com as estruturas próximas.",
+      "Quando a confirmação é necessária, a biópsia fornece material para análise anatomopatológica. Com o diagnóstico e a extensão esclarecidos, podem ser discutidos acompanhamento, remoção, tratamentos complementares e eventual reconstrução.",
+      "A palavra “tumor” não define, sozinha, se uma lesão é benigna ou maligna.",
+    ],
+    methodHighlight:
+      "A palavra “tumor” não define, sozinha, se uma lesão é benigna ou maligna",
+    methodPoints: [
+      "Histórico e evolução percebida da alteração.",
+      "Exame da boca, da face, dos dentes e da sensibilidade.",
+      "Radiografias, tomografias ou outros exames indicados.",
+      "Biópsia e laudo anatomopatológico, quando necessários.",
+    ],
+    methodDetails: {
+      title: "Quando a reconstrução entra no planejamento?",
+      text:
+        "A necessidade de reconstrução depende da estrutura envolvida, da extensão do tecido a ser removido e do possível impacto sobre a função. Quando indicada, ela é considerada desde o planejamento e pode ocorrer no mesmo tratamento ou em outra etapa.",
+    },
+    decisionPaths: {
+      title: "O diagnóstico pode levar a caminhos diferentes.",
+      items: [
+        {
+          title: "Alteração localizada",
+          text:
+            "Esclarecer o diagnóstico e avaliar acompanhamento ou tratamento, buscando preservar as estruturas próximas.",
+        },
+        {
+          title: "Lesão extensa ou recorrente",
+          text:
+            "Planejar a conduta considerando anatomia, função e a eventual necessidade de reconstrução.",
+        },
+        {
+          title: "Suspeita ou confirmação de malignidade",
+          text:
+            "Integrar diagnóstico, tratamento oncológico, cirurgia e reabilitação com os profissionais necessários.",
+        },
+      ],
+    },
+    crossLink: {
+      label: "Quando a questão principal é suporte para implantes, veja reconstrução óssea",
+      href: "/reconstrucao-ossea",
+    },
+
+    journey: {
+      kicker: "Da investigação ao acompanhamento",
+      title: "Cada etapa responde a uma pergunta antes da próxima decisão.",
+      intro:
+        "Nem todos os casos percorrem o mesmo caminho. Exames, biópsia e tratamento são indicados apenas quando acrescentam algo à compreensão ou ao cuidado.",
+      steps: [
+        {
+          title: "1. Avaliação inicial",
+          text:
+            "Histórico, sintomas, exame da boca e da face e revisão das imagens disponíveis.",
+        },
+        {
+          title: "2. Confirmação diagnóstica",
+          text:
+            "Exames complementares ou biópsia são solicitados quando necessários para esclarecer a alteração.",
+        },
+        {
+          title: "3. Planejamento do cuidado",
+          text:
+            "As opções, os riscos, os limites e a participação de outros profissionais são discutidos antes da conduta.",
+        },
+        {
+          title: "4. Tratamento e acompanhamento",
+          text:
+            "A conduta indicada é realizada e o seguimento é definido conforme o diagnóstico e a evolução.",
+        },
+      ],
+    },
+
+    authorityFocus:
+      "Diagnóstico cirúrgico e reconstrução dos maxilares, com integração hospitalar quando necessária",
+    authorityBody:
+      "A avaliação é conduzida considerando primeiro o diagnóstico e a extensão da alteração. Casos que exigem reconstrução ampla ou cuidado oncológico precisam de planejamento hospitalar e participação coordenada das especialidades envolvidas.",
+
+    consultationQuestions: [
+      consultaExames,
+      consultaSegundaOpiniao,
+      consultaParticular,
+    ],
+    preparation: {
+      title: "Leve os exames e laudos que já tiver.",
+      text:
+        "Radiografias, tomografias e resultados de biópsias anteriores ajudam na conversa. A ausência de algum documento não impede a consulta inicial.",
+    },
+    consultationTitle:
+      "A primeira consulta organiza o que já se sabe e o que ainda precisa ser confirmado.",
+    consultationIntro:
+      "Conte como a alteração foi descoberta, quando os sintomas começaram e quais orientações você já recebeu. O exame clínico e a revisão das imagens ajudam a definir o que falta investigar.",
+    consultationOutcome:
+      "Uma explicação dos achados, dos exames eventualmente necessários e dos caminhos que podem ser considerados antes de decidir qualquer tratamento.",
+    consultationNote:
+      "Você pode procurar uma segunda opinião mesmo que já exista um laudo ou uma conduta proposta.",
+
+    faqTitle: "Diagnóstico, biópsia e possibilidades de cuidado.",
+    faqs: [
+      {
+        question: "Tumor no maxilar é sempre câncer?",
+        answer:
+          "Não. Existem tumores benignos e malignos, cistos e outras condições. O diagnóstico depende da avaliação e, em determinados casos, da análise do tecido.",
+      },
+      {
+        question: "Toda alteração precisa de biópsia?",
+        answer:
+          "Não. A indicação depende do aspecto clínico e das imagens. Quando necessária, a equipe explica o objetivo, as alternativas e os cuidados envolvidos.",
+      },
+      {
+        question: "A remoção sempre exige reconstrução?",
+        answer:
+          "Não. Isso depende da localização, da extensão e do impacto funcional da remoção. Quando indicada, a reconstrução passa a fazer parte do planejamento.",
+      },
+    ],
+
+    closingTitle: "Esclareça o diagnóstico antes de decidir o tratamento.",
+    closingText:
+      "A equipe informa horários, valor da consulta e quais exames ou documentos podem ajudar na avaliação.",
+    visualSummary: {
+      kicker: "Diagnóstico e extensão",
+      title: "Entender o que é, onde está e o que precisa ser preservado.",
+      cues: ["Natureza da alteração", "Estruturas próximas", "Função e reconstrução"],
+    },
+    formQuestion: "Como podemos ajudar?",
+    formOptions: neutralFormOptions,
+    contactForm: {
+      title: "Converse sobre a alteração encontrada.",
+      description:
+        "A equipe informa horários, valor da consulta e o que pode ajudar na avaliação.",
+    },
+    whatsappMessage:
+      "Olá, vi a página sobre patologias maxilofaciais e gostaria de saber como funciona a avaliação de uma alteração encontrada no meu exame.",
+    metadata: {
+      title: "Patologias Maxilofaciais em João Pessoa",
+      description:
+        "Recebeu um achado de cisto, tumor ou alteração óssea nos maxilares? Entenda como funciona a avaliação, os exames e o planejamento do cuidado em João Pessoa.",
+    },
+  },
+
+  "trauma-bucomaxilofacial": {
+    slug: "trauma-bucomaxilofacial",
+    lastReviewed: "2026-09-15",
+    navLabel: "Trauma bucomaxilofacial",
+    eyebrow: "Trauma bucomaxilofacial em João Pessoa",
+    motif: "trauma",
+    title: "Trauma na face: o que avaliar depois?",
+    titleHighlight: "o que avaliar depois",
+    intro:
+      "Depois do primeiro atendimento, a avaliação especializada verifica fraturas, mordida, visão, movimentos e outros efeitos do trauma para orientar os próximos cuidados.",
+    heroBadges: [
+      "Mordida e função",
+      "Fraturas e sequelas",
+      "Exames conforme o caso",
+    ],
+    primaryCta: "Quero avaliar meu caso após o trauma",
+    methodCta: "Quero entender o que precisa ser tratado",
+    trustCta: "Quero revisar meu caso após o trauma",
+    note:
+      "O contato pelo site é destinado a casos estáveis ou após o primeiro atendimento.",
+
+    painKicker: "O que mudou depois do trauma?",
+    painTitle:
+      "O inchaço pode esconder alterações percebidas ao morder, enxergar ou movimentar a mandíbula.",
+    painItems: [
+      "Os dentes deixaram de encaixar como antes ou ficou difícil abrir e fechar a boca.",
+      "Surgiram dormência no lábio, no queixo, na bochecha ou perto dos olhos.",
+      "Há assimetria, afundamento ou aumento de volume persistente na face.",
+      "Dentes quebraram ou ficaram móveis, ou apareceram visão dupla e dificuldade para movimentar os olhos.",
+    ],
+    painIcons: ["refeicao", "rosto", "camadas", "duvida"],
+    storyEyebrow: "Depois que o inchaço diminui",
+    consequenceTitle: "O acompanhamento observa função, estrutura e recuperação.",
+    consequenceText:
+      "A posição dos ossos, a mordida, a sensibilidade e os movimentos podem precisar de reavaliação. Nos traumas antigos, a consulta investiga alterações persistentes e as possibilidades de cuidado para eventuais sequelas.",
+    painNote:
+      "Esses sinais não definem, sozinhos, se existe indicação cirúrgica. Alteração visual ou outro sinal de alerta depois de um trauma exige atendimento em pronto-socorro.",
+
+    objectionsKicker: "O que costuma gerar dúvida",
+    objectionsTitle: "O que vale esclarecer depois de um trauma na face.",
+    objections: [
+      {
+        belief: "Se consigo abrir a boca, significa que não houve fratura?",
+        reality:
+          "Não. Algumas fraturas permitem movimento e podem ser percebidas pela mordida, sensibilidade, assimetria ou exame de imagem.",
+      },
+      {
+        belief: "Preciso esperar o inchaço desaparecer?",
+        reality:
+          "Não para receber a avaliação inicial. O inchaço pode exigir reavaliações durante o planejamento, mas sinais de urgência não devem esperar.",
+      },
+      {
+        belief: "Toda fratura facial precisa de cirurgia?",
+        reality:
+          "Não. A conduta depende do osso envolvido, do deslocamento, da estabilidade, da função e das outras lesões existentes.",
+      },
+      {
+        belief: "É somente uma questão estética?",
+        reality:
+          "Não. Traumas faciais podem afetar respiração, visão, mastigação, fala, sensibilidade e movimentos da mandíbula.",
+      },
+    ],
+    midCtaQuestion: "Sua mordida ou seus movimentos mudaram depois do trauma?",
+
+    methodEyebrow: "Avaliação depois da estabilização",
+    methodTitle: "Primeiro, segurança. Depois, anatomia, função e recuperação.",
+    methodTitleHighlight: "Primeiro, segurança",
+    methodBody: [
+      "Nos traumas recentes, via aérea, sangramento, estado neurológico, visão e coluna cervical têm prioridade no atendimento de urgência. Quando o paciente está estável, a avaliação bucomaxilofacial considera como o acidente aconteceu, os sintomas, a face, a boca, os dentes, a mordida, os movimentos e a sensibilidade.",
+      "Radiografias ou tomografia podem ser indicadas conforme a região e a suspeita clínica. O tratamento depende da estrutura afetada, do deslocamento, do impacto funcional, das lesões associadas e do tempo transcorrido.",
+      "Nem todo trauma facial precisa de cirurgia; todo trauma com sinais de alerta precisa do lugar certo de atendimento.",
+    ],
+    methodHighlight:
+      "Nem todo trauma facial precisa de cirurgia; todo trauma com sinais de alerta precisa do lugar certo de atendimento",
+    methodPoints: [
+      "Como ocorreu o trauma e quais atendimentos já foram realizados.",
+      "Mordida, abertura da boca, dentes e movimentos da mandíbula.",
+      "Contorno da face, visão, sensibilidade e estruturas envolvidas.",
+      "Imagens disponíveis e necessidade de exames complementares.",
+    ],
+    decisionPaths: {
+      title: "O momento e a estabilidade do paciente mudam o próximo passo.",
+      items: [
+        {
+          title: "Trauma recente com sinais de alerta",
+          text:
+            "Pronto-socorro e estabilização têm prioridade antes de qualquer consulta eletiva.",
+        },
+        {
+          title: "Caso estável após o primeiro atendimento",
+          text:
+            "A avaliação revê a fratura, a mordida, os sintomas e o acompanhamento necessário.",
+        },
+        {
+          title: "Trauma antigo ou sequela",
+          text:
+            "A consulta analisa mordida, movimentos, sensibilidade, assimetria e possibilidades de reconstrução.",
+        },
+      ],
+    },
+
+    journey: {
+      kicker: "Do primeiro atendimento ao seguimento",
+      title: "A urgência e o planejamento especializado têm momentos diferentes.",
+      intro:
+        "O risco imediato é tratado primeiro. Depois da estabilização, a equipe especializada avalia as estruturas afetadas, as opções e a recuperação.",
+      steps: [
+        {
+          title: "1. Urgência e estabilização",
+          text:
+            "Riscos imediatos e outras lesões são investigados e tratados no ambiente hospitalar.",
+        },
+        {
+          title: "2. Avaliação especializada",
+          text:
+            "A face, a boca, os dentes, a mordida, os movimentos e as imagens indicadas são avaliados.",
+        },
+        {
+          title: "3. Definição da conduta",
+          text:
+            "Acompanhamento ou cirurgia são discutidos, com outras especialidades quando necessário.",
+        },
+        {
+          title: "4. Recuperação e seguimento",
+          text:
+            "Cicatrização, mordida, movimentos, sensibilidade e demais funções afetadas são acompanhados.",
+        },
+      ],
+    },
+
+    authorityFocus:
+      "Experiência hospitalar na avaliação e reconstrução de traumas da face",
+    authorityBody:
+      "O Dr. Adriano coordena o serviço de Cirurgia e Traumatologia Buco-Maxilo-Facial do HUOL. Em 2025, o Conselho Federal de Odontologia destacou a atuação do serviço em um caso de múltiplas fraturas e reconstrução facial, dentro do atendimento de média e alta complexidade.",
+    authorityLink: {
+      label: "Ver publicação oficial do Conselho Federal de Odontologia",
+      href: "https://website.cfo.org.br/cirurgias-faciais-o-trabalho-e-a-competencia-do-cirurgiao-dentista-e-da-odontologia/",
+    },
+
+    consultationQuestions: [
+      consultaExames,
+      consultaSegundaOpiniao,
+      consultaParticular,
+    ],
+    preparation: {
+      title: "Leve os registros do atendimento que já tiver.",
+      text:
+        "Laudos, imagens e relatório de alta ajudam na consulta. Não adie atendimento hospitalar para reunir documentos se houver sinais de urgência.",
+    },
+    consultationTitle:
+      "A consulta organiza o que mudou e o que ainda precisa de cuidado.",
+    consultationIntro:
+      "Conte quando e como ocorreu o trauma, onde recebeu o primeiro atendimento e como os sintomas evoluíram. São avaliadas alterações de mordida, movimentos, sensibilidade, forma da face e exames disponíveis.",
+    consultationOutcome:
+      "Entender os achados, a necessidade de novos exames, a possibilidade de acompanhamento ou cirurgia e quais profissionais devem participar.",
+    consultationNote:
+      "Para dificuldade de respirar ou engolir, sangramento intenso, alteração súbita da visão, vômitos, sonolência incomum ou desmaio, procure um pronto-socorro.",
+
+    faqTitle: "Depois do primeiro atendimento ou em uma sequela antiga.",
+    faqs: [
+      {
+        question: "Já passei pelo pronto-socorro. Ainda faz sentido uma avaliação?",
+        answer:
+          "Sim. A consulta especializada pode revisar a fratura, a mordida, os sintomas e o acompanhamento necessário depois da estabilização.",
+      },
+      {
+        question: "Um trauma antigo ainda pode ser avaliado?",
+        answer:
+          "Sim. Alterações persistentes de mordida, movimento, sensibilidade ou contorno facial podem ser investigadas. As possibilidades dependem da sequela e das condições atuais.",
+      },
+      {
+        question: "É possível garantir que tudo voltará a ser como antes?",
+        answer:
+          "Não. O tratamento busca recuperar anatomia e função dentro das possibilidades do caso. O resultado depende da extensão do trauma, das estruturas afetadas e da resposta individual.",
+      },
+    ],
+
+    closingTitle:
+      "Para casos estáveis, entenda o que ainda precisa ser avaliado.",
+    closingText:
+      "A equipe informa horários, valor da consulta e quais registros do primeiro atendimento podem ajudar.",
+    visualSummary: {
+      kicker: "Estrutura e função",
+      title: "Avaliar o que mudou e o que precisa ser acompanhado.",
+      cues: ["Mordida", "Ossos da face", "Movimentos e sensibilidade"],
+    },
+    formQuestion: "Como podemos ajudar?",
+    formOptions: neutralFormOptions,
+    contactForm: {
+      title: "Converse sobre a avaliação após o trauma.",
+      description:
+        "Para casos estáveis ou após o primeiro atendimento, a equipe informa horários, valor da consulta e o que levar.",
+    },
+    whatsappMessage:
+      "Olá, vi a página sobre trauma bucomaxilofacial. Já passei pelo primeiro atendimento e gostaria de saber como funciona a avaliação especializada.",
+    metadata: {
+      title: "Trauma Bucomaxilofacial em João Pessoa",
+      description:
+        "Fraturas da face, alteração da mordida ou dificuldade para abrir a boca após um trauma? Entenda a avaliação bucomaxilofacial e quando buscar urgência.",
+    },
+  },
 };
 
 export const homeFormOptions = [
@@ -1077,6 +1500,9 @@ export const homeFormOptions = [
   "Apneia do sono.",
   "Cirurgia ortognática.",
   "Cirurgia de siso.",
+  "Patologias maxilofaciais.",
+  "Trauma bucomaxilofacial.",
+  "Fissuras e anomalias craniofaciais.",
   "Outro assunto.",
 ];
 
@@ -1086,6 +1512,9 @@ export const dentistFormOptions = [
   "Encaminhar um caso de cirurgia ortognática.",
   "Encaminhar um caso relacionado à apneia.",
   "Encaminhar um caso de cirurgia de siso.",
+  "Encaminhar um caso de patologia maxilofacial.",
+  "Encaminhar um caso de trauma bucomaxilofacial.",
+  "Encaminhar um caso de fissura ou anomalia craniofacial.",
   "Discutir um caso antes do encaminhamento.",
   "Outro assunto.",
 ];

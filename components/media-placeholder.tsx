@@ -53,6 +53,16 @@ const placeholders = {
     caption: "Imagens reais anonimizadas do volume ósseo e planejamento a inserir.",
     portrait: false,
   },
+  "case-pathology": {
+    title: "Caso real de patologia maxilofacial aqui",
+    caption: "Espaço reservado para exames e contexto clínico reais, anonimizados, revisados e autorizados.",
+    portrait: false,
+  },
+  "case-trauma": {
+    title: "Caso real de trauma bucomaxilofacial aqui",
+    caption: "Espaço reservado para exames, conduta e acompanhamento reais, anonimizados, revisados e autorizados.",
+    portrait: false,
+  },
   "case-atm": {
     title: "Caso real de DTM e ATM aqui",
     caption: "Espaço reservado para material real do caso, revisado e autorizado.",

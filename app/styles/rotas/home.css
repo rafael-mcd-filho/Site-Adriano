@@ -62,6 +62,13 @@
   --media-placeholder-ratio: 16 / 10;
 }
 
+/* Nove áreas formam três linhas completas no desktop. */
+@media (min-width: 901px) {
+  [data-rota="home"] .areas-grid-nine {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
 @media (max-width: 800px) {
   [data-rota="home"] .home-authority-portrait {
     max-width: 260px;

@@ -31,6 +31,17 @@
   grid-template-columns: 1fr;
 }
 
+[data-rota="para-dentistas"] .professional-area-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 26px;
+  margin-top: 24px;
+}
+
+[data-rota="para-dentistas"] .professional-area-links .text-link {
+  min-height: 44px;
+}
+
 [data-rota="para-dentistas"] .professional-next-step {
   display: grid;
   justify-items: center;
@@ -88,5 +99,10 @@
   [data-rota="para-dentistas"] .professional-next-step {
     justify-items: stretch;
     text-align: left;
+  }
+
+  [data-rota="para-dentistas"] .professional-area-links {
+    display: grid;
+    gap: 6px;
   }
 }

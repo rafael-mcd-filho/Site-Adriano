@@ -48,8 +48,10 @@ const painItems = [
   "ATM: discutir sintomas persistentes, investigação e possibilidades de conduta.",
   "Ortognática: integrar a avaliação dos maxilares ao planejamento ortodôntico.",
   "Apneia: investigar a participação da estrutura facial junto ao cuidado do sono.",
-  "Reconstrução maxilofacial: discutir perdas extensas, implantes faciais e técnicas microcirúrgicas.",
-  "Outros casos bucomaxilofaciais: avaliar sisos, lesões e tumores benignos dos maxilares e da face.",
+  "Patologias maxilofaciais: discutir cistos, tumores e outras alterações ósseas dos maxilares.",
+  "Trauma bucomaxilofacial: avaliar fraturas da face, alterações da mordida e a continuidade do cuidado.",
+  "Fissuras e anomalias craniofaciais: discutir a etapa cirúrgica pediátrica e sua integração ao acompanhamento em curso.",
+  "Sisos e outros casos cirúrgicos: esclarecer indicação, riscos e sequência do encaminhamento.",
 ];
 
 const professionalCredentials = [
@@ -230,6 +232,18 @@ export default function ParaDentistasPage() {
             </div>
 
             <PainList items={painItems} />
+
+            <nav className="professional-area-links" aria-label="Conteúdo clínico relacionado">
+              <Link className="text-link" href="/patologias-maxilofaciais">
+                Ver patologias maxilofaciais <ArrowRight size={16} aria-hidden="true" />
+              </Link>
+              <Link className="text-link" href="/trauma-bucomaxilofacial">
+                Ver trauma bucomaxilofacial <ArrowRight size={16} aria-hidden="true" />
+              </Link>
+              <Link className="text-link" href="/sobre#cirurgia-pediatrica">
+                Conhecer a atuação pediátrica <ArrowRight size={16} aria-hidden="true" />
+              </Link>
+            </nav>
 
             <aside className="consequence-panel">
               <span className="consequence-icon" aria-hidden="true">

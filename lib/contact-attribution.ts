@@ -13,6 +13,8 @@ export const contactPages = {
   "apneia-do-sono": { path: "/apneia-do-sono", label: "Apneia do sono" },
   "implantes-dentarios": { path: "/implantes-dentarios", label: "Implantes dentários" },
   "reconstrucao-ossea": { path: "/reconstrucao-ossea", label: "Reconstrução óssea" },
+  "patologias-maxilofaciais": { path: "/patologias-maxilofaciais", label: "Patologias maxilofaciais" },
+  "trauma-bucomaxilofacial": { path: "/trauma-bucomaxilofacial", label: "Trauma bucomaxilofacial" },
   "cirurgia-atm": { path: "/cirurgia-atm", label: "DTM e ATM" },
   "cirurgia-ortognatica": { path: "/cirurgia-ortognatica", label: "Cirurgia ortognática" },
   "cirurgia-de-siso": { path: "/cirurgia-de-siso", label: "Cirurgia de siso" },

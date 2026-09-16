@@ -678,6 +678,64 @@
 .target-left { left: 58px; }
 .target-right { right: 58px; animation-delay: 400ms; }
 
+.motif-pathology {
+  border-color: rgba(var(--blue-600-rgb), 0.2);
+  border-radius: 34px 8px 34px 8px;
+  background: linear-gradient(155deg, var(--white), var(--blue-50));
+  box-shadow: 14px 14px 0 rgba(var(--blue-600-rgb), 0.07), 0 35px 90px rgba(var(--navy-950-rgb), 0.13);
+}
+
+.motif-pathology .visual-stage {
+  background:
+    radial-gradient(circle at 72% 30%, rgba(var(--blue-400-rgb), 0.17), transparent 26%),
+    linear-gradient(160deg, var(--surface-soft), var(--white));
+}
+
+.motif-pathology .anatomy-illustration img {
+  border: 1px solid rgba(var(--blue-600-rgb), 0.13);
+  box-shadow: 0 18px 42px rgba(var(--navy-950-rgb), 0.08);
+}
+
+.motif-trauma {
+  border: 0;
+  border-radius: 8px 46px 8px 46px;
+  background: var(--navy-900);
+  color: var(--white);
+}
+
+.motif-trauma .visual-caption,
+.motif-trauma .visual-cues {
+  border-color: rgba(255, 255, 255, 0.11);
+  background: rgba(var(--navy-950-rgb), 0.78);
+}
+
+.motif-trauma .visual-caption span,
+.motif-trauma .visual-cues small {
+  color: var(--blue-200);
+}
+
+.motif-trauma .visual-cues > span {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.motif-trauma .visual-stage {
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    radial-gradient(circle at center, var(--navy-700), var(--navy-950) 76%);
+  background-size: 34px 34px, 34px 34px, auto;
+}
+
+.motif-trauma .anatomy-illustration img {
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 18px 46px rgba(0, 0, 0, 0.22);
+}
+
+.motif-trauma .anatomy-legend b {
+  background: var(--blue-200);
+  color: var(--navy-950);
+}
+
 .motif-planning {
   border-radius: 46% 54% 38% 62% / 57% 35% 65% 43%;
   background: var(--navy-900);

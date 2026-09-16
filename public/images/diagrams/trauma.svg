@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400" role="img" aria-labelledby="title desc">
+  <title id="title">Regiões da face consideradas após um trauma</title>
+  <desc id="desc">Ilustração educativa esquemática com região afetada, alinhamento dos ossos e relação da mordida. Não representa anatomia individual nem um caso clínico.</desc>
+  <rect width="600" height="400" rx="24" fill="#F4F1EB"/>
+  <circle cx="103" cy="64" r="130" fill="#E5ECF1"/>
+  <g stroke-linecap="round" stroke-linejoin="round">
+    <path d="M300 47C394 47 452 111 442 206C437 257 408 312 365 342C344 357 322 365 300 368C278 365 256 357 235 342C192 312 163 257 158 206C148 111 206 47 300 47Z" fill="#D9E4E9" stroke="#7891A6" stroke-width="4"/>
+    <path d="M188 189C218 172 257 167 300 172C343 167 382 172 412 189L399 245C366 231 333 225 300 227C267 225 234 231 201 245Z" fill="#E8D8C7" fill-opacity=".72" stroke="#9D8672" stroke-width="3"/>
+    <ellipse cx="239" cy="145" rx="44" ry="31" fill="#F8FAFB" stroke="#708DA1" stroke-width="3"/>
+    <ellipse cx="361" cy="145" rx="44" ry="31" fill="#F8FAFB" stroke="#708DA1" stroke-width="3"/>
+    <path d="M300 116L281 205H319Z" fill="#F7F1E8" stroke="#8A9CAA" stroke-width="3"/>
+    <path d="M214 254C239 270 268 277 300 277C332 277 361 270 386 254" fill="none" stroke="#526F85" stroke-width="3"/>
+    <path d="M226 280C246 319 270 339 300 348C330 339 354 319 374 280" fill="none" stroke="#708DA1" stroke-width="4"/>
+    <path d="M238 254H362" fill="none" stroke="#607C97" stroke-width="2" stroke-dasharray="6 6"/>
+    <path d="M337 213L320 231L339 246L323 267L342 284" fill="none" stroke="#466B8B" stroke-width="4"/>
+    <path d="M326 204C351 201 375 207 394 220" fill="none" stroke="#8DA4B9" stroke-width="2" stroke-dasharray="5 5"/>
+    <circle cx="337" cy="247" r="39" fill="none" stroke="#607C97" stroke-width="2" stroke-dasharray="6 6"/>
+
+    <path d="M337 247L472 112" fill="none" stroke="#526F85" stroke-width="2" stroke-dasharray="5 4"/>
+    <circle cx="487" cy="97" r="15" fill="#294963"/>
+    <text x="487" y="103" text-anchor="middle" fill="white" font-size="18" font-family="Arial" font-weight="700">1</text>
+
+    <path d="M190 190L100 116" fill="none" stroke="#526F85" stroke-width="2" stroke-dasharray="5 4"/>
+    <circle cx="84" cy="103" r="15" fill="#294963"/>
+    <text x="84" y="109" text-anchor="middle" fill="white" font-size="18" font-family="Arial" font-weight="700">2</text>
+
+    <path d="M266 276L151 339" fill="none" stroke="#526F85" stroke-width="2" stroke-dasharray="5 4"/>
+    <circle cx="133" cy="349" r="15" fill="#294963"/>
+    <text x="133" y="355" text-anchor="middle" fill="white" font-size="18" font-family="Arial" font-weight="700">3</text>
+  </g>
+</svg>

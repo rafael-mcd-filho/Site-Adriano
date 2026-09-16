@@ -11,6 +11,7 @@ import { siteName } from "@/lib/metadata";
 import { ogImageFor } from "@/lib/og";
 import {
   areaNavigation,
+  institutionalExpertise,
   locationMapsLink,
   practiceLocations,
   schemaName,
@@ -158,7 +159,10 @@ const structuredData = {
       "@id": siteConfig.url + "/#person",
       name: schemaName,
       jobTitle: siteConfig.specialty,
-      knowsAbout: areaNavigation.map((area) => area.label),
+      knowsAbout: [
+        ...areaNavigation.map((area) => area.label),
+        ...institutionalExpertise,
+      ],
       alumniOf: [
         {
           "@type": "CollegeOrUniversity",

@@ -500,7 +500,7 @@
   list-style: none;
 }
 
-.closing-areas a {
+.closing-areas > ul a {
   display: grid;
   align-items: center;
   padding: 18px 0;
@@ -512,29 +512,29 @@
   transition: color 180ms ease;
 }
 
-.closing-areas a:hover {
+.closing-areas > ul a:hover {
   color: var(--blue-200);
 }
 
-.closing-areas a strong {
+.closing-areas > ul a strong {
   font-family: var(--font-manrope), sans-serif;
   font-size: var(--fs-lead);
   font-weight: 650;
   letter-spacing: -0.025em;
 }
 
-.closing-areas a span {
+.closing-areas > ul a span {
   color: #c5d0dd;
   font-size: var(--fs-sm);
   grid-column: 1;
 }
 
-.closing-areas a svg {
+.closing-areas > ul a svg {
   color: var(--blue-200);
   grid-row: 1 / span 2;
 }
 
-/* As cinco rotas são as áreas com captação ativa, não o limite da atuação. */
+/* As rotas são as áreas com captação ativa, não o limite da atuação. */
 .closing-areas-note {
   max-width: 72ch;
   margin: 22px 0 0;
@@ -647,7 +647,7 @@
     font-size: var(--fs-sm);
   }
 
-  .closing-areas a {
+  .closing-areas > ul a {
     grid-template-columns: minmax(0, 1fr) auto;
   }
 }

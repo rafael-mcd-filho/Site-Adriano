@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Check, CircleHelp } from "lucide-react";
+import type { ReactNode } from "react";
 import { ButtonContent } from "@/components/button-content";
 import { DoctorPortrait } from "@/components/doctor-portrait";
 import { HeroBackdrop } from "@/components/hero-backdrop";
@@ -8,7 +9,13 @@ import { WhatsAppButton } from "@/components/whatsapp-button";
 import type { TreatmentContent } from "@/lib/content";
 
 /** Abertura com fotografia ilustrativa, identificação e caminhos de contato. */
-export function TreatmentHero({ content }: { content: TreatmentContent }) {
+export function TreatmentHero({
+  content,
+  notice,
+}: {
+  content: TreatmentContent;
+  notice?: ReactNode;
+}) {
   return (
     <section
       className={
@@ -38,6 +45,8 @@ export function TreatmentHero({ content }: { content: TreatmentContent }) {
               </li>
             ))}
           </ul>
+
+          {notice}
 
           <div className="hero-actions">
             <WhatsAppButton

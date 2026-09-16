@@ -18,7 +18,7 @@ import styles from "./treatment-refinement.module.css";
  *
  * Nome, registro e credenciais vêm de `siteConfig` porque são os mesmos em
  * qualquer página. Só o parágrafo de atuação muda: repetir o mesmo texto nas
- * cinco rotas não ajuda o leitor nem o Google.
+ * várias rotas não ajuda o leitor nem o Google.
  *
  * O caso entra aqui apenas quando NÃO coube na seção de etapas — nunca nas
  * duas.
@@ -61,6 +61,19 @@ export function TreatmentTrust({
             {content.authorityBody ??
               "O Dr. Adriano atua na avaliação e no tratamento de alterações dos maxilares, da face e da articulação da mandíbula. Suas queixas, os exames e o cuidado que você já recebe ajudam a orientar a conduta, com integração entre profissionais quando necessária."}
           </p>
+
+          {content.authorityLink && (
+            <p className="authority-links">
+              <a
+                className="text-link light-link"
+                href={content.authorityLink.href}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {content.authorityLink.label}
+              </a>
+            </p>
+          )}
 
           <div className="authority-facts">
             <span>

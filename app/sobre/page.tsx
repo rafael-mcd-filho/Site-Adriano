@@ -180,6 +180,7 @@ export default function SobrePage() {
                 <a key={group.id} href={"#" + group.id}>{group.title}</a>
               ))}
               <a href="#board">Ver certificação</a>
+              <a href="#cirurgia-pediatrica">Atuação pediátrica</a>
             </nav>
 
             <div className="career-groups">
@@ -276,7 +277,71 @@ export default function SobrePage() {
           </div>
         </section>
 
-        {/* 5 — atendimento e trabalho integrado, no mesmo bloco. */}
+        {/* 5 — uma área institucional sustentada pela atuação informada pelo
+            profissional. Ela permanece aqui enquanto não houver conteúdo
+            suficiente para justificar uma rota própria. */}
+        <section className="section section-white pediatric-section" id="cirurgia-pediatrica">
+          <div className="container">
+            <div className="section-heading split-heading">
+              <div>
+                <span className="section-kicker">Cirurgia bucomaxilofacial pediátrica</span>
+                <h2>Fissuras e anomalias craniofaciais podem exigir cuidado em diferentes fases do crescimento.</h2>
+              </div>
+              <p>
+                O Dr. Adriano atua na avaliação e no planejamento cirúrgico de
+                crianças com fissuras e outras anomalias bucomaxilofaciais,
+                considerando o cuidado que cada criança já recebe.
+              </p>
+            </div>
+
+            <div className="integration-grid pediatric-grid">
+              <article>
+                <span className="consultation-icon" aria-hidden="true">
+                  <BadgeCheck size={20} />
+                </span>
+                <h3>Experiência em serviço pediátrico</h3>
+                <p>
+                  Fundou e coordena o serviço do Hospital Infantil Varela
+                  Santiago voltado a crianças com anomalias bucomaxilofaciais,
+                  incluindo pacientes com fissuras e síndromes.
+                </p>
+              </article>
+              <article>
+                <span className="consultation-icon" aria-hidden="true">
+                  <ShieldCheck size={20} />
+                </span>
+                <h3>Decisões conforme cada etapa</h3>
+                <p>
+                  A conduta depende da avaliação, da fase de desenvolvimento e
+                  do que já foi realizado. A sequência é explicada para a
+                  família antes de qualquer decisão.
+                </p>
+              </article>
+              <article>
+                <span className="consultation-icon" aria-hidden="true">
+                  <Handshake size={20} />
+                </span>
+                <h3>Cuidado integrado</h3>
+                <p>
+                  Quando outros profissionais acompanham a criança, a
+                  comunicação ajuda a alinhar a participação cirúrgica às
+                  demais etapas do cuidado.
+                </p>
+              </article>
+            </div>
+
+            <div className="pediatric-actions">
+              <Link className="text-link" href="#contato">
+                Entender como funciona a avaliação <ArrowRight size={16} aria-hidden="true" />
+              </Link>
+              <Link className="text-link" href="/para-dentistas">
+                Discutir um caso pelo canal profissional <ArrowRight size={16} aria-hidden="true" />
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* 6 — atendimento e trabalho integrado, no mesmo bloco. */}
         <section className="section authority-section" id="atuacao">
           <div className="container">
             <div className="section-heading">
@@ -323,7 +388,7 @@ export default function SobrePage() {
           </div>
         </section>
 
-        {/* A reserva identifica a prova real que ainda precisa ser fornecida. */}
+        {/* 7 — a reserva identifica a prova real que ainda precisa ser fornecida. */}
         <section className="section reviews-section" id="avaliacoes">
           <div className="container">
             {patientReviews.length ? (
@@ -334,7 +399,7 @@ export default function SobrePage() {
           </div>
         </section>
 
-        {/* 7 — áreas e contato encerram juntos. */}
+        {/* 8 — áreas e contato encerram juntos. */}
         <section className="section contact-section" id="contato">
           <div className="container">
             <div className="closing-copy">
@@ -382,13 +447,20 @@ export default function SobrePage() {
                     </li>
                   );
                 })}
+                <li>
+                  <Link href="#cirurgia-pediatrica">
+                    <strong>Fissuras e anomalias craniofaciais</strong>
+                    <span>Atuação em cirurgia bucomaxilofacial pediátrica.</span>
+                    <ChevronRight size={16} aria-hidden="true" />
+                  </Link>
+                </li>
               </ul>
               <p className="closing-areas-note">
                 A atuação em cirurgia e traumatologia buco-maxilo-facial
                 também inclui reconstrução maxilofacial avançada com técnicas
                 microcirúrgicas, implantes faciais, prótese de articulação
-                temporomandibular e tumores benignos dos maxilares e da face.
-                Para discutir um caso assim,{" "}
+                temporomandibular e outros casos de maior complexidade. Para
+                discutir um caso assim,{" "}
                 <Link href="/para-dentistas">fale pelo canal profissional</Link>.
               </p>
             </div>

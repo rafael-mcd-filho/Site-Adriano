@@ -5,6 +5,8 @@ const heroImages: Record<string, string> = {
   "apneia-do-sono": "/images/heroes/hero-apneia-v1.webp",
   "implantes-dentarios": "/images/heroes/hero-implantes-v1.webp",
   "reconstrucao-ossea": "/images/heroes/hero-reconstrucao-v1.webp",
+  "patologias-maxilofaciais": "/images/heroes/hero-patologias-v1.webp",
+  "trauma-bucomaxilofacial": "/images/heroes/hero-trauma-v1.webp",
   "cirurgia-atm": "/images/heroes/hero-atm-v1.webp",
   "cirurgia-ortognatica": "/images/heroes/hero-ortognatica-v1.webp",
   "para-dentistas": "/images/heroes/hero-dentistas-v1.webp",

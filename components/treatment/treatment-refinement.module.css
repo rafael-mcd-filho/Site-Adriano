@@ -3,6 +3,7 @@
 .methodDetails { margin: 18px 0; border-block: 1px solid #52657d; }
 .methodDetails summary { padding: 16px 0; color: #e5ebf2; cursor: pointer; font-weight: 650; }
 .methodDetails p { padding-bottom: 16px; }
+.relatedLinks { display: grid; justify-items: start; gap: 10px; }
 .resolution { margin-top: clamp(30px, 4vw, 52px); padding-block: clamp(32px, 5vw, 60px); background: var(--surface); color: var(--ink); }
 .resolution :global(.decision-objections) { margin-top: 0; }
 .decision .resolution :global(.decision-objections) > h3, .decision .resolution :global(.objection-list) strong { color: var(--navy-950); }

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900" role="img" aria-labelledby="title description">
+  <title id="title">Caso real de trauma bucomaxilofacial aqui</title>
+  <desc id="description">Espaço reservado, sem exame, fotografia, lesão ou resultado de demonstração.</desc>
+  <rect width="1200" height="900" fill="#F3F0EA"/>
+  <path d="M1020 0H1200V513C1025 387 910 220 1020 0Z" fill="#E4EAF0"/>
+  <path d="M0 725C190 645 345 695 500 900H0Z" fill="#E8E1D6"/>
+  <rect x="35" y="35" width="1130" height="830" rx="25" fill="none" stroke="#C7D1DA" stroke-width="2"/>
+  <text x="600" y="120" text-anchor="middle" fill="#62768A" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="700" letter-spacing="5">ESPAÇO RESERVADO</text>
+  <g transform="translate(528 216)" fill="none" stroke="#607C97" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M72 0C117 0 144 31 139 77C136 103 121 132 99 147C89 154 80 158 72 160C64 158 55 154 45 147C23 132 8 103 5 77C0 31 27 0 72 0Z"/>
+    <path d="M31 78C52 88 92 88 113 78M36 110C56 123 88 123 108 110"/>
+    <path d="M88 70L77 84L90 95L79 110"/>
+  </g>
+  <text x="600" y="455" text-anchor="middle" fill="#1C3147" font-family="Arial, Helvetica, sans-serif" font-size="61" font-weight="700" letter-spacing="-2">
+    <tspan x="600" dy="0">Caso real de trauma</tspan>
+    <tspan x="600" dy="82">bucomaxilofacial aqui</tspan>
+  </text>
+  <text x="600" y="664" text-anchor="middle" fill="#62768A" font-family="Arial, Helvetica, sans-serif" font-size="26">Exames, conduta e acompanhamento anonimizados</text>
+  <path d="M562 740H638" stroke="#8DA4B9" stroke-width="4" stroke-linecap="round"/>
+  <text x="600" y="802" text-anchor="middle" fill="#62768A" font-family="Arial, Helvetica, sans-serif" font-size="25">Material real, revisado e autorizado, a inserir</text>
+</svg>

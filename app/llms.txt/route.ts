@@ -39,6 +39,9 @@ export function GET() {
       siteConfig.url +
       "/sobre): formação, certificação Board do Colégio Brasileiro de CTBMF e critérios de indicação.",
     ...areas,
+    "- [Fissuras e anomalias craniofaciais em crianças](" +
+      siteConfig.url +
+      "/sobre#cirurgia-pediatrica): atuação em cirurgia bucomaxilofacial pediátrica, experiência em serviço especializado e cuidado integrado.",
     "- [Para dentistas](" +
       siteConfig.url +
       "/para-dentistas): fluxo de encaminhamento e comunicação entre profissionais.",

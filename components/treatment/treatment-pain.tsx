@@ -59,9 +59,13 @@ export function TreatmentPain({ content }: { content: TreatmentContent }) {
             <h3>{content.consequenceTitle}</h3>
             <p>{content.consequenceText}</p>
             <p className="pain-consequence-note">
-              Esses sinais não significam, por si só, que você precise de
-              cirurgia. A avaliação reúne suas queixas, o exame e os fatores
-              associados para discutir as opções de cuidado.
+              {content.painNote ?? (
+                <>
+                  Esses sinais não significam, por si só, que você precise de
+                  cirurgia. A avaliação reúne suas queixas, o exame e os fatores
+                  associados para discutir as opções de cuidado.
+                </>
+              )}
             </p>
           </div>
         </div>

@@ -42,6 +42,18 @@ export const ogCards = {
     footer: "Entenda as possibilidades e os limites do seu caso",
     alt: "Avaliação de reconstrução óssea para futura reabilitação",
   },
+  "patologias-maxilofaciais": {
+    eyebrow: "PATOLOGIAS MAXILOFACIAIS",
+    title: "Um achado nos maxilares precisa ser entendido com cuidado.",
+    footer: "História · Exame · Imagens · Planejamento",
+    alt: "Avaliação de cistos, tumores e alterações ósseas dos maxilares",
+  },
+  "trauma-bucomaxilofacial": {
+    eyebrow: "TRAUMA BUCOMAXILOFACIAL",
+    title: "Depois de um trauma na face, o que precisa ser avaliado?",
+    footer: "Sinais de alerta · Exame · Imagens · Continuidade do cuidado",
+    alt: "Avaliação de trauma bucomaxilofacial e fraturas da face",
+  },
   "cirurgia-atm": {
     eyebrow: "DTM E ATM",
     title: "Sua mandíbula estala, dói ou parece travar?",

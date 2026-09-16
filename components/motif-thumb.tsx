@@ -8,9 +8,10 @@ export type MotifType =
   | "layers"
   | "joint"
   | "alignment"
+  | "pathology"
+  | "trauma"
   | "wisdom"
-  | "planning"
-  | "wisdom";
+  | "planning";
 
 /**
  * Marca compacta para o topo dos cards de área.
@@ -92,6 +93,27 @@ export function MotifThumb({ type }: { type: MotifType }) {
         </>
       )}
 
+      {type === "pathology" && (
+        <>
+          <path d="M20 31c9-8 20-12 32-10 12 1 21 7 27 16" opacity="0.42" />
+          <path d="M18 41c5 21 17 33 30 37 15-4 25-14 31-31" strokeWidth="2.4" />
+          <path d="M28 48c12 7 28 8 41 1" opacity="0.55" />
+          <circle cx="59" cy="52" r="9" />
+          <circle cx="59" cy="52" r="3" fill="currentColor" stroke="none" />
+          <path d="M59 36v6M59 62v6M43 52h6M69 52h6" opacity="0.62" />
+        </>
+      )}
+
+      {type === "trauma" && (
+        <>
+          <path d="M48 17c17 0 29 12 29 30 0 19-12 29-29 34-17-5-29-15-29-34 0-18 12-30 29-30Z" opacity="0.42" />
+          <path d="M27 49c6 3 13 4 21 4s15-1 21-4" />
+          <path d="M31 61c10 7 24 8 34 0" strokeWidth="2.4" />
+          <path d="m48 46-6 8 8 6-6 9" strokeWidth="2.4" />
+          <path d="M14 45h15M67 45h15M18 41l-4 4 4 4M78 41l4 4-4 4" opacity="0.62" />
+        </>
+      )}
+
       {/* Siso usa o motivo de camadas na própria página (o mapa de volume
           ósseo serve à imagem de um dente incluso), mas na grade da home ele
           ficava idêntico ao card de reconstrução, lado a lado. Aqui ganha
@@ -109,15 +131,6 @@ export function MotifThumb({ type }: { type: MotifType }) {
           </g>
           <path d="M10 80c22-7 54-7 76 0" opacity="0.45" />
           <circle cx="70" cy="76.6" r="2.6" fill="currentColor" stroke="none" opacity="0.6" />
-        </>
-      )}
-
-      {type === "wisdom" && (
-        <>
-          <path d="M20 45v30h60V45" opacity="0.45" />
-          <path d="M25 22c-10-2-10 14-5 21l4 21 5-15 6 15 4-21c5-9 4-23-5-21l-4 3z" />
-          <g transform="rotate(-38 62 52)"><path d="M56 29c-10-2-10 14-5 21l4 21 5-15 6 15 4-21c5-9 4-23-5-21l-4 3z" /></g>
-          <path d="M16 81c23-9 39-3 66-12" strokeDasharray="3 4" />
         </>
       )}
 

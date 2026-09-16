@@ -30,9 +30,9 @@ import { faqSchema } from "@/lib/schema";
 import { credentialFacts, siteConfig } from "@/lib/site";
 
 /**
- * Título, motivo visual e os três pontos de cada card vêm de `lib/content.ts`.
- * Só a descrição curta e o rótulo de contexto são próprios da home — o resto
- * já é o conteúdo da página de destino e não pode divergir dela.
+ * Nas áreas com página própria, título, motivo visual e pontos vêm de
+ * `lib/content.ts`. A atuação pediátrica continua institucional por enquanto:
+ * o card traz seu conteúdo aqui e aponta para a seção factual em `/sobre`.
  *
  * A ordem segue a prioridade do plano de mídia: apneia e reconstrução entram
  * primeiro por não terem concorrente local mapeado.
@@ -43,6 +43,10 @@ const areaCards: Array<{
   tone: "teal" | "navy";
   description: string;
   action: string;
+  /** Reserva para uma área institucional ou uma rota em criação. */
+  title?: string;
+  href?: string;
+  cues?: readonly string[];
   /** Desenho do card quando o motivo da rota não serve à grade da home. */
   thumb?: MotifType;
 }> = [
@@ -61,6 +65,34 @@ const areaCards: Array<{
     description:
       "Ouvir que falta osso pode frustrar o desejo de voltar a mastigar com conforto. Conheça as possibilidades de reconstrução e seus limites.",
     action: "Conhecer minhas possibilidades",
+  },
+  {
+    slug: "patologias-maxilofaciais",
+    badge: "Investigação",
+    tone: "navy",
+    description:
+      "Um cisto, tumor ou outra alteração óssea encontrada em exame precisa ser compreendida antes de definir a conduta.",
+    action: "Entender o que o exame encontrou",
+  },
+  {
+    slug: "trauma-bucomaxilofacial",
+    badge: "Trauma da face",
+    tone: "teal",
+    description:
+      "Depois de uma queda, acidente ou impacto na face, dor, inchaço ou mudança na mordida precisam de avaliação adequada.",
+    action: "Entender a avaliação após um trauma",
+  },
+  {
+    slug: "cirurgia-pediatrica",
+    badge: "Cuidado pediátrico",
+    tone: "teal",
+    title: "Fissuras e anomalias craniofaciais",
+    href: "/sobre#cirurgia-pediatrica",
+    cues: ["Crianças e famílias", "Cuidado por etapas", "Integração profissional"],
+    description:
+      "Crianças com fissuras e outras anomalias podem precisar de cuidado coordenado em diferentes fases do crescimento.",
+    action: "Conhecer essa área de atuação",
+    thumb: "planning",
   },
   {
     slug: "cirurgia-atm",
@@ -267,14 +299,20 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="areas-grid">
+            <div className="areas-grid areas-grid-nine">
               {areaCards.map((card) => {
                 const treatment = treatments[card.slug];
+                const title = treatment?.navLabel ?? card.title;
+                const href = treatment ? "/" + treatment.slug : card.href;
+                const cues = treatment?.visualSummary.cues ?? card.cues ?? [];
+                const motif = card.thumb ?? treatment?.motif;
+
+                if (!title || !href || !motif) return null;
 
                 return (
                   <article className="area-card" key={card.slug}>
                     <div className="area-visual" aria-hidden="true">
-                      <MotifThumb type={card.thumb ?? treatment.motif} />
+                      <MotifThumb type={motif} />
                       <span
                         className={
                           card.tone === "teal"
@@ -287,20 +325,20 @@ export default function Home() {
                     </div>
 
                     <div className="area-body">
-                      <h3>{treatment.navLabel}</h3>
+                      <h3>{title}</h3>
                       <p>{card.description}</p>
                       <ul className="area-cues">
-                        {treatment.visualSummary.cues.map((cue) => (
+                        {cues.map((cue) => (
                           <li key={cue}>
                             <Check size={11} aria-hidden="true" />
                             {cue}
                           </li>
                         ))}
                       </ul>
-                      <Link className="area-link" href={"/" + treatment.slug}>
+                      <Link className="area-link" href={href}>
                         <span>
                           {card.action}
-                          <span className="sr-only"> — {treatment.navLabel}</span>
+                          <span className="sr-only"> — {title}</span>
                         </span>
                         <span className="area-link-arrow" aria-hidden="true">
                           <ArrowRight size={15} />

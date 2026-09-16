@@ -7,6 +7,8 @@ const illustrations = {
   layers: { title: "Região considerada no planejamento da reconstrução", labels: ["Futura reabilitação", "Região a avaliar", "Osso disponível"] },
   joint: { title: "Articulação da mandíbula e músculos", labels: ["Disco articular", "Côndilo da mandíbula", "Região muscular"] },
   alignment: { title: "Maxilares e relação entre as arcadas", labels: ["Maxila", "Mandíbula", "Mordida"] },
+  pathology: { title: "Região dos maxilares considerada na investigação de uma alteração", labels: ["Área observada", "Estruturas próximas", "Planejamento da investigação"] },
+  trauma: { title: "Regiões da face consideradas após um trauma", labels: ["Região afetada", "Alinhamento ósseo", "Mordida e função"] },
   wisdom: { title: "Siso incluso e estruturas próximas", labels: ["Siso incluso", "Dente vizinho", "Canal da mandíbula"] },
   "wisdom-positions": { title: "Posições possíveis do siso", labels: ["Erupcionado", "Parcialmente erupcionado", "Incluso"] },
 } as const;
