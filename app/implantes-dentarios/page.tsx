@@ -33,6 +33,15 @@ export default function ImplantesPage() {
       <TreatmentDecision content={content} />
       <SectionWave from="var(--surface)" to="var(--sand-100)" flip />
       <TreatmentJourney content={content} />
+      <section className="section section-white" id="implantes-extra-orais">
+        <div className="container">
+          <div className="section-heading">
+            <span className="section-kicker">Reabilitação facial</span>
+            <h2>Quando a reabilitação envolve a face, o plano é individual.</h2>
+            <p>Além dos dentes, próteses extra-orais podem fazer parte da conversa em situações que envolvem a estética e a função da face. A avaliação considera o que precisa ser reabilitado, as condições da região e a participação dos profissionais envolvidos para discutir as possibilidades do seu caso.</p>
+          </div>
+        </div>
+      </section>
       <TreatmentTrust content={content} />
       <TreatmentConsultation content={content} />
       <TreatmentContact content={content} />

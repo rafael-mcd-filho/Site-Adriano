@@ -76,7 +76,7 @@ export function LocationSection() {
               <MapPin size={13} aria-hidden="true" />
               Onde você será atendido
             </span>
-            <h2>Dois consultórios: João Pessoa e Natal.</h2>
+            <h2>Dois consultórios: Natal e João Pessoa.</h2>
           </div>
           <p>
             <Clock3 size={16} aria-hidden="true" /> {siteConfig.hoursLines[0]}.

@@ -25,18 +25,19 @@ import { Reviews } from "@/components/reviews";
 import { SectionWave } from "@/components/section-wave";
 import { TrustMarquee } from "@/components/trust-marquee";
 import { WhatsAppButton } from "@/components/whatsapp-button";
+import { VideoEmbed } from "@/components/video-embed";
 import { colleagueReviews } from "@/lib/content";
 import { pageMetadata } from "@/lib/metadata";
 import { breadcrumbSchema, faqSchema } from "@/lib/schema";
 import { siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Encaminhamento Buco-Maxilo-Facial",
-  socialTitle: "Para dentistas | Dr. Adriano",
+  title: "Profissionais da saúde",
+  socialTitle: "Profissionais da saúde | Dr. Adriano",
   description:
-    "Discuta indicação, etapa cirúrgica e continuidade do cuidado com o Dr. Adriano Rocha Germano, professor titular da UFRN. Encaminhamento em João Pessoa e Natal.",
-  path: "/para-dentistas",
-  ogSlug: "para-dentistas",
+    "Profissionais da saúde podem discutir indicação, planejamento e continuidade do cuidado com o Dr. Adriano Rocha Germano. Atendimento em Natal e João Pessoa.",
+  path: "/profissionais-da-saude",
+  ogSlug: "profissionais-da-saude",
 });
 
 const whatsappMessage =
@@ -45,32 +46,33 @@ const whatsappMessage =
 /** Situação e especialidade juntas, evitando duas listas sobre o mesmo caso. */
 const painItems = [
   "Implantes e reconstrução óssea: avaliar o suporte e alinhar a etapa cirúrgica à reabilitação.",
-  "ATM: discutir sintomas persistentes, investigação e possibilidades de conduta.",
-  "Ortognática: integrar a avaliação dos maxilares ao planejamento ortodôntico.",
-  "Apneia: investigar a participação da estrutura facial junto ao cuidado do sono.",
-  "Patologias maxilofaciais: discutir cistos, tumores e outras alterações ósseas dos maxilares.",
-  "Trauma bucomaxilofacial: avaliar fraturas da face, alterações da mordida e a continuidade do cuidado.",
-  "Fissuras e anomalias craniofaciais: discutir a etapa cirúrgica pediátrica e sua integração ao acompanhamento em curso.",
-  "Sisos e outros casos cirúrgicos: esclarecer indicação, riscos e sequência do encaminhamento.",
+  "ATM: discutir sintomas persistentes, investigação e possibilidades de conduta cirúrgica ou não cirúrgica.",
+  "Ortognática: integrar o planejamento cirúrgico ao planejamento ortodôntico.",
+  "Apneia: investigar fatores da face que possam influenciar o sono, em conjunto com a equipe responsável.",
+  "Patologias maxilofaciais: discutir diagnóstico, planejamento e possibilidades de técnicas reconstrutivas.",
+  "Trauma bucomaxilofacial: avaliar fraturas da face, alterações da mordida e indicação de cirurgia.",
+  "Fissuras e anomalias craniofaciais: discutir as etapas cirúrgicas pediátricas, seu momento adequado e as técnicas possíveis.",
+  "Sisos e outros casos cirúrgicos: esclarecer indicação, riscos e técnicas cirúrgicas disponíveis.",
 ];
 
 const professionalCredentials = [
   "Mestre e doutor pela UNICAMP, com pós-doutorado no Hospital 12 de Octubre, em Madri.",
   "Professor titular da UFRN e chefe do Serviço de Cirurgia Buco-Maxilo-Facial do HUOL.",
-  "Certificado pelo Board do Colégio Brasileiro e membro da banca de examinadores em 2026.",
+  "Certificado pelo Board da ALACIBU em 2022 e pelo Board do Colégio Brasileiro em 2026, quando passou a integrar a banca de examinadores.",
+  "Membro titular do Colégio Brasileiro de Cirurgia e Traumatologia Buco-Maxilo-Facial.",
 ];
 
 /** Responsabilidades combinadas entre os profissionais em cada plano. */
 const scope = {
   mine: [
-    "Avaliação bucomaxilofacial e discussão da indicação com o encaminhador.",
+    "Avaliação bucomaxilofacial e discussão da indicação com o encaminhador. A conversa entre profissionais pode ocorrer presencialmente ou online, conforme o caso.",
     "Planejamento e execução da etapa cirúrgica, quando indicada.",
     "Acompanhamento pós-operatório e orientação dos cuidados dessa etapa.",
     "Comunicação dos achados e das condições para prosseguir com o tratamento.",
   ],
   yours: [
-    "Reabilitação protética ou condução ortodôntica, conforme sua participação no plano.",
-    "Acompanhamento clínico e preventivo de rotina.",
+    "Tratamento odontológico paralelo, quando fizer parte de sua atuação no plano.",
+    "Acompanhamento clínico e preventivo odontológico, médico ou fonoaudiológico, conforme a especialidade.",
     "Próximas etapas do tratamento, alinhadas aos achados e à recuperação do paciente.",
   ],
 };
@@ -151,7 +153,7 @@ export default function ParaDentistasPage() {
       <JsonLd data={faqSchema(professionalFaqs)} />
       <JsonLd
         data={breadcrumbSchema([
-          { name: "Para dentistas", path: "/para-dentistas" },
+          { name: "Profissionais da saúde", path: "/profissionais-da-saude" },
         ])}
       />
 
@@ -166,9 +168,10 @@ export default function ParaDentistasPage() {
                 <span className="mark-accent">o cuidado precisa continuar integrado.</span>
               </h1>
               <p>
-                Dentistas, ortodontistas e médicos podem discutir indicação,
-                responsabilidades e sequência do tratamento com o Dr. Adriano
-                Rocha Germano. Atendimento em João Pessoa e Natal.
+                Dentistas, ortodontistas, médicos, fonoaudiólogos,
+                fisioterapeutas e psicólogos podem discutir opiniões sobre
+                o caso, indicação, planejamento e sequência do tratamento
+                com o Dr. Adriano Rocha Germano. Atendimento em Natal e João Pessoa.
               </p>
 
               <ul className="hero-badges">
@@ -286,8 +289,8 @@ export default function ParaDentistasPage() {
                   casos complexos da região são tratados. */}
               <p>
                 Fundou o serviço e a residência de Cirurgia Buco-Maxilo-Facial
-                do HUOL e coordena o serviço para crianças com anomalias
-                bucomaxilofaciais no Hospital Infantil Varela Santiago.
+                do HUOL-UFRN. Foi um dos fundadores e coordena a área de
+                Cirurgia Bucomaxilofacial no Hospital Infantil Varela Santiago.
               </p>
               <p className="authority-links">
                 <a className="text-link" href={siteConfig.boardCertificate} target="_blank" rel="noopener noreferrer">
@@ -311,7 +314,7 @@ export default function ParaDentistasPage() {
           <div className="container">
             <div className="section-heading centered-heading">
               <span className="pill-badge">Escopo e devolutiva</span>
-              <h2>Responsabilidades claras em cada etapa do cuidado.</h2>
+              <h2>Participação de cada profissional em cada etapa do cuidado.</h2>
               <p>A participação de cada profissional é combinada conforme o caso e o plano em andamento.</p>
             </div>
 
@@ -355,6 +358,17 @@ export default function ParaDentistasPage() {
               </div>
             </div>
 
+          </div>
+        </section>
+
+        <section className="section section-white" aria-labelledby="video-equipe-title">
+          <div className="container">
+            <div className="section-heading">
+              <span className="section-kicker">Conversa entre profissionais</span>
+              <h2 id="video-equipe-title">Planejamento conjunto em ortodontia e cirurgia bucomaxilofacial.</h2>
+              <p>O Dr. Adriano conversa sobre a integração das equipes no episódio “Segredos de um bom trabalho em equipe”.</p>
+            </div>
+            <VideoEmbed id="oUHyJctzudg" title="Ortodontia e CTBMF: Segredos de um bom trabalho em equipe" />
           </div>
         </section>
 
@@ -426,7 +440,7 @@ export default function ParaDentistasPage() {
             </div>
 
             <ContactForm
-              page="para-dentistas"
+              page="profissionais-da-saude"
               variant="professional"
               available={Boolean(process.env.FORM_WEBHOOK_URL)}
               eyebrow="Canal profissional"

@@ -11,14 +11,15 @@ export const contactPages = {
   home: { path: "/", label: "Página inicial" },
   sobre: { path: "/sobre", label: "Sobre o Dr. Adriano" },
   "apneia-do-sono": { path: "/apneia-do-sono", label: "Apneia do sono" },
-  "implantes-dentarios": { path: "/implantes-dentarios", label: "Implantes dentários" },
+  "implantes-dentarios": { path: "/implantes-dentarios", label: "Implantes dentários e extra-orais" },
   "reconstrucao-ossea": { path: "/reconstrucao-ossea", label: "Reconstrução óssea" },
   "patologias-maxilofaciais": { path: "/patologias-maxilofaciais", label: "Patologias maxilofaciais" },
   "trauma-bucomaxilofacial": { path: "/trauma-bucomaxilofacial", label: "Trauma bucomaxilofacial" },
   "cirurgia-atm": { path: "/cirurgia-atm", label: "DTM e ATM" },
   "cirurgia-ortognatica": { path: "/cirurgia-ortognatica", label: "Cirurgia ortognática" },
   "cirurgia-de-siso": { path: "/cirurgia-de-siso", label: "Cirurgia de siso" },
-  "para-dentistas": { path: "/para-dentistas", label: "Para dentistas" },
+  "para-dentistas": { path: "/profissionais-da-saude", label: "Profissionais da saúde" },
+  "profissionais-da-saude": { path: "/profissionais-da-saude", label: "Profissionais da saúde" },
 } as const;
 
 const utmKeys = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"] as const;

@@ -47,6 +47,17 @@ export type PracticeLocation = {
 
 export const practiceLocations: PracticeLocation[] = [
   {
+    id: "natal",
+    city: "Natal",
+    state: "RN",
+    building: "Edifício CTC — Corporate Tower Center",
+    street: "Av. Amintas Barros, 3700",
+    complement: "Torre Trade, sala 511",
+    postalCode: "59075-250",
+    whatsapp: "5584994177276",
+    whatsappDisplay: "(84) 99417-7276",
+  },
+  {
     id: "joao-pessoa",
     city: "João Pessoa",
     state: "PB",
@@ -57,17 +68,6 @@ export const practiceLocations: PracticeLocation[] = [
     postalCode: "58032-090",
     whatsapp: "5583986070067",
     whatsappDisplay: "(83) 98607-0067",
-  },
-  {
-    id: "natal",
-    city: "Natal",
-    state: "RN",
-    building: "Edifício CTC — Corporate Tower Center",
-    street: "Av. Amintas Barros, 3700",
-    complement: "Torre Trade, sala 511",
-    postalCode: "59075-250",
-    whatsapp: "5584994177276",
-    whatsappDisplay: "(84) 99417-7276",
   },
 ];
 
@@ -141,12 +141,17 @@ export const professionalTimeline: Array<{
   },
   {
     title: "Hospital Infantil Varela Santiago",
-    detail: "Fundador e coordenador do serviço voltado a crianças com anomalias bucomaxilofaciais, incluindo pacientes fissurados e sindrômicos.",
+    detail: "Um dos fundadores e coordenador do serviço de Cirurgia Bucomaxilofacial voltado a crianças com anomalias bucomaxilofaciais, incluindo pacientes com fissuras e síndromes.",
   },
   {
     year: "2015",
     title: "Pós-doutorado",
     detail: "Hospital Universitario 12 de Octubre, em Madri, Espanha.",
+  },
+  {
+    year: "2022",
+    title: "Certificação Board pela ALACIBU",
+    detail: "Certificação pela Associação Latino-Americana de Cirurgia e Traumatologia Bucomaxilofacial.",
   },
   {
     year: "2023–2024",
@@ -158,6 +163,15 @@ export const professionalTimeline: Array<{
     title: "Certificação Board e banca de examinadores",
     detail: "Certificado pelo Board do Colégio Brasileiro (FBCOMS) e membro ativo da banca que avalia outros cirurgiões.",
   },
+  {
+    year: "2026",
+    title: "Presidente do COBRAC-Natal",
+    detail: "Presidência do Congresso Brasileiro de Cirurgia e Traumatologia Buco-Maxilo-Facial em Natal.",
+  },
+  {
+    title: "Membro titular do Colégio Brasileiro",
+    detail: "Membro titular do Colégio Brasileiro de Cirurgia e Traumatologia Buco-Maxilo-Facial.",
+  },
 ];
 
 export const siteConfig = {
@@ -166,7 +180,7 @@ export const siteConfig = {
   specialty: "Cirurgião Bucomaxilofacial",
   registry: "CRO-PB 12753 · CRO-RN 1980",
   /**
-   * As quatro credenciais que entram nos blocos de autoridade de todas as
+   * As credenciais que entram nos blocos de autoridade de todas as
    * páginas. A trajetória completa fica em `professionalTimeline`, na /sobre.
    *
    * A ordem vai do que o paciente reconhece para o que o colega reconhece:
@@ -176,14 +190,15 @@ export const siteConfig = {
     "Mestre e doutor em Cirurgia e Traumatologia Buco-Maxilo-Facial pela UNICAMP, com pós-doutorado no Hospital 12 de Octubre, em Madri.",
     "Professor titular da UFRN e chefe do Serviço de Cirurgia e Traumatologia Buco-Maxilo-Facial do Hospital Universitário Onofre Lopes.",
     "Presidente do Colégio Brasileiro de Cirurgia e Traumatologia Buco-Maxilo-Facial em 2023 e 2024.",
-    "Certificado pelo Board do Colégio Brasileiro (FBCOMS) e membro da banca de examinadores, em 2026.",
+    "Certificado pelo Board da ALACIBU em 2022 e pelo Board do Colégio Brasileiro (FBCOMS) em 2026, quando passou a integrar a banca de examinadores.",
+    "Membro titular do Colégio Brasileiro de Cirurgia e Traumatologia Buco-Maxilo-Facial.",
   ],
   // O total de 29 foi informado pelo cliente; não consta na imagem do certificado.
   boardContext:
     "Em 2026, integra o grupo de 29 profissionais no Brasil habilitados a atuar como avaliadores desse Board.",
   boardCertificate: "/credenciais/certificado-board-adriano-rocha-germano-2026.png",
   /** Onde ele atende. Usado nas frases de identidade, não nas rotas de SEO. */
-  serviceArea: "João Pessoa e Natal",
+  serviceArea: "Natal e João Pessoa",
   /** Perfis oficiais. Entram em `sameAs` só quando preenchidos. */
   instagram: process.env.NEXT_PUBLIC_INSTAGRAM_URL || "https://www.instagram.com/dr.adrianorgermano/",
   hours: "Atendimento com agendamento, em horário comercial",
@@ -192,11 +207,11 @@ export const siteConfig = {
     "Agendamento pelo WhatsApp de cada consultório",
   ],
   description:
-    "Dor na mandíbula, perda de dentes ou alterações na mordida? Avaliação em cirurgia buco-maxilo-facial em João Pessoa e Natal para entender seu caso antes de decidir.",
+    "Dor na mandíbula, perda de dentes ou alterações na mordida? Avaliação em cirurgia buco-maxilo-facial em Natal e João Pessoa para entender seu caso antes de decidir.",
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://dradrianorgermano.com.br",
   /**
-   * Número dos botões de WhatsApp do site. É o de João Pessoa, onde está a
-   * captação ativa; o de Natal aparece no bloco do próprio consultório.
+   * Número de reserva para links que informam explicitamente uma cidade.
+   * Os botões gerais pedem a escolha do consultório antes de abrir o WhatsApp.
    *
    * Enquanto este campo estava vazio, TODOS os botões do site eram âncoras
    * para um formulário desabilitado — o site não tinha nenhum canal de
@@ -246,9 +261,9 @@ export const areaNavigation = [
     hint: "Ronco · pausas na respiração · cansaço ao acordar",
   },
   {
-    label: "Implantes dentários",
+    label: "Implantes dentários e extra-orais",
     href: "/implantes-dentarios",
-    hint: "Falta de dentes · prótese que incomoda",
+    hint: "Falta de dentes · prótese oral ou facial que incomoda",
   },
   {
     label: "Reconstrução óssea",

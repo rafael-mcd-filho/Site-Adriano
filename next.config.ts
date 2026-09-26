@@ -29,6 +29,11 @@ const nextConfig: NextConfig = {
         destination: "/cirurgia-atm",
         permanent: true,
       },
+      {
+        source: "/para-dentistas",
+        destination: "/profissionais-da-saude",
+        permanent: true,
+      },
     ];
   },
   images: {

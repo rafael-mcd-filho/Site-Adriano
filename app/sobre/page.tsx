@@ -32,7 +32,7 @@ export const metadata: Metadata = pageMetadata({
   title: "Dr. Adriano Rocha Germano | Cirurgião Bucomaxilofacial",
   socialTitle: "Dr. Adriano Rocha Germano",
   description:
-    "Mestre e doutor pela UNICAMP, professor titular da UFRN e presidente do Colégio Brasileiro de CTBMF em 2023–2024. Consultórios em João Pessoa e Natal.",
+    "Mestre e doutor pela UNICAMP, professor titular da UFRN e presidente do Colégio Brasileiro de CTBMF em 2023–2024. Consultórios em Natal e João Pessoa.",
   path: "/sobre",
   ogSlug: "sobre",
   absoluteTitle: true,
@@ -60,7 +60,7 @@ const careerGroups = [
     id: "reconhecimento",
     title: "Reconhecimento",
     items: professionalTimeline.filter((item) =>
-      ["Presidente do Colégio Brasileiro de Cirurgia e Traumatologia Buco-Maxilo-Facial", "Certificação Board e banca de examinadores"].includes(item.title),
+      ["Certificação Board pela ALACIBU", "Presidente do Colégio Brasileiro de Cirurgia e Traumatologia Buco-Maxilo-Facial", "Certificação Board e banca de examinadores", "Presidente do COBRAC-Natal", "Membro titular do Colégio Brasileiro"].includes(item.title),
     ),
   },
 ];
@@ -123,7 +123,7 @@ export default function SobrePage() {
               <p>
                 Cirurgião bucomaxilofacial, professor titular da UFRN e chefe do
                 serviço da especialidade no Hospital Universitário Onofre Lopes,
-                com consultórios em João Pessoa e Natal. A consulta começa pela
+                com consultórios em Natal e João Pessoa. A consulta começa pela
                 sua história, e a conduta vem do que o exame mostrar — não de
                 um protocolo pronto.
               </p>
@@ -207,9 +207,11 @@ export default function SobrePage() {
 
             <div className="career-editorial">
               <MediaPlaceholder kind="doctor-congress" compact caption="Foto real em congresso a inserir, com nome do evento e ano confirmados." />
-              <aside className="personal-note-placeholder" aria-label="Espaço reservado para fala pessoal">
-                <span className="section-kicker">Fala pessoal do doutor a inserir</span>
-                <p>Espaço reservado para um texto real do Dr. Adriano sobre sua trajetória e a forma como conversa com os pacientes antes de decidir um tratamento.</p>
+              <aside className="personal-note" aria-label="Fala pessoal do Dr. Adriano">
+                <span className="section-kicker">Por que escolhi a especialidade</span>
+                <p>A Cirurgia e Traumatologia Buco-Maxilo-Facial entrou na minha vida quando percebi que poderia ir muito além de transformar sorrisos e faces: poderia contribuir para uma verdadeira transformação na vida dos meus pacientes.</p>
+                <p>Mais do que resultados estéticos, essa especialidade me permite proporcionar qualidade de vida, aliviar sofrimentos e angústias e promover mudanças significativas em aspectos fundamentais como a função mastigatória, a fala e a respiração.</p>
+                <p>E, sobretudo, encontrei na Cirurgia e Traumatologia Buco-Maxilo-Facial a possibilidade de contribuir para o bem-estar e a autoestima de muitos pacientes, favorecendo não apenas mudanças físicas, mas também impactos positivos em sua saúde emocional e qualidade de vida.</p>
               </aside>
             </div>
           </div>
@@ -225,14 +227,15 @@ export default function SobrePage() {
               <span className="section-kicker">A certificação</span>
               <h2>Uma certificação examinada por profissionais da especialidade.</h2>
               <p>
-                O Colégio Brasileiro de Cirurgia e Traumatologia Buco-Maxilo-Facial
-                mantém uma certificação voluntária que avalia formação, experiência
-                e conhecimento do cirurgião. Ela é separada do registro profissional
-                no Conselho de Odontologia.
+                Em 2022, o Dr. Adriano recebeu a certificação Board da Associação
+                Latino-Americana de Cirurgia e Traumatologia Bucomaxilofacial
+                (ALACIBU). Em 2026, foi certificado pelo Board do Colégio Brasileiro
+                de Cirurgia e Traumatologia Buco-Maxilo-Facial (FBCOMS).
               </p>
               <p>
-                O certificado de 2026 registra a certificação do Dr. Adriano
-                e sua participação na banca de examinadores. {siteConfig.boardContext}
+                O certificado brasileiro de 2026 também registra sua participação
+                na banca de examinadores que avalia outros cirurgiões.
+                {" "}{siteConfig.boardContext}
               </p>
 
               <a
@@ -299,11 +302,12 @@ export default function SobrePage() {
                 <span className="consultation-icon" aria-hidden="true">
                   <BadgeCheck size={20} />
                 </span>
-                <h3>Experiência em serviço pediátrico</h3>
+                <h3>Experiência em serviço pediátrico de anomalias craniofaciais</h3>
                 <p>
-                  Fundou e coordena o serviço do Hospital Infantil Varela
-                  Santiago voltado a crianças com anomalias bucomaxilofaciais,
-                  incluindo pacientes com fissuras e síndromes.
+                  Foi um dos fundadores e coordena o serviço de Cirurgia
+                  Bucomaxilofacial do Hospital Infantil Varela Santiago, voltado
+                  a crianças com anomalias bucomaxilofaciais, incluindo pacientes
+                  com fissuras e síndromes.
                 </p>
               </article>
               <article>
@@ -334,7 +338,7 @@ export default function SobrePage() {
               <Link className="text-link" href="#contato">
                 Entender como funciona a avaliação <ArrowRight size={16} aria-hidden="true" />
               </Link>
-              <Link className="text-link" href="/para-dentistas">
+              <Link className="text-link" href="/profissionais-da-saude">
                 Discutir um caso pelo canal profissional <ArrowRight size={16} aria-hidden="true" />
               </Link>
             </div>
@@ -356,9 +360,10 @@ export default function SobrePage() {
                 </span>
                 <h3>Com quem já acompanha você</h3>
                 <p>
-                  Dentista, ortodontista, médico do sono: quando existe um
-                  profissional conduzindo o caso, o planejamento considera esse
-                  cuidado e a comunicação entre as partes faz parte do trabalho.
+                  Dentista, ortodontista, médico, fonoaudiólogo, psicólogo ou
+                  fisioterapeuta: quando existe um profissional conduzindo o caso,
+                  o planejamento considera esse cuidado e a comunicação entre
+                  as partes faz parte do trabalho.
                 </p>
               </article>
               <article>
@@ -367,9 +372,12 @@ export default function SobrePage() {
                 </span>
                 <h3>Atendimento particular</h3>
                 <p>
-                  Sem convênios. A equipe informa o valor da consulta antes do
-                  agendamento, e os custos de um eventual tratamento são
-                  apresentados conforme as etapas, antes de qualquer decisão.
+                  A consulta e os honorários da equipe são particulares. Muitos
+                  procedimentos hospitalares podem ser autorizados pelo convênio,
+                  conforme a cobertura de cada plano; os honorários profissionais
+                  são pagos à parte. O reembolso pode ser parcial ou total,
+                  dependendo do contrato. A equipe esclarece os custos antes
+                  de qualquer decisão.
                 </p>
               </article>
               <article>
@@ -461,7 +469,7 @@ export default function SobrePage() {
                 microcirúrgicas, implantes faciais, prótese de articulação
                 temporomandibular e outros casos de maior complexidade. Para
                 discutir um caso assim,{" "}
-                <Link href="/para-dentistas">fale pelo canal profissional</Link>.
+                <Link href="/profissionais-da-saude">fale pelo canal profissional</Link>.
               </p>
             </div>
           </div>

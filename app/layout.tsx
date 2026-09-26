@@ -34,7 +34,7 @@ const sourceSans = Source_Sans_3({
 });
 
 const homeOgImage = ogImageFor("home");
-const homeTitle = "Cirurgião Buco-Maxilo-Facial em João Pessoa | Dr. Adriano";
+const homeTitle = "Cirurgião Buco-Maxilo-Facial em Natal e João Pessoa | Dr. Adriano";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),

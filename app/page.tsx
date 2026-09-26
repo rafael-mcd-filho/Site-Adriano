@@ -104,18 +104,19 @@ const areaCards: Array<{
   },
   {
     slug: "cirurgia-ortognatica",
-    badge: "Função e mordida",
+    badge: "Estética e função",
     tone: "navy",
     description:
-      "Quando a mordida não encaixa, mastigar pode exigir esforço. Entenda se o seu caso pede aparelho, cirurgia ou cuidado conjunto.",
+      "Quando a mordida não encaixa, mastigar pode exigir esforço e a face pode apresentar desarmonias. Entenda se o seu caso pede aparelho, cirurgia ou tratamento multiprofissional.",
     action: "Entender se tenho indicação",
   },
   {
     slug: "implantes-dentarios",
     badge: "Planejamento",
     tone: "teal",
+    title: "Implantes dentários e extra-orais",
     description:
-      "A falta de dentes ou a insegurança com a prótese interfere nas refeições e no sorriso? Veja o que avaliar para planejar sua reabilitação.",
+      "A falta de dentes, mudanças na estética da boca ou da face e a insegurança com próteses afetam sua alimentação, fala ou sorriso? Conheça as possibilidades de reabilitação oral ou facial para o seu caso.",
     action: "Saber se posso fazer implante",
   },
   {
@@ -155,7 +156,7 @@ const decisionCriteria = [
 const homeCredentials = [
   "Mestre e doutor em Cirurgia Bucomaxilofacial pela UNICAMP.",
   "Professor titular da UFRN e chefe do serviço da especialidade no HUOL.",
-  "Certificado pelo Board e membro da banca de examinadores · 2026.",
+  "Certificado pelo Board da ALACIBU · 2022; certificado e examinador do Board brasileiro · 2026.",
 ];
 
 /**
@@ -191,7 +192,7 @@ const homeFaqs = [
   {
     question: "Onde e em que horários acontece o atendimento?",
     answer:
-      "Em João Pessoa, no bairro de Miramar, e em Natal, no Corporate Tower Center. O atendimento acontece de segunda a sexta, em horário comercial, com agendamento. Os endereços e links de rota estão no fim desta página.",
+      "Em Natal, no Corporate Tower Center, e em João Pessoa, no bairro de Miramar. O atendimento acontece de segunda a sexta, em horário comercial, com agendamento. Os endereços e links de rota estão no fim desta página.",
   },
   {
     question: "Existe avaliação online?",
@@ -222,14 +223,14 @@ export default function Home() {
               </span>
               <h1>
                 <span className="hero-name">{siteConfig.fullName}</span>
-                Comer, sorrir ou{" "}
-                <span className="mark-accent">dormir bem</span> deixou de ser simples?
+                Se olhar no espelho, sorrir, <span className="mark-accent">dormir bem</span> ou comer deixou de ser simples?
               </h1>
               <p>
-                Você evita certos alimentos, sente a mandíbula doer ou acorda
-                sem descansar? Antes de falar em cirurgia, precisamos entender
-                o seu caso. Avaliação buco-maxilo-facial em {siteConfig.serviceArea}
-                {" "}para investigar o que limita sua rotina e discutir como cuidar disso.
+                Você evita certos alimentos, sente a mandíbula doer, acorda
+                cansado ou percebe algo na face ou no sorriso que lhe desagrada?
+                Antes de falar em cirurgia, precisamos entender o seu caso.
+                A avaliação buco-maxilo-facial em {siteConfig.serviceArea} investiga
+                o que limita sua rotina para discutir como resolver ou minimizar isso.
               </p>
 
               <ul className="hero-badges">
@@ -501,8 +502,8 @@ export default function Home() {
             </div>
 
             <p className="closing-dentist">
-              É dentista e quer discutir um caso?{" "}
-              <Link className="text-link light-link" href="/para-dentistas">
+              É profissional da saúde e quer discutir um caso?{" "}
+              <Link className="text-link light-link" href="/profissionais-da-saude">
                 Conheça o canal profissional
                 <ArrowRight size={15} aria-hidden="true" />
               </Link>

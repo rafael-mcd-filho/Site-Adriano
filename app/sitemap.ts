@@ -26,7 +26,7 @@ const routes: SitemapRoute[] = [
      que existia na home. */
   { path: "/sobre", priority: 0.9, changeFrequency: "monthly" },
   ...treatmentRoutes,
-  { path: "/para-dentistas", priority: 0.6, changeFrequency: "yearly" },
+  { path: "/profissionais-da-saude", priority: 0.6, changeFrequency: "yearly" },
   /**
    * Página de confiança: indexável de propósito, para quem procura a política
    * encontrá-la sem depender de achar o link no rodapé.

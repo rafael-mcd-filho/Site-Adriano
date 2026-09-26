@@ -53,7 +53,7 @@ export type PainIcon = keyof typeof painIconSet;
  * a lista virava um bloco de texto de quatro parágrafos. O ícone dá à pessoa um
  * ponto de entrada — ela procura o desenho que parece com o problema dela.
  *
- * Sem `icons`, cai no traço antigo. É o que a página "Para dentistas" usa:
+ * Sem `icons`, cai no traço antigo. É o que a página "Profissionais da saúde" usa:
  * lá os itens descrevem situações de encaminhamento, não sintomas, e um ícone
  * por item sugeriria uma taxonomia que não existe.
  */

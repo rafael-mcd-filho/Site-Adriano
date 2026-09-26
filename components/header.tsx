@@ -16,12 +16,10 @@ import {
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { ButtonContent } from "@/components/button-content";
-import { WhatsAppIcon } from "@/components/whatsapp-button";
+import { ConsultorioChooser } from "@/components/consultorio-chooser";
 import {
   areaNavigation,
-  getWhatsAppHref,
   siteConfig,
-  whatsappMessageWithSource,
 } from "@/lib/site";
 
 const headerWhatsAppMessage =
@@ -32,7 +30,7 @@ const navIcons: Record<string, LucideIcon> = {
   "/": Home,
   "/sobre": User,
   "/#processo": Stethoscope,
-  "/para-dentistas": Handshake,
+  "/profissionais-da-saude": Handshake,
 };
 
 /**
@@ -42,7 +40,7 @@ const navIcons: Record<string, LucideIcon> = {
  * ele apontava para o mesmo lugar que o botão do cabeçalho — dois alvos, um
  * destino. O link continua no rodapé, onde quem procura por ele olha.
  *
- * "Para dentistas" saiu da pílula e virou um link menor ao lado do CTA: é
+ * O canal para profissionais saiu da pílula e virou um link menor ao lado do CTA: é
  * outro público, e disputar espaço com os itens do paciente não ajudava
  * nenhum dos dois. O colega procura ativamente; ele acha.
  */
@@ -55,7 +53,7 @@ const mobileLinks = [
   { label: "Início", href: "/" },
   { label: "Dr. Adriano", href: "/sobre" },
   { label: "Como funciona", href: "/#processo" },
-  { label: "Para dentistas", href: "/para-dentistas" },
+  { label: "Profissionais da saúde", href: "/profissionais-da-saude" },
 ];
 
 const focusableSelector =
@@ -63,7 +61,7 @@ const focusableSelector =
 
 export function Header() {
   const pathname = usePathname();
-  const professional = pathname === "/para-dentistas";
+  const professional = pathname === "/profissionais-da-saude";
   const contactLabel = professional ? "Discutir um caso" : "Entender meu caso";
   const contactMessage = professional
     ? "Olá, sou profissional de saúde e gostaria de discutir um encaminhamento com o Dr. Adriano."
@@ -74,10 +72,9 @@ export function Header() {
   const areasRef = useRef<HTMLDivElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
   const toggleRef = useRef<HTMLButtonElement>(null);
-  const isWhatsAppConfigured = Boolean(siteConfig.whatsappNumber);
   const currentArea = areaNavigation.find((item) => item.href === pathname);
   const inArea = Boolean(currentArea);
-  const contactHref = pathname === "/" || pathname === "/para-dentistas" || pathname === "/sobre" || inArea
+  const contactHref = pathname === "/" || pathname === "/profissionais-da-saude" || pathname === "/sobre" || inArea
     ? "#contato"
     : "/#contato";
 
@@ -280,36 +277,25 @@ export function Header() {
 
             <Link
               className={
-                pathname === "/para-dentistas"
+                pathname === "/profissionais-da-saude"
                   ? "header-dentist active"
                   : "header-dentist"
               }
-              href="/para-dentistas"
-              aria-current={pathname === "/para-dentistas" ? "page" : undefined}
+              href="/profissionais-da-saude"
+              aria-current={pathname === "/profissionais-da-saude" ? "page" : undefined}
             >
               <Handshake size={14} aria-hidden="true" />
-              Para dentistas
+              Profissionais da saúde
             </Link>
           </nav>
 
-          <a
-            id="cta-header-whatsapp"
-            data-cta="cta-header-whatsapp"
-            data-cta-channel={isWhatsAppConfigured ? "whatsapp" : "form"}
+          <ConsultorioChooser
+            label={contactLabel}
+            message={contactMessage}
+            ctaId="cta-header-whatsapp"
+            source="cabeçalho do site"
             className="button button-small button-motion header-cta"
-            href={isWhatsAppConfigured ? getWhatsAppHref(
-              whatsappMessageWithSource(contactMessage, "cabeçalho do site"),
-            ) : contactHref}
-            target={isWhatsAppConfigured ? "_blank" : undefined}
-            rel={isWhatsAppConfigured ? "noopener noreferrer" : undefined}
-            aria-label={isWhatsAppConfigured
-              ? contactLabel + " — falar com a equipe pelo WhatsApp"
-              : contactLabel + " — ver opções de contato"}
-          >
-            <ButtonContent icon={WhatsAppIcon} seal="whatsapp">
-              {contactLabel}
-            </ButtonContent>
-          </a>
+          />
 
           <button
             ref={toggleRef}

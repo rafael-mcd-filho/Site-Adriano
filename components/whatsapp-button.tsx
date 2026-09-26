@@ -48,7 +48,7 @@ export function WhatsAppButton({
   source,
   fallbackHref = "#contato",
   number,
-  chooseLocation = label === "Escolher consultório e falar com a equipe",
+  chooseLocation = true,
 }: WhatsAppButtonProps) {
   if (chooseLocation && !number) {
     return <ConsultorioChooser label={label} message={message} ctaId={ctaId} source={source ?? originFromCtaId(ctaId)} className={(compact ? "button button-whatsapp button-motion button-small " : "button button-whatsapp button-motion ") + className} />;

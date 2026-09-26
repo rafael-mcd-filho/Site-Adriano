@@ -8,6 +8,7 @@ import { TreatmentJourney } from "@/components/treatment/treatment-journey";
 import { TreatmentPain } from "@/components/treatment/treatment-pain";
 import { TreatmentShell } from "@/components/treatment/treatment-shell";
 import { TreatmentTrust } from "@/components/treatment/treatment-trust";
+import { VideoEmbed } from "@/components/video-embed";
 import { treatments } from "@/lib/content";
 import { treatmentMetadata } from "@/lib/metadata";
 import { credentialFacts } from "@/lib/site";
@@ -35,6 +36,16 @@ export default function ApneiaPage() {
       <TreatmentDecision content={content} />
       <SectionWave from="var(--surface)" to="var(--sand-100)" flip />
       <TreatmentJourney content={content} />
+      <section className="section section-white" aria-labelledby="video-apneia-title">
+        <div className="container">
+          <div className="section-heading">
+            <span className="section-kicker">Conversa sobre o sono</span>
+            <h2 id="video-apneia-title">Entenda mais sobre a apneia do sono.</h2>
+            <p>O Dr. Adriano conversa com um profissional da medicina do sono sobre investigação e cuidado conjunto.</p>
+          </div>
+          <VideoEmbed id="JTaVaA-75Nc" title="Viva Melhor sem Apneia do Sono — Conversa Afinada com o Dr. Adriano" />
+        </div>
+      </section>
       <TreatmentTrust content={content} />
       <TreatmentConsultation content={content} />
       <TreatmentContact content={content} />

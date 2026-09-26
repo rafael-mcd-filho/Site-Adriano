@@ -10,7 +10,7 @@ export type Objection = { belief: string; reality: string };
  * contraste (peso, cor e o fio lateral) é o que faz a estrutura aparecer sem
  * precisar de rótulo escrito em cima de cada coluna.
  *
- * Vive fora de `components/treatment/` porque a página "Para dentistas" usa a
+ * Vive fora de `components/treatment/` porque a página "Profissionais da saúde" usa a
  * mesma lista, com as dúvidas do colega no lugar das do paciente. Antes eram
  * duas cópias da mesma marcação, e a segunda ficou para trás na primeira
  * mudança de layout.

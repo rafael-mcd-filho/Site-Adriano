@@ -2,15 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import { WhatsAppIcon } from "@/components/whatsapp-button";
+import { ConsultorioChooser } from "@/components/consultorio-chooser";
 import { ctaLadder } from "@/lib/content";
-import {
-  getWhatsAppHref,
-  siteConfig,
-  whatsappMessageWithSource,
-} from "@/lib/site";
-
-const isConfigured = Boolean(siteConfig.whatsappNumber);
 
 /**
  * Aparece depois que o hero sai da viewport e volta a se ocultar quando a
@@ -24,7 +17,7 @@ const isConfigured = Boolean(siteConfig.whatsappNumber);
 export function FloatingWhatsApp({ message }: { message: string }) {
   const [ready, setReady] = useState(false);
   const pathname = usePathname();
-  const label = pathname === "/para-dentistas" ? "Discutir um caso" : ctaLadder.floating;
+  const label = pathname === "/profissionais-da-saude" ? "Discutir um caso" : ctaLadder.floating;
 
   useEffect(() => {
     const hero = document.querySelector<HTMLElement>(
@@ -62,24 +55,13 @@ export function FloatingWhatsApp({ message }: { message: string }) {
     };
   }, []);
 
-  return (
-    <a
-      id="cta-flutuante-whatsapp"
-      data-cta="cta-flutuante-whatsapp"
-      data-cta-channel={isConfigured ? "whatsapp" : "form"}
-      className={ready ? "floating-whatsapp is-ready" : "floating-whatsapp"}
-      href={getWhatsAppHref(
-        whatsappMessageWithSource(message, "botão flutuante durante a leitura"),
-      )}
-      target={isConfigured ? "_blank" : undefined}
-      rel={isConfigured ? "noopener noreferrer" : undefined}
-      aria-label={isConfigured ? label + " pelo WhatsApp" : label + " — ver opções de contato"}
-      aria-hidden={!ready}
-      tabIndex={ready ? 0 : -1}
-      title={isConfigured ? "Falar pelo WhatsApp" : "Solicitar contato da equipe"}
-    >
-      <WhatsAppIcon size={22} />
-      <span>{label}</span>
-    </a>
-  );
+  if (!ready) return null;
+
+  return <ConsultorioChooser
+    label={label}
+    message={message}
+    ctaId="cta-flutuante-whatsapp"
+    source="botão flutuante durante a leitura"
+    className="floating-whatsapp is-ready"
+  />;
 }

@@ -20,7 +20,7 @@ export type OgCard = {
 export const ogCards = {
   home: {
     eyebrow: "CIRURGIA BUCO-MAXILO-FACIAL",
-    title: "Comer, sorrir ou dormir bem deixou de ser simples?",
+    title: "Olhar no espelho, sorrir, dormir bem ou comer já não é tão simples?",
     footer: "Antes de falar em cirurgia, precisamos entender o seu caso",
     alt: "Dr. Adriano — Cirurgia e Traumatologia Buco-Maxilo-Facial em João Pessoa",
   },
@@ -31,10 +31,10 @@ export const ogCards = {
     alt: "Avaliação buco-maxilo-facial na apneia do sono",
   },
   "implantes-dentarios": {
-    eyebrow: "IMPLANTES DENTÁRIOS",
-    title: "A falta de dentes mudou seu jeito de comer e sorrir?",
-    footer: "Osso · Gengiva · Mordida · Futura prótese",
-    alt: "Planejamento de implantes dentários",
+    eyebrow: "IMPLANTES DENTÁRIOS E EXTRA-ORAIS",
+    title: "Conheça possibilidades de reabilitação oral e facial.",
+    footer: "Avaliação · Planejamento · Cuidado integrado",
+    alt: "Avaliação para implantes dentários e extra-orais",
   },
   "reconstrucao-ossea": {
     eyebrow: "RECONSTRUÇÃO ÓSSEA",
@@ -74,13 +74,13 @@ export const ogCards = {
   },
   sobre: {
     eyebrow: "DR. ADRIANO ROCHA GERMANO",
-    title: "Cirurgião bucomaxilofacial em João Pessoa e Natal.",
+    title: "Cirurgião bucomaxilofacial em Natal e João Pessoa.",
     footer: "Mestre e doutor pela UNICAMP · Professor titular da UFRN",
     alt: "Formação e credenciais do Dr. Adriano Rocha Germano",
   },
-  "para-dentistas": {
+  "profissionais-da-saude": {
     eyebrow: "CANAL PROFISSIONAL",
-    title: "A etapa cirúrgica precisa avançar. O cuidado precisa continuar.",
+    title: "Profissionais da saúde: planejamento e cuidado integrados.",
     footer: "Discussão do caso · Conduta · Continuidade do cuidado",
     alt: "Encaminhamento profissional para cirurgia buco-maxilo-facial",
   },

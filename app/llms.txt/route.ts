@@ -42,9 +42,9 @@ export function GET() {
     "- [Fissuras e anomalias craniofaciais em crianças](" +
       siteConfig.url +
       "/sobre#cirurgia-pediatrica): atuação em cirurgia bucomaxilofacial pediátrica, experiência em serviço especializado e cuidado integrado.",
-    "- [Para dentistas](" +
+    "- [Profissionais da saúde](" +
       siteConfig.url +
-      "/para-dentistas): fluxo de encaminhamento e comunicação entre profissionais.",
+      "/profissionais-da-saude): fluxo de encaminhamento e comunicação entre profissionais.",
     "- [Política de privacidade](" +
       siteConfig.url +
       "/politica-de-privacidade): tratamento de dados e direitos do titular.",

@@ -153,7 +153,7 @@ caixa — e compara com a medição anterior. Está em `scripts/regressao-css.js
    tenha mudado a aparência de propósito.
 
 Repita rota a rota. As que importam: `/`, as cinco de tratamento,
-`/para-dentistas` e `/politica-de-privacidade`.
+`/profissionais-da-saude` e `/politica-de-privacidade`.
 
 **Não redimensione a janela entre medir e comparar.** Poucos pixels de largura
 mudam quase todo nó, e o relatório passa a culpar o seu CSS. A sonda recusa a

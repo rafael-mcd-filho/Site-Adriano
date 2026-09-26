@@ -35,7 +35,7 @@ export async function submitContact(
   const consent = clean(formData.get("consent"));
   const company = clean(formData.get("company"));
   const page = clean(formData.get("page"));
-  const professional = page === "para-dentistas";
+  const professional = page === "profissionais-da-saude" || page === "para-dentistas";
   const professionalRole = professional ? clean(formData.get("professionalRole")) : "";
   // Mantém o contrato do webhook e funciona também antes da hidratação do formulário.
   const message = professional

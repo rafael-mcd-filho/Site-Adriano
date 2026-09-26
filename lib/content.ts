@@ -60,7 +60,16 @@ export type Review = {
 };
 
 export const patientReviews: Review[] = [];
-export const colleagueReviews: Review[] = [];
+export const colleagueReviews: Review[] = [
+  {
+    text: "É sempre um prazer discutir e planejar casos ao lado do colega Adriano Germano. Esses momentos de troca nos permitem aprender continuamente, ampliar nossas perspectivas e considerar diferentes alternativas, sempre respeitando e integrando as visões de cada profissional. No final, quem mais se beneficia dessa parceria e desse cuidado compartilhado é o nosso paciente.",
+    author: "Dr. Adriano Diógenes, especialista em Prótese e Reabilitação Oral",
+  },
+  {
+    text: "Essa integração entre o cirurgião bucomaxilofacial e o ortodontista torna-se muito mais efetiva quando o colega possui a expertise necessária para compreender as particularidades e as dificuldades inerentes a cada caso. A partir dessa visão compartilhada, buscamos construir uma solução conjunta, que atenda às expectativas do paciente e, ao mesmo tempo, seja tecnicamente viável e segura para ambos os profissionais. É assim que temos conduzido nosso trabalho: reunindo-nos, discutindo cuidadosamente cada caso e compartilhando diferentes perspectivas para chegarmos, juntos, à melhor conduta. Acredito que essa parceria, baseada no diálogo, no respeito às diferentes áreas de atuação e na busca por um objetivo comum, seja um dos pilares fundamentais para o sucesso dos nossos tratamentos.",
+    author: "Dr. Sergio Azevedo, especialista em Ortodontia",
+  },
+];
 
 /**
  * Caso conduzido, no formato que as regras de publicidade comportam:
@@ -99,7 +108,7 @@ export const consultaExames: Faq = {
 export const consultaParticular: Faq = {
   question: "Como funciona o atendimento particular?",
   answer:
-    "O atendimento é particular, sem convênios. A equipe informa o valor da consulta antes de agendar. Custos e condições do tratamento são apresentados conforme o plano, antes de você decidir.",
+    "A consulta e os honorários da equipe são particulares. Procedimentos hospitalares podem ter autorização do convênio conforme a cobertura do seu plano; eventual reembolso dos honorários também depende do contrato. A equipe informa valores e condições antes de você decidir.",
 };
 
 export const consultaSegundaOpiniao: Faq = {
@@ -828,13 +837,13 @@ export const treatments: Record<string, TreatmentContent> = {
     methodCta: "Quero avaliar o suporte para implantes",
     trustCta: "Quero avaliar opções para repor meus dentes",
     slug: "implantes-dentarios",
-    navLabel: "Implantes dentários",
-    eyebrow: "Implantes dentários em João Pessoa",
+    navLabel: "Implantes dentários e extra-orais",
+    eyebrow: "Implantes dentários e extra-orais em Natal e João Pessoa",
     motif: "implant",
-    title: "A falta de dentes mudou seu jeito de comer e sorrir?",
-    titleHighlight: "comer e sorrir",
-    intro: "Quando falta um dente ou a prótese incomoda, uma refeição simples pede adaptações. A avaliação esclarece se implantes podem fazer parte da reabilitação e como planejar os dentes que eles vão sustentar.",
-    heroBadges: ["Avaliação para implantes", "Planejamento com seu dentista", "João Pessoa"],
+    title: "Implantes dentários e extra-orais: quais possibilidades existem para sua reabilitação?",
+    titleHighlight: "sua reabilitação",
+    intro: "A falta de dentes, mudanças na estética da boca ou da face e a insegurança com próteses podem afetar a alimentação, a fala ou o sorriso. A avaliação esclarece possibilidades de reabilitação oral ou facial adequadas ao seu caso.",
+    heroBadges: ["Avaliação para implantes", "Reabilitação oral e facial", "Natal e João Pessoa"],
     primaryCta: "Quero saber se posso fazer implante",
     note: "Conheça as opções e as etapas antes de decidir pelo tratamento.",
 
@@ -936,7 +945,7 @@ export const treatments: Record<string, TreatmentContent> = {
       description: "A equipe informa horários, valor da consulta e o que levar."
     },
     whatsappMessage: "Olá, vi a página de implantes dentários e gostaria de saber como funciona a avaliação para o meu caso.",
-    metadata: { title: "Implantes Dentários em João Pessoa", description: "Perdeu dentes ou sente incômodo com a prótese? Conheça a avaliação para implantes dentários em João Pessoa: osso, gengiva, mordida e futura reabilitação." },
+    metadata: { title: "Implantes Dentários e Extra-orais em Natal e João Pessoa", description: "Conheça a avaliação para implantes dentários e extra-orais e as possibilidades de reabilitação oral ou facial em Natal e João Pessoa." },
   },
 
 
@@ -1299,7 +1308,7 @@ export const treatments: Record<string, TreatmentContent> = {
     title: "Trauma na face: o que avaliar depois?",
     titleHighlight: "o que avaliar depois",
     intro:
-      "Depois do primeiro atendimento, a avaliação especializada verifica fraturas, mordida, visão, movimentos e outros efeitos do trauma para orientar os próximos cuidados.",
+      "O primeiro atendimento é essencial para identificar sinais de urgência. Depois da estabilização, a avaliação bucomaxilofacial verifica fraturas da face, alterações da mordida ou da visão e movimentos limitados para esclarecer o diagnóstico e planejar os próximos cuidados.",
     heroBadges: [
       "Mordida e função",
       "Fraturas e sequelas",

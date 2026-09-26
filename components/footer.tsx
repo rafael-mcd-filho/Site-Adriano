@@ -48,7 +48,7 @@ export function Footer() {
           </Link>
           <p>
             Antes de falar em cirurgia, precisamos entender o seu caso.
-            Atendimento em cirurgia buco-maxilo-facial em João Pessoa e Natal.
+            Atendimento em cirurgia buco-maxilo-facial em Natal e João Pessoa.
           </p>
           {siteConfig.isDemo && (
             <span className="demo-badge">
@@ -81,7 +81,7 @@ export function Footer() {
               <Link href="/sobre">Dr. Adriano Rocha Germano</Link>
             </li>
             <li>
-              <Link href="/para-dentistas">Para dentistas</Link>
+              <Link href="/profissionais-da-saude">Profissionais da saúde</Link>
             </li>
             <li>
               <Link href="/politica-de-privacidade">Política de privacidade</Link>
