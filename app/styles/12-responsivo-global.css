@@ -434,7 +434,7 @@
     padding: 0;
   }
 
-  .floating-whatsapp span {
+  .floating-whatsapp .button-label {
     display: none;
   }
 

@@ -82,6 +82,12 @@
   visibility: hidden;
 }
 
+.floating-whatsapp .button-circle {
+  position: static;
+  flex: 0 0 34px;
+  transform: none;
+}
+
 .floating-whatsapp.is-ready {
   opacity: 1;
   pointer-events: auto;
