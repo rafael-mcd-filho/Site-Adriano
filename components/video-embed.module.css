@@ -1,5 +1,5 @@
 .frame {
-  width: min(100%, 880px);
+  width: 100%;
   aspect-ratio: 16 / 9;
   overflow: hidden;
   border-radius: var(--radius-lg, 20px);

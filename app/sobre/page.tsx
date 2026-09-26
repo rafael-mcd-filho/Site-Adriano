@@ -7,6 +7,7 @@ import {
   ChevronRight,
   Handshake,
   MapPin,
+  Quote,
   ShieldCheck,
 } from "lucide-react";
 import { ContactForm } from "@/components/contact-form";
@@ -205,15 +206,21 @@ export default function SobrePage() {
               {siteConfig.registry} · especialista registrado nos dois estados
             </p>
 
-            <div className="career-editorial">
-              <MediaPlaceholder kind="doctor-congress" compact caption="Foto real em congresso a inserir, com nome do evento e ano confirmados." />
-              <aside className="personal-note" aria-label="Fala pessoal do Dr. Adriano">
-                <span className="section-kicker">Por que escolhi a especialidade</span>
-                <p>A Cirurgia e Traumatologia Buco-Maxilo-Facial entrou na minha vida quando percebi que poderia ir muito além de transformar sorrisos e faces: poderia contribuir para uma verdadeira transformação na vida dos meus pacientes.</p>
-                <p>Mais do que resultados estéticos, essa especialidade me permite proporcionar qualidade de vida, aliviar sofrimentos e angústias e promover mudanças significativas em aspectos fundamentais como a função mastigatória, a fala e a respiração.</p>
-                <p>E, sobretudo, encontrei na Cirurgia e Traumatologia Buco-Maxilo-Facial a possibilidade de contribuir para o bem-estar e a autoestima de muitos pacientes, favorecendo não apenas mudanças físicas, mas também impactos positivos em sua saúde emocional e qualidade de vida.</p>
-              </aside>
-            </div>
+            <aside className="career-editorial" aria-label="Fala pessoal do Dr. Adriano">
+              <blockquote className="personal-note">
+                <div className="personal-lead">
+                  <span className="section-kicker">Em primeira pessoa</span>
+                  <Quote size={44} strokeWidth={1.5} aria-hidden="true" />
+                  <h3>Por que escolhi esta especialidade</h3>
+                  <p>A Cirurgia e Traumatologia Buco-Maxilo-Facial entrou na minha vida quando percebi que poderia ir muito além de transformar sorrisos e faces: poderia contribuir para uma verdadeira transformação na vida dos meus pacientes.</p>
+                </div>
+                <div className="personal-body">
+                  <p>Mais do que resultados estéticos, essa especialidade me permite proporcionar qualidade de vida, aliviar sofrimentos e angústias e promover mudanças significativas em aspectos fundamentais como a função mastigatória, a fala e a respiração.</p>
+                  <p>E, sobretudo, encontrei na Cirurgia e Traumatologia Buco-Maxilo-Facial a possibilidade de contribuir para o bem-estar e a autoestima de muitos pacientes, favorecendo não apenas mudanças físicas, mas também impactos positivos em sua saúde emocional e qualidade de vida.</p>
+                  <footer>Dr. Adriano Rocha Germano <span>· Cirurgião bucomaxilofacial</span></footer>
+                </div>
+              </blockquote>
+            </aside>
           </div>
         </section>
 
@@ -476,7 +483,7 @@ export default function SobrePage() {
         </section>
       </main>
 
-      <FloatingWhatsApp message={whatsappMessage} />
+      <FloatingWhatsApp />
     </>
   );
 }

@@ -14,7 +14,7 @@ import { ctaLadder } from "@/lib/content";
  * do retângulo é imediata e barata, e não depende de o observer acordar quando
  * o hero está animando.
  */
-export function FloatingWhatsApp({ message }: { message: string }) {
+export function FloatingWhatsApp() {
   const [ready, setReady] = useState(false);
   const pathname = usePathname();
   const label = pathname === "/profissionais-da-saude" ? "Discutir um caso" : ctaLadder.floating;
@@ -59,9 +59,7 @@ export function FloatingWhatsApp({ message }: { message: string }) {
 
   return <ConsultorioChooser
     label={label}
-    message={message}
     ctaId="cta-flutuante-whatsapp"
-    source="botão flutuante durante a leitura"
     className="floating-whatsapp is-ready"
   />;
 }

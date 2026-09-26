@@ -7,6 +7,7 @@ import {
   siteConfig,
   type PracticeLocation,
 } from "@/lib/site";
+import { whatsappMessageForPage } from "@/lib/whatsapp-copy";
 
 /**
  * Um consultório por cartão, com rota no mapa e WhatsApp próprios.
@@ -53,11 +54,7 @@ function LocationCard({ location }: { location: PracticeLocation }) {
         <WhatsAppButton
           ctaId={"cta-local-" + location.id + "-whatsapp"}
           className="location-cta"
-          message={
-            "Olá, gostaria de agendar uma avaliação no consultório de " +
-            location.city +
-            "."
-          }
+          message={whatsappMessageForPage("/", location.city)}
           label={"Falar com a equipe de " + location.city}
           number={location.whatsapp}
         />

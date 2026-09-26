@@ -21,11 +21,11 @@ import { FloatingWhatsApp } from "@/components/floating-whatsapp";
 import { HeroBackdrop } from "@/components/hero-backdrop";
 import { JsonLd } from "@/components/json-ld";
 import { PainList } from "@/components/pain-list";
-import { Reviews } from "@/components/reviews";
+import { ProfessionalReviews } from "@/components/professional-reviews";
 import { SectionWave } from "@/components/section-wave";
 import { TrustMarquee } from "@/components/trust-marquee";
 import { WhatsAppButton } from "@/components/whatsapp-button";
-import { VideoEmbed } from "@/components/video-embed";
+import { VideoFeature } from "@/components/video-feature";
 import { colleagueReviews } from "@/lib/content";
 import { pageMetadata } from "@/lib/metadata";
 import { breadcrumbSchema, faqSchema } from "@/lib/schema";
@@ -361,16 +361,14 @@ export default function ParaDentistasPage() {
           </div>
         </section>
 
-        <section className="section section-white" aria-labelledby="video-equipe-title">
-          <div className="container">
-            <div className="section-heading">
-              <span className="section-kicker">Conversa entre profissionais</span>
-              <h2 id="video-equipe-title">Planejamento conjunto em ortodontia e cirurgia bucomaxilofacial.</h2>
-              <p>O Dr. Adriano conversa sobre a integração das equipes no episódio “Segredos de um bom trabalho em equipe”.</p>
-            </div>
-            <VideoEmbed id="oUHyJctzudg" title="Ortodontia e CTBMF: Segredos de um bom trabalho em equipe" />
-          </div>
-        </section>
+        <VideoFeature
+          id="oUHyJctzudg"
+          title="Ortodontia e CTBMF: Segredos de um bom trabalho em equipe"
+          eyebrow="TRABALHO EM EQUIPE"
+          heading="O plano fica mais claro quando os profissionais conversam."
+          description="No episódio sobre ortodontia e cirurgia bucomaxilofacial, o Dr. Adriano conversa sobre como alinhar decisões e etapas do tratamento."
+          headingId="video-equipe-title"
+        />
 
         {/* 5 — fluxo. */}
         <section className="section consultation-section" id="fluxo">
@@ -411,15 +409,7 @@ export default function ParaDentistasPage() {
           </div>
         </section>
 
-        {/* 6 — espaço reservado para relatos reais de colegas. */}
-          <section className="section reviews-section" id="colegas">
-            <div className="container">
-              {colleagueReviews.length ? <Reviews
-                items={colleagueReviews}
-                title="O que dizem os profissionais que encaminham"
-              /> : <MediaPlaceholder kind="reviews-colleagues" className="reviews-media-reserved" />}
-            </div>
-          </section>
+        <ProfessionalReviews items={colleagueReviews} />
 
         {/* 7 — dúvidas residuais e contato, juntos. */}
         <section className="section contact-section" id="contato">
@@ -462,7 +452,7 @@ export default function ParaDentistasPage() {
         </section>
       </main>
 
-      <FloatingWhatsApp message={whatsappMessage} />
+      <FloatingWhatsApp />
     </>
   );
 }

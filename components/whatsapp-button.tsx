@@ -2,9 +2,7 @@ import { ButtonContent } from "@/components/button-content";
 import { ConsultorioChooser } from "@/components/consultorio-chooser";
 import {
   getWhatsAppHref,
-  originFromCtaId,
   siteConfig,
-  whatsappMessageWithSource,
 } from "@/lib/site";
 
 export function WhatsAppIcon({ size = 16 }: { size?: number }) {
@@ -31,8 +29,6 @@ type WhatsAppButtonProps = {
   label?: string;
   compact?: boolean;
   className?: string;
-  /** Origem legível na mensagem. Sem isso, é derivada do `ctaId`. */
-  source?: string;
   fallbackHref?: string;
   /** Número de outro consultório. Sem ele, usa o número principal do site. */
   number?: string;
@@ -45,13 +41,12 @@ export function WhatsAppButton({
   label = "Falar pelo WhatsApp",
   compact = false,
   className = "",
-  source,
   fallbackHref = "#contato",
   number,
   chooseLocation = true,
 }: WhatsAppButtonProps) {
   if (chooseLocation && !number) {
-    return <ConsultorioChooser label={label} message={message} ctaId={ctaId} source={source ?? originFromCtaId(ctaId)} className={(compact ? "button button-whatsapp button-motion button-small " : "button button-whatsapp button-motion ") + className} />;
+    return <ConsultorioChooser label={label} ctaId={ctaId} className={(compact ? "button button-whatsapp button-motion button-small " : "button button-whatsapp button-motion ") + className} />;
   }
   const displayLabel = isConfigured ? label : label
     .replace("Perguntar pelo WhatsApp", "Tirar uma dúvida")
@@ -67,10 +62,7 @@ export function WhatsAppButton({
           ? "button button-whatsapp button-motion button-small "
           : "button button-whatsapp button-motion ") + className
       }
-      href={isConfigured ? getWhatsAppHref(
-        whatsappMessageWithSource(message, source ?? originFromCtaId(ctaId)),
-        number,
-      ) : fallbackHref}
+      href={isConfigured ? getWhatsAppHref(message.trim(), number) : fallbackHref}
       target={isConfigured ? "_blank" : undefined}
       rel={isConfigured ? "noopener noreferrer" : undefined}
       aria-label={displayLabel + (isConfigured ? " — falar com a equipe pelo WhatsApp" : " — ir para o formulário de contato")}

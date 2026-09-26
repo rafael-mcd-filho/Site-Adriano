@@ -326,27 +326,3 @@ export function getWhatsAppHref(
     encodeURIComponent(message)
   );
 }
-
-/**
- * Anexa a origem à mensagem pré-preenchida. Quem responde no celular vê de
- * onde a pessoa veio antes de perguntar — o dado que o GTM registra para
- * análise chega junto, em português, para quem atende.
- */
-export function whatsappMessageWithSource(message: string, source: string) {
-  return message.trim() + "\n\nOrigem no site: " + source + ".";
-}
-
-/**
- * Origem legível a partir do id de rastreio, para não repetir a mesma
- * informação em duas props. `cta-hero-whatsapp` vira "hero"; um texto próprio
- * pode ser passado quando o id não descrever bem o lugar.
- */
-export function originFromCtaId(ctaId: string) {
-  const readable = ctaId
-    .replace(/^cta-/, "")
-    .replace(/-whatsapp$/, "")
-    .replace(/-/g, " ")
-    .trim();
-
-  return readable || "site";
-}

@@ -1,0 +1,139 @@
+.section {
+  padding-block: clamp(72px, 8vw, 118px);
+  background:
+    radial-gradient(circle at 0% 0%, rgba(var(--blue-400-rgb), 0.12), transparent 34%),
+    var(--sand-100);
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 18px;
+}
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 8px clamp(0px, 2vw, 24px) 18px 0;
+}
+
+.kicker {
+  color: var(--blue-600);
+  font-family: var(--font-manrope), sans-serif;
+  font-size: var(--fs-label);
+  font-weight: 800;
+  letter-spacing: 0.17em;
+}
+
+.intro h2 {
+  max-width: 16ch;
+  margin: 18px 0;
+  color: var(--navy-950);
+  font-size: clamp(32px, 3.5vw, 52px);
+  line-height: 1.1;
+  letter-spacing: -0.045em;
+}
+
+.intro p {
+  max-width: 38ch;
+  margin: 0;
+  color: var(--muted);
+  font-size: var(--fs-body);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  margin: 0;
+  padding: clamp(27px, 3.3vw, 43px);
+  border-radius: 18px;
+}
+
+.first {
+  grid-column: 1;
+  background: var(--navy-900);
+  color: var(--white);
+  box-shadow: 0 22px 55px rgba(var(--navy-950-rgb), 0.15);
+}
+
+.second {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  border: 1px solid rgba(var(--navy-800-rgb), 0.18);
+  background: var(--white);
+  color: var(--navy-900);
+  box-shadow: 0 22px 55px rgba(var(--navy-950-rgb), 0.07);
+}
+
+.quoteIcon {
+  flex: 0 0 auto;
+  margin-bottom: 20px;
+  color: var(--blue-200);
+}
+
+.second .quoteIcon {
+  color: var(--blue-600);
+}
+
+.card p {
+  max-width: 61ch;
+  margin: 0;
+  font-size: clamp(17px, 1.7vw, 20px);
+  line-height: 1.65;
+}
+
+.first p {
+  font-size: clamp(18px, 1.9vw, 22px);
+}
+
+.card footer {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: auto;
+  padding-top: 28px;
+  font-family: var(--font-manrope), sans-serif;
+  font-size: var(--fs-fine);
+  line-height: 1.5;
+}
+
+.author {
+  display: block;
+  padding-top: 14px;
+  border-top: 1px solid currentColor;
+  font-weight: 800;
+}
+
+.first .author {
+  border-color: rgba(255, 255, 255, 0.34);
+}
+
+.second .author {
+  border-color: var(--border);
+}
+
+.source {
+  opacity: 0.78;
+}
+
+@media (max-width: 850px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .intro {
+    padding: 0 0 18px;
+  }
+
+  .intro h2 {
+    max-width: 22ch;
+  }
+
+  .first,
+  .second {
+    grid-column: 1;
+    grid-row: auto;
+  }
+}

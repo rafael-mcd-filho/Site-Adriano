@@ -517,7 +517,7 @@ export default function Home() {
         <LocationSection />
       </main>
 
-      <FloatingWhatsApp message={whatsappMessage} />
+      <FloatingWhatsApp />
     </>
   );
 }

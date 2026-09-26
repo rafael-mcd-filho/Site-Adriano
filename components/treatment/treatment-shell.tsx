@@ -67,7 +67,7 @@ export function TreatmentShell({
         {children}
       </main>
 
-      <FloatingWhatsApp message={content.whatsappMessage} />
+      <FloatingWhatsApp />
     </>
   );
 }

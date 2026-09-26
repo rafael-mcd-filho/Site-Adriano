@@ -22,9 +22,6 @@ import {
   siteConfig,
 } from "@/lib/site";
 
-const headerWhatsAppMessage =
-  "Olá, gostaria de entender como funciona uma avaliação com o Dr. Adriano.";
-
 /** Ícones ficam aqui, não em `lib/site.ts`: navegação é dado, ícone é interface. */
 const navIcons: Record<string, LucideIcon> = {
   "/": Home,
@@ -63,9 +60,6 @@ export function Header() {
   const pathname = usePathname();
   const professional = pathname === "/profissionais-da-saude";
   const contactLabel = professional ? "Discutir um caso" : "Entender meu caso";
-  const contactMessage = professional
-    ? "Olá, sou profissional de saúde e gostaria de discutir um encaminhamento com o Dr. Adriano."
-    : headerWhatsAppMessage;
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [areasOpen, setAreasOpen] = useState(false);
@@ -291,9 +285,7 @@ export function Header() {
 
           <ConsultorioChooser
             label={contactLabel}
-            message={contactMessage}
             ctaId="cta-header-whatsapp"
-            source="cabeçalho do site"
             className="button button-small button-motion header-cta"
           />
 

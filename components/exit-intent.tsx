@@ -6,7 +6,6 @@ import { WhatsAppIcon } from "@/components/whatsapp-button";
 import {
   getWhatsAppHref,
   siteConfig,
-  whatsappMessageWithSource,
 } from "@/lib/site";
 
 const STORAGE_KEY = "adriano-exit-intent-visto";
@@ -126,9 +125,7 @@ export function ExitIntent({ message }: { message: string }) {
             data-cta="cta-saida-whatsapp"
             data-cta-channel="whatsapp"
             className="button button-motion"
-            href={getWhatsAppHref(
-              whatsappMessageWithSource(message, "aviso de saída da página"),
-            )}
+            href={getWhatsAppHref(message.trim())}
             target={siteConfig.whatsappNumber ? "_blank" : undefined}
             rel={siteConfig.whatsappNumber ? "noopener noreferrer" : undefined}
             onClick={dismiss}
