@@ -22,7 +22,7 @@
 }
 
 [data-rota="home"] .home-authority-portrait {
-  max-width: 360px;
+  max-width: 420px;
   justify-self: center;
 }
 
@@ -71,7 +71,7 @@
 
 @media (max-width: 800px) {
   [data-rota="home"] .home-authority-portrait {
-    max-width: 260px;
+    max-width: 320px;
   }
 
   [data-rota="home"] #processo .editorial-support-grid > .media-placeholder {

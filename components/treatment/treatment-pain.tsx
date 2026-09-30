@@ -37,9 +37,9 @@ export function TreatmentPain({ content }: { content: TreatmentContent }) {
 
         <div className="pain-consequence">
           {content.slug === "cirurgia-de-siso" ? <AnatomyIllustration type="wisdom-positions" />
-            : content.slug === "cirurgia-ortognatica" ? <MediaPlaceholder kind="doctor-planning" caption="Foto real do planejamento entre cirurgião e ortodontista a inserir." />
-            : content.slug === "cirurgia-atm" ? <MediaPlaceholder kind="doctor-examination" />
-            : content.slug === "reconstrucao-ossea" ? <MediaPlaceholder kind="doctor-consultation" />
+            : content.slug === "cirurgia-ortognatica" ? <MediaPlaceholder kind="doctor-planning" />
+            : content.slug === "cirurgia-atm" ? null
+            : content.slug === "reconstrucao-ossea" ? <MediaPlaceholder kind="doctor-consultation" slot="doctor-explanation" />
             : <figure className="pain-consequence-photo">
             <Image
               src={imageSrc}

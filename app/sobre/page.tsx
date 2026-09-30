@@ -197,6 +197,9 @@ export default function SobrePage() {
                       </li>
                     ))}
                   </ol>
+                  {group.id === "experiencia" && (
+                    <MediaPlaceholder kind="doctor-congress" className="career-congress" />
+                  )}
                 </article>
               ))}
             </div>
@@ -274,7 +277,7 @@ export default function SobrePage() {
             </div>
 
             <div className="editorial-support-grid">
-            <MediaPlaceholder kind="doctor-consultation" />
+            <MediaPlaceholder kind="doctor-consultation" slot="doctor-explanation" />
             <ul className="decision-criteria decision-criteria-wide">
               {decisionAxis.map((item) => (
                 <li key={item.title}>
@@ -392,7 +395,6 @@ export default function SobrePage() {
                   <MapPin size={20} />
                 </span>
                 <h3>Onde é o atendimento</h3>
-                <MediaPlaceholder kind="reception" compact className="integration-media" />
                 <p>
                   Dois consultórios, em {siteConfig.serviceArea}, cada um com
                   WhatsApp próprio.
@@ -403,16 +405,12 @@ export default function SobrePage() {
           </div>
         </section>
 
-        {/* 7 — a reserva identifica a prova real que ainda precisa ser fornecida. */}
-        <section className="section reviews-section" id="avaliacoes">
+        {/* 7 — depoimentos enviados pelo cliente. */}
+        {patientReviews.length > 0 && <section className="section reviews-section" id="avaliacoes">
           <div className="container">
-            {patientReviews.length ? (
               <Reviews items={patientReviews} title="O que os pacientes dizem sobre o atendimento" />
-            ) : (
-              <MediaPlaceholder kind="reviews-patients" className="reviews-media-reserved" />
-            )}
           </div>
-        </section>
+        </section>}
 
         {/* 8 — áreas e contato encerram juntos. */}
         <section className="section contact-section" id="contato">

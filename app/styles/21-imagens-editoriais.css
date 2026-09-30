@@ -1,5 +1,4 @@
-/* Espaços explícitos para fotografias e provas reais ainda não fornecidas.
-   Seletores próprios: este arquivo não altera componentes de outras frentes. */
+/* Fotografias fornecidas, com proporções próprias e enquadramento responsivo. */
 
 .media-placeholder {
   --media-placeholder-ratio: 4 / 3;
@@ -73,31 +72,60 @@
 .doctor-certificate-small .certificate-preview { padding: 8px; }
 .doctor-certificate-small .certificate-preview span,
 .doctor-certificate-small .certificate-caption { font-size: 11px; }
-.doctor-portrait-reserved .doctor-placeholder-frame { min-width: 0; overflow: hidden; border-radius: 16px; }
-.doctor-placeholder-frame > img { display: block; width: 100%; height: auto; object-fit: cover; aspect-ratio: 4 / 5; }
-.photo-hero .doctor-portrait-reserved { grid-template-columns: minmax(140px, .7fr) minmax(0, 1fr); align-items: center; max-width: 460px; gap: 0; }
-.doctor-portrait-reserved > figcaption { min-width: 0; }
-.photo-hero .doctor-portrait-reserved .doctor-placeholder-frame { border-radius: 14px 0 0 14px; }
-.clinical-case-reserved { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); align-items: center; gap: 28px; margin-top: 42px; padding: clamp(18px, 3vw, 32px); background: rgba(255,255,255,.65); border: 1px solid #d4dce3; border-radius: 22px; }
-.clinical-case-reserved h3 { margin-top: 10px; }
-.clinical-case-reserved > div > p { margin-top: 14px; }
-.reviews-media-reserved { max-width: 640px; margin-inline: auto; }
-.integration-media { margin-block: 16px; }
-.location-photo-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 22px 22px 0; gap: 16px; }
+/* A foto ocupa a coluna do hero; a identificação fica abaixo, sem reduzir
+   o profissional a uma miniatura de corpo inteiro. */
+.doctor-portrait.doctor-portrait-photo {
+  grid-template-columns: minmax(0, 1fr);
+  align-self: center;
+  justify-self: center;
+  width: 100%;
+  max-width: 380px;
+  gap: 0;
+}
+.doctor-portrait-photo .doctor-placeholder-frame {
+  min-width: 0;
+  overflow: hidden;
+  aspect-ratio: 1;
+  background: white;
+}
+.doctor-placeholder-frame > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 0;
+}
+.doctor-portrait-photo .doctor-placeholder-frame > img {
+  transform: scale(1.5);
+  transform-origin: 50% 10%;
+}
+.doctor-portrait.doctor-portrait-photo > figcaption {
+  min-width: 0;
+  padding: 22px 26px;
+  border-top: 1px solid var(--border);
+}
+.media-placeholder[data-media-slot="doctor-authority"] .media-placeholder__image > img {
+  object-fit: cover;
+  transform: scale(1.12);
+  transform-origin: 50% 25%;
+}
+.location-photo-pair { display: grid; grid-template-columns: minmax(0, 1fr); padding: 22px 22px 0; gap: 16px; }
+.location-photo-pair .media-placeholder { --media-placeholder-ratio: 16 / 10; }
+.location-photo-pair .media-placeholder__image { aspect-ratio: 16 / 10; }
+.location-photo-pair .media-placeholder__image > img { object-fit: cover; }
 .location-photo-pair .media-placeholder > figcaption { font-size: 12px; }
 
 @media (max-width: 800px) {
-  .editorial-support-grid, .clinical-case-reserved { grid-template-columns: 1fr; }
+  .editorial-support-grid { grid-template-columns: 1fr; }
   .editorial-support-grid > .media-placeholder { position: static; max-width: 480px; margin-inline: auto; }
   .doctor-authority-media { max-width: 360px; }
-  .clinical-case-reserved > .media-placeholder { max-width: 400px; margin-inline: auto; }
-  .doctor-portrait.doctor-portrait-reserved { grid-template-columns: 140px minmax(0, 1fr); gap: 0; }
-  .doctor-portrait-reserved > figcaption { padding: 16px; }
+  .doctor-portrait.doctor-portrait-photo { grid-template-columns: 112px minmax(0, 1fr); max-width: 480px; }
+  .doctor-portrait-photo .doctor-placeholder-frame { position: relative; aspect-ratio: auto; min-height: 190px; }
+  .doctor-portrait-photo .doctor-placeholder-frame > img { position: absolute; inset: 0; transform: scale(1.25); transform-origin: 50% 5%; }
+  .doctor-portrait.doctor-portrait-photo > figcaption { padding: 18px 16px; border-top: 0; border-left: 1px solid var(--border); }
 }
 @media (max-width: 420px) {
-  .doctor-portrait.doctor-portrait-reserved { grid-template-columns: 1fr; }
-  .doctor-portrait-reserved .doctor-placeholder-frame { width: 160px; margin: 16px auto 0; border-radius: 12px; }
-  .doctor-portrait-reserved > figcaption { text-align: center; }
-  .doctor-portrait-reserved .identity-board, .doctor-portrait-reserved .identity-link { justify-content: center; }
+  .doctor-portrait.doctor-portrait-photo { grid-template-columns: 96px minmax(0, 1fr); }
+  .doctor-portrait.doctor-portrait-photo > figcaption { padding: 16px 12px; }
   .location-photo-pair { padding-inline: 16px; gap: 12px; }
 }

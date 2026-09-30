@@ -15,3 +15,7 @@
  * Se a regra passar a valer para mais de uma rota, ela não pertence mais
  * aqui: mova para o arquivo dono em app/styles/.
  */
+
+[data-rota="cirurgia-atm"] .pain-consequence {
+  grid-template-columns: minmax(0, 1fr);
+}

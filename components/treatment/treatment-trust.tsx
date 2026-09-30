@@ -30,12 +30,14 @@ export function TreatmentTrust({
   content: TreatmentContent;
   showCase?: boolean;
 }) {
-  const reviews = content.reviews ?? patientReviews;
+  const reviews = (content.reviews ?? patientReviews).filter(
+    (review) => !review.treatment || review.treatment === content.slug,
+  );
 
   return (
     <section className={"section authority-section " + styles.trust} id="confianca">
       <div className="container authority-grid">
-        <MediaPlaceholder kind="doctor-portrait" className={styles.portrait} />
+        <MediaPlaceholder kind="doctor-portrait" slot="doctor-authority" className={styles.portrait} />
 
         <div className="authority-copy">
           <span className="section-kicker light">Quem conduz a avaliação</span>
@@ -102,20 +104,16 @@ export function TreatmentTrust({
         </div>
       </div>
 
-      {showCase && (
+      {showCase && content.clinicalCase && (
         <div className="container trust-case">
           <ClinicalCaseCard item={content.clinicalCase} />
         </div>
       )}
 
       {/* A ação de contato independe da disponibilidade de relatos reais. */}
-      {reviews.length ? (
+      {reviews.length > 0 && (
         <div className="container trust-reviews">
           <Reviews items={reviews} />
-        </div>
-      ) : (
-        <div className="container trust-reviews">
-          <MediaPlaceholder kind="reviews-patients" className="reviews-media-reserved" />
         </div>
       )}
       <div className={"container " + styles.trustAction}>

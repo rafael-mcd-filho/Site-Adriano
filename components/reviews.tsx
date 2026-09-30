@@ -1,5 +1,6 @@
 import { Quote, Star } from "lucide-react";
 import type { Review } from "@/lib/content";
+import { ReviewsImageCarousel } from "@/components/reviews-image-carousel";
 
 /**
  * Relatos reais dentro de um bloco maior — nunca uma seção própria.
@@ -23,6 +24,7 @@ export function Reviews({
   rating?: { average: string; count: number; href: string };
 }) {
   if (!items.length) return null;
+  const imageOnly = items.every((review) => review.imageHref);
 
   return (
     <div className="reviews">
@@ -42,18 +44,22 @@ export function Reviews({
         )}
       </div>
 
-      <div className="reviews-grid">
-        {items.map((review) => (
-          <blockquote className="review-card" key={review.text}>
-            <Quote size={18} aria-hidden="true" />
-            <p>{review.text}</p>
-            <footer>
-              {review.author}
-              {review.source && <span> · {review.source}</span>}
-            </footer>
-          </blockquote>
-        ))}
-      </div>
+      {imageOnly ? (
+        <ReviewsImageCarousel items={items} />
+      ) : (
+        <div className="reviews-grid">
+          {items.map((review) => (
+            <blockquote className="review-card" key={review.text}>
+              <Quote size={18} aria-hidden="true" />
+              <p>{review.text}</p>
+              <footer>
+                {review.author}
+                {review.source && <span> · {review.source}</span>}
+              </footer>
+            </blockquote>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

@@ -202,7 +202,50 @@
 .reviews-grid {
   display: grid;
   gap: 18px;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+}
+
+.reviews-carousel-shell {
+  position: relative;
+}
+
+.reviews-carousel {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: calc((100% - 54px) / 4);
+  gap: 18px;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  padding: 2px 4px 4px;
+  scroll-padding-inline: 2px;
+  scroll-snap-type: inline mandatory;
+  scrollbar-width: none;
+}
+
+.reviews-carousel::-webkit-scrollbar {
+  display: none;
+}
+
+@media (max-width: 800px) {
+  .reviews-carousel {
+    grid-auto-columns: minmax(250px, 82%);
+  }
+}
+
+.review-image-card {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  margin: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  background: #102844;
+  box-shadow: 0 18px 40px rgba(15, 43, 76, 0.12);
+  scroll-snap-align: start;
+}
+
+.review-image-card img {
+  object-fit: contain;
 }
 
 .review-card {
@@ -700,6 +743,7 @@
 .location-card-body {
   display: grid;
   align-content: start;
+  grid-template-rows: auto auto auto auto minmax(0, 1fr);
   padding: clamp(22px, 3vw, 30px);
   gap: 12px;
 }
@@ -735,6 +779,7 @@
 
 .location-card-body .location-cta {
   margin-top: 6px;
+  align-self: end;
 }
 
 /* Rodapé: cidade em cima, WhatsApp embaixo. */

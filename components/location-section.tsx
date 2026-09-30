@@ -22,8 +22,7 @@ function LocationCard({ location }: { location: PracticeLocation }) {
   return (
     <article className="location-card">
       <div className="location-photo-pair">
-        <MediaPlaceholder kind="facade" compact slot={"facade-" + location.id} caption={"Fachada em " + location.city + " a inserir."} />
-        <MediaPlaceholder kind="reception" compact slot={"reception-" + location.id} caption={"Recepção em " + location.city + " a inserir."} />
+        <MediaPlaceholder kind="facade" compact slot={"facade-" + location.id} />
       </div>
       <div className="location-card-body">
         <span className="section-kicker">

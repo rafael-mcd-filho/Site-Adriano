@@ -5,7 +5,7 @@ import { siteConfig } from "@/lib/site";
 import { MediaPlaceholder } from "@/components/media-placeholder";
 import { mediaReplacements } from "@/lib/media-replacements";
 
-/** Foto pendente explicitamente identificada; o certificado fornecido é preservado. */
+/** Retrato de apresentação, foto no consultório e certificado profissional. */
 export function DoctorPortrait({
   variant = "hero",
   profileHref = "/sobre",
@@ -16,7 +16,7 @@ export function DoctorPortrait({
   if (variant === "authority") {
     return (
       <div className="doctor-authority-media">
-        <MediaPlaceholder kind="doctor-portrait" />
+        <MediaPlaceholder kind="doctor-portrait" slot="doctor-authority" />
         <div className="doctor-certificate-small"><DoctorPortrait variant="certificate" /></div>
       </div>
     );
@@ -33,10 +33,13 @@ export function DoctorPortrait({
       </figure>
     );
   }
+  const portrait = mediaReplacements["doctor-portrait"];
+  if (!portrait) return null;
+
   return (
-    <figure className={"doctor-portrait doctor-portrait-" + variant + " doctor-portrait-reserved"}>
+    <figure className={"doctor-portrait doctor-portrait-" + variant + " doctor-portrait-photo"}>
       <div className="doctor-placeholder-frame">
-        <Image src={mediaReplacements["doctor-portrait"]?.src ?? "/images/placeholders/doctor-portrait.svg"} alt={mediaReplacements["doctor-portrait"]?.alt ?? "Imagem do doutor aqui — substituir pelo retrato real do Dr. Adriano."} width={960} height={1200} sizes="(max-width: 600px) 160px, (max-width: 800px) 200px, 420px" />
+        <Image src={portrait.src} alt={portrait.alt} width={portrait.width} height={portrait.height} sizes="(max-width: 800px) 180px, 570px" />
       </div>
       {/* A identidade é a autoria do que vem abaixo: sem ela, o visitante lê
           quatro seções de conteúdo clínico assinadas por ninguém. O link para

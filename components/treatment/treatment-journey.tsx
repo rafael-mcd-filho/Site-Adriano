@@ -1,19 +1,7 @@
 import { HeartPulse, Search, Waypoints } from "lucide-react";
 import { ClinicalCaseCard } from "@/components/clinical-case";
 import type { TreatmentContent } from "@/lib/content";
-import type { MediaPlaceholderKind } from "@/components/media-placeholder";
 import styles from "./treatment-refinement.module.css";
-
-const casePlaceholders: Record<string, MediaPlaceholderKind> = {
-  "apneia-do-sono": "case-sleep",
-  "implantes-dentarios": "case-implants",
-  "reconstrucao-ossea": "case-bone",
-  "patologias-maxilofaciais": "case-pathology",
-  "trauma-bucomaxilofacial": "case-trauma",
-  "cirurgia-atm": "case-atm",
-  "cirurgia-ortognatica": "case-orthognathic",
-  "cirurgia-de-siso": "case-wisdom",
-};
 
 /**
  * As três etapas seguem sempre a mesma lógica — entender, executar,
@@ -70,7 +58,7 @@ export function TreatmentJourney({ content }: { content: TreatmentContent }) {
           })}
         </ol>
 
-        <ClinicalCaseCard item={content.clinicalCase} placeholderKind={casePlaceholders[content.slug]} />
+        <ClinicalCaseCard item={content.clinicalCase} />
       </div>
     </section>
   );

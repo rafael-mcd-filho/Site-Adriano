@@ -59,6 +59,11 @@
   margin: 0;
 }
 
+[data-rota="sobre"] .career-congress {
+  max-width: 320px;
+  margin: 24px auto 0;
+}
+
 [data-rota="sobre"] .career-group .career-timeline {
   margin-top: 14px;
 }

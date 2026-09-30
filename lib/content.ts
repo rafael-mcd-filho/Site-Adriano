@@ -57,9 +57,40 @@ export type Review = {
   author: string;
   /** Origem verificável: "Google", "Enviado por e-mail em 00/00", etc. */
   source?: string;
+  /** Arte enviada pelo cliente que documenta o comentário transcrito. */
+  imageHref?: string;
+  /** Evita apresentar um relato específico como prova de outro tratamento. */
+  treatment?: string;
 };
 
-export const patientReviews: Review[] = [];
+/** Artes de depoimentos enviadas pelo cliente e otimizadas em public/images/avaliacoes/. */
+export const patientReviews: Review[] = [
+  {
+    text: "A ortognática foi a realização de um sonho! Definitivamente uma transformação de vida, tanto pessoal como profissional. Agradeço muito a Dr. Adriano e sua equipe pelo trabalho maravilhoso",
+    author: "@juliana.dasi",
+    source: "Instagram · trecho do depoimento",
+    imageHref: "/images/avaliacoes/depoimento-1.webp",
+    treatment: "cirurgia-ortognatica",
+  },
+  {
+    text: "Médico top de verdade, meu medico é um exemplo de médico responsável, atencioso com os pacientes. Super indico ele. Amo muito",
+    author: "@luciaa_dias",
+    source: "Instagram · trecho do depoimento",
+    imageHref: "/images/avaliacoes/depoimento-2.webp",
+  },
+  {
+    text: "[…] obrigado por tudo, pelo amor, cuidado e dedicação que tem por cada paciente […]",
+    author: "@ivandamedeiros",
+    source: "Instagram · trecho do depoimento",
+    imageHref: "/images/avaliacoes/depoimento-3.webp",
+  },
+  {
+    text: "Depoimento enviado em imagem pelo cliente.",
+    author: "@elianalvesbonfim",
+    source: "Instagram · trecho do depoimento",
+    imageHref: "/images/avaliacoes/depoimento-4.webp",
+  },
+];
 export const colleagueReviews: Review[] = [
   {
     text: "É sempre um prazer discutir e planejar casos ao lado do colega Adriano Germano. Esses momentos de troca nos permitem aprender continuamente, ampliar nossas perspectivas e considerar diferentes alternativas, sempre respeitando e integrando as visões de cada profissional. No final, quem mais se beneficia dessa parceria e desse cuidado compartilhado é o nosso paciente.",

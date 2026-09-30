@@ -354,25 +354,21 @@ export default function Home() {
         </section>
 
         {/* A prova social entra depois das áreas, antes da apresentação completa. */}
-        <section className="section reviews-section home-early-reviews" id="avaliacoes">
+        {patientReviews.length > 0 && <section className="section reviews-section home-early-reviews" id="avaliacoes">
           <div className="container">
-            {patientReviews.length ? (
               <Reviews
-                items={patientReviews.slice(0, 3)}
+                items={patientReviews}
                 title="O que os pacientes dizem sobre o atendimento"
               />
-            ) : (
-              <MediaPlaceholder kind="reviews-patients" className="reviews-media-reserved" />
-            )}
           </div>
-        </section>
+        </section>}
 
         {/* Quem conduz E como decide, juntos. O currículo completo
             fica em /sobre: a home apresenta o profissional, não conta a
             trajetória inteira. */}
         <section className="section about-section section-soft-edge section-with-wave" id="sobre">
           <div className="container about-grid">
-            <MediaPlaceholder kind="doctor-portrait" className="home-authority-portrait" />
+            <MediaPlaceholder kind="doctor-portrait" slot="doctor-authority" className="home-authority-portrait" />
             <div className="about-copy">
               <span className="section-kicker light">Quem conduz a avaliação</span>
               <h2>{siteConfig.fullName}</h2>
