@@ -66,8 +66,8 @@ export const practiceLocations: PracticeLocation[] = [
     complement: "Sala 1405",
     neighborhood: "Miramar",
     postalCode: "58032-090",
-    whatsapp: "5583986070067",
-    whatsappDisplay: "(83) 98607-0067",
+    whatsapp: "558391275324",
+    whatsappDisplay: "(83) 9127-5324",
   },
 ];
 
