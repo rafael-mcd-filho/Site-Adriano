@@ -1,5 +1,9 @@
 # Documentação do projeto
 
+## Implementação atual
+
+Contato exclusivamente pelo WhatsApp desde 30/09/2026. Formulários, webhook e página de obrigado foram removidos. Documentos antigos abaixo são históricos quando divergirem desta decisão. Veja [Rastreamento e conversões](../TRACKING-GTM.md).
+
 ## 01 — Cliente
 
 - [Briefing do cliente](./01-cliente/briefing-cliente-adriano-bmf.md)

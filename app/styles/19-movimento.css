@@ -322,20 +322,6 @@
     0 12px 26px -6px color-mix(in srgb, var(--whatsapp) 72%, transparent);
 }
 
-/* O botão do formulário não é do WhatsApp, mas é o mesmo passo seguinte por
-   outro caminho: recebe o mesmo volume, na cor dele. */
-.form-submit:not(:disabled) {
-  background-image: linear-gradient(
-    to bottom,
-    color-mix(in srgb, var(--navy-700) 92%, white),
-    var(--navy-800) 60%,
-    var(--navy-950)
-  );
-  box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.16) inset,
-    0 8px 20px -6px color-mix(in srgb, var(--navy-800) 52%, transparent);
-}
-
 /*
  * O anel do pulso.
  *

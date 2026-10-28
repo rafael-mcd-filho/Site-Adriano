@@ -1,4 +1,3 @@
-import { ContactForm } from "@/components/contact-form";
 import { WhatsAppButton } from "@/components/whatsapp-button";
 import type { TreatmentContent } from "@/lib/content";
 import styles from "./treatment-refinement.module.css";
@@ -10,7 +9,7 @@ import styles from "./treatment-refinement.module.css";
  * vida, não do procedimento. No meio da leitura esse tom soaria vago perto dos
  * blocos técnicos; aqui ele é o que faz decidir.
  *
- * WhatsApp primeiro, formulário depois — a mesma ordem do hero. O rótulo é o
+ * Contato exclusivamente pelo WhatsApp, como no hero. O rótulo é o
  * último degrau da escada: a esta altura a pessoa já sabe o que a avaliação é,
  * então o botão pode dizer o que ela faz.
  */
@@ -24,25 +23,11 @@ export function TreatmentContact({ content }: { content: TreatmentContent }) {
           <WhatsAppButton
             ctaId="cta-final-whatsapp"
             message={content.whatsappMessage}
-            label="Escolher consultório e falar com a equipe"
+            label="Falar com a equipe pelo WhatsApp"
             className="button-whatsapp-solid"
           />
           <p className={styles.contactNote}>A equipe informa horários, valor da consulta e o que levar. A indicação de qualquer procedimento depende da avaliação.</p>
         </div>
-
-        <ContactForm
-          available={Boolean(process.env.FORM_WEBHOOK_URL)}
-          page={content.slug}
-          eyebrow={
-            content.contactForm?.eyebrow ??
-            "Prefere que a equipe entre em contato?"
-          }
-          title={content.contactForm?.title ?? "Converse sobre a avaliação."}
-          description={
-            content.contactForm?.description ??
-            "Deixe seu nome e WhatsApp para conversar sobre horários e funcionamento da consulta."
-          }
-        />
       </div>
     </section>
   );

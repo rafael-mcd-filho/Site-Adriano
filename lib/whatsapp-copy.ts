@@ -12,26 +12,21 @@ const pageSubjects: Record<string, string> = {
   "/cirurgia-de-siso": "cirurgia de siso",
 };
 
-export function whatsappMessageForPage(pathname: string, city: string) {
+export function whatsappMessageForPage(pathname: string) {
   const path = pathname.replace(/\/$/, "") || "/";
-  const cityPreference = ` Prefiro falar com a equipe de ${city}.`;
 
   if (path === "/profissionais-da-saude" || path === "/para-dentistas") {
-    return "Olá, vim pelo site e estava vendo a página para profissionais da saúde. Queria ajuda para conversar sobre um caso." + cityPreference;
+    return "Olá, vim pelo site e estava vendo a página para profissionais da saúde. Queria ajuda para conversar sobre um caso.";
   }
 
   if (path === "/") {
-    return "Olá, vim pelo site e queria ajuda para entender meu caso." + cityPreference;
-  }
-
-  if (path === "/obrigado") {
-    return "Olá, acabei de enviar uma solicitação pelo site e queria complementar meu contato." + cityPreference;
+    return "Olá, vim pelo site e queria ajuda para entender meu caso.";
   }
 
   const subject = pageSubjects[path];
   if (subject) {
-    return `Olá, vim pelo site e estava vendo a página sobre ${subject}. Queria ajuda.${cityPreference}`;
+    return `Olá, vim pelo site e estava vendo a página sobre ${subject}. Queria ajuda.`;
   }
 
-  return "Olá, vim pelo site e queria ajuda." + cityPreference;
+  return "Olá, vim pelo site e queria ajuda.";
 }

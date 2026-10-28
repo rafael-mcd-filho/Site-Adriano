@@ -1,31 +1,20 @@
-import Script from "next/script";
+// Contêiner do Dr. Adriano, configurado diretamente no código.
+const containerId = "GTM-WFF2SFX6";
 
-const containerId = process.env.NEXT_PUBLIC_GTM_ID || "";
-
-/**
- * O contêiner só é carregado quando `NEXT_PUBLIC_GTM_ID` existe. Enquanto isso,
- * os eventos continuam sendo empilhados em `window.dataLayer` pelos
- * componentes de rastreio — quando o GTM entrar, ele encontra a fila pronta e
- * nada precisa ser reinstrumentado.
- */
+/** Script do GTM compartilhado por todas as páginas, sem variável de ambiente. */
 export function GoogleTagManager() {
-  if (!containerId) return null;
-
   return (
-    <Script id="gtm-loader" strategy="afterInteractive">
-      {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    // eslint-disable-next-line @next/next/next-script-for-ga -- Snippet direto no head solicitado pelo responsável pelo site.
+    <script id="gtm-loader" dangerouslySetInnerHTML={{ __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','${containerId}');`}
-    </Script>
+})(window,document,'script','dataLayer','${containerId}');` }} />
   );
 }
 
 /** Fallback para navegação sem JavaScript. Precisa ser o início do `<body>`. */
 export function GoogleTagManagerNoScript() {
-  if (!containerId) return null;
-
   return (
     <noscript>
       <iframe

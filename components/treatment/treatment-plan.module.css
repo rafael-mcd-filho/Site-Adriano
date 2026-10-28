@@ -1,0 +1,58 @@
+/* Um único plano: leitura principal aberta, aprofundamentos sob demanda. */
+.plan {
+  padding-block: clamp(48px, 6vw, 80px);
+  background: var(--sand-100);
+  color: var(--ink);
+  border-block: 1px solid var(--border);
+  scroll-margin-top: 100px;
+}
+.heading { max-width: 780px; margin-bottom: clamp(28px, 4vw, 44px); }
+.heading h2 { margin: 14px 0 0; color: var(--navy-950); text-wrap: balance; }
+.layout { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 64px); align-items: start; }
+.assessment { min-width: 0; }
+.assessment > p { margin: 0 0 18px; color: var(--muted); }
+.points { display: grid; gap: 12px; list-style: none; padding: 6px 0 24px; margin: 0; }
+.points li { display: flex; align-items: baseline; gap: 10px; color: var(--ink); font-size: var(--fs-sm); }
+.points svg { flex: 0 0 16px; color: var(--whatsapp-dark); transform: translateY(3px); }
+.journey { padding: clamp(22px, 3vw, 32px); background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-xl); scroll-margin-top: 100px; }
+.journeyKicker { color: var(--blue-600); font-size: var(--fs-label); font-weight: 750; letter-spacing: .06em; text-transform: uppercase; }
+.journey h3 { color: var(--navy-950); font-size: var(--fs-h3); margin: 10px 0 12px; text-wrap: balance; }
+.journeyIntro { color: var(--muted); font-size: var(--fs-sm); margin: 0 0 24px; }
+.steps { list-style: none; padding: 0; margin: 0; }
+.steps li { display: grid; grid-template-columns: 32px minmax(0, 1fr); gap: 14px; position: relative; padding-bottom: 22px; }
+.steps li:last-child { padding-bottom: 0; }
+.steps li:not(:last-child)::before { content: ""; position: absolute; left: 15px; top: 38px; bottom: 6px; width: 1px; background: var(--border); }
+.steps[data-alternatives] li::before { display: none; }
+.marker { width: 32px; height: 32px; display: grid; place-items: center; border: 1px solid var(--border); background: var(--surface); border-radius: 50%; color: var(--navy-800); font-size: var(--fs-label); font-weight: 750; font-variant-numeric: tabular-nums; }
+.steps h4, .paths h4 { font-size: var(--fs-body); color: var(--navy-950); margin: 3px 0 7px; line-height: 1.4; }
+.steps p, .paths p { font-size: var(--fs-sm); color: var(--muted); margin: 0; }
+.disclosure { border-block-end: 1px solid var(--border); }
+.disclosure summary { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 52px; padding: 16px 0; list-style: none; cursor: pointer; color: var(--navy-950); font-size: var(--fs-sm); font-weight: 650; }
+.disclosure summary::-webkit-details-marker { display: none; }
+.disclosure summary svg { flex: 0 0 17px; color: var(--blue-600); }
+.disclosure[open] > summary svg { transform: rotate(45deg); }
+.disclosure summary:focus-visible { outline: 2px solid var(--blue-600); outline-offset: 4px; border-radius: 4px; }
+.answer { padding: 0 28px 18px 0; }
+.answer p { margin: 0; font-size: var(--fs-sm); color: var(--muted); }
+.illustration { padding: 0 0 20px; }
+.illustration :global(.visual-motif) { margin: 0; width: 100%; }
+.relatedLinks { display: grid; justify-items: start; gap: 12px; padding-top: 20px; }
+.relatedLinks a { display: inline-flex; align-items: baseline; gap: 8px; color: var(--blue-600); font-size: var(--fs-sm); text-underline-offset: 4px; }
+.relatedLinks svg { flex: 0 0 16px; transform: translateY(3px); }
+.paths, .questions { margin-top: clamp(28px, 4vw, 44px); padding-top: clamp(24px, 3vw, 32px); border-top: 1px solid var(--border); }
+.paths h3, .questions h3 { color: var(--navy-950); font-size: var(--fs-h3); margin: 0 0 18px; }
+.paths ul { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; list-style: none; margin: 0; padding: 0; }
+.paths li { padding-left: 18px; border-left: 2px solid var(--blue-200); }
+.questionGrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 36px; align-items: start; }
+.action { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-top: 28px; }
+.action > p { max-width: 48ch; margin: 0; color: var(--navy-950); font-size: var(--fs-lead); font-weight: 650; }
+.action > button { flex: 0 1 auto; }
+@media (hover: hover) and (pointer: fine) { .disclosure summary:hover { color: var(--blue-600); } }
+@media (max-width: 900px) { .layout { grid-template-columns: 1fr; gap: 28px; } .action { flex-direction: column; align-items: flex-start; } }
+@media (max-width: 600px) {
+  .heading h2 { text-wrap: pretty; }
+  .journey { padding: 22px 18px; }
+  .questionGrid, .paths ul { grid-template-columns: 1fr; }
+  .steps li { gap: 12px; }
+  .action > button { width: 100%; }
+}

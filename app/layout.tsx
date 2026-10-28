@@ -5,6 +5,7 @@ import { Footer } from "@/components/footer";
 import { GoogleTagManager, GoogleTagManagerNoScript } from "@/components/gtm";
 import { Header } from "@/components/header";
 import { JsonLd } from "@/components/json-ld";
+import { PageViewTracking } from "@/components/page-view-tracking";
 import { WhatsAppTracking } from "@/components/whatsapp-tracking";
 import { treatments } from "@/lib/content";
 import { siteName } from "@/lib/metadata";
@@ -91,7 +92,7 @@ export const viewport: Viewport = {
  * Um consultório como nó próprio do grafo.
  *
  * São dois `Dentist`, um por cidade, cada um com endereço completo e o
- * telefone do WhatsApp daquela equipe. Um nó único com duas cidades em
+ * telefone central de atendimento em João Pessoa. Um nó único com duas cidades em
  * `areaServed` diria ao Google que existe um lugar atendendo duas regiões —
  * quando existem dois lugares, cada um na sua.
  *
@@ -109,7 +110,7 @@ function practiceNode(location: PracticeLocation) {
     image: siteConfig.url + homeOgImage.url,
     inLanguage: "pt-BR",
     medicalSpecialty: "OralAndMaxillofacialSurgery",
-    telephone: schemaTelephone(location),
+    telephone: schemaTelephone(),
     address: {
       "@type": "PostalAddress",
       streetAddress: [location.street, location.complement, location.building]
@@ -203,6 +204,9 @@ const structuredData = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="pt-BR" className={manrope.variable + " " + sourceSans.variable}>
+      <head>
+        <GoogleTagManager />
+      </head>
       <body>
         <GoogleTagManagerNoScript />
         <JsonLd data={structuredData} />
@@ -213,7 +217,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <div id="conteudo">{children}</div>
         <Footer />
         <WhatsAppTracking />
-        <GoogleTagManager />
+        <PageViewTracking />
       </body>
     </html>
   );

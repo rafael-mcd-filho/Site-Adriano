@@ -7,7 +7,6 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { ButtonContent } from "@/components/button-content";
-import { ContactForm } from "@/components/contact-form";
 import { DoctorPortrait } from "@/components/doctor-portrait";
 import { MediaPlaceholder } from "@/components/media-placeholder";
 import { FaqAccordion } from "@/components/faq-accordion";
@@ -187,7 +186,7 @@ const homeFaqs = [
   {
     question: "Como faço para agendar uma avaliação?",
     answer:
-      "Escolha o consultório e fale pelo WhatsApp. A equipe informa valor, horários e o que levar. Se enviar uma solicitação de contato, aguarde o retorno da equipe para confirmar o agendamento.",
+      "Fale diretamente pelo WhatsApp de João Pessoa. A equipe informa valor, horários e o que levar. Aguarde a confirmação da equipe para considerar o agendamento concluído.",
   },
   {
     question: "Onde e em que horários acontece o atendimento?",
@@ -478,19 +477,11 @@ export default function Home() {
               <WhatsAppButton
                 ctaId="cta-final-whatsapp"
                 message={whatsappMessage}
-                label="Escolher consultório e falar com a equipe"
+                label="Falar com a equipe pelo WhatsApp"
                 className="button-whatsapp-solid"
               />
               <p className="contact-expectation">A equipe informa horários, valor da consulta e o que levar. A indicação de qualquer procedimento depende da avaliação.</p>
             </div>
-
-            <ContactForm
-              page="home"
-              available={Boolean(process.env.FORM_WEBHOOK_URL)}
-              eyebrow="Prefere que a equipe entre em contato?"
-              title="Vamos começar pela sua dúvida."
-              description="Deixe seu contato para saber como agendar. A equipe responde pelo WhatsApp em horário comercial; os detalhes clínicos ficam para a consulta."
-            />
 
             <div className="closing-faq" id="duvidas">
               <h2>Dúvidas que costumam sobrar.</h2>

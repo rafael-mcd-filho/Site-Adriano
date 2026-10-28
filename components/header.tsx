@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { BrandLogo } from "@/components/brand-logo";
 import { usePathname } from "next/navigation";
 import {
   Activity,
@@ -8,7 +9,6 @@ import {
   ChevronDown,
   Handshake,
   Home,
-  MessageCircle,
   Stethoscope,
   User,
   X,
@@ -16,11 +16,14 @@ import {
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { ButtonContent } from "@/components/button-content";
-import { ConsultorioChooser } from "@/components/consultorio-chooser";
+import { WhatsAppButton, WhatsAppIcon } from "@/components/whatsapp-button";
 import {
   areaNavigation,
+  contactLocation,
+  getWhatsAppHref,
   siteConfig,
 } from "@/lib/site";
+import { whatsappMessageForPage } from "@/lib/whatsapp-copy";
 
 /** Ícones ficam aqui, não em `lib/site.ts`: navegação é dado, ícone é interface. */
 const navIcons: Record<string, LucideIcon> = {
@@ -68,9 +71,7 @@ export function Header() {
   const toggleRef = useRef<HTMLButtonElement>(null);
   const currentArea = areaNavigation.find((item) => item.href === pathname);
   const inArea = Boolean(currentArea);
-  const contactHref = pathname === "/" || pathname === "/profissionais-da-saude" || pathname === "/sobre" || inArea
-    ? "#contato"
-    : "/#contato";
+  const contactMessage = whatsappMessageForPage(pathname);
 
   const closeMenu = () => setIsOpen(false);
 
@@ -207,13 +208,7 @@ export function Header() {
       <header className={scrolled ? "site-header is-scrolled" : "site-header"}>
         <div className="container header-inner">
           <Link className="brand" href="/" onClick={closeMenu} aria-label="Dr. Adriano — Início">
-            <span className="brand-mark" aria-hidden="true">
-              A
-            </span>
-            <span className="brand-copy">
-              <strong>Dr. Adriano</strong>
-              <small>Buco-Maxilo-Facial</small>
-            </span>
+            <BrandLogo />
           </Link>
 
           <nav className="desktop-nav" aria-label="Navegação principal">
@@ -283,10 +278,12 @@ export function Header() {
             </Link>
           </nav>
 
-          <ConsultorioChooser
+          <WhatsAppButton
+            message={contactMessage}
             label={contactLabel}
             ctaId="cta-header-whatsapp"
-            className="button button-small button-motion header-cta"
+            compact
+            className="header-cta"
           />
 
           <button
@@ -329,13 +326,7 @@ export function Header() {
       >
         <div className="mobile-menu-top">
           <span className="brand brand-light">
-            <span className="brand-mark" aria-hidden="true">
-              A
-            </span>
-            <span className="brand-copy">
-              <strong>Dr. Adriano</strong>
-              <small>Buco-Maxilo-Facial</small>
-            </span>
+            <BrandLogo light />
           </span>
           <button
             type="button"
@@ -374,15 +365,20 @@ export function Header() {
         </nav>
 
         <div className="mobile-menu-foot">
-          <Link
-            id="cta-menu-mobile-formulario"
-            data-cta="cta-menu-mobile-formulario"
+          <a
+            id="cta-menu-mobile-contato"
+            data-cta="cta-menu-mobile-contato"
+            data-cta-channel="whatsapp"
+            data-cta-city={contactLocation.id}
+            data-cta-location="menu-mobile"
             className="button button-motion mobile-whatsapp"
-            href={contactHref}
+            href={getWhatsAppHref(contactMessage)}
+            target="_blank"
+            rel="noopener noreferrer"
             onClick={closeMenu}
           >
-            <ButtonContent icon={MessageCircle}>{contactLabel}</ButtonContent>
-          </Link>
+            <ButtonContent icon={WhatsAppIcon} seal="whatsapp">{contactLabel}</ButtonContent>
+          </a>
 
           <p className="mobile-credentials">
             {siteConfig.specialty}

@@ -1,10 +1,8 @@
-import { SectionWave } from "@/components/section-wave";
 import { TrustMarquee } from "@/components/trust-marquee";
 import { TreatmentConsultation } from "@/components/treatment/treatment-consultation";
 import { TreatmentContact } from "@/components/treatment/treatment-contact";
-import { TreatmentDecision } from "@/components/treatment/treatment-decision";
+import { TreatmentPlan } from "@/components/treatment/treatment-plan";
 import { TreatmentHero } from "@/components/treatment/treatment-hero";
-import { TreatmentJourney } from "@/components/treatment/treatment-journey";
 import { TreatmentPain } from "@/components/treatment/treatment-pain";
 import { TreatmentShell } from "@/components/treatment/treatment-shell";
 import { TreatmentTrust } from "@/components/treatment/treatment-trust";
@@ -17,25 +15,14 @@ const content = treatments["apneia-do-sono"];
 
 export const metadata = treatmentMetadata(content);
 
-/**
- * Sete blocos, e cada um responde a uma pergunta diferente do visitante. Quem
- * chega aqui costuma trazer uma ideia formada sobre CPAP e cirurgia: por isso
- * as objeções ficam na mesma seção do método, logo depois do critério que as
- * desfaz, e não numa faixa própria antes dele.
- *
- * A ordem das seções é decidida NESTE arquivo. Reordenar, remover ou inserir
- * uma seção própria aqui não afeta nenhuma outra página.
- */
+/** Planejamento e etapas compartilham uma seção; os demais blocos são preservados. */
 export default function ApneiaPage() {
   return (
     <TreatmentShell content={content}>
       <TreatmentHero content={content} />
       <TrustMarquee items={credentialFacts} />
       <TreatmentPain content={content} />
-      <SectionWave to="var(--navy-800)" />
-      <TreatmentDecision content={content} />
-      <SectionWave from="var(--surface)" to="var(--sand-100)" flip />
-      <TreatmentJourney content={content} />
+      <TreatmentPlan content={content} />
       <VideoFeature
         id="JTaVaA-75Nc"
         title="Viva Melhor sem Apneia do Sono — Conversa Afinada com o Dr. Adriano"

@@ -102,26 +102,7 @@
 }
 #conteudo:has(.contact-section) + .site-footer { --footer-wave-fill: var(--navy-950); }
 #conteudo:has(.location-section) + .site-footer { --footer-wave-fill: var(--ivory); }
-.contact-card, .faq-card { box-shadow: none; }
-.contact-card { border: 1px solid var(--border); }
-.field textarea {
-  width: 100%;
-  min-height: 128px;
-  padding: 12px 14px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-ui);
-  background: white;
-  color: var(--ink);
-  font: inherit;
-  font-size: max(16px, 1em);
-  line-height: 1.5;
-  resize: vertical;
-}
-.field input { background: white; }
-.field textarea:focus { outline: 2px solid var(--blue-600); outline-offset: 2px; }
-.field textarea[aria-invalid='true'] { border-color: var(--error); }
-.contact-fields:disabled textarea { cursor: not-allowed; }
-.field-hint, .field small { color: var(--muted); font-size: var(--fs-fine); }
+.faq-card { box-shadow: none; }
 @media (max-width: 600px) {
   .hero-badges { display: grid; gap: 10px; }
   .hero-actions { gap: 16px; }

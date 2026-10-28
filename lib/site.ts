@@ -25,8 +25,8 @@ const wantsDemoData = process.env.NEXT_PUBLIC_SITE_IS_DEMO !== "false";
 const isDemo = wantsDemoData && !isIndexable;
 
 /**
- * Um consultório. São dois, e nenhum é "o principal" para quem está na outra
- * cidade: cada um tem endereço e WhatsApp próprios.
+ * Os dois consultórios mantêm seus endereços. O contato pelo site é
+ * centralizado no WhatsApp de João Pessoa.
  *
  * O bairro de Natal não veio no material e não foi deduzido pelo CEP —
  * endereço é o dado que manda gente para uma porta, e ele fica como veio.
@@ -45,6 +45,20 @@ export type PracticeLocation = {
   whatsappDisplay: string;
 };
 
+/** Único destino dos contatos iniciados pelo site. */
+export const contactLocation: PracticeLocation = {
+  id: "joao-pessoa",
+  city: "João Pessoa",
+  state: "PB",
+  building: "Edifício Eco Medical Center",
+  street: "Rua Antônio Rabelo Júnior, 170",
+  complement: "Sala 1405",
+  neighborhood: "Miramar",
+  postalCode: "58032-090",
+  whatsapp: "558391275324",
+  whatsappDisplay: "(83) 9127-5324",
+};
+
 export const practiceLocations: PracticeLocation[] = [
   {
     id: "natal",
@@ -54,21 +68,10 @@ export const practiceLocations: PracticeLocation[] = [
     street: "Av. Amintas Barros, 3700",
     complement: "Torre Trade, sala 511",
     postalCode: "59075-250",
-    whatsapp: "5584994177276",
-    whatsappDisplay: "(84) 99417-7276",
+    whatsapp: "558494177176",
+    whatsappDisplay: "(84) 9417-7176",
   },
-  {
-    id: "joao-pessoa",
-    city: "João Pessoa",
-    state: "PB",
-    building: "Edifício Eco Medical Center",
-    street: "Rua Antônio Rabelo Júnior, 170",
-    complement: "Sala 1405",
-    neighborhood: "Miramar",
-    postalCode: "58032-090",
-    whatsapp: "558391275324",
-    whatsappDisplay: "(83) 9127-5324",
-  },
+  contactLocation,
 ];
 
 /** Endereço em uma linha, na ordem que o Google Maps entende. */
@@ -204,21 +207,13 @@ export const siteConfig = {
   hours: "Atendimento com agendamento, em horário comercial",
   hoursLines: [
     "Segunda a sexta, em horário comercial",
-    "Agendamento pelo WhatsApp de cada consultório",
+    "Agendamento pelo WhatsApp de João Pessoa",
   ],
   description:
     "Dor na mandíbula, perda de dentes ou alterações na mordida? Avaliação em cirurgia buco-maxilo-facial em Natal e João Pessoa para entender seu caso antes de decidir.",
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://dradrianorgermano.com.br",
-  /**
-   * Número de reserva para links que informam explicitamente uma cidade.
-   * Os botões gerais pedem a escolha do consultório antes de abrir o WhatsApp.
-   *
-   * Enquanto este campo estava vazio, TODOS os botões do site eram âncoras
-   * para um formulário desabilitado — o site não tinha nenhum canal de
-   * contato funcionando. A variável de ambiente continua podendo sobrescrever.
-   */
-  whatsappNumber:
-    process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || practiceLocations[0].whatsapp,
+  /** Todos os contatos do site abrem diretamente a equipe de João Pessoa. */
+  whatsappNumber: contactLocation.whatsapp,
   isDemo,
   isIndexable,
 };
@@ -302,26 +297,16 @@ export const institutionalExpertise = [
   "Fissuras e anomalias craniofaciais",
 ] as const;
 
-/** Telefone de um consultório em formato E.164, para o schema. */
-export function schemaTelephone(location: PracticeLocation) {
-  return "+" + location.whatsapp;
+/** Telefone central de atendimento em formato E.164, para o schema. */
+export function schemaTelephone() {
+  return "+" + siteConfig.whatsappNumber;
 }
 
-/**
- * Link de conversa no WhatsApp. `number` existe para o bloco de cada
- * consultório: quem mora em Natal fala com a equipe de Natal.
- */
-export function getWhatsAppHref(
-  message: string,
-  number: string = siteConfig.whatsappNumber,
-) {
-  if (!number) {
-    return "#contato";
-  }
-
+/** Link direto para o único WhatsApp de atendimento do site: João Pessoa. */
+export function getWhatsAppHref(message: string) {
   return (
     "https://wa.me/" +
-    number.replace(/\D/g, "") +
+    siteConfig.whatsappNumber +
     "?text=" +
     encodeURIComponent(message)
   );

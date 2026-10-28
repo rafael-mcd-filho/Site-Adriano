@@ -10,7 +10,6 @@ import {
   Quote,
   ShieldCheck,
 } from "lucide-react";
-import { ContactForm } from "@/components/contact-form";
 import { DoctorPortrait } from "@/components/doctor-portrait";
 import { MediaPlaceholder } from "@/components/media-placeholder";
 import { FloatingWhatsApp } from "@/components/floating-whatsapp";
@@ -396,8 +395,8 @@ export default function SobrePage() {
                 </span>
                 <h3>Onde é o atendimento</h3>
                 <p>
-                  Dois consultórios, em {siteConfig.serviceArea}, cada um com
-                  WhatsApp próprio.
+                  Dois consultórios, em {siteConfig.serviceArea}, com contato
+                  pelo WhatsApp de João Pessoa.
                 </p>
                 <Link className="text-link light-link" href="/#local">Ver endereços e como chegar <ArrowRight size={16} aria-hidden="true" /></Link>
               </article>
@@ -424,19 +423,11 @@ export default function SobrePage() {
               <WhatsAppButton
                 ctaId="cta-final-whatsapp"
                 message={whatsappMessage}
-                label="Escolher consultório e falar com a equipe"
+                label="Falar com a equipe pelo WhatsApp"
                 className="button-whatsapp-solid"
               />
               <p className="contact-expectation">A equipe informa horários, valor da consulta e o que levar. A indicação de qualquer procedimento depende da avaliação.</p>
             </div>
-
-            <ContactForm
-              page="sobre"
-              available={Boolean(process.env.FORM_WEBHOOK_URL)}
-              eyebrow="Prefere que a equipe entre em contato?"
-              title="Comece pela sua dúvida."
-              description="Deixe seu nome e WhatsApp. A equipe responde em horário comercial e explica como funciona a consulta."
-            />
 
             {/*
               As rotas de tratamento são as áreas com captação ativa, não o

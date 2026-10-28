@@ -20,12 +20,12 @@
 @import "./styles/08-home-areas-e-publicos.css";
 @import "./styles/09-credenciais-e-localizacao.css";
 @import "./styles/10-duvidas.css";
-@import "./styles/11-formulario.css";
+@import "./styles/11-whatsapp.css";
 @import "./styles/12-responsivo-global.css";
 @import "./styles/13-retrato-e-hero.css";
 @import "./styles/14-paginas-de-tratamento.css";
 @import "./styles/15-tratamento-responsivo.css";
-@import "./styles/16-rodape-e-obrigado.css";
+@import "./styles/16-rodape.css";
 
 /* ── Camada final ───────────────────────────────────────────────────────
    Duas rodadas de revisão aplicadas por cima de tudo acima. Vencem porque vêm

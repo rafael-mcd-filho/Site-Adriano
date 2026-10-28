@@ -30,9 +30,6 @@
   color: var(--muted);
   font-weight: 650;
 }
-
-/* O essencial primeiro: quase ninguém lê treze seções antes de enviar um
-   formulário. O resumo não substitui o texto — só não obriga a lê-lo todo. */
 [data-rota="politica-de-privacidade"] .legal-summary {
   padding: 24px 26px;
   border: 1px solid var(--border);

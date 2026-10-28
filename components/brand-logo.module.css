@@ -1,0 +1,19 @@
+.logo,
+.large {
+  display: block;
+  flex: 0 0 auto;
+  width: 150px;
+  height: auto;
+  overflow: hidden;
+}
+
+.large {
+  width: 224px;
+  max-width: 100%;
+}
+
+@media (max-width: 600px) {
+  .logo {
+    width: 130px;
+  }
+}

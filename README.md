@@ -4,7 +4,7 @@ Projeto do site profissional do Dr. Adriano, com foco em cirurgia buco-maxilo-fa
 
 ## Status
 
-Primeira versão funcional construída com Next.js, React e TypeScript. Todas as páginas planejadas, a copy, o sistema visual, os formulários contextuais e a base técnica de SEO já estão implementados.
+Primeira versão funcional construída com Next.js, React e TypeScript. Todas as páginas planejadas, a copy, o sistema visual, o contato pelo WhatsApp e a base técnica de SEO já estão implementados.
 
 ## Documentação
 
@@ -32,8 +32,12 @@ Para validar a versão de produção, execute `npm run build`.
 
 - `NEXT_PUBLIC_SITE_URL` — domínio canônico do site.
 - `NEXT_PUBLIC_SITE_IS_DEMO` — mantenha `true` enquanto houver dados provisórios; o site permanecerá fora da indexação.
-- `NEXT_PUBLIC_WHATSAPP_NUMBER` — número com DDI e DDD, somente dígitos.
-- `FORM_WEBHOOK_URL` — endpoint que receberá os formulários. Sem ele, o envio funciona apenas como demonstração.
+
+## Rastreamento e contato
+
+O contato é exclusivamente pelo WhatsApp de João Pessoa, (83) 9127-5324, definido em `contactLocation` em `lib/site.ts`. Todos os botões abrem a conversa diretamente, sem modal de escolha de consultório. O GTM usa o contêiner `GTM-WFF2SFX6` diretamente no script de `components/gtm.tsx`, sem variável na Vercel. O script fica no `head` e o `noscript` no início do `body` de todas as páginas.
+
+Veja [TRACKING-GTM.md](./TRACKING-GTM.md) para os eventos e as conversões a criar no Google Ads.
 
 ## Estrutura do projeto
 
@@ -47,4 +51,4 @@ Os materiais brutos do cliente devem permanecer em docs/06-assets-originais. Ape
 
 ## Publicação
 
-A publicação deve ser feita somente depois da troca dos dados fictícios, da configuração do WhatsApp, do webhook dos formulários e da aprovação das fotos. O projeto está preparado para deploy na Vercel.
+A publicação deve ser feita somente depois da troca dos dados fictícios, da configuração do WhatsApp, da aprovação das fotos. O projeto está preparado para deploy na Vercel.

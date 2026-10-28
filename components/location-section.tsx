@@ -7,16 +7,10 @@ import {
   siteConfig,
   type PracticeLocation,
 } from "@/lib/site";
-import { whatsappMessageForPage } from "@/lib/whatsapp-copy";
 
 /**
- * Um consultório por cartão, com rota no mapa e WhatsApp próprios.
- *
- * Eram um endereço e um telefone de demonstração. Com os dois consultórios
- * reais, a seção passou a responder a pergunta que a pessoa de fato traz —
- * "qual fica mais perto de mim?" — e o botão de cada cartão fala com a equipe
- * daquela cidade, em vez de mandar quem mora em Natal para o número de João
- * Pessoa.
+ * Cada cartão preserva o endereço e a rota do consultório. O contato fica
+ * centralizado na equipe de João Pessoa, com a cidade informada na mensagem.
  */
 function LocationCard({ location }: { location: PracticeLocation }) {
   return (
@@ -53,9 +47,8 @@ function LocationCard({ location }: { location: PracticeLocation }) {
         <WhatsAppButton
           ctaId={"cta-local-" + location.id + "-whatsapp"}
           className="location-cta"
-          message={whatsappMessageForPage("/", location.city)}
-          label={"Falar com a equipe de " + location.city}
-          number={location.whatsapp}
+          message={"Olá, vim pelo site e gostaria de saber sobre o atendimento em " + location.city + "."}
+          label="Falar com a equipe"
         />
       </div>
     </article>
@@ -76,8 +69,8 @@ export function LocationSection() {
           </div>
           <p>
             <Clock3 size={16} aria-hidden="true" /> {siteConfig.hoursLines[0]}.
-            Fale com o consultório da sua cidade para combinar o horário e
-            saber o que levar.
+            Fale com a equipe pelo WhatsApp de João Pessoa para combinar o
+            horário e saber o que levar.
           </p>
         </div>
 

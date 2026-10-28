@@ -8,22 +8,6 @@ import type { PainIcon } from "@/components/pain-list";
 export const contentLastReviewed = "2026-09-13";
 
 /**
- * Opções do formulário das páginas de tratamento.
- *
- * Roteiam por INTENÇÃO DE CONTATO, nunca por estado de saúde. Pedir declaração
- * em primeira pessoa ("Tenho dor…", "Já tenho diagnóstico…") coleta dado
- * pessoal sensível pela LGPD (Art. 5º, II) e exigiria consentimento específico
- * e destacado (Art. 11). A área clínica já é conhecida pela página onde a
- * pessoa está; o quadro clínico fica para a conversa, fora do formulário.
- */
-export const neutralFormOptions = [
-  "Quero entender como funciona a avaliação.",
-  "Quero saber o que acontece na primeira consulta.",
-  "Prefiro explicar meu caso pelo WhatsApp.",
-  "Outro assunto.",
-];
-
-/**
  * Escada de compromisso dos CTAs.
  *
  * O rótulo muda quando a pessoa avançou de etapa mental, nunca por variedade:
@@ -325,14 +309,6 @@ export type TreatmentContent = {
     title: string;
     cues: [string, string, string];
   };
-  formQuestion: string;
-  formOptions: string[];
-  /** Copy do formulário de contato do fecho. */
-  contactForm?: {
-    eyebrow?: string;
-    title?: string;
-    description?: string;
-  };
   whatsappMessage: string;
   metadata: {
     title: string;
@@ -454,12 +430,6 @@ export const treatments: Record<string, TreatmentContent> = {
     closingText: "Converse com a equipe sobre a avaliação dos maxilares e sua participação no cuidado da apneia.",
     /* Sem relato aprovado: o bloco de confiança omite a prova social. */
     visualSummary: { kicker: "Sono e respiração", title: "Entender a respiração para orientar o cuidado do sono.", cues: ["Ronco", "Pausas respiratórias", "Cansaço ao acordar"] },
-    formQuestion: "Como podemos ajudar?",
-    formOptions: neutralFormOptions,
-    contactForm: {
-      title: "Converse sobre a avaliação do sono.",
-      description: "A equipe informa horários, valor da consulta e o que levar."
-    },
     whatsappMessage: "Olá, vi a página sobre apneia do sono e gostaria de saber como funciona a avaliação buco-maxilo-facial.",
     metadata: { title: "Apneia do Sono em João Pessoa", description: "Ronco, pausas na respiração e cansaço ao acordar? Entenda o papel dos maxilares na apneia do sono e da avaliação multidisciplinar em João Pessoa." },
   },
@@ -602,12 +572,6 @@ export const treatments: Record<string, TreatmentContent> = {
     closingText: "Converse com a equipe para esclarecer a falta de osso, as alternativas e as etapas que poderiam fazer parte do seu plano.",
     /* Sem relato aprovado: o bloco de confiança omite a prova social. */
     visualSummary: { kicker: "Osso e reabilitação", title: "Reconstruir com um objetivo para os seus dentes.", cues: ["Perda óssea", "Enxerto ósseo", "Futura prótese"] },
-    formQuestion: "Como podemos ajudar?",
-    formOptions: neutralFormOptions,
-    contactForm: {
-      title: "Converse sobre suas possibilidades.",
-      description: "A equipe informa horários, valor da consulta e o que levar."
-    },
     whatsappMessage: "Olá, vi a página sobre reconstrução óssea e gostaria de saber como avaliar minhas possibilidades de reabilitação.",
     metadata: { title: "Reconstrução Óssea e Enxerto em João Pessoa", description: "Ouviu que não há osso suficiente para implante? Entenda como a reconstrução e o enxerto ósseo são avaliados em João Pessoa, com indicação individual." },
   },
@@ -717,12 +681,6 @@ export const treatments: Record<string, TreatmentContent> = {
     closingText: "Converse com a equipe para avaliar sua dor, os movimentos e os cuidados que fazem sentido para o seu quadro.",
     /* Sem relato aprovado: o bloco de confiança omite a prova social. */
     visualSummary: { kicker: "Articulação e músculos", title: "Investigar a dor. Cuidar do movimento.", cues: ["Dor na mandíbula", "Estalos", "Travamento"] },
-    formQuestion: "Como podemos ajudar?",
-    formOptions: neutralFormOptions,
-    contactForm: {
-      title: "Converse sobre a avaliação da mandíbula.",
-      description: "A equipe informa horários, valor da consulta e o que levar."
-    },
     whatsappMessage: "Olá, vi a página sobre DTM e ATM e gostaria de saber como funciona a avaliação da mandíbula.",
     metadata: { title: "DTM e ATM: Dor na Mandíbula em João Pessoa", description: "Dor na mandíbula, estalos ou travamento? Conheça a avaliação de DTM e ATM em João Pessoa, os cuidados conservadores e quando a cirurgia é considerada." },
   },
@@ -836,12 +794,6 @@ export const treatments: Record<string, TreatmentContent> = {
     closingText: "Converse sobre a indicação, a participação do ortodontista e as etapas para planejar sua decisão.",
     /* Sem relato aprovado: o bloco de confiança omite a prova social. */
     visualSummary: { kicker: "Mordida e face", title: "Planejar a função sem deixar suas expectativas de lado.", cues: ["Mastigação", "Posição dos maxilares", "Mudanças faciais"] },
-    formQuestion: "Como podemos ajudar?",
-    formOptions: neutralFormOptions,
-    contactForm: {
-      title: "Converse sobre a indicação.",
-      description: "A equipe informa horários, valor da consulta e o que levar."
-    },
     whatsappMessage: "Olá, vi a página sobre cirurgia ortognática e gostaria de entender como funciona a avaliação de indicação.",
     metadata: { title: "Cirurgia Ortognática em João Pessoa", description: "Mordida que não encaixa ou dificuldade para mastigar? Entenda a indicação, o papel do ortodontista e a jornada da cirurgia ortognática em João Pessoa." },
   },
@@ -969,12 +921,6 @@ export const treatments: Record<string, TreatmentContent> = {
     closingText: "Converse com a equipe para avaliar suas opções de reabilitação e entender as etapas antes de decidir.",
     /* Sem relato aprovado: o bloco de confiança omite a prova social. */
     visualSummary: { kicker: "Dentes e mastigação", title: "O implante sustenta a prótese. O plano considera sua rotina.", cues: ["Osso e gengiva", "Mastigação", "Futura prótese"] },
-    formQuestion: "Como podemos ajudar?",
-    formOptions: neutralFormOptions,
-    contactForm: {
-      title: "Converse sobre a reabilitação.",
-      description: "A equipe informa horários, valor da consulta e o que levar."
-    },
     whatsappMessage: "Olá, vi a página de implantes dentários e gostaria de saber como funciona a avaliação para o meu caso.",
     metadata: { title: "Implantes Dentários e Extra-orais em Natal e João Pessoa", description: "Conheça a avaliação para implantes dentários e extra-orais e as possibilidades de reabilitação oral ou facial em Natal e João Pessoa." },
   },
@@ -1114,12 +1060,6 @@ export const treatments: Record<string, TreatmentContent> = {
         "Canal da mandíbula",
         "Dente vizinho"
       ]
-    },
-    formQuestion: "Como podemos ajudar?",
-    formOptions: neutralFormOptions,
-    contactForm: {
-      title: "Converse sobre o seu siso.",
-      description: "A equipe informa horários, valor da consulta e o que levar."
     },
     whatsappMessage: "Olá, vi a página sobre cirurgia de siso e gostaria de saber se preciso remover o meu.",
     metadata: {
@@ -1313,13 +1253,6 @@ export const treatments: Record<string, TreatmentContent> = {
       kicker: "Diagnóstico e extensão",
       title: "Entender o que é, onde está e o que precisa ser preservado.",
       cues: ["Natureza da alteração", "Estruturas próximas", "Função e reconstrução"],
-    },
-    formQuestion: "Como podemos ajudar?",
-    formOptions: neutralFormOptions,
-    contactForm: {
-      title: "Converse sobre a alteração encontrada.",
-      description:
-        "A equipe informa horários, valor da consulta e o que pode ajudar na avaliação.",
     },
     whatsappMessage:
       "Olá, vi a página sobre patologias maxilofaciais e gostaria de saber como funciona a avaliação de uma alteração encontrada no meu exame.",
@@ -1516,13 +1449,6 @@ export const treatments: Record<string, TreatmentContent> = {
       title: "Avaliar o que mudou e o que precisa ser acompanhado.",
       cues: ["Mordida", "Ossos da face", "Movimentos e sensibilidade"],
     },
-    formQuestion: "Como podemos ajudar?",
-    formOptions: neutralFormOptions,
-    contactForm: {
-      title: "Converse sobre a avaliação após o trauma.",
-      description:
-        "Para casos estáveis ou após o primeiro atendimento, a equipe informa horários, valor da consulta e o que levar.",
-    },
     whatsappMessage:
       "Olá, vi a página sobre trauma bucomaxilofacial. Já passei pelo primeiro atendimento e gostaria de saber como funciona a avaliação especializada.",
     metadata: {
@@ -1532,29 +1458,3 @@ export const treatments: Record<string, TreatmentContent> = {
     },
   },
 };
-
-export const homeFormOptions = [
-  "Implantes dentários.",
-  "Reconstrução óssea.",
-  "DTM e ATM.",
-  "Apneia do sono.",
-  "Cirurgia ortognática.",
-  "Cirurgia de siso.",
-  "Patologias maxilofaciais.",
-  "Trauma bucomaxilofacial.",
-  "Fissuras e anomalias craniofaciais.",
-  "Outro assunto.",
-];
-
-export const dentistFormOptions = [
-  "Encaminhar um caso de implantes ou reconstrução.",
-  "Encaminhar um caso de ATM.",
-  "Encaminhar um caso de cirurgia ortognática.",
-  "Encaminhar um caso relacionado à apneia.",
-  "Encaminhar um caso de cirurgia de siso.",
-  "Encaminhar um caso de patologia maxilofacial.",
-  "Encaminhar um caso de trauma bucomaxilofacial.",
-  "Encaminhar um caso de fissura ou anomalia craniofacial.",
-  "Discutir um caso antes do encaminhamento.",
-  "Outro assunto.",
-];

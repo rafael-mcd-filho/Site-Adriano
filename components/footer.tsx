@@ -1,9 +1,11 @@
 import Link from "next/link";
+import { BrandLogo } from "@/components/brand-logo";
 import { Clock3, MapPin, ShieldCheck } from "lucide-react";
 import { FooterAction } from "@/components/footer-action";
 import {
   areaNavigation,
-  practiceLocations,
+  contactLocation,
+  getWhatsAppHref,
   schemaName,
   siteConfig,
 } from "@/lib/site";
@@ -38,18 +40,20 @@ export function Footer() {
       <div className="container footer-grid">
         <div className="footer-brand">
           <Link className="brand brand-light" href="/">
-            <span className="brand-mark" aria-hidden="true">
-              A
-            </span>
-            <span className="brand-copy">
-              <strong>Dr. Adriano</strong>
-              <small>Buco-Maxilo-Facial</small>
-            </span>
+            <BrandLogo light large />
           </Link>
           <p>
             Antes de falar em cirurgia, precisamos entender o seu caso.
             Atendimento em cirurgia buco-maxilo-facial em Natal e João Pessoa.
           </p>
+          <a className="footer-instagram" href={siteConfig.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram do Dr. Adriano: @dr.adrianorgermano (abre em nova aba)">
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true" focusable="false">
+              <rect x="3" y="3" width="18" height="18" rx="5" />
+              <circle cx="12" cy="12" r="4" />
+              <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+            </svg>
+            <span><strong>Acompanhe no Instagram</strong><span>@dr.adrianorgermano</span></span>
+          </a>
           {siteConfig.isDemo && (
             <span className="demo-badge">
               <ShieldCheck size={15} aria-hidden="true" />
@@ -73,11 +77,6 @@ export function Footer() {
           <h2 className="footer-title">Informações</h2>
           <ul className="footer-links">
             <li>
-              <a href={siteConfig.instagram} target="_blank" rel="noopener noreferrer">
-                Instagram do Dr. Adriano
-              </a>
-            </li>
-            <li>
               <Link href="/sobre">Dr. Adriano Rocha Germano</Link>
             </li>
             <li>
@@ -98,18 +97,21 @@ export function Footer() {
         <div>
           <h2 className="footer-title">Atendimento</h2>
           <ul className="footer-contact">
-            {practiceLocations.map((location) => (
-              <li key={location.id}>
-                <MapPin size={18} aria-hidden="true" />
-                <span>
-                  <strong>{location.city}</strong>
-                  <br />
-                  <a href={"https://wa.me/" + location.whatsapp}>
-                    WhatsApp {location.whatsappDisplay}
-                  </a>
-                </span>
-              </li>
-            ))}
+            <li>
+              <MapPin size={18} aria-hidden="true" />
+              <span>
+                <strong>Contato · {contactLocation.city}</strong>
+                <br />
+                <a href={getWhatsAppHref("Olá, vim pelo site e gostaria de falar com a equipe.")}
+                  data-cta="cta-rodape-whatsapp"
+                  data-cta-channel="whatsapp"
+                  data-cta-location="rodape"
+                  data-cta-city={contactLocation.id}
+                  target="_blank" rel="noopener noreferrer">
+                  WhatsApp {contactLocation.whatsappDisplay}
+                </a>
+              </span>
+            </li>
             <li>
               <Clock3 size={18} aria-hidden="true" />
               <span>{siteConfig.hours}</span>

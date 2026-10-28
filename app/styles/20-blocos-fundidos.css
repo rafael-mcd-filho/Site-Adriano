@@ -592,38 +592,6 @@
   text-decoration: underline;
 }
 
-/* ── Confirmação ───────────────────────────────────────────────────────── */
-.thanks-extra {
-  display: grid;
-  max-width: 760px;
-  margin: clamp(34px, 4vw, 48px) auto 0;
-  padding: 26px 28px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-xl);
-  background: var(--ivory);
-  gap: 14px;
-}
-
-.thanks-extra p {
-  margin: 0;
-  font-size: var(--fs-sm);
-}
-
-.thanks-extra ul {
-  display: flex;
-  flex-wrap: wrap;
-  margin: 0;
-  padding: 0;
-  gap: 8px 26px;
-  list-style: none;
-}
-
-.thanks-extra a {
-  color: var(--blue-600);
-  font-size: var(--fs-sm);
-  font-weight: 650;
-}
-
 /* ── Para dentistas: escopo e devolutiva ───────────────────────────────── */
 .case-block {
   margin-top: clamp(34px, 4vw, 48px);
@@ -696,8 +664,7 @@
 }
 
 /* ── Consultórios ──────────────────────────────────────────────────────── */
-/* Um cartão por cidade, cada um com mapa e WhatsApp próprios. A seção deixou
-   de ser "o endereço" e passou a responder "qual fica mais perto de mim?". */
+/* Um cartão por cidade, com rota própria e contato centralizado em João Pessoa. */
 .location-section .split-heading p {
   display: flex;
   align-items: flex-start;
@@ -855,14 +822,6 @@
 
 .career-registry svg {
   color: var(--blue-600);
-}
-
-/* ── Confirmação: números para salvar ──────────────────────────────────── */
-.thanks-extra .thanks-numbers {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px 24px;
-  font-size: var(--fs-sm);
 }
 
 @media (max-width: 600px) {

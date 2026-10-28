@@ -227,8 +227,7 @@
   .about-grid,
   .location-grid,
   .professional-grid,
-  .legal-layout,
-  .contact-card {
+  .legal-layout {
     grid-template-columns: 1fr;
   }
 
@@ -248,10 +247,6 @@
   }
   .legal-index {
     position: static;
-  }
-
-  .contact-card {
-    gap: 35px;
   }
 
   .footer-grid {
@@ -394,9 +389,7 @@
   .treatment-page-alignment .mobile-signal-mark i:nth-child(1) { width: 46px; height: 1px; border-width: 1px 0 0; }
   .treatment-page-alignment .mobile-signal-mark i:nth-child(2) { width: 1px; height: 42px; border-width: 0 0 0 1px; }
   .treatment-page-alignment .mobile-signal-mark i:nth-child(3) { width: 13px; height: 13px; border-radius: 50%; }
-  .areas-grid,
-  .field-grid,
-  .reason-options {
+  .areas-grid {
     grid-template-columns: 1fr;
   }
   .portrait-initial {
@@ -410,19 +403,6 @@
   }
   .authority-grid {
     grid-template-columns: 1fr;
-  }
-  .contact-card,
-  .form-success {
-    grid-template-columns: 1fr;
-    padding: 27px 20px;
-  }
-
-  .form-success > * {
-    grid-column: 1 !important;
-  }
-
-  .form-success > svg {
-    margin-bottom: 8px;
   }
 
   .floating-whatsapp {

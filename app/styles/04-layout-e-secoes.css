@@ -83,8 +83,7 @@
 .home-hero,
 .inner-hero,
 .dentist-hero,
-.legal-hero,
-.thanks-hero {
+.legal-hero {
   overflow: hidden;
   background:
     radial-gradient(circle at 17% 15%, rgba(var(--blue-400-rgb), 0.22), transparent 27%),

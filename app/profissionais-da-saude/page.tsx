@@ -13,7 +13,6 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { ButtonContent } from "@/components/button-content";
-import { ContactForm } from "@/components/contact-form";
 import { DoctorPortrait } from "@/components/doctor-portrait";
 import { MediaPlaceholder } from "@/components/media-placeholder";
 import { FaqAccordion } from "@/components/faq-accordion";
@@ -197,12 +196,12 @@ export default function ParaDentistasPage() {
                   className="button-whatsapp-solid"
                 />
                 <Link
-                  id="cta-hero-formulario"
-                  data-cta="cta-hero-formulario"
+                  id="cta-hero-fluxo"
+                  data-cta="cta-hero-fluxo"
                   className="button button-secondary button-motion"
-                  href={process.env.FORM_WEBHOOK_URL ? "#contato" : "#fluxo"}
+                  href="#fluxo"
                 >
-                  <ButtonContent>{process.env.FORM_WEBHOOK_URL ? "Solicitar retorno profissional" : "Ver como encaminhar"}</ButtonContent>
+                  <ButtonContent>Ver como encaminhar</ButtonContent>
                 </Link>
               </div>
 
@@ -428,15 +427,6 @@ export default function ParaDentistasPage() {
                 className="button-whatsapp-solid"
               />
             </div>
-
-            <ContactForm
-              page="profissionais-da-saude"
-              variant="professional"
-              available={Boolean(process.env.FORM_WEBHOOK_URL)}
-              eyebrow="Canal profissional"
-              title="Solicite um retorno profissional."
-              description="Informe seu contato, área de atuação e o objetivo da conversa. A documentação clínica é compartilhada depois, pelo canal orientado pela equipe."
-            />
 
             <div className="closing-faq" id="duvidas-profissionais">
               <h2>Dúvidas antes do primeiro encaminhamento.</h2>

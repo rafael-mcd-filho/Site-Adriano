@@ -82,12 +82,12 @@ A ordem importa: cada um pode sobrescrever os anteriores. Não reordene os
 | `08-home-areas-e-publicos.css` | Blocos da home: selo em pílula, áreas de atuação, dois públicos |
 | `09-credenciais-e-localizacao.css` | Cartão de credencial do hero e bloco de localização |
 | `10-duvidas.css` | Acordeão de dúvidas frequentes |
-| `11-formulario.css` | Formulário de contato: campos, máscara, estados, avisos |
+| `11-whatsapp.css` | Botão flutuante do WhatsApp |
 | `12-responsivo-global.css` | Os cortes de 1080, 800 e 600px que valem para o site inteiro |
 | `13-retrato-e-hero.css` | Retrato do profissional, selos do hero, WhatsApp como botão primário |
 | `14-paginas-de-tratamento.css` | Blocos 2 a 8 das rotas de tratamento |
 | `15-tratamento-responsivo.css` | Cortes de largura dos blocos de tratamento |
-| `16-rodape-e-obrigado.css` | Onda do rodapé e página de confirmação |
+| `16-rodape.css` | Onda do rodapé e avisos de erro |
 | `17-divida-…` / `18-divida-…` | Camada final. Ver abaixo |
 | `19-movimento.css` | Revelação ao rolar |
 | `20-blocos-fundidos.css` | Seções nascidas da união de outras duas: dor + consequência, método + objeções, credencial + prova, consulta + dúvidas, contato + FAQ |

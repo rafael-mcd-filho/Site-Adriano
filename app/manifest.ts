@@ -15,13 +15,19 @@ export default function manifest(): MetadataRoute.Manifest {
      * Servido de `public/` em vez das convenções de metadata: o caminho gerado
      * pelo Next carrega hash de cache, e o manifest precisa de URL estável.
      * Sem `icons`, instalar o site na tela inicial resulta em ícone em branco.
-     * SVG com `sizes: "any"` cobre todas as densidades sem gerar PNGs.
+     * PNGs do monograma AG nos tamanhos de instalação.
      */
     icons: [
       {
-        src: "/icon.svg",
-        sizes: "any",
-        type: "image/svg+xml",
+        src: "/brand/adriano-ag-192-v1.png",
+        sizes: "192x192",
+        type: "image/png",
+        purpose: "any",
+      },
+      {
+        src: "/brand/adriano-ag-512-v1.png",
+        sizes: "512x512",
+        type: "image/png",
         purpose: "any",
       },
     ],

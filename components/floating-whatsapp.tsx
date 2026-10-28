@@ -2,13 +2,16 @@
 
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import { ConsultorioChooser } from "@/components/consultorio-chooser";
+import { ButtonContent } from "@/components/button-content";
+import { WhatsAppIcon } from "@/components/whatsapp-icon";
 import { ctaLadder } from "@/lib/content";
+import { contactLocation, getWhatsAppHref } from "@/lib/site";
+import { whatsappMessageForPage } from "@/lib/whatsapp-copy";
 
 /**
  * Aparece depois que o hero sai da viewport e volta a se ocultar quando a
  * seção de contato entra em cena. Assim o atalho não compete nem com o CTA da
- * primeira dobra nem com o consentimento e o envio do formulário.
+ * primeira dobra nem com a seção final de contato.
  *
  * `scroll`/`resize` passivos em vez de IntersectionObserver: a checagem direta
  * do retângulo é imediata e barata, e não depende de o observer acordar quando
@@ -53,13 +56,22 @@ export function FloatingWhatsApp() {
       window.removeEventListener("resize", schedule);
       if (frame) cancelAnimationFrame(frame);
     };
-  }, []);
+  }, [pathname]);
 
   if (!ready) return null;
 
-  return <ConsultorioChooser
-    label={label}
-    ctaId="cta-flutuante-whatsapp"
+  return <a
+    id="cta-flutuante-whatsapp"
+    data-cta="cta-flutuante-whatsapp"
+    data-cta-channel="whatsapp"
+    data-cta-city={contactLocation.id}
+    data-cta-location="flutuante"
     className="floating-whatsapp is-ready"
-  />;
+    href={getWhatsAppHref(whatsappMessageForPage(pathname))}
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label={label + " — falar com a equipe pelo WhatsApp"}
+  >
+    <ButtonContent icon={WhatsAppIcon} seal="whatsapp">{label}</ButtonContent>
+  </a>;
 }

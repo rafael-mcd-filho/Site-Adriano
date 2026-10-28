@@ -1,6 +1,7 @@
 import { contentLastReviewed, treatments } from "@/lib/content";
 import {
   areaNavigation,
+  contactLocation,
   locationAddress,
   practiceLocations,
   schemaName,
@@ -65,10 +66,9 @@ export function GET() {
         location.building +
         ", " +
         locationAddress(location) +
-        ". WhatsApp " +
-        location.whatsappDisplay +
         ".",
     ),
+    "- WhatsApp de atendimento (João Pessoa): " + contactLocation.whatsappDisplay + ".",
     "- Atendimento: " + siteConfig.hours,
     "- Modalidade: atendimento particular; valores informados individualmente no contato.",
     "- Site oficial: " + siteConfig.url + "/",
@@ -76,7 +76,7 @@ export function GET() {
     "## Observações",
     "",
     "- Conteúdo informativo. Diagnóstico, indicação, riscos, etapas e recuperação dependem de avaliação individual e variam conforme o caso.",
-    "- O contato inicial pelo WhatsApp ou pelo formulário não confirma agendamento nem substitui consulta.",
+    "- O contato inicial pelo WhatsApp não confirma agendamento nem substitui consulta.",
     "- Última revisão editorial do conteúdo clínico: " + contentLastReviewed + ".",
     // `null` some da lista; string vazia é linha em branco de verdade, que o
     // Markdown precisa para separar os blocos.
